@@ -102,9 +102,10 @@ model LessonItem {
 
 model Exercise {
   id       Int       @id @default(autoincrement())
+  key      String    @unique // id ổn định trong data/exercises, để seed chạy lại không tạo trùng
   levelId  Int
   skill    String // listening | reading | writing | speaking | grammar
-  type     String // mcq | truefalse | dictation | reorder | fillblank | shadowing | compose
+  type     String // picture_tf | picture_mcq | mcq | dictation | reorder | fillblank | shadowing | compose
   payload  String // JSON đề
   answer   String // JSON đáp án
   attempts Attempt[]

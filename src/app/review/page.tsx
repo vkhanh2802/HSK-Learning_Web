@@ -14,9 +14,25 @@ export default async function Page() {
     take: LIMIT,
   });
   const words = new Map((await getWords([...new Set(cards.map((c) => c.itemId))])).map((w) => [w.id, w]));
+
+  // Thẻ nghe: 3 phương án nhiễu là từ cùng cấp, cùng số chữ nếu đủ (khó đoán theo độ dài).
+  // Bốc ngẫu nhiên ở server để client không bị lệch khi hydrate.
+  const pool = await prisma.word.findMany({ select: { id: true, hanzi: true, levelId: true } });
+  const distractors = (word: { id: number; hanzi: string }) => {
+    const level = pool.find((p) => p.id === word.id)?.levelId;
+    const same = pool.filter((p) => p.levelId === level && p.id !== word.id);
+    const sameLen = same.filter((p) => [...p.hanzi].length === [...word.hanzi].length);
+    const from = sameLen.length >= 3 ? sameLen : same;
+    return [...from].sort(() => Math.random() - 0.5).slice(0, 3).map((p) => p.hanzi);
+  };
+
   const items: ReviewItem[] = cards.flatMap((c) => {
     const word = words.get(c.itemId);
-    return word ? [{ cardId: c.id, mode: c.mode as ReviewItem["mode"], word }] : [];
+    if (!word) return [];
+    const mode = c.mode as ReviewItem["mode"];
+    const options =
+      mode === "listen" ? [word.hanzi, ...distractors(word)].sort(() => Math.random() - 0.5) : undefined;
+    return [{ cardId: c.id, mode, word, options }];
   });
 
   return (

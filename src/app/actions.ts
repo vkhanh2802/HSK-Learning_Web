@@ -1,7 +1,9 @@
 "use server";
 
 import { z } from "zod";
+import { matchesDictation } from "@/lib/compare";
 import { prisma } from "@/lib/db";
+import type { Line } from "@/lib/exercises";
 import { newCard, review, type Grade } from "@/lib/srs";
 
 // Chế độ thẻ cho mỗi từ; recall (gõ pinyin/chữ) bật ở Phase 9.
@@ -50,4 +52,29 @@ export async function reviewCard(input: z.input<typeof reviewInput>) {
     }),
   ]);
   return next.due.toISOString();
+}
+
+const submitInput = z.object({
+  exerciseId: z.number().int().positive(),
+  response: z.union([z.boolean(), z.number().int().min(0).max(20), z.string().max(200)]),
+  durationMs: z.number().int().min(0).max(3_600_000).optional(),
+});
+
+/** Chấm một bài tập ở server (đáp án không gửi xuống client trước), ghi Attempt, trả kết quả. */
+export async function submitExercise(input: z.input<typeof submitInput>) {
+  const { exerciseId, response, durationMs } = submitInput.parse(input);
+  const ex = await prisma.exercise.findUnique({ where: { id: exerciseId } });
+  if (!ex) throw new Error("Không tìm thấy bài tập");
+
+  const answer = JSON.parse(ex.answer) as boolean | number | null;
+  const payload = JSON.parse(ex.payload) as { audio: Line[] };
+  const correct =
+    ex.type === "dictation"
+      ? typeof response === "string" && matchesDictation(response, payload.audio[0])
+      : response === answer;
+
+  await prisma.attempt.create({
+    data: { exerciseId, skill: ex.skill, correct, response: JSON.stringify(response), durationMs },
+  });
+  return { correct, answer };
 }

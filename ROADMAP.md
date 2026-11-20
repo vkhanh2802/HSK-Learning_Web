@@ -235,22 +235,28 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 ## Phase 5 — Kỹ năng Nghe 听
 
 ### 5.1 Component bài tập chung
-- [ ] `Exercise` lưu `payload` JSON + `answer` JSON → 1 component render theo `type`
-- [ ] `POST /api/attempt` ghi kết quả
+- [x] `Exercise` lưu `payload` JSON + `answer` JSON; thêm cột `key` duy nhất (migration `exercise_key`) để seed upsert, không xoá bài mà `Attempt` đang trỏ tới. Định dạng + schema zod ở `src/lib/exercises.ts`; dữ liệu ở `data/exercises/hskN-skill.json`, seed kiểm tra key trùng và đáp án ngoài phạm vi.
+- [x] `ExercisePlayer.tsx`: 1 component render theo `type`
+- [x] Server action `submitExercise` (thay `POST /api/attempt`): **chấm ở server**, đáp án không gửi xuống client trước; ghi `Attempt` (skill, đúng/sai, câu trả lời, thời gian)
 
 ### 5.2 Các dạng bài
-- [ ] **Nghe → đúng/sai với tranh** (HSK1–2)
-- [ ] **Nghe → chọn đáp án** (câu ngắn, hội thoại 2 lượt)
-- [ ] **Chép chính tả** `Dictation.tsx`: nghe câu → gõ pinyin hoặc 汉字; so khớp bỏ dấu câu, khoảng trắng
-- [ ] **Nghe hội thoại dài → trả lời câu hỏi** (HSK3–4)
+- [x] **Nghe → đúng/sai với tranh** (`picture_tf`) — tranh là emoji (chưa có ảnh thật)
+- [x] **Nghe → chọn tranh** (`picture_mcq`) và **nghe → chọn đáp án** (`mcq`, câu ngắn / hội thoại 2 lượt, giọng nam/nữ phân biệt bằng cao độ)
+- [x] **Chép chính tả** (`dictation`, nằm trong `ExercisePlayer`): gõ chữ Hán hoặc pinyin (có/không dấu, gõ `v` thay `ü`), bỏ qua dấu câu/khoảng trắng — `src/lib/compare.ts` + test
+- [ ] **Nghe hội thoại dài → trả lời câu hỏi** (HSK3–4) — làm ở Phase 10 cùng dữ liệu HSK3–4 (dạng `mcq` đã đọc được nhiều lượt thoại)
+- [x] Thẻ ôn `listen` (hoãn từ Phase 3): nghe rồi chọn 1 trong 4 chữ (nhiễu cùng cấp, ưu tiên cùng số chữ, bốc ở server); chọn đúng gợi ý Nhớ, sai gợi ý Quên
 
 ### 5.3 Tiện ích nghe
-- [ ] Tốc độ 0.75x / 1x / 1.25x
-- [ ] Nút nghe lại, giới hạn số lần nghe (chế độ thi)
-- [ ] Hiện transcript sau khi trả lời
+- [x] Tốc độ 0.75x / 1x / 1.25x
+- [x] Tự phát khi hiện câu, nút nghe lại có đếm số lần. Giới hạn số lần nghe để dành cho chế độ thi (Phase 11).
+- [x] Hiện lời thoại (chữ Hán, pinyin, nghĩa, người nói) sau khi trả lời
+- [x] Nút loa của câu hỏi nghe không ghi chữ trong nhãn trợ năng (`AudioButton hideText`) để trình đọc màn hình không lộ đáp án
 
 ### 5.4 Nội dung
-- [ ] 20 bài nghe HSK1, 20 bài HSK2 (câu do bạn/LLM soạn, chỉ dùng từ trong cấp, tự duyệt)
+- [x] 20 bài nghe HSK1 (`data/exercises/hsk1-listening.json`: 5 đúng/sai tranh, 5 chọn tranh, 5 hội thoại, 5 chép chính tả) — do Claude soạn, **cần duyệt**
+- [ ] 20 bài HSK2 — làm khi có dữ liệu từ vựng HSK2 (Phase 10)
+
+> Xác minh: 33 test (thêm `compare.test.ts`, cấu hình `vitest.config.ts` cho alias `@/`), lint, `tsc --noEmit`, build đạt. Trên dev server: làm đủ 20 câu, chấm đúng cả 4 dạng (cố ý trả lời đúng/sai xen kẽ, kết quả 10/20 khớp dự kiến), lời thoại hiện đúng, 20 `Attempt` skill `listening` được ghi; học bài 1 rồi ôn: thẻ nghe hiện 4 phương án, chọn sai thì hiện "Bạn chọn 看 — gợi ý chấm Quên"; không lỗi server. DB được sao lưu trước khi test và khôi phục sau (vẫn có 20 bài nghe, tiến độ học trống).
 
 **Tiêu chí hoàn thành:** làm được 1 bộ 10 câu nghe HSK1, có chấm điểm và transcript.
 

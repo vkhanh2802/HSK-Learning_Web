@@ -8,7 +8,12 @@ import { writeGrade, type Grade } from "@/lib/srs";
 import { speak } from "@/lib/tts";
 import type { WordView } from "@/lib/words";
 
-export type ReviewItem = { cardId: number; mode: "recognize" | "listen" | "write"; word: WordView };
+export type ReviewItem = {
+  cardId: number;
+  mode: "recognize" | "listen" | "write";
+  word: WordView;
+  options?: string[]; // thẻ nghe: các chữ để chọn (đã gồm đáp án)
+};
 
 /** Thẻ viết: viết lần lượt từng chữ của từ, không có mẫu; báo tổng số lần sai khi xong. */
 function WriteFront({ word, onDone }: { word: WordView; onDone: (mistakes: number) => void }) {
@@ -59,13 +64,22 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reviewed, setReviewed] = useState(0);
-  const [suggested, setSuggested] = useState<{ grade: Grade; mistakes: number | null } | null>(null);
+  const [suggested, setSuggested] = useState<{ grade: Grade; note: string } | null>(null);
   const shownAt = useRef(0);
 
-  // Lật thẻ; thẻ viết mà lật trước khi viết xong coi như chưa nhớ.
+  // Lật thẻ; thẻ viết/nghe mà lật trước khi làm xong coi như chưa nhớ.
   const flip = useCallback(() => {
     setFlipped(true);
-    setSuggested((s) => s ?? (queue[0]?.mode === "write" ? { grade: 1, mistakes: null } : null));
+    const mode = queue[0]?.mode;
+    setSuggested(
+      (s) =>
+        s ??
+        (mode === "write"
+          ? { grade: 1, note: "Chưa viết xong — gợi ý chấm Quên." }
+          : mode === "listen" && queue[0]?.options
+            ? { grade: 1, note: "Chưa chọn — gợi ý chấm Quên." }
+            : null),
+    );
   }, [queue]);
 
   const current = queue[0];
@@ -135,27 +149,48 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
               key={`${current.cardId}-${reviewed}`}
               word={w}
               onDone={(mistakes) => {
-                setSuggested({ grade: writeGrade(mistakes), mistakes });
+                const grade = writeGrade(mistakes);
+                setSuggested({ grade, note: `Sai ${mistakes} lần — gợi ý chấm ${GRADES[grade - 1].label}.` });
                 setFlipped(true);
               }}
             />
           )
         ) : (
           <div>
-            <p className="text-sm opacity-75">Nghe và nhớ lại từ</p>
+            <p className="text-sm opacity-75">{current.options ? "Nghe và chọn từ đúng" : "Nghe và nhớ lại từ"}</p>
             <div className="mt-3 flex justify-center">
-              <AudioButton key={current.cardId} text={w.hanzi} />
+              <AudioButton key={current.cardId} text={w.hanzi} hideText />
             </div>
+            {current.options && !flipped && (
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {current.options.map((h) => (
+                  <button
+                    key={h}
+                    type="button"
+                    lang="zh-CN"
+                    className="rounded border border-border px-3 py-3 text-2xl hover:bg-muted"
+                    onClick={() => {
+                      setSuggested(
+                        h === w.hanzi
+                          ? { grade: 3, note: "✓ Chọn đúng — gợi ý chấm Nhớ." }
+                          : { grade: 1, note: `✗ Bạn chọn ${h} — gợi ý chấm Quên.` },
+                      );
+                      setFlipped(true);
+                    }}
+                  >
+                    {h}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
         {flipped && (
-          <div className="mt-4 border-t border-border pt-4">
+          <div className={current.mode === "write" ? "" : "mt-4 border-t border-border pt-4"}>
             {suggested && (
               <p role="status" className="mb-2 text-sm">
-                {suggested.mistakes === null
-                  ? "Chưa viết xong — gợi ý chấm Quên."
-                  : `Sai ${suggested.mistakes} lần — gợi ý chấm ${GRADES[suggested.grade - 1].label}.`}
+                {suggested.note}
               </p>
             )}
             {current.mode !== "recognize" && (

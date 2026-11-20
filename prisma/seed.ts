@@ -4,10 +4,13 @@
 //   data/raw/hskN.json     — danh sách từ HSK 2.0 gốc (drkameleon/complete-hsk-vocabulary, MIT): nghĩa tiếng Anh, bộ thủ
 //   data/vocab/hskN.json   — tự soạn: pinyin chuẩn (tách âm tiết bằng dấu cách), nghĩa Việt, loại từ, câu ví dụ
 //   data/lessons/hskN.json — chia bài theo chủ đề
+//   data/exercises/hskN-skill.json — bài tập (nghe, đọc, …), định dạng ở src/lib/exercises.ts
 // Chỉ cấp nào có đủ data/vocab và data/lessons mới được nạp.
 import "dotenv/config";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { z } from "zod";
 import { prisma } from "../src/lib/db";
+import { exerciseSchema, splitExercise } from "../src/lib/exercises";
 import { joinSyllables } from "../src/lib/pinyin";
 
 type RawWord = {
@@ -118,8 +121,31 @@ async function seedLevel(level: number) {
   console.log(`HSK${level}: ${wordIds.size} từ, ${charIds.size} chữ, ${lessons.length} bài`);
 }
 
+// data/exercises/hsk{N}-{skill}.json, ví dụ hsk1-listening.json. Upsert theo key nên chạy lại không trùng
+// và không xoá bài cũ (Attempt đang trỏ tới).
+async function seedExercises() {
+  for (const file of readdirSync("data/exercises").filter((f) => f.endsWith(".json"))) {
+    const m = /^hsk(\d)-(\w+)\.json$/.exec(file);
+    if (!m) throw new Error(`Tên file bài tập không đúng mẫu hskN-skill.json: ${file}`);
+    const [levelId, skill] = [Number(m[1]), m[2]];
+    const items = z.array(exerciseSchema).parse(readJson(`data/exercises/${file}`));
+    const keys = new Set(items.map((i) => i.key));
+    if (keys.size !== items.length) throw new Error(`${file}: trùng key`);
+    for (const item of items)
+      if ("options" in item && item.answer >= item.options.length)
+        throw new Error(`${file}: ${item.key} có đáp án ngoài số phương án`);
+    for (const item of items) {
+      const { key, type, payload, answer } = splitExercise(item);
+      const data = { levelId, skill, type, payload: JSON.stringify(payload), answer: JSON.stringify(answer) };
+      await prisma.exercise.upsert({ where: { key }, update: data, create: { key, ...data } });
+    }
+    console.log(`${file}: ${items.length} bài`);
+  }
+}
+
 async function main() {
   for (const level of [1, 2, 3, 4]) await seedLevel(level);
+  await seedExercises();
 }
 
 main()

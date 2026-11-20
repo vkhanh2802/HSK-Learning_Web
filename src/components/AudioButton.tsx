@@ -3,7 +3,16 @@
 import { useState } from "react";
 import { speak } from "@/lib/tts";
 
-export default function AudioButton({ text, label = "Nghe phát âm" }: { text: string; label?: string }) {
+// hideText: câu hỏi nghe — không đưa chữ vào nhãn, kẻo trình đọc màn hình đọc lộ đáp án.
+export default function AudioButton({
+  text,
+  label = "Nghe phát âm",
+  hideText = false,
+}: {
+  text: string;
+  label?: string;
+  hideText?: boolean;
+}) {
   const [unsupported, setUnsupported] = useState(false);
 
   return (
@@ -11,7 +20,7 @@ export default function AudioButton({ text, label = "Nghe phát âm" }: { text: 
       <button
         type="button"
         onClick={() => setUnsupported(!speak(text))}
-        aria-label={`${label}: ${text}`}
+        aria-label={hideText ? label : `${label}: ${text}`}
         title={label}
         className="rounded-full border border-border px-2 py-1 leading-none hover:bg-muted"
       >

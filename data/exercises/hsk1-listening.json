@@ -1,0 +1,192 @@
+[
+  {
+    "key": "hsk1-listening-01",
+    "type": "picture_tf",
+    "audio": [{ "hanzi": "苹果", "pinyin": "píngguǒ", "vi": "quả táo" }],
+    "picture": { "emoji": "🍎", "label": "quả táo" },
+    "answer": true
+  },
+  {
+    "key": "hsk1-listening-02",
+    "type": "picture_tf",
+    "audio": [{ "hanzi": "猫", "pinyin": "māo", "vi": "con mèo" }],
+    "picture": { "emoji": "🐶", "label": "con chó" },
+    "answer": false
+  },
+  {
+    "key": "hsk1-listening-03",
+    "type": "picture_tf",
+    "audio": [{ "hanzi": "飞机", "pinyin": "fēijī", "vi": "máy bay" }],
+    "picture": { "emoji": "✈️", "label": "máy bay" },
+    "answer": true
+  },
+  {
+    "key": "hsk1-listening-04",
+    "type": "picture_tf",
+    "audio": [{ "hanzi": "出租车", "pinyin": "chūzūchē", "vi": "xe taxi" }],
+    "picture": { "emoji": "🚌", "label": "xe buýt" },
+    "answer": false
+  },
+  {
+    "key": "hsk1-listening-05",
+    "type": "picture_tf",
+    "audio": [{ "hanzi": "下雨", "pinyin": "xià yǔ", "vi": "trời mưa" }],
+    "picture": { "emoji": "☀️", "label": "trời nắng" },
+    "answer": false
+  },
+  {
+    "key": "hsk1-listening-06",
+    "type": "picture_mcq",
+    "audio": [{ "hanzi": "我喜欢喝茶。", "pinyin": "Wǒ xǐhuan hē chá.", "vi": "Tôi thích uống trà." }],
+    "options": [
+      { "emoji": "🍵", "label": "tách trà" },
+      { "emoji": "🥛", "label": "cốc sữa" },
+      { "emoji": "🍎", "label": "quả táo" }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk1-listening-07",
+    "type": "picture_mcq",
+    "audio": [{ "hanzi": "他在睡觉。", "pinyin": "Tā zài shuìjiào.", "vi": "Anh ấy đang ngủ." }],
+    "options": [
+      { "emoji": "📖", "label": "đọc sách" },
+      { "emoji": "😴", "label": "ngủ" },
+      { "emoji": "🍚", "label": "ăn cơm" }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk1-listening-08",
+    "type": "picture_mcq",
+    "audio": [{ "hanzi": "我坐飞机去北京。", "pinyin": "Wǒ zuò fēijī qù Běijīng.", "vi": "Tôi đi máy bay đến Bắc Kinh." }],
+    "options": [
+      { "emoji": "🚕", "label": "taxi" },
+      { "emoji": "🚆", "label": "tàu hỏa" },
+      { "emoji": "✈️", "label": "máy bay" }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk1-listening-09",
+    "type": "picture_mcq",
+    "audio": [{ "hanzi": "我女儿很喜欢猫。", "pinyin": "Wǒ nǚ'ér hěn xǐhuan māo.", "vi": "Con gái tôi rất thích mèo." }],
+    "options": [
+      { "emoji": "🐶", "label": "con chó" },
+      { "emoji": "🐱", "label": "con mèo" },
+      { "emoji": "🐟", "label": "con cá" }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk1-listening-10",
+    "type": "picture_mcq",
+    "audio": [{ "hanzi": "今天很热。", "pinyin": "Jīntiān hěn rè.", "vi": "Hôm nay rất nóng." }],
+    "options": [
+      { "emoji": "☀️", "label": "trời nắng nóng" },
+      { "emoji": "❄️", "label": "trời tuyết lạnh" },
+      { "emoji": "🌧️", "label": "trời mưa" }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk1-listening-11",
+    "type": "mcq",
+    "audio": [
+      { "speaker": "nữ", "hanzi": "你叫什么名字？", "pinyin": "Nǐ jiào shénme míngzi?", "vi": "Bạn tên là gì?" },
+      { "speaker": "nam", "hanzi": "我叫王明。", "pinyin": "Wǒ jiào Wáng Míng.", "vi": "Tôi tên là Vương Minh." }
+    ],
+    "question": { "hanzi": "男的叫什么名字？", "pinyin": "Nán de jiào shénme míngzi?", "vi": "Người nam tên là gì?" },
+    "options": [
+      { "hanzi": "王明", "pinyin": "Wáng Míng" },
+      { "hanzi": "王月", "pinyin": "Wáng Yuè" },
+      { "hanzi": "李明", "pinyin": "Lǐ Míng" }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk1-listening-12",
+    "type": "mcq",
+    "audio": [
+      { "speaker": "nam", "hanzi": "你什么时候去商店？", "pinyin": "Nǐ shénme shíhou qù shāngdiàn?", "vi": "Khi nào bạn đi cửa hàng?" },
+      { "speaker": "nữ", "hanzi": "我下午去。", "pinyin": "Wǒ xiàwǔ qù.", "vi": "Buổi chiều tôi đi." }
+    ],
+    "question": { "hanzi": "女的什么时候去商店？", "pinyin": "Nǚ de shénme shíhou qù shāngdiàn?", "vi": "Người nữ đi cửa hàng khi nào?" },
+    "options": [
+      { "hanzi": "上午", "pinyin": "shàngwǔ" },
+      { "hanzi": "中午", "pinyin": "zhōngwǔ" },
+      { "hanzi": "下午", "pinyin": "xiàwǔ" }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk1-listening-13",
+    "type": "mcq",
+    "audio": [
+      { "speaker": "nữ", "hanzi": "这个杯子多少钱？", "pinyin": "Zhège bēizi duōshao qián?", "vi": "Cái cốc này bao nhiêu tiền?" },
+      { "speaker": "nam", "hanzi": "八块。", "pinyin": "Bā kuài.", "vi": "Tám đồng." }
+    ],
+    "question": { "hanzi": "杯子多少钱？", "pinyin": "Bēizi duōshao qián?", "vi": "Cái cốc bao nhiêu tiền?" },
+    "options": [
+      { "hanzi": "八块", "pinyin": "bā kuài" },
+      { "hanzi": "九块", "pinyin": "jiǔ kuài" },
+      { "hanzi": "十块", "pinyin": "shí kuài" }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk1-listening-14",
+    "type": "mcq",
+    "audio": [
+      { "speaker": "nam", "hanzi": "你爸爸在哪儿工作？", "pinyin": "Nǐ bàba zài nǎr gōngzuò?", "vi": "Bố bạn làm việc ở đâu?" },
+      { "speaker": "nữ", "hanzi": "他在医院工作，他是医生。", "pinyin": "Tā zài yīyuàn gōngzuò, tā shì yīshēng.", "vi": "Bố tôi làm ở bệnh viện, ông ấy là bác sĩ." }
+    ],
+    "question": { "hanzi": "女的爸爸是做什么的？", "pinyin": "Nǚ de bàba shì zuò shénme de?", "vi": "Bố của người nữ làm nghề gì?" },
+    "options": [
+      { "hanzi": "老师", "pinyin": "lǎoshī" },
+      { "hanzi": "医生", "pinyin": "yīshēng" },
+      { "hanzi": "学生", "pinyin": "xuésheng" }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk1-listening-15",
+    "type": "mcq",
+    "audio": [
+      { "speaker": "nữ", "hanzi": "明天天气怎么样？", "pinyin": "Míngtiān tiānqì zěnmeyàng?", "vi": "Thời tiết ngày mai thế nào?" },
+      { "speaker": "nam", "hanzi": "明天下雨。", "pinyin": "Míngtiān xià yǔ.", "vi": "Ngày mai trời mưa." }
+    ],
+    "question": { "hanzi": "明天天气怎么样？", "pinyin": "Míngtiān tiānqì zěnmeyàng?", "vi": "Thời tiết ngày mai thế nào?" },
+    "options": [
+      { "hanzi": "很热", "pinyin": "hěn rè" },
+      { "hanzi": "很冷", "pinyin": "hěn lěng" },
+      { "hanzi": "下雨", "pinyin": "xià yǔ" }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk1-listening-16",
+    "type": "dictation",
+    "audio": [{ "hanzi": "你好！", "pinyin": "Nǐ hǎo!", "vi": "Xin chào!" }]
+  },
+  {
+    "key": "hsk1-listening-17",
+    "type": "dictation",
+    "audio": [{ "hanzi": "我是学生。", "pinyin": "Wǒ shì xuésheng.", "vi": "Tôi là học sinh." }]
+  },
+  {
+    "key": "hsk1-listening-18",
+    "type": "dictation",
+    "audio": [{ "hanzi": "谢谢你。", "pinyin": "Xièxie nǐ.", "vi": "Cảm ơn bạn." }]
+  },
+  {
+    "key": "hsk1-listening-19",
+    "type": "dictation",
+    "audio": [{ "hanzi": "今天星期几？", "pinyin": "Jīntiān xīngqī jǐ?", "vi": "Hôm nay thứ mấy?" }]
+  },
+  {
+    "key": "hsk1-listening-20",
+    "type": "dictation",
+    "audio": [{ "hanzi": "我想喝水。", "pinyin": "Wǒ xiǎng hē shuǐ.", "vi": "Tôi muốn uống nước." }]
+  }
+]

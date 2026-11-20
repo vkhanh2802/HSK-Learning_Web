@@ -134,7 +134,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
             </p>
           ) : (
             <p className="flex items-center gap-3">
-              Nghe và chọn chữ đúng: <AudioButton key={q.word.id} text={q.word.hanzi} />
+              Nghe và chọn chữ đúng: <AudioButton key={q.word.id} text={q.word.hanzi} hideText />
             </p>
           )}
           <div className="mt-4 grid gap-2 sm:grid-cols-2">

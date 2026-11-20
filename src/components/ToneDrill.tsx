@@ -66,7 +66,7 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
   return (
     <div>
       <p className="flex items-center gap-3 text-sm">
-        Câu {round + 1}/{ROUNDS} · Đúng {score} · Nghe lại: <AudioButton key={`${round}-${sample.char}`} text={sample.char} />
+        Câu {round + 1}/{ROUNDS} · Đúng {score} · Nghe lại: <AudioButton key={`${round}-${sample.char}`} text={sample.char} hideText />
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         {q.options.map((t) => {
