@@ -8,7 +8,7 @@ type NavItem = NavLink | { label: string; children: NavLink[] };
 
 const levels = [1, 2, 3, 4];
 
-// shortcut: Ngữ pháp/Đọc trỏ tới mục số 1 vì chưa có trang danh sách; thêm trang danh sách ở Phase 6–7.
+// shortcut: Ngữ pháp trỏ tới mục số 1 vì chưa có trang danh sách; thêm trang danh sách ở Phase 7.
 const items: NavItem[] = [
   { href: "/", label: "Trang chủ" },
   {
@@ -27,7 +27,7 @@ const items: NavItem[] = [
     children: [
       { href: "/listening", label: "Nghe" },
       { href: "/speaking", label: "Nói" },
-      { href: "/reading/1", label: "Đọc" },
+      { href: "/reading", label: "Đọc" },
       { href: "/writing", label: "Viết" },
     ],
   },

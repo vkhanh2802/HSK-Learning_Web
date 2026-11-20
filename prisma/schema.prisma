@@ -79,14 +79,16 @@ model GrammarPoint {
 }
 
 model Passage {
-  id        Int     @id @default(autoincrement())
-  levelId   Int
-  level     Level   @relation(fields: [levelId], references: [id])
-  type      String // reading | dialogue
-  title     String
-  tokens    String // JSON: [{t, p, vi}]
-  audioUrl  String?
-  questions String // JSON
+  id          Int     @id @default(autoincrement())
+  key         String  @unique // id ổn định trong data/passages, để seed upsert
+  levelId     Int
+  level       Level   @relation(fields: [levelId], references: [id])
+  type        String // reading | dialogue
+  title       String
+  tokens      String // JSON: Token[][] (mỗi dòng một mảng), xem src/lib/passages.ts
+  translation String? // bản dịch tiếng Việt cả bài
+  audioUrl    String?
+  questions   String // JSON (có đáp án — không gửi thẳng xuống client)
 }
 
 model LessonItem {

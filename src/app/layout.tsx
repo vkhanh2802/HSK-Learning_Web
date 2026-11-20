@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Noto_Sans, Noto_Sans_SC } from "next/font/google";
 import Nav from "@/components/Nav";
+import ThemeScript from "@/components/ThemeScript";
 import ThemeToggle from "@/components/ThemeToggle";
 import "./globals.css";
 
@@ -21,9 +22,6 @@ export const metadata: Metadata = {
   description: "Học tiếng Trung từ HSK1 đến HSK4 với đủ 4 kỹ năng Nghe, Nói, Đọc, Viết",
 };
 
-// Chạy trước khi vẽ trang để không bị nháy sai màu khi người dùng đã chọn chế độ.
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,10 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={`${notoSans.variable} ${notoSansSC.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="antialiased">
+        <ThemeScript />
         <a
           href="#noi-dung"
           className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-20 focus:rounded focus:bg-background focus:p-2"

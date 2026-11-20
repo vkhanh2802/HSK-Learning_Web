@@ -5,12 +5,14 @@
 //   data/vocab/hskN.json   — tự soạn: pinyin chuẩn (tách âm tiết bằng dấu cách), nghĩa Việt, loại từ, câu ví dụ
 //   data/lessons/hskN.json — chia bài theo chủ đề
 //   data/exercises/hskN-skill.json — bài tập (nghe, đọc, …), định dạng ở src/lib/exercises.ts
+//   data/passages/hskN.json — bài đọc, định dạng + cách tách token ở src/lib/passages.ts
 // Chỉ cấp nào có đủ data/vocab và data/lessons mới được nạp.
 import "dotenv/config";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { z } from "zod";
 import { prisma } from "../src/lib/db";
 import { exerciseSchema, splitExercise } from "../src/lib/exercises";
+import { passageFileSchema, tokenize } from "../src/lib/passages";
 import { joinSyllables } from "../src/lib/pinyin";
 
 type RawWord = {
@@ -143,8 +145,43 @@ async function seedExercises() {
   }
 }
 
+// data/passages/hskN.json. Mọi token phải là từ vựng cấp ≤ N hoặc có trong gloss của bài (kiểm tra từ vượt cấp).
+async function seedPassages(level: number) {
+  const file = `data/passages/hsk${level}.json`;
+  if (!existsSync(file)) return;
+  const passages = z.array(passageFileSchema).parse(readJson(file));
+  const words = await prisma.word.findMany({ where: { levelId: { lte: level } } });
+  const vocab = new Map(words.map((w) => [w.hanzi, w]));
+
+  const errors: string[] = [];
+  const built = passages.map((p) => {
+    const { lines, unknown } = tokenize(p.text, vocab, p.gloss);
+    if (unknown.length) errors.push(`${p.key}: từ ngoài HSK1–${level} chưa có gloss: ${[...new Set(unknown)].join(" ")}`);
+    p.questions.forEach((q, i) => {
+      if ("options" in q && q.answer >= q.options.length) errors.push(`${p.key}: câu ${i + 1} có đáp án ngoài số phương án`);
+    });
+    return { p, lines };
+  });
+  if (new Set(passages.map((p) => p.key)).size !== passages.length) errors.push("trùng key");
+  if (errors.length) throw new Error(`${file} lỗi:\n- ${errors.join("\n- ")}`);
+
+  for (const { p, lines } of built) {
+    const data = {
+      levelId: level,
+      type: p.type,
+      title: p.title,
+      tokens: JSON.stringify(lines),
+      translation: p.translation,
+      questions: JSON.stringify(p.questions),
+    };
+    await prisma.passage.upsert({ where: { key: p.key }, update: data, create: { key: p.key, ...data } });
+  }
+  console.log(`${file}: ${passages.length} bài đọc`);
+}
+
 async function main() {
   for (const level of [1, 2, 3, 4]) await seedLevel(level);
+  for (const level of [1, 2, 3, 4]) await seedPassages(level);
   await seedExercises();
 }
 

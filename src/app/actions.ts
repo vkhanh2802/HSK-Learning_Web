@@ -4,26 +4,60 @@ import { z } from "zod";
 import { matchesDictation } from "@/lib/compare";
 import { prisma } from "@/lib/db";
 import type { Line } from "@/lib/exercises";
+import type { Question } from "@/lib/passages";
 import { newCard, review, type Grade } from "@/lib/srs";
 
 // Chế độ thẻ cho mỗi từ; recall (gõ pinyin/chữ) bật ở Phase 9.
 const MODES = ["recognize", "listen", "write"] as const;
 
-/** Học xong bài: tạo thẻ ôn cho mọi từ trong bài (không đụng thẻ đã có) và đánh dấu bài đã học. */
+/** Tạo thẻ ôn cho một từ ở mọi chế độ còn thiếu; không đụng thẻ đã có. Trả về số thẻ mới tạo. */
+async function createWordCards(itemId: number, now: Date) {
+  let created = 0;
+  for (const mode of MODES) {
+    const key = { itemType_itemId_mode: { itemType: "word", itemId, mode } };
+    if (await prisma.reviewCard.findUnique({ where: key })) continue;
+    await prisma.reviewCard.create({ data: { itemType: "word", itemId, mode, ...(await newCard(now)) } });
+    created++;
+  }
+  return created;
+}
+
+/** Học xong bài: tạo thẻ ôn cho mọi từ trong bài và đánh dấu bài đã học. */
 export async function completeLesson(lessonId: number) {
   const id = z.number().int().positive().parse(lessonId);
   const lesson = await prisma.lesson.findUnique({ where: { id }, include: { items: true } });
   if (!lesson) throw new Error("Không tìm thấy bài học");
 
   const now = new Date();
-  const wordIds = lesson.items.filter((i) => i.itemType === "word").map((i) => i.itemId);
-  for (const itemId of wordIds)
-    for (const mode of MODES) {
-      const key = { itemType_itemId_mode: { itemType: "word", itemId, mode } };
-      if (await prisma.reviewCard.findUnique({ where: key })) continue;
-      await prisma.reviewCard.create({ data: { itemType: "word", itemId, mode, ...(await newCard(now)) } });
-    }
+  for (const i of lesson.items) if (i.itemType === "word") await createWordCards(i.itemId, now);
   if (!lesson.doneAt) await prisma.lesson.update({ where: { id }, data: { doneAt: now } });
+}
+
+/** Thêm một từ (tra trong bài đọc) vào ôn tập. Trả về số thẻ mới tạo (0 = đã có sẵn). */
+export async function addWordToReview(wordId: number) {
+  const id = z.number().int().positive().parse(wordId);
+  if (!(await prisma.word.findUnique({ where: { id } }))) throw new Error("Không tìm thấy từ");
+  return createWordCards(id, new Date());
+}
+
+const readingInput = z.object({
+  passageId: z.number().int().positive(),
+  question: z.number().int().min(0).max(50),
+  response: z.union([z.boolean(), z.number().int().min(0).max(20)]),
+});
+
+/** Chấm một câu hỏi đọc hiểu ở server, ghi Attempt (skill reading), trả kết quả + đáp án. */
+export async function submitReading(input: z.input<typeof readingInput>) {
+  const { passageId, question, response } = readingInput.parse(input);
+  const passage = await prisma.passage.findUnique({ where: { id: passageId } });
+  const q = passage && (JSON.parse(passage.questions) as Question[])[question];
+  if (!q) throw new Error("Không tìm thấy câu hỏi");
+
+  const correct = response === q.answer;
+  await prisma.attempt.create({
+    data: { skill: "reading", correct, response: JSON.stringify({ passage: passage.key, question, response }) },
+  });
+  return { correct, answer: q.answer };
 }
 
 const reviewInput = z.object({

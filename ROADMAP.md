@@ -118,7 +118,7 @@ web_chinese/
 ### 1.4 Layout chung
 - [x] Thanh điều hướng: Trang chủ · Học · Ôn tập · Kỹ năng · Ngữ pháp · Thi thử — `src/components/Nav.tsx`; "Học" (HSK1–4, pinyin, thanh điệu), "Kỹ năng" (Nghe/Nói/Đọc/Viết), "Thi thử" (HSK1–4) là menu thả xuống `<details>`, tự đóng khi chuyển trang; mục đang mở tô màu nhấn, có `aria-current`; link "Bỏ qua tới nội dung". Ngữ pháp và Đọc tạm trỏ `/grammar/1`, `/reading/1` vì chưa có trang danh sách.
 - [x] Font chữ Hán: `Noto Sans SC` (qua `next/font/google`) — thay Geist; subsets `latin` + `vietnamese`, glyph chữ Hán tải theo unicode-range; `lang="vi"`, đổi title/description. Class biến font đặt ở `<html>` (đặt ở `<body>` thì `--font-sans` ở `:root` không nhận font).
-- [x] Chế độ sáng/tối — `src/components/ThemeToggle.tsx`; mặc định theo hệ thống, bấm nút để ghi đè bằng `data-theme` trên `<html>`, lưu `localStorage`; script nhỏ trong `<head>` đặt theme trước khi vẽ để không nháy màu. Màu dùng biến CSS `background/foreground/muted/border/accent` trong `globals.css`.
+- [x] Chế độ sáng/tối — `src/components/ThemeToggle.tsx`; mặc định theo hệ thống, bấm nút để ghi đè bằng `data-theme` trên `<html>`, lưu `localStorage`; script nhỏ chèn vào `<head>` đặt theme trước khi vẽ để không nháy màu. (Phase 6: chuyển sang `src/components/ThemeScript.tsx` dùng `useServerInsertedHTML` theo hướng dẫn "Preventing flash" của Next 16, vì `<script>` render trong layout làm React báo lỗi console "Encountered a script tag".) Màu dùng biến CSS `background/foreground/muted/border/accent` trong `globals.css`.
 
 > Xác minh: lint, `tsc --noEmit`, build đạt. Trên dev server: menu thả xuống mở/đóng đúng, chuyển trang tô đúng mục, nút sáng/tối đổi màu và giữ sau khi tải lại, font tính ra là Noto Sans SC, chữ 我 hiển thị, link bỏ qua hiện khi Tab, không lỗi console, giao diện mobile 375px menu xuống dòng gọn.
 
@@ -265,20 +265,24 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 ## Phase 6 — Kỹ năng Đọc 读
 
 ### 6.1 Trình đọc `/reading/[id]`
-- [ ] Tách bài đọc thành từ (lưu sẵn mảng token trong JSON, không tách tự động lúc chạy)
-- [ ] Bấm vào từ → popup pinyin + nghĩa + nút "Thêm vào ôn tập"
-- [ ] `PinyinToggle`: bật/tắt pinyin trên đầu chữ (`<ruby>`); mặc định bật cho HSK1–2
-- [ ] Nút đọc to toàn bài (TTS)
+- [x] Tách từ lúc seed, không lúc chạy: bài viết sẵn token cách nhau bằng dấu cách (`data/passages/hskN.json`), seed tra pinyin/nghĩa từ từ vựng và lưu `Token[][]` (mỗi dòng một mảng) vào `Passage.tokens` — `src/lib/passages.ts` (`tokenize`, có test). Thêm cột `key` (upsert) và `translation` (migration `passage_key`).
+- [x] Bấm vào từ → khung tra cứu (dính cuối màn hình): chữ, nghe, pinyin, nghĩa, nút "Thêm vào ôn tập" (server action `addWordToReview`, tạo đủ thẻ recognize/listen/write, không trùng thẻ đã có; hiện "Đã có trong ôn tập")
+- [x] Nút Pinyin bật/tắt `<ruby>` trên chữ (nằm trong `Reader.tsx`, không tách `PinyinToggle` riêng); mặc định bật cho HSK1–2
+- [x] Nút đọc to cả bài (TTS), nút hiện bản dịch tiếng Việt
+- [x] Trang `/reading` liệt kê bài theo cấp; menu "Đọc" trỏ về đây; nút bài trước/sau
 
 ### 6.2 Câu hỏi đọc hiểu
-- [ ] Ghép câu với tranh (HSK1–2)
-- [ ] Chọn từ điền chỗ trống (HSK2–4)
-- [ ] Sắp xếp 3 câu thành đoạn (HSK4)
-- [ ] Đọc đoạn → trả lời câu hỏi
+- [x] Ghép câu với tranh (dạng `picture`, tranh emoji)
+- [ ] Chọn từ điền chỗ trống (HSK2–4) — Phase 10 cùng dữ liệu HSK2–4
+- [ ] Sắp xếp 3 câu thành đoạn (HSK4) — Phase 10
+- [x] Đọc đoạn → đúng/sai (`tf`) và chọn đáp án (`mcq`); chấm ở server (`submitReading`, đáp án không gửi xuống client), ghi `Attempt` skill `reading`, hiện tổng điểm
 
 ### 6.3 Nội dung
-- [ ] 10 bài đọc mỗi cấp HSK1–2, độ dài: HSK1 ~50 chữ, HSK2 ~100 chữ
-- [ ] Script kiểm tra: mọi từ trong bài thuộc cấp ≤ N (báo từ vượt cấp)
+- [x] 10 bài đọc HSK1 (7 đoạn văn, 3 hội thoại; 34–53 chữ; 23 câu hỏi) — do Claude soạn, **cần duyệt**
+- [ ] 10 bài HSK2 (~100 chữ) — Phase 10
+- [x] Kiểm tra từ vượt cấp ngay trong seed: token không thuộc từ vựng cấp ≤ N và không có trong `gloss` của bài (tên riêng…) → seed dừng và báo lỗi. Đã bắt được 1 lỗi thật khi soạn (说 đứng riêng không thuộc HSK1).
+
+> Xác minh: 36 test, lint, `tsc --noEmit`, build đạt. Chạy bản build trên cổng 3123 (dev server của bạn đang chạy giữ Prisma Client cũ trước migration nên `/reading` trả 500 — **cần khởi động lại `npm run dev`**): danh sách 10 bài; bài "Mua đồ" hiện pinyin ruby, tra 杯子 → thêm vào ôn tập → "Đã có trong ôn tập" (tạo 3 thẻ); tắt pinyin, bật bản dịch đúng; trả lời mcq + tf → 2/2; câu tranh bài 4 chấm đúng; không lỗi server. Sau test đã xoá đúng 3 thẻ + 3 Attempt do test tạo (DB trước đó không có thẻ/Attempt nào).
 
 **Tiêu chí hoàn thành:** đọc được bài HSK1, tra từ bằng 1 click, từ tra được đưa vào SRS.
 
