@@ -3,19 +3,40 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --muted: #f2f2f2;
+  --border: #e2e2e2;
+  --accent: #b91c1c;
+  color-scheme: light;
+}
+
+/* Theo hệ thống khi chưa chọn; data-theme do nút sáng/tối đặt sẽ ghi đè. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --muted: #1c1c1c;
+    --border: #2e2e2e;
+    --accent: #f87171;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #1c1c1c;
+  --border: #2e2e2e;
+  --accent: #f87171;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
   --font-sans: var(--font-noto-sans-sc), "Microsoft YaHei", "PingFang SC", sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

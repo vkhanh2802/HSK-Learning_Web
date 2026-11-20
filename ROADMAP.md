@@ -116,9 +116,11 @@ web_chinese/
 > Xác minh: `npm run lint`, `npx tsc --noEmit`, `npm run build` đạt; `next start` trả HTTP 200 cho `/`, `/review`, `/pinyin`, `/learn/1`, `/mock-test/4`, `/write/我`. Lưu ý Next.js 16 trả param chữ Hán còn mã hoá nên `write/[char]` tự `decodeURIComponent`; URL mã hoá sai (vd. `%E0%A4%A`) bị chính Next.js trả 500 ở mọi route động, không phải do code trang.
 
 ### 1.4 Layout chung
-- [ ] Thanh điều hướng: Trang chủ · Học · Ôn tập · Kỹ năng · Ngữ pháp · Thi thử
-- [x] Font chữ Hán: `Noto Sans SC` (qua `next/font/google`) — thay Geist; subsets `latin` + `vietnamese`, glyph chữ Hán tải theo unicode-range; `lang="vi"`, đổi title/description.
-- [ ] Chế độ sáng/tối
+- [x] Thanh điều hướng: Trang chủ · Học · Ôn tập · Kỹ năng · Ngữ pháp · Thi thử — `src/components/Nav.tsx`; "Học" (HSK1–4, pinyin, thanh điệu), "Kỹ năng" (Nghe/Nói/Đọc/Viết), "Thi thử" (HSK1–4) là menu thả xuống `<details>`, tự đóng khi chuyển trang; mục đang mở tô màu nhấn, có `aria-current`; link "Bỏ qua tới nội dung". Ngữ pháp và Đọc tạm trỏ `/grammar/1`, `/reading/1` vì chưa có trang danh sách.
+- [x] Font chữ Hán: `Noto Sans SC` (qua `next/font/google`) — thay Geist; subsets `latin` + `vietnamese`, glyph chữ Hán tải theo unicode-range; `lang="vi"`, đổi title/description. Class biến font đặt ở `<html>` (đặt ở `<body>` thì `--font-sans` ở `:root` không nhận font).
+- [x] Chế độ sáng/tối — `src/components/ThemeToggle.tsx`; mặc định theo hệ thống, bấm nút để ghi đè bằng `data-theme` trên `<html>`, lưu `localStorage`; script nhỏ trong `<head>` đặt theme trước khi vẽ để không nháy màu. Màu dùng biến CSS `background/foreground/muted/border/accent` trong `globals.css`.
+
+> Xác minh: lint, `tsc --noEmit`, build đạt. Trên dev server: menu thả xuống mở/đóng đúng, chuyển trang tô đúng mục, nút sáng/tối đổi màu và giữ sau khi tải lại, font tính ra là Noto Sans SC, chữ 我 hiển thị, link bỏ qua hiện khi Tab, không lỗi console, giao diện mobile 375px menu xuống dòng gọn.
 
 **Tiêu chí hoàn thành:** `npm run dev` chạy, có layout + menu, các trang trống mở được.
 
