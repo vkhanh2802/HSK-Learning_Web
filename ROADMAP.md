@@ -134,6 +134,7 @@ web_chinese/
 - [x] File bổ sung `data/vocab/hsk1.json` (định dạng: xem [Phụ lục B](#phụ-lục-b--định-dạng-dữ-liệu-json)): pinyin chuẩn tách âm tiết, loại từ, nghĩa Việt cho đủ 150 từ HSK1 — do Claude soạn, **cần bạn duyệt lại**.
 - [x] 1 câu ví dụ cho mỗi từ HSK1, chủ yếu dùng từ HSK1 (vài tên riêng/từ ghép dễ đoán như 越南, 汉字, 这里) — **cần duyệt**.
 - [ ] HSK2–4: soạn `data/vocab/hsk2..4.json` (làm ở Phase 10).
+- [x] Đối chiếu với danh sách chính thức HSK 2012 (repo glxxyz/hskhsk.com, MIT, file `HSK Official With Definitions 2012 L1–L4`): HSK1 lệch 6 từ — bản 2012 có 饭店 号 没有 哪儿 说 一点儿, danh sách hiện tại có 饭馆 火车站 零 没 日 说话 thay vào; các cấp 2–4 của nguồn hiện tại chỉ có 147/298/598 từ (bản 2012: 150/300/600). Người dùng chọn **giữ danh sách hiện tại**, dùng repo đó để tham khảo khi duyệt nghĩa; nên xem lại khi làm HSK2–4 ở Phase 10.
 
 ### 2.2 Chia bài học
 - [x] HSK1: 15 bài × 10 từ theo chủ đề → `data/lessons/hsk1.json`
@@ -240,7 +241,7 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 - [x] Server action `submitExercise` (thay `POST /api/attempt`): **chấm ở server**, đáp án không gửi xuống client trước; ghi `Attempt` (skill, đúng/sai, câu trả lời, thời gian)
 
 ### 5.2 Các dạng bài
-- [x] **Nghe → đúng/sai với tranh** (`picture_tf`) — tranh là emoji (chưa có ảnh thật)
+- [x] **Nghe → đúng/sai với tranh** (`picture_tf`) — ảnh thật: 18 ảnh CC0/Public Domain lấy qua Openverse trong `public/images` (nguồn ở `CREDITS.md`), component `Picture.tsx` tự quay về emoji nếu ảnh lỗi. (Unsplash bị loại vì chặn trình duyệt tự động bằng trang kiểm tra bot.)
 - [x] **Nghe → chọn tranh** (`picture_mcq`) và **nghe → chọn đáp án** (`mcq`, câu ngắn / hội thoại 2 lượt, giọng nam/nữ phân biệt bằng cao độ)
 - [x] **Chép chính tả** (`dictation`, nằm trong `ExercisePlayer`): gõ chữ Hán hoặc pinyin (có/không dấu, gõ `v` thay `ü`), bỏ qua dấu câu/khoảng trắng — `src/lib/compare.ts` + test
 - [ ] **Nghe hội thoại dài → trả lời câu hỏi** (HSK3–4) — làm ở Phase 10 cùng dữ liệu HSK3–4 (dạng `mcq` đã đọc được nhiều lượt thoại)
@@ -272,7 +273,7 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 - [x] Trang `/reading` liệt kê bài theo cấp; menu "Đọc" trỏ về đây; nút bài trước/sau
 
 ### 6.2 Câu hỏi đọc hiểu
-- [x] Ghép câu với tranh (dạng `picture`, tranh emoji)
+- [x] Ghép câu với tranh (dạng `picture`, ảnh thật, emoji dự phòng)
 - [ ] Chọn từ điền chỗ trống (HSK2–4) — Phase 10 cùng dữ liệu HSK2–4
 - [ ] Sắp xếp 3 câu thành đoạn (HSK4) — Phase 10
 - [x] Đọc đoạn → đúng/sai (`tf`) và chọn đáp án (`mcq`); chấm ở server (`submitReading`, đáp án không gửi xuống client), ghi `Attempt` skill `reading`, hiện tổng điểm

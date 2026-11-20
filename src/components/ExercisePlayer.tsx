@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 import { submitExercise } from "@/app/actions";
+import Picture from "@/components/Picture";
 import type { ClientExercise, Line } from "@/lib/exercises";
 import { speakLines } from "@/lib/tts";
 
@@ -106,9 +107,9 @@ export default function ExercisePlayer({
         {exercise.type === "picture_tf" && (
           <>
             <p>Âm thanh có khớp với tranh không?</p>
-            <p className="my-3 text-7xl" role="img" aria-label={exercise.payload.picture.label}>
-              {exercise.payload.picture.emoji}
-            </p>
+            <div className="my-3">
+              <Picture picture={exercise.payload.picture} size={200} />
+            </div>
             <div className="flex gap-2">
               {[true, false].map((v) => (
                 <button
@@ -136,9 +137,9 @@ export default function ExercisePlayer({
                   disabled={answered || pending}
                   onClick={() => submit(i)}
                   aria-label={o.label}
-                  className={`rounded border border-border px-6 py-3 text-6xl ${optionClass(answered, result?.answer === i, picked === i)}`}
+                  className={`rounded border-2 border-border p-1.5 ${optionClass(answered, result?.answer === i, picked === i)}`}
                 >
-                  {o.emoji}
+                  <Picture picture={o} size={140} />
                 </button>
               ))}
             </div>

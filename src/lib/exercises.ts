@@ -8,7 +8,7 @@ const line = z.object({
   pinyin: z.string().min(1),
   vi: z.string().min(1),
 });
-const picture = z.object({ emoji: z.string().min(1), label: z.string().min(1) });
+const picture = z.object({ emoji: z.string().min(1), image: z.string().startsWith("/images/").optional(), label: z.string().min(1) });
 const text = z.object({ hanzi: z.string().min(1), pinyin: z.string().min(1), vi: z.string().optional() });
 
 export const exerciseSchema = z.discriminatedUnion("type", [

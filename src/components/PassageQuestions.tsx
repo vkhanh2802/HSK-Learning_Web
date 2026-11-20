@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { submitReading } from "@/app/actions";
+import Picture from "@/components/Picture";
 import type { ClientQuestion } from "@/lib/passages";
 
 type Result = { correct: boolean; answer: boolean | number };
@@ -102,9 +103,9 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
                       disabled={locked}
                       onClick={() => answer(qi, i)}
                       aria-label={o.label}
-                      className={`rounded border border-border px-5 py-2 text-5xl ${optionClass(r, i, picked[qi])}`}
+                      className={`rounded border-2 border-border p-1.5 ${optionClass(r, i, picked[qi])}`}
                     >
-                      {o.emoji}
+                      <Picture picture={o} size={120} />
                     </button>
                   ))}
               </div>

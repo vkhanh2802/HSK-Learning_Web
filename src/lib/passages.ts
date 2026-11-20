@@ -9,11 +9,13 @@ export const questionSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("tf"), statement: text, answer: z.boolean() }),
   // Câu hỏi + phương án chữ.
   z.object({ type: z.literal("mcq"), question: text, options: z.array(option).min(2), answer: z.number().int().min(0) }),
-  // Đọc câu, chọn tranh (emoji) đúng.
+  // Đọc câu, chọn tranh đúng (ảnh trong public/images, emoji dự phòng).
   z.object({
     type: z.literal("picture"),
     sentence: text,
-    options: z.array(z.object({ emoji: z.string().min(1), label: z.string().min(1) })).min(2),
+    options: z
+      .array(z.object({ emoji: z.string().min(1), image: z.string().startsWith("/images/").optional(), label: z.string().min(1) }))
+      .min(2),
     answer: z.number().int().min(0),
   }),
 ]);

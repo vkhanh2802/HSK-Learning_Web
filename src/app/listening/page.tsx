@@ -18,7 +18,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ l
     <main className="p-8">
       <h1 className="text-2xl font-bold">Luyện nghe</h1>
       <p className="mt-1 text-sm opacity-75">
-        Nghe rồi trả lời; sau mỗi câu có lời thoại (chữ Hán, pinyin, nghĩa). Tranh minh hoạ dùng biểu tượng emoji.
+        Nghe rồi trả lời; sau mỗi câu có lời thoại (chữ Hán, pinyin, nghĩa). Ảnh minh hoạ CC0 / Public Domain (nguồn: public/images/CREDITS.md).
       </p>
       {levels.length > 1 && (
         <nav aria-label="Chọn cấp" className="mt-4 flex gap-2">

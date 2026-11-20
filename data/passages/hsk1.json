@@ -5,13 +5,43 @@
     "title": "Tự giới thiệu",
     "text": "你 好 ！ 我 叫 王明 。 我 是 中国 人 ， 我 家 在 北京 。 我 是 老师 ， 我 在 学校 工作 。 我 很 喜欢 我 的 学生 。",
     "translation": "Xin chào! Tôi tên là Vương Minh. Tôi là người Trung Quốc, nhà tôi ở Bắc Kinh. Tôi là giáo viên, tôi làm việc ở trường học. Tôi rất thích học sinh của tôi.",
-    "gloss": { "王明": { "p": "Wáng Míng", "vi": "Vương Minh (tên người)" } },
+    "gloss": {
+      "王明": {
+        "p": "Wáng Míng",
+        "vi": "Vương Minh (tên người)"
+      }
+    },
     "questions": [
-      { "type": "tf", "statement": { "hanzi": "王明是学生。", "pinyin": "Wáng Míng shì xuésheng.", "vi": "Vương Minh là học sinh." }, "answer": false },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "王明是学生。",
+          "pinyin": "Wáng Míng shì xuésheng.",
+          "vi": "Vương Minh là học sinh."
+        },
+        "answer": false
+      },
       {
         "type": "mcq",
-        "question": { "hanzi": "王明的家在哪儿？", "pinyin": "Wáng Míng de jiā zài nǎr?", "vi": "Nhà Vương Minh ở đâu?" },
-        "options": [{ "hanzi": "北京", "pinyin": "Běijīng" }, { "hanzi": "学校", "pinyin": "xuéxiào" }, { "hanzi": "商店", "pinyin": "shāngdiàn" }],
+        "question": {
+          "hanzi": "王明的家在哪儿？",
+          "pinyin": "Wáng Míng de jiā zài nǎr?",
+          "vi": "Nhà Vương Minh ở đâu?"
+        },
+        "options": [
+          {
+            "hanzi": "北京",
+            "pinyin": "Běijīng"
+          },
+          {
+            "hanzi": "学校",
+            "pinyin": "xuéxiào"
+          },
+          {
+            "hanzi": "商店",
+            "pinyin": "shāngdiàn"
+          }
+        ],
         "answer": 0
       }
     ]
@@ -23,11 +53,36 @@
     "text": "我 家 有 三 个 人 ： 爸爸 、 妈妈 和 我 。 爸爸 是 医生 ， 他 在 医院 工作 。 妈妈 是 老师 ， 她 在 学校 工作 。 我 是 学生 。 我们 家 有 一 个 小 猫 ， 我 很 爱 我 的 猫 。",
     "translation": "Nhà tôi có ba người: bố, mẹ và tôi. Bố là bác sĩ, bố làm việc ở bệnh viện. Mẹ là giáo viên, mẹ làm việc ở trường học. Tôi là học sinh. Nhà chúng tôi có một con mèo nhỏ, tôi rất yêu con mèo của tôi.",
     "questions": [
-      { "type": "tf", "statement": { "hanzi": "妈妈是医生。", "pinyin": "Māma shì yīshēng.", "vi": "Mẹ là bác sĩ." }, "answer": false },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "妈妈是医生。",
+          "pinyin": "Māma shì yīshēng.",
+          "vi": "Mẹ là bác sĩ."
+        },
+        "answer": false
+      },
       {
         "type": "mcq",
-        "question": { "hanzi": "爸爸在哪儿工作？", "pinyin": "Bàba zài nǎr gōngzuò?", "vi": "Bố làm việc ở đâu?" },
-        "options": [{ "hanzi": "医院", "pinyin": "yīyuàn" }, { "hanzi": "学校", "pinyin": "xuéxiào" }, { "hanzi": "商店", "pinyin": "shāngdiàn" }],
+        "question": {
+          "hanzi": "爸爸在哪儿工作？",
+          "pinyin": "Bàba zài nǎr gōngzuò?",
+          "vi": "Bố làm việc ở đâu?"
+        },
+        "options": [
+          {
+            "hanzi": "医院",
+            "pinyin": "yīyuàn"
+          },
+          {
+            "hanzi": "学校",
+            "pinyin": "xuéxiào"
+          },
+          {
+            "hanzi": "商店",
+            "pinyin": "shāngdiàn"
+          }
+        ],
         "answer": 0
       }
     ]
@@ -41,11 +96,36 @@
     "questions": [
       {
         "type": "mcq",
-        "question": { "hanzi": "杯子多少钱？", "pinyin": "Bēizi duōshao qián?", "vi": "Cái cốc bao nhiêu tiền?" },
-        "options": [{ "hanzi": "八块", "pinyin": "bā kuài" }, { "hanzi": "十块", "pinyin": "shí kuài" }, { "hanzi": "八十块", "pinyin": "bāshí kuài" }],
+        "question": {
+          "hanzi": "杯子多少钱？",
+          "pinyin": "Bēizi duōshao qián?",
+          "vi": "Cái cốc bao nhiêu tiền?"
+        },
+        "options": [
+          {
+            "hanzi": "八块",
+            "pinyin": "bā kuài"
+          },
+          {
+            "hanzi": "十块",
+            "pinyin": "shí kuài"
+          },
+          {
+            "hanzi": "八十块",
+            "pinyin": "bāshí kuài"
+          }
+        ],
         "answer": 1
       },
-      { "type": "tf", "statement": { "hanzi": "先生买了桌子。", "pinyin": "Xiānsheng mǎi le zhuōzi.", "vi": "Ông khách đã mua cái bàn." }, "answer": false }
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "先生买了桌子。",
+          "pinyin": "Xiānsheng mǎi le zhuōzi.",
+          "vi": "Ông khách đã mua cái bàn."
+        },
+        "answer": false
+      }
     ]
   },
   {
@@ -55,17 +135,62 @@
     "text": "今天 是 星期 六 。 今天 天气 很 好 ， 不 冷 ， 不 热 。 上午 我 和 朋友 去 商店 买 衣服 ， 下午 我们 去 看 电影 。 明天 下雨 ， 我 想 在 家 睡觉 。",
     "translation": "Hôm nay là thứ bảy. Hôm nay trời đẹp, không lạnh, không nóng. Buổi sáng tôi và bạn đi cửa hàng mua quần áo, buổi chiều chúng tôi đi xem phim. Ngày mai trời mưa, tôi muốn ở nhà ngủ.",
     "questions": [
-      { "type": "tf", "statement": { "hanzi": "今天下雨。", "pinyin": "Jīntiān xià yǔ.", "vi": "Hôm nay trời mưa." }, "answer": false },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "今天下雨。",
+          "pinyin": "Jīntiān xià yǔ.",
+          "vi": "Hôm nay trời mưa."
+        },
+        "answer": false
+      },
       {
         "type": "mcq",
-        "question": { "hanzi": "下午他们做什么？", "pinyin": "Xiàwǔ tāmen zuò shénme?", "vi": "Buổi chiều họ làm gì?" },
-        "options": [{ "hanzi": "买衣服", "pinyin": "mǎi yīfu" }, { "hanzi": "看电影", "pinyin": "kàn diànyǐng" }, { "hanzi": "睡觉", "pinyin": "shuìjiào" }],
+        "question": {
+          "hanzi": "下午他们做什么？",
+          "pinyin": "Xiàwǔ tāmen zuò shénme?",
+          "vi": "Buổi chiều họ làm gì?"
+        },
+        "options": [
+          {
+            "hanzi": "买衣服",
+            "pinyin": "mǎi yīfu"
+          },
+          {
+            "hanzi": "看电影",
+            "pinyin": "kàn diànyǐng"
+          },
+          {
+            "hanzi": "睡觉",
+            "pinyin": "shuìjiào"
+          }
+        ],
         "answer": 1
       },
       {
         "type": "picture",
-        "sentence": { "hanzi": "明天下雨。", "pinyin": "Míngtiān xià yǔ.", "vi": "Ngày mai trời mưa." },
-        "options": [{ "emoji": "☀️", "label": "trời nắng" }, { "emoji": "🌧️", "label": "trời mưa" }, { "emoji": "❄️", "label": "trời tuyết" }],
+        "sentence": {
+          "hanzi": "明天下雨。",
+          "pinyin": "Míngtiān xià yǔ.",
+          "vi": "Ngày mai trời mưa."
+        },
+        "options": [
+          {
+            "emoji": "☀️",
+            "image": "/images/sunny.webp",
+            "label": "trời nắng"
+          },
+          {
+            "emoji": "🌧️",
+            "image": "/images/rain.webp",
+            "label": "trời mưa"
+          },
+          {
+            "emoji": "❄️",
+            "image": "/images/snow.jpg",
+            "label": "trời tuyết"
+          }
+        ],
         "answer": 1
       }
     ]
@@ -77,15 +202,49 @@
     "text": "小王 ： 你 想 吃 什么 ？\n小李 ： 我 想 吃 米饭 和 中国 菜 。 你 呢 ？\n小王 ： 我 不 想 吃 米饭 ， 我 想 吃 苹果 。\n小李 ： 你 喝 什么 ？ 喝 茶 吗 ？\n小王 ： 不 ， 我 喝 水 。",
     "translation": "Tiểu Vương: Bạn muốn ăn gì?\nTiểu Lý: Mình muốn ăn cơm và món Trung Quốc. Còn bạn?\nTiểu Vương: Mình không muốn ăn cơm, mình muốn ăn táo.\nTiểu Lý: Bạn uống gì? Uống trà không?\nTiểu Vương: Không, mình uống nước.",
     "gloss": {
-      "小王": { "p": "Xiǎo Wáng", "vi": "Tiểu Vương (cách gọi thân mật)" },
-      "小李": { "p": "Xiǎo Lǐ", "vi": "Tiểu Lý (cách gọi thân mật)" }
+      "小王": {
+        "p": "Xiǎo Wáng",
+        "vi": "Tiểu Vương (cách gọi thân mật)"
+      },
+      "小李": {
+        "p": "Xiǎo Lǐ",
+        "vi": "Tiểu Lý (cách gọi thân mật)"
+      }
     },
     "questions": [
-      { "type": "tf", "statement": { "hanzi": "小李想吃苹果。", "pinyin": "Xiǎo Lǐ xiǎng chī píngguǒ.", "vi": "Tiểu Lý muốn ăn táo." }, "answer": false },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "小李想吃苹果。",
+          "pinyin": "Xiǎo Lǐ xiǎng chī píngguǒ.",
+          "vi": "Tiểu Lý muốn ăn táo."
+        },
+        "answer": false
+      },
       {
         "type": "picture",
-        "sentence": { "hanzi": "小王喝水。", "pinyin": "Xiǎo Wáng hē shuǐ.", "vi": "Tiểu Vương uống nước." },
-        "options": [{ "emoji": "🍵", "label": "trà" }, { "emoji": "💧", "label": "nước" }, { "emoji": "🍎", "label": "táo" }],
+        "sentence": {
+          "hanzi": "小王喝水。",
+          "pinyin": "Xiǎo Wáng hē shuǐ.",
+          "vi": "Tiểu Vương uống nước."
+        },
+        "options": [
+          {
+            "emoji": "🍵",
+            "image": "/images/tea.jpg",
+            "label": "trà"
+          },
+          {
+            "emoji": "💧",
+            "image": "/images/water.webp",
+            "label": "nước"
+          },
+          {
+            "emoji": "🍎",
+            "image": "/images/apple.webp",
+            "label": "táo"
+          }
+        ],
         "answer": 1
       }
     ]
@@ -96,15 +255,45 @@
     "title": "Bạn của tôi",
     "text": "我 有 一 个 中国 朋友 ， 她 叫 李月 。 她 是 北京 人 ， 她 二 十 岁 。 她 很 喜欢 看 书 和 看 电影 。 我们 是 同学 。 星期 六 我 去 她 家 ， 她 妈妈 做 的 中国 菜 很 好 。",
     "translation": "Tôi có một người bạn Trung Quốc, cô ấy tên là Lý Nguyệt. Cô ấy là người Bắc Kinh, hai mươi tuổi. Cô ấy rất thích đọc sách và xem phim. Chúng tôi là bạn học. Thứ bảy tôi đến nhà cô ấy, món Trung Quốc mẹ cô ấy nấu rất ngon.",
-    "gloss": { "李月": { "p": "Lǐ Yuè", "vi": "Lý Nguyệt (tên người)" } },
+    "gloss": {
+      "李月": {
+        "p": "Lǐ Yuè",
+        "vi": "Lý Nguyệt (tên người)"
+      }
+    },
     "questions": [
       {
         "type": "mcq",
-        "question": { "hanzi": "李月多大？", "pinyin": "Lǐ Yuè duō dà?", "vi": "Lý Nguyệt bao nhiêu tuổi?" },
-        "options": [{ "hanzi": "十二岁", "pinyin": "shí'èr suì" }, { "hanzi": "二十岁", "pinyin": "èrshí suì" }, { "hanzi": "二十二岁", "pinyin": "èrshí'èr suì" }],
+        "question": {
+          "hanzi": "李月多大？",
+          "pinyin": "Lǐ Yuè duō dà?",
+          "vi": "Lý Nguyệt bao nhiêu tuổi?"
+        },
+        "options": [
+          {
+            "hanzi": "十二岁",
+            "pinyin": "shí'èr suì"
+          },
+          {
+            "hanzi": "二十岁",
+            "pinyin": "èrshí suì"
+          },
+          {
+            "hanzi": "二十二岁",
+            "pinyin": "èrshí'èr suì"
+          }
+        ],
         "answer": 1
       },
-      { "type": "tf", "statement": { "hanzi": "李月不喜欢看书。", "pinyin": "Lǐ Yuè bù xǐhuan kàn shū.", "vi": "Lý Nguyệt không thích đọc sách." }, "answer": false }
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "李月不喜欢看书。",
+          "pinyin": "Lǐ Yuè bù xǐhuan kàn shū.",
+          "vi": "Lý Nguyệt không thích đọc sách."
+        },
+        "answer": false
+      }
     ]
   },
   {
@@ -116,11 +305,36 @@
     "questions": [
       {
         "type": "mcq",
-        "question": { "hanzi": "他们坐什么去北京？", "pinyin": "Tāmen zuò shénme qù Běijīng?", "vi": "Họ đi Bắc Kinh bằng gì?" },
-        "options": [{ "hanzi": "飞机", "pinyin": "fēijī" }, { "hanzi": "出租车", "pinyin": "chūzūchē" }, { "hanzi": "火车", "pinyin": "huǒchē" }],
+        "question": {
+          "hanzi": "他们坐什么去北京？",
+          "pinyin": "Tāmen zuò shénme qù Běijīng?",
+          "vi": "Họ đi Bắc Kinh bằng gì?"
+        },
+        "options": [
+          {
+            "hanzi": "飞机",
+            "pinyin": "fēijī"
+          },
+          {
+            "hanzi": "出租车",
+            "pinyin": "chūzūchē"
+          },
+          {
+            "hanzi": "火车",
+            "pinyin": "huǒchē"
+          }
+        ],
         "answer": 0
       },
-      { "type": "tf", "statement": { "hanzi": "他们星期五回家。", "pinyin": "Tāmen xīngqīwǔ huí jiā.", "vi": "Họ về nhà vào thứ sáu." }, "answer": true }
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "他们星期五回家。",
+          "pinyin": "Tāmen xīngqīwǔ huí jiā.",
+          "vi": "Họ về nhà vào thứ sáu."
+        },
+        "answer": true
+      }
     ]
   },
   {
@@ -130,15 +344,46 @@
     "text": "小王 ： 喂 ， 你 好 ！ 你 在 做 什么 ？\n小李 ： 我 在 家 看 电视 。\n小王 ： 下午 你 能 来 我 家 吗 ？ 我们 学习 汉语 。\n小李 ： 能 ， 我 三 点 去 你 家 。\n小王 ： 好 ， 再见 ！",
     "translation": "Tiểu Vương: Alô, chào bạn! Bạn đang làm gì thế?\nTiểu Lý: Mình đang ở nhà xem tivi.\nTiểu Vương: Chiều nay bạn đến nhà mình được không? Chúng mình học tiếng Trung.\nTiểu Lý: Được, ba giờ mình đến nhà bạn.\nTiểu Vương: Ừ, tạm biệt!",
     "gloss": {
-      "小王": { "p": "Xiǎo Wáng", "vi": "Tiểu Vương (cách gọi thân mật)" },
-      "小李": { "p": "Xiǎo Lǐ", "vi": "Tiểu Lý (cách gọi thân mật)" }
+      "小王": {
+        "p": "Xiǎo Wáng",
+        "vi": "Tiểu Vương (cách gọi thân mật)"
+      },
+      "小李": {
+        "p": "Xiǎo Lǐ",
+        "vi": "Tiểu Lý (cách gọi thân mật)"
+      }
     },
     "questions": [
-      { "type": "tf", "statement": { "hanzi": "小李在看电视。", "pinyin": "Xiǎo Lǐ zài kàn diànshì.", "vi": "Tiểu Lý đang xem tivi." }, "answer": true },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "小李在看电视。",
+          "pinyin": "Xiǎo Lǐ zài kàn diànshì.",
+          "vi": "Tiểu Lý đang xem tivi."
+        },
+        "answer": true
+      },
       {
         "type": "mcq",
-        "question": { "hanzi": "小李几点去小王家？", "pinyin": "Xiǎo Lǐ jǐ diǎn qù Xiǎo Wáng jiā?", "vi": "Mấy giờ Tiểu Lý đến nhà Tiểu Vương?" },
-        "options": [{ "hanzi": "两点", "pinyin": "liǎng diǎn" }, { "hanzi": "三点", "pinyin": "sān diǎn" }, { "hanzi": "四点", "pinyin": "sì diǎn" }],
+        "question": {
+          "hanzi": "小李几点去小王家？",
+          "pinyin": "Xiǎo Lǐ jǐ diǎn qù Xiǎo Wáng jiā?",
+          "vi": "Mấy giờ Tiểu Lý đến nhà Tiểu Vương?"
+        },
+        "options": [
+          {
+            "hanzi": "两点",
+            "pinyin": "liǎng diǎn"
+          },
+          {
+            "hanzi": "三点",
+            "pinyin": "sān diǎn"
+          },
+          {
+            "hanzi": "四点",
+            "pinyin": "sì diǎn"
+          }
+        ],
         "answer": 1
       }
     ]
@@ -152,11 +397,36 @@
     "questions": [
       {
         "type": "mcq",
-        "question": { "hanzi": "他几点回家？", "pinyin": "Tā jǐ diǎn huí jiā?", "vi": "Mấy giờ anh ấy về nhà?" },
-        "options": [{ "hanzi": "七点", "pinyin": "qī diǎn" }, { "hanzi": "四点", "pinyin": "sì diǎn" }, { "hanzi": "十点", "pinyin": "shí diǎn" }],
+        "question": {
+          "hanzi": "他几点回家？",
+          "pinyin": "Tā jǐ diǎn huí jiā?",
+          "vi": "Mấy giờ anh ấy về nhà?"
+        },
+        "options": [
+          {
+            "hanzi": "七点",
+            "pinyin": "qī diǎn"
+          },
+          {
+            "hanzi": "四点",
+            "pinyin": "sì diǎn"
+          },
+          {
+            "hanzi": "十点",
+            "pinyin": "shí diǎn"
+          }
+        ],
         "answer": 1
       },
-      { "type": "tf", "statement": { "hanzi": "他中午在家吃饭。", "pinyin": "Tā zhōngwǔ zài jiā chī fàn.", "vi": "Buổi trưa anh ấy ăn cơm ở nhà." }, "answer": false }
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "他中午在家吃饭。",
+          "pinyin": "Tā zhōngwǔ zài jiā chī fàn.",
+          "vi": "Buổi trưa anh ấy ăn cơm ở nhà."
+        },
+        "answer": false
+      }
     ]
   },
   {
@@ -166,11 +436,39 @@
     "text": "这 是 我 的 桌子 。 桌子 上 有 一 个 电脑 、 一 本 书 和 一 个 杯子 。 杯子 里 有 茶 。 桌子 前面 有 一 个 椅子 ， 桌子 后面 有 我 的 小 狗 。 我 很 喜欢 我 的 狗 。",
     "translation": "Đây là cái bàn của tôi. Trên bàn có một cái máy tính, một quyển sách và một cái cốc. Trong cốc có trà. Phía trước bàn có một cái ghế, phía sau bàn có con chó nhỏ của tôi. Tôi rất thích con chó của tôi.",
     "questions": [
-      { "type": "tf", "statement": { "hanzi": "杯子里有水。", "pinyin": "Bēizi li yǒu shuǐ.", "vi": "Trong cốc có nước." }, "answer": false },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "杯子里有水。",
+          "pinyin": "Bēizi li yǒu shuǐ.",
+          "vi": "Trong cốc có nước."
+        },
+        "answer": false
+      },
       {
         "type": "picture",
-        "sentence": { "hanzi": "桌子后面有一个小狗。", "pinyin": "Zhuōzi hòumiàn yǒu yí ge xiǎo gǒu.", "vi": "Phía sau bàn có một con chó nhỏ." },
-        "options": [{ "emoji": "🐱", "label": "con mèo" }, { "emoji": "🐶", "label": "con chó" }, { "emoji": "🪑", "label": "cái ghế" }],
+        "sentence": {
+          "hanzi": "桌子后面有一个小狗。",
+          "pinyin": "Zhuōzi hòumiàn yǒu yí ge xiǎo gǒu.",
+          "vi": "Phía sau bàn có một con chó nhỏ."
+        },
+        "options": [
+          {
+            "emoji": "🐱",
+            "image": "/images/cat.webp",
+            "label": "con mèo"
+          },
+          {
+            "emoji": "🐶",
+            "image": "/images/dog.jpg",
+            "label": "con chó"
+          },
+          {
+            "emoji": "🪑",
+            "image": "/images/chair.webp",
+            "label": "cái ghế"
+          }
+        ],
         "answer": 1
       }
     ]
