@@ -40,7 +40,7 @@ Chốt trước khi code (mặc định đã chọn ở cột phải — đổi 
 | Chạy ở đâu | Local trước, deploy sau (Phase 13) |
 | Ngôn ngữ giao diện | Tiếng Việt |
 
-Yêu cầu máy: Node.js ≥ 20.9.0, Git, Chrome (để dùng nhận diện giọng nói).
+Yêu cầu máy: Node.js 24.x hoặc ≥ 26, Git, Chrome (để dùng nhận diện giọng nói).
 
 ---
 
@@ -58,9 +58,15 @@ Yêu cầu máy: Node.js ≥ 20.9.0, Git, Chrome (để dùng nhận diện gi�
 > Xác minh sau nâng cấp: Node 24.19.0, npm 11.17.0, Git 2.53.0; Next.js và eslint-config-next 16.4.6 (bản stable mới nhất trên registry npm khi nâng cấp), React/React DOM 19.3.1, @types/react và @types/react-dom 19.3.0. `npm install`, `npm run lint`, `npx tsc --noEmit`, `npm run build`, `npm ls --depth=0` đạt; `npm audit --json` báo 0 lỗ hổng. Dev server trả HTTP 200 cho `/` và `/next.svg`, đã dừng sau kiểm tra. Next.js tự sinh `AGENTS.md` hướng dẫn đọc tài liệu đúng phiên bản. Tại thời điểm xác minh mục 1.1, chưa thực hiện 1.2–1.4; commit khởi tạo sau đó được người dùng phê duyệt.
 
 ### 1.2 Cài thư viện
-- [ ] `npm i prisma @prisma/client ts-fsrs hanzi-writer zod`
-- [ ] `npm i -D tsx vitest`
-- [ ] `npx prisma init --datasource-provider sqlite`
+- [x] `npm i --save-exact @prisma/client@7.10.1 ts-fsrs@6.0.0 hanzi-writer@3.7.3 zod@4.6.7 dotenv@18.0.10`
+- [x] `npm i -D --save-exact prisma@7.10.1 tsx@4.23.15 vitest@5.1.1` — Prisma CLI nằm trong devDependencies, cùng phiên bản với client.
+- [x] `npx prisma init --datasource-provider sqlite --no-skills`
+- [x] Thêm `.env.example` chỉ có `DATABASE_URL="file:./dev.db"`; `.env` thực tế đã được ignore.
+- [x] Xử lý GHSA-7589-6fvf-x4pw trước commit: override riêng `@prisma/config@7.10.1 -> effect@3.22.5` (bản vá từ 3.22.1), giữ cặp Prisma/client 7.10.1 và Effect major 3; ghi chú bảo trì trong README.
+
+> Phiên bản/môi trường: chọn Prisma stable 7.10.1 vì nhãn `latest` của CLI đang trỏ tới 8.0.0-rc.34. Bộ thư viện 1.2 yêu cầu Node 24.x hoặc >= 26 (đã cập nhật engines và README); môi trường kiểm tra là Node 24.19.0, @types/node 24.19.2. CLI bản này sinh `prisma7.config.ts`, nạp URL qua `dotenv`; schema chỉ có SQLite datasource và generator `prisma-client`, output `src/generated/prisma` đã ignore. Phụ lục A dùng cú pháp Prisma cũ: khi làm Phase 2 cần giữ URL trong config, dùng output/import client mới và bổ sung SQLite runtime adapter; chưa cài adapter hay tạo model, database, migration, seed hoặc client ở bước này.
+
+> Xác minh sau bản vá: `npm ci`, `npm ls --depth=0`, `npm ls effect --all` (chỉ còn 3.22.5), `npx prisma validate`, Prisma CLI format trên schema tạm ngoài repo, smoke TypeScript bằng `tsx`, 5 smoke test tạm bằng Vitest (Effect đúng bản vá, Prisma config hợp lệ/không hợp lệ, input advisory 20.000 ký tự trong worker có timeout, export thư viện), `npm run lint`, `npx tsc --noEmit`, `npm run build` đều đạt; test tạm đã xóa, schema project không đổi. Audit ban đầu có 3 high cùng gốc Effect; `npm audit --json` sau bản vá báo 0 lỗ hổng kể cả dev dependencies. Không force-fix, không đổi major. Review tĩnh độc lập cho riêng bản sửa bảo mật đã hoàn tất, không có phát hiện chặn; chưa xác minh client/generate/migrate của Phase 2. Mọi thay đổi 1.2 chưa stage/chưa commit, chỉ chờ người dùng phê duyệt commit.
 
 ### 1.3 Cấu trúc thư mục
 
@@ -103,9 +109,15 @@ web_chinese/
   tests/
 ```
 
+- [x] Tạo 12 route trang giữ chỗ (`review`, `pinyin`, `tones`, `listening`, `speaking`, `writing`, `learn/[levelId]`, `lesson/[id]`, `write/[char]`, `reading/[id]`, `grammar/[id]`, `mock-test/[level]`) và thay trang mẫu `page.tsx` bằng trang Dashboard giữ chỗ.
+- [x] Tạo thư mục rỗng có `.gitkeep`: `data/{vocab,grammar,passages,lessons}`, `public/audio`, `src/components/exercises`, `src/lib`, `tests`.
+- [ ] Chưa tạo: `prisma/seed.ts` (Phase 2), các API route, component và file `lib/*` — tạo khi làm tới phase tương ứng.
+
+> Xác minh: `npm run lint`, `npx tsc --noEmit`, `npm run build` đạt; `next start` trả HTTP 200 cho `/`, `/review`, `/pinyin`, `/learn/1`, `/mock-test/4`, `/write/我`. Lưu ý Next.js 16 trả param chữ Hán còn mã hoá nên `write/[char]` tự `decodeURIComponent`; URL mã hoá sai (vd. `%E0%A4%A`) bị chính Next.js trả 500 ở mọi route động, không phải do code trang.
+
 ### 1.4 Layout chung
 - [ ] Thanh điều hướng: Trang chủ · Học · Ôn tập · Kỹ năng · Ngữ pháp · Thi thử
-- [ ] Font chữ Hán: `Noto Sans SC` (qua `next/font/google`)
+- [x] Font chữ Hán: `Noto Sans SC` (qua `next/font/google`) — thay Geist; subsets `latin` + `vietnamese`, glyph chữ Hán tải theo unicode-range; `lang="vi"`, đổi title/description.
 - [ ] Chế độ sáng/tối
 
 **Tiêu chí hoàn thành:** `npm run dev` chạy, có layout + menu, các trang trống mở được.
