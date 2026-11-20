@@ -161,14 +161,15 @@ web_chinese/
 > Xong Phase này là **bắt đầu học được hằng ngày**.
 
 ### 3.1 Phát âm (TTS)
-- [ ] `src/lib/tts.ts`: dùng `window.speechSynthesis`, chọn voice `zh-CN`, tốc độ chỉnh được
-- [ ] `AudioButton.tsx`: nút loa, phát `audioUrl` nếu có, không thì gọi TTS
-- [ ] Xử lý trường hợp máy không có voice tiếng Trung → hiện thông báo
+- [x] `src/lib/tts.ts`: `speak(text, rate)` dùng `window.speechSynthesis`, ưu tiên voice `zh-CN`, tốc độ mặc định 0.9
+- [x] `AudioButton.tsx`: nút loa gọi TTS. Chưa phát `audioUrl` vì chưa có file mp3 nào — thêm khi có audio thật.
+- [x] Máy không có voice tiếng Trung → hiện hướng dẫn cài gói ngôn ngữ Trung (Giản thể) trong Windows
 
 ### 3.2 Trang học bài `/lesson/[id]`
-- [ ] Bước 1 — Giới thiệu từng từ: chữ Hán lớn, pinyin, nghĩa, âm thanh, ví dụ, tách chữ
-- [ ] Bước 2 — Kiểm tra nhanh: 5–10 câu trắc nghiệm (Hán → nghĩa, nghe → chọn chữ)
-- [ ] Bước 3 — Hoàn thành: tạo `ReviewCard` cho từng từ, đánh dấu bài đã học
+- [x] `/learn/[levelId]`: danh sách bài theo cấp, đánh dấu bài đã học
+- [x] Bước 1 — Giới thiệu từng từ: chữ Hán lớn, pinyin, nghĩa, loại từ, âm thanh, ví dụ (có âm thanh), tách chữ
+- [x] Bước 2 — Kiểm tra: 10 câu (mỗi từ 1 câu), xen kẽ Hán → nghĩa và nghe → chọn chữ, 3 phương án nhiễu lấy từ cùng bài
+- [x] Bước 3 — Hoàn thành: server action `completeLesson` tạo `ReviewCard` (không ghi đè thẻ đã có khi học lại bài), đánh dấu `doneAt`
 
 ### 3.3 Thẻ ôn tập (ReviewCard)
 Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
@@ -180,22 +181,25 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 | `recall` | nghĩa tiếng Việt | gõ pinyin / 汉字 | Viết |
 | `write` | nghĩa + pinyin | viết nét (Phase 4) | Viết |
 
-- [ ] MVP chỉ bật `recognize` + `listen`; bật thêm `recall`, `write` sau
+- [x] MVP chỉ bật `recognize` + `listen`; bật thêm `recall`, `write` sau
+- [ ] Thẻ `listen` hiện là thẻ lật (nghe → tự nhớ → lật xem chữ), chưa có phương án chọn chữ — thêm ở Phase 5.
 
 ### 3.4 Thuật toán FSRS
-- [ ] `src/lib/srs.ts`: bọc `ts-fsrs` — `newCard()`, `schedule(card, rating)`, trả về state mới + `due`
-- [ ] Rating 4 mức: Again / Hard / Good / Easy
-- [ ] Viết test `tests/srs.test.ts`: thẻ mới chấm Good → `due` > hôm nay
+- [x] `src/lib/srs.ts`: bọc `ts-fsrs` v6 (`DefaultScheduler`, FSRS-7) — `newCard(now)`, `review(fsrsJson, grade, now)` trả về `{ fsrs, due }`. Card lưu JSON nên phải đổi lại `dueAt`/`lastReviewAt` thành `Date` khi đọc.
+- [x] Rating 4 mức: Quên / Khó / Nhớ / Dễ (Again / Hard / Good / Easy = 1–4)
+- [x] Test `tests/srs.test.ts`: thẻ mới đến hạn ngay; chấm Good → `due` > 1 ngày; chấm Again sau khi đọc lại từ JSON → ôn lại trong < 30 phút
 
 ### 3.5 Trang ôn tập `/review`
-- [ ] Lấy thẻ `due <= now`, giới hạn 100 thẻ/lượt
-- [ ] Hiện mặt trước → bấm "Hiện đáp án" → chọn rating
-- [ ] `POST /api/review` cập nhật FSRS + ghi `Attempt`
-- [ ] Phím tắt: `Space` lật thẻ, `1–4` chấm điểm
-- [ ] Cài đặt: số từ mới/ngày (mặc định 10)
+- [x] Lấy thẻ `due <= now`, giới hạn 100 thẻ/lượt
+- [x] Hiện mặt trước → bấm "Hiện đáp án" → chọn rating; thẻ được hẹn lại < 10 phút (vd. chấm Quên) xếp lại cuối hàng trong lượt
+- [x] Server action `reviewCard` (thay cho `POST /api/review`, validate bằng zod) cập nhật FSRS + ghi `Attempt` trong 1 transaction
+- [x] Phím tắt: `Space` lật thẻ, `1–4` chấm điểm
+- [ ] Cài đặt số từ mới/ngày — hoãn: hiện mỗi bài đã giới hạn 10 từ, bạn tự chọn học bao nhiêu bài/ngày.
 
 ### 3.6 Dashboard tối thiểu
-- [ ] Số thẻ đến hạn hôm nay, số từ đã học / tổng theo cấp, streak ngày
+- [x] Số thẻ đến hạn, số từ đã học / tổng theo cấp (thanh tiến độ), chuỗi ngày học (`src/lib/streak.ts` + test, tính theo giờ máy chủ, cả ngày ôn thẻ lẫn ngày học xong bài), link bài tiếp theo
+
+> Xác minh: `npm test` (9 test), lint, `tsc --noEmit`, build đạt. Trên dev server: học bài 1 (10 từ, câu hỏi, lưu) → dashboard hiện 20 thẻ đến hạn, chuỗi 1 ngày, 10/150 từ; `/review` lật bằng Space, chấm `3` thẻ rời hàng, chấm `1` thẻ xếp lại cuối hàng; server không lỗi. Trình duyệt test không có giọng tiếng Trung nên chỉ kiểm tra được cảnh báo, chưa nghe được âm thật. DB đã sao lưu trước khi test và khôi phục sau đó (tiến độ học vẫn trống). Phần "hôm sau có thẻ đến hạn" của tiêu chí chưa kiểm được trực tiếp — logic lịch được test ở `srs.test.ts`.
 
 **Tiêu chí hoàn thành:** học xong bài 1 HSK1, hôm sau mở `/review` có thẻ đến hạn, chấm điểm xong lịch ôn cập nhật đúng.
 
