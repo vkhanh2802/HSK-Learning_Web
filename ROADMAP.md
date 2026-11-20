@@ -129,24 +129,28 @@ web_chinese/
 ## Phase 2 — Dữ liệu & Database
 
 ### 2.1 Lấy dữ liệu từ vựng
-- [ ] Tải danh sách HSK 2.0 từ GitHub `drkameleon/complete-hsk-vocabulary` (hoặc nguồn mở tương đương)
-- [ ] Viết script `scripts/build-vocab.ts` chuyển về định dạng ở [Phụ lục B](#phụ-lục-b--định-dạng-dữ-liệu-json)
-- [ ] Bổ sung `meaningVi`: dịch bằng LLM **một lần**, lưu vào JSON, **tự duyệt lại** HSK1 trước
-- [ ] Bổ sung 1–2 câu ví dụ cho mỗi từ (chỉ dùng từ cùng cấp hoặc thấp hơn)
+- [x] Tải danh sách HSK 2.0 từ GitHub `drkameleon/complete-hsk-vocabulary` (MIT) → `data/raw/hsk1..4.json` (150 / 147 / 298 / 598 từ mới mỗi cấp), giữ nguyên bản, nguồn ghi trong `data/raw/README.md`.
+- [x] ~~Script `scripts/build-vocab.ts`~~ — không cần: seed đọc thẳng file gốc + file bổ sung. Bản gốc chỉ có nghĩa tiếng Anh, pinyin có chỗ lẫn cách đọc phụ (听 ghi `yǐn` trước `tīng`), nên pinyin lấy từ file bổ sung.
+- [x] File bổ sung `data/vocab/hsk1.json` (định dạng: xem [Phụ lục B](#phụ-lục-b--định-dạng-dữ-liệu-json)): pinyin chuẩn tách âm tiết, loại từ, nghĩa Việt cho đủ 150 từ HSK1 — do Claude soạn, **cần bạn duyệt lại**.
+- [x] 1 câu ví dụ cho mỗi từ HSK1, chủ yếu dùng từ HSK1 (vài tên riêng/từ ghép dễ đoán như 越南, 汉字, 这里) — **cần duyệt**.
+- [ ] HSK2–4: soạn `data/vocab/hsk2..4.json` (làm ở Phase 10).
 
 ### 2.2 Chia bài học
-- [ ] HSK1: 15 bài × ~10 từ; HSK2: 15 bài × ~10 từ; HSK3: 20 bài × ~15 từ; HSK4: 20 bài × ~30 từ
-- [ ] Nhóm theo chủ đề (chào hỏi, số đếm, gia đình, thời gian, mua sắm, …)
-- [ ] Lưu trong `data/lessons/hskN.json`
+- [x] HSK1: 15 bài × 10 từ theo chủ đề → `data/lessons/hsk1.json`
+- [ ] HSK2: 15 bài × ~10 từ; HSK3: 20 bài × ~15 từ; HSK4: 20 bài × ~30 từ (Phase 10)
 
 ### 2.3 Schema & seed
-- [ ] Copy schema ở [Phụ lục A](#phụ-lục-a--schema-prisma-đầy-đủ) vào `prisma/schema.prisma`
-- [ ] `npx prisma migrate dev --name init`
-- [ ] Viết `prisma/seed.ts`: đọc JSON → upsert Level, Word, Character, Lesson, LessonItem
-- [ ] Tách chữ: mỗi `Word` → nhiều `Character` qua `WordCharacter`
-- [ ] Thêm vào `package.json`: `"prisma": { "seed": "tsx prisma/seed.ts" }`
-- [ ] `npx prisma db seed`
-- [ ] `src/lib/db.ts`: singleton PrismaClient
+- [x] Schema Phụ lục A chuyển sang cú pháp Prisma 7: `datasource` không còn `url` (URL ở `prisma7.config.ts`), generator `prisma-client` ra `src/generated/prisma`; thêm `onDelete: Cascade` cho bảng nối, `@@unique([lessonId, itemType, itemId])` cho `LessonItem`.
+- [x] `DATABASE_URL="file:./prisma/dev.db"` (đường dẫn tính từ thư mục gốc project) trong `.env` và `.env.example`.
+- [x] `npx prisma migrate dev --name init`
+- [x] `prisma/seed.ts`: kiểm tra dữ liệu trước (từ thiếu/thừa, số âm tiết ≠ số chữ, từ trùng hoặc lạc bài), rồi upsert Level, Word, Character, WordCharacter, Lesson, LessonItem; chạy lại nhiều lần không bị trùng.
+- [x] Tách chữ: pinyin của chữ ưu tiên cách đọc khi chữ là một từ riêng (不 = bù, không lấy bú trong 不客气); bộ thủ lấy từ file gốc cho chữ đứng riêng.
+- [x] Prisma 7 khai báo seed trong `prisma7.config.ts` (`migrations.seed`), không còn ở `package.json`.
+- [x] `npx prisma db seed` → `HSK1: 150 từ, 178 chữ, 15 bài`
+- [x] `src/lib/db.ts`: singleton PrismaClient qua adapter `@prisma/adapter-better-sqlite3`.
+- [x] `src/lib/pinyin.ts` `joinSyllables` (nǚ ér → nǚ'ér) + test `tests/pinyin.test.ts`; script `npm test`, `postinstall: prisma generate` (client sinh ra bị gitignore).
+
+> Xác minh: seed chạy 2 lần cho cùng kết quả (150 từ, 178 chữ, 224 liên kết chữ, 15 bài, 150 mục bài học); kiểm tra mẫu 女儿 nǚ'ér, 不客气 búkèqi (不:bù), 听 tīng. `npm test`, lint, `tsc --noEmit`, build đạt. Chưa có trang nào đọc DB — `db.ts` mới được dùng qua seed, sẽ chạy trong Next.js ở Phase 3.
 
 **Tiêu chí hoàn thành:** `npx prisma studio` thấy đủ 150 từ HSK1, 15 bài, chữ đã tách đúng.
 
@@ -529,20 +533,16 @@ model Setting {
 
 ## Phụ lục B — Định dạng dữ liệu JSON
 
-`data/vocab/hsk1.json`
+`data/vocab/hsk1.json` — file bổ sung, khóa là chữ Hán; pinyin tách âm tiết bằng dấu cách (số âm tiết phải bằng số chữ). Nghĩa tiếng Anh và bộ thủ seed tự lấy từ `data/raw/hsk1.json`.
 ```json
-[
-  {
-    "hanzi": "朋友",
-    "pinyin": "péngyou",
-    "meaningVi": "bạn bè",
-    "meaningEn": "friend",
+{
+  "朋友": {
+    "pinyin": "péng you",
     "pos": "danh từ",
-    "examples": [
-      { "hanzi": "他是我的朋友。", "pinyin": "Tā shì wǒ de péngyou.", "vi": "Anh ấy là bạn của tôi." }
-    ]
+    "vi": "bạn, bạn bè",
+    "example": { "hanzi": "他是我的朋友。", "pinyin": "Tā shì wǒ de péngyou.", "vi": "Anh ấy là bạn của tôi." }
   }
-]
+}
 ```
 
 `data/lessons/hsk1.json`

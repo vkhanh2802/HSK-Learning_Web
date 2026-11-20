@@ -10,9 +10,12 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "prisma generate",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@prisma/adapter-better-sqlite3": "7.10.1",
     "@prisma/client": "7.10.1",
     "dotenv": "18.0.10",
     "hanzi-writer": "3.7.3",

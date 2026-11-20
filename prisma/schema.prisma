@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma 7: URL nằm trong prisma7.config.ts, client chạy qua adapter better-sqlite3 (src/lib/db.ts).
 
 generator client {
   provider = "prisma-client"
@@ -8,4 +7,156 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+}
+
+// SQLite không có kiểu Json/mảng nên các trường JSON lưu String rồi JSON.parse.
+
+model Level {
+  id       Int            @id // 1..4
+  name     String // "HSK1"
+  words    Word[]
+  lessons  Lesson[]
+  grammar  GrammarPoint[]
+  passages Passage[]
+}
+
+model Lesson {
+  id      Int          @id @default(autoincrement())
+  levelId Int
+  level   Level        @relation(fields: [levelId], references: [id])
+  order   Int
+  title   String
+  topic   String
+  doneAt  DateTime?
+  items   LessonItem[]
+
+  @@unique([levelId, order])
+}
+
+model Word {
+  id         Int             @id @default(autoincrement())
+  hanzi      String          @unique
+  pinyin     String
+  meaningVi  String
+  meaningEn  String?
+  pos        String?
+  levelId    Int
+  level      Level           @relation(fields: [levelId], references: [id])
+  examples   String // JSON: [{hanzi, pinyin, vi}]
+  audioUrl   String?
+  characters WordCharacter[]
+}
+
+model Character {
+  id        Int             @id @default(autoincrement())
+  char      String          @unique
+  pinyin    String
+  radical   String?
+  strokes   Int?
+  meaningVi String?
+  words     WordCharacter[]
+}
+
+model WordCharacter {
+  wordId      Int
+  characterId Int
+  position    Int
+  word        Word      @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@id([wordId, characterId, position])
+}
+
+model GrammarPoint {
+  id          Int     @id @default(autoincrement())
+  levelId     Int
+  level       Level   @relation(fields: [levelId], references: [id])
+  title       String
+  pattern     String
+  explanation String
+  examples    String // JSON
+  mistakes    String? // JSON
+}
+
+model Passage {
+  id        Int     @id @default(autoincrement())
+  levelId   Int
+  level     Level   @relation(fields: [levelId], references: [id])
+  type      String // reading | dialogue
+  title     String
+  tokens    String // JSON: [{t, p, vi}]
+  audioUrl  String?
+  questions String // JSON
+}
+
+model LessonItem {
+  id       Int    @id @default(autoincrement())
+  lessonId Int
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  itemType String // word | grammar | passage | exercise
+  itemId   Int
+  order    Int
+
+  @@unique([lessonId, itemType, itemId])
+}
+
+model Exercise {
+  id       Int       @id @default(autoincrement())
+  levelId  Int
+  skill    String // listening | reading | writing | speaking | grammar
+  type     String // mcq | truefalse | dictation | reorder | fillblank | shadowing | compose
+  payload  String // JSON đề
+  answer   String // JSON đáp án
+  attempts Attempt[]
+}
+
+model ReviewCard {
+  id        Int       @id @default(autoincrement())
+  itemType  String // word | character | sentence
+  itemId    Int
+  mode      String // recognize | listen | recall | write
+  fsrs      String // JSON state của ts-fsrs
+  due       DateTime
+  suspended Boolean   @default(false)
+  attempts  Attempt[]
+
+  @@unique([itemType, itemId, mode])
+  @@index([due])
+}
+
+model Attempt {
+  id         Int         @id @default(autoincrement())
+  exerciseId Int?
+  exercise   Exercise?   @relation(fields: [exerciseId], references: [id])
+  cardId     Int?
+  card       ReviewCard? @relation(fields: [cardId], references: [id])
+  skill      String
+  correct    Boolean
+  rating     Int?
+  response   String?
+  durationMs Int?
+  createdAt  DateTime    @default(now())
+
+  @@index([createdAt])
+}
+
+model MockTest {
+  id       Int          @id @default(autoincrement())
+  levelId  Int
+  sections String // JSON
+  results  MockResult[]
+}
+
+model MockResult {
+  id         Int      @id @default(autoincrement())
+  mockTestId Int
+  mockTest   MockTest @relation(fields: [mockTestId], references: [id])
+  scores     String // JSON {listening, reading, writing, total}
+  answers    String // JSON
+  createdAt  DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value String
 }
