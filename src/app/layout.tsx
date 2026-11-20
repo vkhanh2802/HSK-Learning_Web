@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Noto_Sans_SC } from "next/font/google";
+import { Noto_Sans, Noto_Sans_SC } from "next/font/google";
 import Nav from "@/components/Nav";
 import ThemeToggle from "@/components/ThemeToggle";
 import "./globals.css";
 
-// Một font cho cả giao diện tiếng Việt và chữ Hán; glyph CJK tải theo unicode-range khi cần.
+// Noto Sans cho chữ Latin/tiếng Việt/pinyin (glyph ā ē ī ō ū của Noto Sans SC đặt dấu lệch);
+// Noto Sans SC lo chữ Hán, glyph CJK tải theo unicode-range khi cần.
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
+  subsets: ["latin", "latin-ext", "vietnamese"],
+});
 const notoSansSC = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
-  subsets: ["latin", "vietnamese"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={notoSansSC.variable} suppressHydrationWarning>
+    <html lang="vi" className={`${notoSans.variable} ${notoSansSC.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

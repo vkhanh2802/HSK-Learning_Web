@@ -19,3 +19,6 @@ export async function review(fsrs: string, grade: Grade, now: Date) {
   const { card } = (await scheduler).review({ card: revive(fsrs), grade, now });
   return { fsrs: JSON.stringify(card), due: card.dueAt };
 }
+
+/** Gợi ý điểm cho thẻ viết theo tổng số lần sai nét: ≤1 Nhớ · 2–3 Khó · >3 Quên. */
+export const writeGrade = (mistakes: number): Grade => (mistakes <= 1 ? 3 : mistakes <= 3 ? 2 : 1);

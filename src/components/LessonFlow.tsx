@@ -59,19 +59,17 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           <p className="mt-1 text-lg">
             {w.meaningVi} {w.pos && <span className="text-sm opacity-75">({w.pos})</span>}
           </p>
-          {w.chars.length > 1 && (
-            <p className="mt-3 text-sm">
-              Tách chữ:{" "}
-              {w.chars.map((c, k) => (
-                <span key={k} className="mr-3">
-                  <span lang="zh-CN" className="text-lg">
-                    {c.char}
-                  </span>{" "}
-                  {c.pinyin}
-                </span>
-              ))}
-            </p>
-          )}
+          <p className="mt-3 text-sm">
+            {w.chars.length > 1 ? "Tách chữ (bấm để tập viết):" : "Tập viết:"}{" "}
+            {w.chars.map((c, k) => (
+              <Link key={k} href={`/write/${c.char}`} target="_blank" className="mr-3 hover:underline">
+                <span lang="zh-CN" className="text-lg text-accent">
+                  {c.char}
+                </span>{" "}
+                {c.pinyin}
+              </Link>
+            ))}
+          </p>
           {w.example && (
             <div className="mt-4 border-t border-border pt-4">
               <p className="flex items-center gap-2">

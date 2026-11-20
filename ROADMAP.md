@@ -208,22 +208,25 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 ## Phase 4 — Nền tảng: Pinyin, Thanh điệu, Nét chữ
 
 ### 4.1 Bảng pinyin `/pinyin`
-- [ ] Lưới thanh mẫu × vận mẫu, bấm ô nào phát âm ô đó
-- [ ] Ghi chú khó cho người Việt: zh/ch/sh vs z/c/s, j/q/x, ü, -n vs -ng
+- [x] Bảng âm tiết nhóm theo thanh mẫu; mỗi âm có nút cho từng thanh. Giọng đọc trình duyệt chỉ đọc chữ Hán, nên mỗi thanh phát bằng một chữ đại diện lấy từ từ vựng HSK1–4 (`src/lib/syllables.ts`): chỉ dùng chữ có đúng 1 cách đọc để không đọc sai, chữ HSK1 lấy pinyin đã soạn tay. Kết quả 321 âm tiết, 613 ô có tiếng; ô nào không có chữ phù hợp thì để trống.
+- [x] Giải thích 4 thanh + thanh nhẹ, và 7 điểm khó cho người Việt: zh/ch/sh/r, z/c/s, j/q/x, ü, -n/-ng, bật hơi b/p d/t g/k, e và i đặc biệt
+- [x] Font: thêm Noto Sans cho chữ Latin/pinyin (glyph ā ē ī ō ū của Noto Sans SC đặt dấu lệch), Noto Sans SC chỉ còn lo chữ Hán
 
 ### 4.2 Luyện thanh điệu `/tones`
-- [ ] Bài 1: nghe 1 âm → chọn thanh (1–4, nhẹ)
-- [ ] Bài 2: cặp tối thiểu (mā/má/mǎ/mà) → chọn đúng
-- [ ] Bài 3: biến điệu (3+3 → 2+3, 不, 一)
-- [ ] `src/lib/pinyin.ts`: chuyển `ma3` ↔ `mǎ`, tách thanh khỏi pinyin
+- [x] Bài 1: nghe 1 âm → chọn thanh 1–4 (10 câu, chấm điểm). Thanh nhẹ không luyện được ở đây vì không có chữ đứng riêng mang thanh nhẹ.
+- [x] Bài 2: cặp tối thiểu — âm tiết có ≥ 2 thanh, phương án là chính các thanh đó (jiāng / jiǎng / jiàng)
+- [x] Bài 3: biến điệu (3+3 → 2+3, 不, 一) — bảng ví dụ “viết → đọc” có âm thanh; chưa có bài trắc nghiệm
+- [x] `src/lib/pinyin.ts`: `numericToMarked` (ma3 → mǎ, lv4/lu:4 → lǜ), `toneOf`, `stripTone` + test
 
 ### 4.3 Viết chữ `/write/[char]`
-- [ ] `StrokeQuiz.tsx` dùng `hanzi-writer`: chế độ xem hoạt ảnh → viết theo mẫu → viết không mẫu
-- [ ] Hiển thị bộ thủ, số nét, các từ chứa chữ đó
-- [ ] Bật mode `write` cho ReviewCard (chấm: sai ≤1 nét = Good, 2–3 = Hard, >3 = Again)
+- [x] `StrokeQuiz.tsx` dùng `hanzi-writer` (tải động ở client): xem hoạt ảnh lặp → viết theo mẫu (gợi ý sau 1 lần sai) → viết không mẫu (gợi ý sau 3 lần sai). Dữ liệu nét lấy từ CDN jsDelivr nên **cần mạng**; mất mạng thì báo lỗi.
+- [x] Hiển thị pinyin, bộ thủ, số nét, các từ chứa chữ đó, nút chữ trước/sau; trang `/write` liệt kê 178 chữ HSK1; màn học từ mới có link tập viết từng chữ
+- [x] Bật mode `write` cho ReviewCard: viết lần lượt từng chữ của từ không có mẫu, gợi ý điểm theo tổng lần sai (`writeGrade`: ≤1 Nhớ, 2–3 Khó, >3 Quên, có test); lật thẻ khi chưa viết xong thì gợi ý Quên. Bài học mới tạo 3 thẻ/từ; bài đã học trước đó chỉ có thẻ write khi bấm "Hoàn thành bài" lại.
 
 ### 4.4 Bộ thủ
-- [ ] Trang 50 bộ thủ thường gặp: hình, nghĩa, ví dụ chữ
+- [x] Trang `/radicals`: 50 bộ thủ (`data/radicals.json`, do Claude soạn — **cần duyệt**) với pinyin, nghĩa, dạng biến thể, chữ ví dụ bấm để tập viết
+
+> Xác minh: 29 test, lint, `tsc --noEmit`, build đạt (không còn cảnh báo). Trên dev server: bảng pinyin hiện và phát đúng ô (mā → 妈), dấu thanh hiển thị đúng sau khi đổi font; 2 bài luyện thanh chạy và chấm điểm; `/write/我` tải 7 nét và chạy hoạt ảnh; viết theo mẫu chữ 一 bằng kéo chuột → “Hoàn hảo”; học bài 4 tạo 30 thẻ, thẻ viết hiện ô viết và gợi ý Quên khi lật sớm; `/radicals` hiện đủ 50 mục; không lỗi console/server. Chưa nghe được âm thật (trình duyệt test không có giọng tiếng Trung). DB được sao lưu trước khi test và khôi phục sau đó.
 
 **Tiêu chí hoàn thành:** phân biệt được 4 thanh qua bài nghe; viết được 150 chữ HSK1 bằng quiz nét.
 

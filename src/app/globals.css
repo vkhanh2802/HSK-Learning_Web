@@ -36,7 +36,7 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
-  --font-sans: var(--font-noto-sans-sc), "Microsoft YaHei", "PingFang SC", sans-serif;
+  --font-sans: var(--font-noto-sans), var(--font-noto-sans-sc), "Microsoft YaHei", "PingFang SC", sans-serif;
 }
 
 body {

@@ -4,8 +4,8 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { newCard, review, type Grade } from "@/lib/srs";
 
-// MVP bật 2 chế độ thẻ; recall/write bật ở Phase 4 và 9.
-const MODES = ["recognize", "listen"] as const;
+// Chế độ thẻ cho mỗi từ; recall (gõ pinyin/chữ) bật ở Phase 9.
+const MODES = ["recognize", "listen", "write"] as const;
 
 /** Học xong bài: tạo thẻ ôn cho mọi từ trong bài (không đụng thẻ đã có) và đánh dấu bài đã học. */
 export async function completeLesson(lessonId: number) {
@@ -42,7 +42,7 @@ export async function reviewCard(input: z.input<typeof reviewInput>) {
     prisma.attempt.create({
       data: {
         cardId,
-        skill: card.mode === "listen" ? "listening" : "reading",
+        skill: card.mode === "listen" ? "listening" : card.mode === "write" ? "writing" : "reading",
         correct: grade > 1,
         rating: grade,
         durationMs,

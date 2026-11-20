@@ -17,6 +17,8 @@ const items: NavItem[] = [
       ...levels.map((n) => ({ href: `/learn/${n}`, label: `HSK${n}` })),
       { href: "/pinyin", label: "Bảng pinyin" },
       { href: "/tones", label: "Thanh điệu" },
+      { href: "/write", label: "Tập viết" },
+      { href: "/radicals", label: "Bộ thủ" },
     ],
   },
   { href: "/review", label: "Ôn tập" },

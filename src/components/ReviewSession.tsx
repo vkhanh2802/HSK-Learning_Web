@@ -3,10 +3,45 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { reviewCard } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
+import StrokeQuiz from "@/components/StrokeQuiz";
+import { writeGrade, type Grade } from "@/lib/srs";
 import { speak } from "@/lib/tts";
 import type { WordView } from "@/lib/words";
 
-export type ReviewItem = { cardId: number; mode: "recognize" | "listen"; word: WordView };
+export type ReviewItem = { cardId: number; mode: "recognize" | "listen" | "write"; word: WordView };
+
+/** Thẻ viết: viết lần lượt từng chữ của từ, không có mẫu; báo tổng số lần sai khi xong. */
+function WriteFront({ word, onDone }: { word: WordView; onDone: (mistakes: number) => void }) {
+  const chars = [...word.hanzi];
+  const [i, setI] = useState(0);
+  const [total, setTotal] = useState(0);
+  return (
+    <div>
+      <p className="text-sm opacity-75">Viết từ này</p>
+      <p className="mt-1 text-xl">{word.pinyin}</p>
+      <p className="text-lg">{word.meaningVi}</p>
+      {chars.length > 1 && (
+        <p className="mt-2 text-sm opacity-75">
+          Chữ {i + 1}/{chars.length}
+        </p>
+      )}
+      <div className="mt-2 flex justify-center">
+        <StrokeQuiz
+          key={i}
+          char={chars[i]}
+          mode="blind"
+          size={220}
+          onComplete={(m) => {
+            const sum = total + m;
+            setTotal(sum);
+            if (i < chars.length - 1) setI(i + 1);
+            else onDone(sum);
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
 const GRADES = [
   { grade: 1, label: "Quên", key: "1" },
@@ -24,7 +59,14 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reviewed, setReviewed] = useState(0);
+  const [suggested, setSuggested] = useState<{ grade: Grade; mistakes: number | null } | null>(null);
   const shownAt = useRef(0);
+
+  // Lật thẻ; thẻ viết mà lật trước khi viết xong coi như chưa nhớ.
+  const flip = useCallback(() => {
+    setFlipped(true);
+    setSuggested((s) => s ?? (queue[0]?.mode === "write" ? { grade: 1, mistakes: null } : null));
+  }, [queue]);
 
   const current = queue[0];
 
@@ -43,6 +85,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
         setQueue((q) => (again ? [...q.slice(1), q[0]] : q.slice(1)));
         setReviewed((n) => n + 1);
         setFlipped(false);
+        setSuggested(null);
         setError(null);
       } catch {
         setError("Không lưu được kết quả, thử lại.");
@@ -58,7 +101,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       if (e.key === " " && !flipped) {
         e.preventDefault();
-        setFlipped(true);
+        flip();
       } else if (flipped) {
         const g = GRADES.find((x) => x.key === e.key);
         if (g) rate(g.grade);
@@ -66,7 +109,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [flipped, rate]);
+  }, [flipped, rate, flip]);
 
   if (!current)
     return (
@@ -86,6 +129,17 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
           <p lang="zh-CN" className="text-6xl">
             {w.hanzi}
           </p>
+        ) : current.mode === "write" ? (
+          !flipped && (
+            <WriteFront
+              key={`${current.cardId}-${reviewed}`}
+              word={w}
+              onDone={(mistakes) => {
+                setSuggested({ grade: writeGrade(mistakes), mistakes });
+                setFlipped(true);
+              }}
+            />
+          )
         ) : (
           <div>
             <p className="text-sm opacity-75">Nghe và nhớ lại từ</p>
@@ -97,7 +151,14 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
 
         {flipped && (
           <div className="mt-4 border-t border-border pt-4">
-            {current.mode === "listen" && (
+            {suggested && (
+              <p role="status" className="mb-2 text-sm">
+                {suggested.mistakes === null
+                  ? "Chưa viết xong — gợi ý chấm Quên."
+                  : `Sai ${suggested.mistakes} lần — gợi ý chấm ${GRADES[suggested.grade - 1].label}.`}
+              </p>
+            )}
+            {current.mode !== "recognize" && (
               <p lang="zh-CN" className="text-5xl">
                 {w.hanzi}
               </p>
@@ -121,7 +182,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
         <button
           type="button"
           className="mt-4 w-full rounded bg-accent px-4 py-3 font-semibold text-background hover:opacity-90"
-          onClick={() => setFlipped(true)}
+          onClick={flip}
         >
           Hiện đáp án <kbd className="ml-2 text-sm opacity-75">Space</kbd>
         </button>
@@ -132,7 +193,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
               key={g.grade}
               type="button"
               disabled={busy}
-              className="rounded border border-border px-2 py-3 hover:bg-muted disabled:opacity-40"
+              className={`rounded border px-2 py-3 hover:bg-muted disabled:opacity-40 ${suggested?.grade === g.grade ? "border-accent border-2 font-semibold" : "border-border"}`}
               onClick={() => rate(g.grade)}
             >
               {g.label} <kbd className="block text-sm opacity-75">{g.key}</kbd>

@@ -1,14 +1,76 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import WritePractice from "@/components/WritePractice";
+import { prisma } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
+
 export default async function Page({ params }: { params: Promise<{ char: string }> }) {
-  const { char } = await params;
+  const { char: rawParam } = await params;
   // Next.js trả param chữ Hán ở dạng còn mã hoá (%E6%88%91); URL lỗi thì giữ nguyên thay vì 500.
-  let text = char;
+  let text = rawParam;
   try {
-    text = decodeURIComponent(char);
+    text = decodeURIComponent(rawParam);
   } catch {}
+  const char = [...text][0] ?? "";
+  if (!/\p{Script=Han}/u.test(char)) notFound();
+
+  const [info, all] = await Promise.all([
+    prisma.character.findUnique({
+      where: { char },
+      include: { words: { include: { word: true }, orderBy: { word: { id: "asc" } } } },
+    }),
+    prisma.character.findMany({ select: { char: true }, orderBy: { id: "asc" } }),
+  ]);
+  const idx = all.findIndex((c) => c.char === char);
+  const prev = idx > 0 ? all[idx - 1].char : null;
+  const next = idx >= 0 && idx < all.length - 1 ? all[idx + 1].char : null;
+
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">Viết chữ {text}</h1>
-      <p>Đang xây dựng — Phase 4.</p>
+      <Link href="/write" className="text-sm opacity-75 hover:underline">
+        ← Tất cả chữ
+      </Link>
+      <h1 className="mt-1 flex items-baseline gap-3 text-2xl font-bold">
+        Viết chữ{" "}
+        <span lang="zh-CN" className="text-4xl">
+          {char}
+        </span>
+        {info && <span className="text-xl font-normal">{info.pinyin}</span>}
+      </h1>
+      {info?.radical && <p className="mt-1 text-sm">Bộ thủ: <span lang="zh-CN">{info.radical}</span></p>}
+
+      <div className="mt-4 flex flex-col gap-6 md:flex-row">
+        <WritePractice char={char} />
+        {info && info.words.length > 0 && (
+          <section>
+            <h2 className="font-semibold">Từ có chữ này</h2>
+            <ul className="mt-2 space-y-1">
+              {info.words.map(({ word }) => (
+                <li key={word.id}>
+                  <span lang="zh-CN" className="text-lg">
+                    {word.hanzi}
+                  </span>{" "}
+                  {word.pinyin} — {word.meaningVi}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+
+      <nav aria-label="Chữ trước và sau" className="mt-6 flex gap-3">
+        {prev && (
+          <Link href={`/write/${prev}`} className="rounded border border-border px-3 py-1.5 hover:bg-muted">
+            ← <span lang="zh-CN">{prev}</span>
+          </Link>
+        )}
+        {next && (
+          <Link href={`/write/${next}`} className="rounded border border-border px-3 py-1.5 hover:bg-muted">
+            <span lang="zh-CN">{next}</span> →
+          </Link>
+        )}
+      </nav>
     </main>
   );
 }

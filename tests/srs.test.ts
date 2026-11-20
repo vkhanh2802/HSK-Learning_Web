@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { newCard, review } from "../src/lib/srs";
+import { newCard, review, writeGrade } from "../src/lib/srs";
 
 const now = new Date("2026-01-01T00:00:00Z");
 
@@ -17,4 +17,14 @@ describe("srs", () => {
     const again = await review(good.fsrs, 1, good.due); // đọc lại từ JSON như khi lấy từ DB
     expect(again.due.getTime() - good.due.getTime()).toBeLessThan(30 * 60_000);
   });
+});
+
+describe("writeGrade", () => {
+  it.each([
+    [0, 3],
+    [1, 3],
+    [2, 2],
+    [3, 2],
+    [4, 1],
+  ])("sai %i nét -> %i", (m, g) => expect(writeGrade(m)).toBe(g));
 });
