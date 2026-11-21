@@ -1,19 +1,15 @@
-// Thống kê cho dashboard (Phase 12). Hàm thuần, tính theo giờ máy chủ như streak.ts.
-
-export const dayKey = (d: Date) => d.toLocaleDateString("sv"); // YYYY-MM-DD
-
-const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
-const addDays = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+// Thống kê cho dashboard (Phase 12). Hàm thuần; ngày tính theo múi giờ người học (src/lib/time.ts).
+import { addDaysKey, dayKey, daysBetween, weekdayMon0 } from "@/lib/time";
 
 /** Số thẻ đến hạn mỗi ngày trong `days` ngày tới; ngày 0 (hôm nay) gồm cả thẻ đã quá hạn. */
 export function forecast(dues: Date[], now: Date, days = 30) {
-  const today = startOfDay(now);
+  const today = dayKey(now);
   const counts = new Array<number>(days).fill(0);
   for (const due of dues) {
-    const i = Math.max(0, Math.round((startOfDay(due).getTime() - today.getTime()) / 86_400_000));
+    const i = Math.max(0, daysBetween(today, dayKey(due)));
     if (i < days) counts[i]++;
   }
-  return counts.map((count, i) => ({ date: dayKey(addDays(today, i)), count }));
+  return counts.map((count, i) => ({ date: addDaysKey(today, i), count }));
 }
 
 export const SKILLS = ["listening", "speaking", "reading", "writing", "grammar"] as const;
@@ -44,13 +40,12 @@ export function accuracyBySkill(attempts: { skill: string; correct: boolean }[],
 export function heatmap(activity: Date[], now: Date, weeks = 26) {
   const counts = new Map<string, number>();
   for (const d of activity) counts.set(dayKey(d), (counts.get(dayKey(d)) ?? 0) + 1);
-  const today = startOfDay(now);
-  const monday = addDays(today, -((today.getDay() + 6) % 7));
-  const first = addDays(monday, -7 * (weeks - 1));
+  const today = dayKey(now);
+  const first = addDaysKey(today, -weekdayMon0(today) - 7 * (weeks - 1));
   return Array.from({ length: weeks }, (_, w) =>
     Array.from({ length: 7 }, (_, d) => {
-      const date = addDays(first, w * 7 + d);
-      return { date: dayKey(date), count: date > today ? null : (counts.get(dayKey(date)) ?? 0) };
+      const date = addDaysKey(first, w * 7 + d);
+      return { date, count: date > today ? null : (counts.get(date) ?? 0) };
     }),
   );
 }

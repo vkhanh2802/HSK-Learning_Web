@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { startMockTest } from "@/app/actions";
 import { prisma } from "@/lib/db";
+import { formatDateTime } from "@/lib/time";
 import { BLUEPRINT, SKILL_VI, type SectionScore } from "@/lib/mock";
 import { buildPool } from "@/lib/mockData";
 
@@ -76,7 +77,7 @@ export default async function Page({ params }: { params: Promise<{ level: string
             return (
               <li key={r.id}>
                 <Link href={`/mock-test/result/${r.id}`} className="hover:underline">
-                  {r.createdAt.toLocaleString("vi-VN")} —{" "}
+                  {formatDateTime(r.createdAt)} —{" "}
                   <strong>
                     {s.total}/{s.max}
                   </strong>{" "}

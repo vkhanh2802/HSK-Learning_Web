@@ -1,14 +1,14 @@
-const dayKey = (d: Date) => d.toLocaleDateString("sv"); // YYYY-MM-DD theo giờ máy chủ
+import { addDaysKey, dayKey } from "@/lib/time";
 
-/** Số ngày học liên tiếp tính đến hôm nay (hoặc hôm qua nếu hôm nay chưa học). */
+/** Số ngày học liên tiếp tính đến hôm nay (hoặc hôm qua nếu hôm nay chưa học), theo múi giờ người học. */
 export function streak(activity: Date[], now = new Date()): number {
   const days = new Set(activity.map(dayKey));
-  const d = new Date(now);
-  if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1);
+  let d = dayKey(now);
+  if (!days.has(d)) d = addDaysKey(d, -1);
   let n = 0;
-  while (days.has(dayKey(d))) {
+  while (days.has(d)) {
     n++;
-    d.setDate(d.getDate() - 1);
+    d = addDaysKey(d, -1);
   }
   return n;
 }

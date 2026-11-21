@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { mistakeWords } from "@/app/actions";
 import AddMistakes from "@/components/AddMistakes";
 import { prisma } from "@/lib/db";
+import { formatDateTime } from "@/lib/time";
 import type { Line } from "@/lib/exercises";
 import { SKILL_VI, type SectionScore } from "@/lib/mock";
 import { loadItems, type FullItem, type Response, type Section } from "@/lib/mockData";
@@ -115,7 +116,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         ← Thi thử HSK{level}
       </Link>
       <h1 className="mt-1 text-2xl font-bold">Kết quả thi thử HSK{level}</h1>
-      <p className="text-sm opacity-75">{result.createdAt.toLocaleString("vi-VN")}</p>
+      <p className="text-sm opacity-75">{formatDateTime(result.createdAt)}</p>
 
       <div className="mt-4 flex flex-wrap gap-4">
         {scores.sections.map((s) => (

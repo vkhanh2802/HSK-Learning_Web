@@ -147,17 +147,18 @@ export async function importBackup(input: unknown) {
 
       const cardIds = new Map<string, number>();
       const ck = (c: { item: string; mode: string }) => `${c.item}|${c.mode}`;
-      for (const c of b.cards) {
+      // Tạo thẻ hàng loạt rồi đọc lại id (theo itemId + mode, là duy nhất): trên Turso mỗi câu lệnh là một lượt qua mạng.
+      const cardRows = b.cards.flatMap((c) => {
         const itemId = maps.word.toId.get(c.item);
-        if (itemId === undefined) {
-          skipped++;
-          continue;
-        }
-        const row = await tx.reviewCard.create({
-          data: { itemType: "word", itemId, mode: c.mode, fsrs: c.fsrs, due: c.due, suspended: c.suspended },
-        });
-        cardIds.set(ck(c), row.id);
-      }
+        if (itemId === undefined) skipped++;
+        return itemId === undefined
+          ? []
+          : [{ itemType: "word", itemId, mode: c.mode, fsrs: c.fsrs, due: c.due, suspended: c.suspended }];
+      });
+      await tx.reviewCard.createMany({ data: cardRows });
+      const wordById = maps.word.toKey;
+      for (const row of await tx.reviewCard.findMany({ select: { id: true, itemId: true, mode: true } }))
+        cardIds.set(ck({ item: wordById.get(row.itemId)!, mode: row.mode }), row.id);
 
       await tx.attempt.createMany({
         data: b.attempts.map((a) => ({

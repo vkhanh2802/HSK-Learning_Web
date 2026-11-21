@@ -436,6 +436,13 @@ Người dùng chọn: làm PWA + chuẩn bị deploy, DB cloud là **Turso** (g
 
 > Xác minh: 71 test, lint, `tsc --noEmit`, build đạt; adapter libsql + `turso-migrate.ts` + seed chạy thử với file libsql local (4 migration, 1198 từ, chạy lại bỏ qua). Bản production chạy với mật khẩu test: chưa đăng nhập → `/login`, API/server action → 401, manifest/icon/`sw.js` vẫn tải được, sai mật khẩu báo lỗi, đúng thì vào trang chủ; service worker kích hoạt và lưu `/offline` + bộ từ; tắt server (giả lập mất mạng) → mở `/reading` chưa từng xem được chuyển sang Ôn offline, lật thẻ chạy. Dev server local (không mật khẩu) vẫn mở mọi trang, không đăng ký service worker. Chưa thử trên Turso/Vercel thật và chưa thử cài PWA trên điện thoại.
 
+### Rà soát trước khi deploy
+- [x] **Múi giờ**: máy chủ Vercel chạy UTC (và không cho đặt biến `TZ`) nên "hôm nay", chuỗi ngày học, lịch ôn 30 ngày, heatmap và giờ thi thử sẽ lệch 7 tiếng. Thêm `src/lib/time.ts`: mọi phép tính ngày theo `APP_TIMEZONE` (mặc định `Asia/Ho_Chi_Minh`), cộng trừ ngày trên chuỗi YYYY-MM-DD; `streak.ts`, `stats.ts`, trang thi thử và tên file backup dùng nó. Test viết lại theo giờ VN, đạt khi chạy với `TZ=UTC`, `Asia/Saigon`, `America/New_York`; thêm ca 23:30 và 00:30 giờ VN là hai ngày khác nhau.
+- [x] **Đăng nhập hai lớp**: server action được gọi theo mã action chứ không theo đường dẫn, nên POST tới `/login` (proxy cho qua) có thể nhắm action khác. Thêm `src/lib/session.ts` (`requireSession` / `hasSession`), gọi ở đầu cả 13 server action và các API route. Thử thật trên bản production: POST `/login` với mã action `startMockTest` khi chưa đăng nhập → không tạo đề nào; khi đã đăng nhập action vẫn chạy.
+- [x] **Khôi phục backup trên Turso**: trước tạo từng thẻ một (mỗi thẻ một lượt qua mạng, vài nghìn thẻ sẽ quá thời gian transaction) → `createMany` rồi đọc lại id. Thử qua adapter libsql: 2400 thẻ + 2400 lượt làm bài khôi phục trong 0,46 s, xuất lại khớp hoàn toàn.
+- [x] Kiểm tra thêm, không cần sửa: `better-sqlite3` chỉ nạp file native khi tạo kết nối (bản deploy dùng Turso nên không cần); `prisma generate` chạy được khi không có `DATABASE_URL`; không có chỗ nào đọc file trong `data/` lúc chạy (chỉ seed).
+- Giới hạn còn lại: Vercel nhận tối đa 4,5 MB mỗi request nên file backup quá lớn không khôi phục được (ghi trong DEPLOY.md).
+
 ---
 
 ## Phụ lục A — Schema Prisma đầy đủ

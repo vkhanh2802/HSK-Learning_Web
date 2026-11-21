@@ -10,6 +10,7 @@ import { gradeGrammar, revealGrammar, type GrammarExercise } from "@/lib/grammar
 import { BLUEPRINT, findWords, pickSection, scoreSections } from "@/lib/mock";
 import { buildPool, gradeItem, itemText, loadItems, recentRefs, type Section } from "@/lib/mockData";
 import type { Question } from "@/lib/passages";
+import { requireSession } from "@/lib/session";
 import { newCard, review, type Grade } from "@/lib/srs";
 
 // Chế độ thẻ cho mỗi từ; recall (gõ pinyin/chữ) bật ở Phase 9.
@@ -29,6 +30,7 @@ async function createWordCards(itemId: number, now: Date) {
 
 /** Học xong bài: tạo thẻ ôn cho mọi từ trong bài và đánh dấu bài đã học. */
 export async function completeLesson(lessonId: number) {
+  await requireSession();
   const id = z.number().int().positive().parse(lessonId);
   const lesson = await prisma.lesson.findUnique({ where: { id }, include: { items: true } });
   if (!lesson) throw new Error("Không tìm thấy bài học");
@@ -40,6 +42,7 @@ export async function completeLesson(lessonId: number) {
 
 /** Thêm một từ (tra trong bài đọc) vào ôn tập. Trả về số thẻ mới tạo (0 = đã có sẵn). */
 export async function addWordToReview(wordId: number) {
+  await requireSession();
   const id = z.number().int().positive().parse(wordId);
   if (!(await prisma.word.findUnique({ where: { id } }))) throw new Error("Không tìm thấy từ");
   return createWordCards(id, new Date());
@@ -53,6 +56,7 @@ const readingInput = z.object({
 
 /** Chấm một câu hỏi đọc hiểu ở server, ghi Attempt (skill reading), trả kết quả + đáp án. */
 export async function submitReading(input: z.input<typeof readingInput>) {
+  await requireSession();
   const { passageId, question, response } = readingInput.parse(input);
   const passage = await prisma.passage.findUnique({ where: { id: passageId } });
   const q = passage && (JSON.parse(passage.questions) as Question[])[question];
@@ -73,6 +77,7 @@ const reviewInput = z.object({
 
 /** Chấm một thẻ: cập nhật lịch FSRS, ghi Attempt, trả về hạn ôn tiếp theo (ISO). */
 export async function reviewCard(input: z.input<typeof reviewInput>) {
+  await requireSession();
   const { cardId, grade, durationMs } = reviewInput.parse(input);
   const card = await prisma.reviewCard.findUnique({ where: { id: cardId } });
   if (!card) throw new Error("Không tìm thấy thẻ");
@@ -106,6 +111,7 @@ const submitInput = z.object({
 
 /** Chấm một bài tập ở server (đáp án không gửi xuống client trước), ghi Attempt, trả kết quả. */
 export async function submitExercise(input: z.input<typeof submitInput>) {
+  await requireSession();
   const { exerciseId, response, durationMs } = submitInput.parse(input);
   const ex = await prisma.exercise.findUnique({ where: { id: exerciseId } });
   if (!ex || ex.type === "compose") throw new Error("Không tìm thấy bài tập");
@@ -127,6 +133,7 @@ const writingInput = z.object({ exerciseId: z.number().int().positive(), text: z
  * Đạt khi điểm ≥ 7/10.
  */
 export async function gradeWriting(input: z.input<typeof writingInput>) {
+  await requireSession();
   if (!AI_GRADING_ENABLED) throw new Error("Chấm bằng AI đang bị khoá");
   const { exerciseId, text } = writingInput.parse(input);
   const ex = await prisma.exercise.findUnique({ where: { id: exerciseId } });
@@ -154,6 +161,7 @@ const grammarInput = z.object({
 
 /** Chấm một bài tập ngữ pháp ở server, ghi Attempt (skill grammar), trả kết quả + đáp án/giải thích. */
 export async function submitGrammar(input: z.input<typeof grammarInput>) {
+  await requireSession();
   const { pointId, exercise, response } = grammarInput.parse(input);
   const point = await prisma.grammarPoint.findUnique({ where: { id: pointId } });
   const ex = point && (JSON.parse(point.exercises) as GrammarExercise[])[exercise];
@@ -168,6 +176,7 @@ export async function submitGrammar(input: z.input<typeof grammarInput>) {
 
 /** Tạo đề thi thử mới cho cấp `level` rồi chuyển sang trang làm bài. */
 export async function startMockTest(level: number) {
+  await requireSession();
   const lv = z.number().int().min(1).max(4).parse(level);
   const spec = BLUEPRINT[lv];
   const [pool, recent] = await Promise.all([buildPool(lv), recentRefs(lv)]);
@@ -190,6 +199,7 @@ const mockInput = z.object({
 
 /** Nộp bài thi thử: chấm ở server, lưu MockResult + Attempt cho từng câu, trả id kết quả. Mỗi đề chỉ nộp 1 lần. */
 export async function submitMockTest(input: z.input<typeof mockInput>) {
+  await requireSession();
   const { testId, answers } = mockInput.parse(input);
   const test = await prisma.mockTest.findUnique({ where: { id: testId }, include: { results: { select: { id: true } } } });
   if (!test) throw new Error("Không tìm thấy đề");
@@ -233,6 +243,7 @@ export async function submitMockTest(input: z.input<typeof mockInput>) {
 
 /** Từ vựng (cấp ≤ cấp đề) xuất hiện trong các câu làm sai của một lần thi. */
 export async function mistakeWords(resultId: number) {
+  await requireSession();
   const result = await prisma.mockResult.findUnique({ where: { id: resultId }, include: { mockTest: true } });
   if (!result) return [];
   const wrong = (JSON.parse(result.answers) as { ref: string; correct: boolean }[]).filter((a) => !a.correct).map((a) => a.ref);
@@ -255,6 +266,7 @@ export async function mistakeWords(resultId: number) {
 
 /** Đưa từ trong các câu làm sai vào ôn tập. Trả về số từ có thẻ mới. */
 export async function addMockMistakes(resultId: number) {
+  await requireSession();
   const id = z.number().int().positive().parse(resultId);
   const now = new Date();
   let added = 0;
@@ -264,6 +276,7 @@ export async function addMockMistakes(resultId: number) {
 
 /** "Học lại" một từ hay quên: đưa mọi thẻ của từ về hạn ngay (giữ lịch sử FSRS, bỏ tạm hoãn). Trả số thẻ. */
 export async function relearnWord(wordId: number) {
+  await requireSession();
   const id = z.number().int().positive().parse(wordId);
   const r = await prisma.reviewCard.updateMany({
     where: { itemType: "word", itemId: id },
@@ -280,6 +293,7 @@ const speakingInput = z.object({
 
 /** Ghi một lần luyện nói (chấm ở client bằng nhận diện giọng nói của trình duyệt): đạt khi khớp ≥ 80%. */
 export async function recordSpeaking(input: z.input<typeof speakingInput>) {
+  await requireSession();
   const { text, heard, score } = speakingInput.parse(input);
   await prisma.attempt.create({
     data: { skill: "speaking", correct: score >= 0.8, response: JSON.stringify({ text, heard, score }) },

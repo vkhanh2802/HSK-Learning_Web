@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { accuracyBySkill, forecast, heatLevel, heatmap, isMastered } from "../src/lib/stats";
 
-const at = (y: number, m: number, d: number, h = 12) => new Date(y, m - 1, d, h);
+// Giờ Việt Nam (UTC+7) để test cho cùng kết quả dù máy chạy test ở múi giờ nào.
+const at = (y: number, m: number, d: number, h = 12) => new Date(Date.UTC(y, m - 1, d, h - 7));
 
 describe("forecast", () => {
   it("gộp thẻ quá hạn vào hôm nay, bỏ thẻ ngoài khoảng", () => {

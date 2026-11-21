@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import type { Example } from "@/lib/words";
+import { hasSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
@@ -8,6 +9,7 @@ export const dynamic = "force-dynamic";
  * Chưa học từ nào thì trả từ vựng HSK1 để vẫn có thứ để ôn.
  */
 export async function GET() {
+  if (!(await hasSession())) return Response.json({ error: "Chưa đăng nhập" }, { status: 401 });
   const cards = await prisma.reviewCard.findMany({
     where: { itemType: "word", suspended: false },
     select: { itemId: true, due: true },
