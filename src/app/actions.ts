@@ -262,6 +262,16 @@ export async function addMockMistakes(resultId: number) {
   return added;
 }
 
+/** "Học lại" một từ hay quên: đưa mọi thẻ của từ về hạn ngay (giữ lịch sử FSRS, bỏ tạm hoãn). Trả số thẻ. */
+export async function relearnWord(wordId: number) {
+  const id = z.number().int().positive().parse(wordId);
+  const r = await prisma.reviewCard.updateMany({
+    where: { itemType: "word", itemId: id },
+    data: { due: new Date(), suspended: false },
+  });
+  return r.count;
+}
+
 const speakingInput = z.object({
   text: z.string().min(1).max(100),
   heard: z.string().max(200),

@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Noto_Sans, Noto_Sans_SC } from "next/font/google";
+import { LogoutButton } from "@/components/LoginForm";
 import Nav from "@/components/Nav";
+import ServiceWorker from "@/components/ServiceWorker";
 import ThemeScript from "@/components/ThemeScript";
 import ThemeToggle from "@/components/ThemeToggle";
+import { authEnabled } from "@/lib/auth";
 import "./globals.css";
 
 // Noto Sans cho chữ Latin/tiếng Việt/pinyin (glyph ā ē ī ō ū của Noto Sans SC đặt dấu lệch);
@@ -20,7 +23,10 @@ const notoSansSC = Noto_Sans_SC({
 export const metadata: Metadata = {
   title: "Học tiếng Trung HSK1–HSK4",
   description: "Học tiếng Trung từ HSK1 đến HSK4 với đủ 4 kỹ năng Nghe, Nói, Đọc, Viết",
+  appleWebApp: { capable: true, title: "学中文" },
 };
+
+export const viewport: Viewport = { themeColor: "#b91c1c" };
 
 export default function RootLayout({
   children,
@@ -31,6 +37,7 @@ export default function RootLayout({
     <html lang="vi" className={`${notoSans.variable} ${notoSansSC.variable}`} suppressHydrationWarning>
       <body className="antialiased">
         <ThemeScript />
+        <ServiceWorker />
         <a
           href="#noi-dung"
           className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-20 focus:rounded focus:bg-background focus:p-2"
@@ -44,6 +51,7 @@ export default function RootLayout({
             </Link>
             <Nav />
             <ThemeToggle />
+            {authEnabled() && <LogoutButton />}
           </div>
         </header>
         <div id="noi-dung" tabIndex={-1} className="mx-auto max-w-5xl outline-none">

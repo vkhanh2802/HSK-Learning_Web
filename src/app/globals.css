@@ -6,6 +6,17 @@
   --muted: #f2f2f2;
   --border: #e2e2e2;
   --accent: #b91c1c;
+  /* Biểu đồ (Phase 12): một sắc xanh, sáng → đậm = ít → nhiều. Bảng màu đã kiểm tra mù màu. */
+  --viz-bar: #2a78d6;
+  --viz-track: #cde2fb;
+  --viz-learned: #86b6ef;
+  --viz-mastered: #256abf;
+  --viz-heat-0: #f2f2f2;
+  --viz-heat-1: #b7d3f6;
+  --viz-heat-2: #6da7ec;
+  --viz-heat-3: #2a78d6;
+  --viz-heat-4: #184f95;
+  --viz-grid: #e1e0d9;
   color-scheme: light;
 }
 
@@ -17,6 +28,16 @@
     --muted: #1c1c1c;
     --border: #2e2e2e;
     --accent: #f87171;
+    --viz-bar: #3987e5;
+    --viz-track: #0d366b;
+    --viz-learned: #1c5cab;
+    --viz-mastered: #86b6ef;
+    --viz-heat-0: #1c1c1c;
+    --viz-heat-1: #0d366b;
+    --viz-heat-2: #1c5cab;
+    --viz-heat-3: #3987e5;
+    --viz-heat-4: #86b6ef;
+    --viz-grid: #2c2c2a;
     color-scheme: dark;
   }
 }
@@ -27,6 +48,16 @@
   --muted: #1c1c1c;
   --border: #2e2e2e;
   --accent: #f87171;
+  --viz-bar: #3987e5;
+  --viz-track: #0d366b;
+  --viz-learned: #1c5cab;
+  --viz-mastered: #86b6ef;
+  --viz-heat-0: #1c1c1c;
+  --viz-heat-1: #0d366b;
+  --viz-heat-2: #1c5cab;
+  --viz-heat-3: #3987e5;
+  --viz-heat-4: #86b6ef;
+  --viz-grid: #2c2c2a;
   color-scheme: dark;
 }
 

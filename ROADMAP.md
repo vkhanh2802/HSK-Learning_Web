@@ -410,12 +410,16 @@ Làm theo từng cấp. Người dùng chọn: HSK2–4 theo **danh sách chính
 
 ## Phase 12 — Dashboard & Thống kê
 
-- [ ] Biểu đồ số thẻ ôn 30 ngày tới (dự báo tải)
-- [ ] Độ chính xác theo kỹ năng (Nghe/Nói/Đọc/Viết) từ `Attempt`
-- [ ] Tiến độ từ vựng từng cấp (đã học / đã thuộc = stability > 21 ngày)
-- [ ] Top 20 từ hay sai (leech) → nút "Học lại"
-- [ ] Heatmap ngày học + streak
-- [ ] Xuất/nhập backup (JSON) để không mất tiến độ
+Trang mới `/stats` (menu "Thống kê"); tính toán ở `src/lib/stats.ts` (hàm thuần, có test), biểu đồ ở `src/components/Charts.tsx`. Màu biểu đồ là biến CSS `--viz-*` trong `globals.css`, có bộ riêng cho nền tối; một sắc xanh, nhạt → đậm = ít → nhiều, đã kiểm tra mù màu và độ tương phản với nền sáng/tối.
+
+- [x] Biểu đồ cột số thẻ đến hạn 30 ngày tới (cột đầu gồm cả thẻ quá hạn); rê chuột hoặc dùng phím ←/→ xem từng ngày; có dạng bảng.
+- [x] Độ chính xác 30 ngày theo kỹ năng (Nghe/Nói/Đọc/Viết + Ngữ pháp) từ `Attempt` — gồm ôn thẻ, luyện kỹ năng, thi thử; chỉ ra kỹ năng yếu nhất (trong các kỹ năng có ≥ 5 lượt). Trang chủ hiện thêm "Kỹ năng yếu nhất 30 ngày qua" kèm link luyện ngay và link Xem thống kê.
+- [x] Tiến độ từ vựng từng cấp: đã thuộc (mọi thẻ của từ có độ ổn định FSRS > 21 ngày) / đang học / chưa học, thanh chia đoạn có chú thích.
+- [x] Top 20 từ hay quên (tổng `lapses` FSRS của các thẻ) → nút "Học lại" (`relearnWord`: đưa mọi thẻ của từ về hạn ngay, giữ lịch sử FSRS).
+- [x] Heatmap 26 tuần (lượt làm bài + bài học xong mỗi ngày, cột = tuần T2→CN), chuỗi ngày hiện tại; rê chuột/phím mũi tên xem từng ngày; có dạng bảng.
+- [x] Xuất/nhập backup JSON (`/api/backup`, `src/lib/backup.ts`): chứa bài đã học, thẻ ôn, lượt làm bài, đề thi thử + kết quả, cài đặt. Liên kết dùng khoá tự nhiên (chữ Hán, key bài tập/bài đọc/điểm ngữ pháp) thay cho id nên khôi phục được vào DB seed mới. Khôi phục ghi đè toàn bộ tiến độ trong 1 transaction (có hỏi xác nhận), mục không còn trong dữ liệu bị bỏ qua và báo số lượng; chỉ nhận JSON gửi từ cùng origin. Dùng route handler thay server action vì file có thể > 1 MB (giới hạn mặc định của server action).
+
+> Xác minh: 67 test (thêm `tests/stats.test.ts`), lint, `tsc --noEmit`, build đạt. Trên dev server với dữ liệu giả lập 60 ngày (8 bài HSK1, 320 thẻ, ~2100 lượt): biểu đồ, thanh độ chính xác ("Nói" yếu nhất), tiến độ HSK1 12 thuộc · 80 đã học, bảng 20 từ hay quên, heatmap hiện đúng ở cả nền tối và sáng; tooltip khi rê chuột và khi dùng phím mũi tên; "Học lại" chạy; backup 526 KB xuất → nhập lại → xuất ra giống hệt (gồm 1 đề thi thử HSK2, kết quả mở được sau khi id đổi); file sai định dạng bị từ chối (400). DB thật được sao lưu trước và đã chép lại sau khi test (còn Attempt id 17 của bạn).
 
 **Tiêu chí hoàn thành:** nhìn dashboard biết hôm nay cần làm gì và kỹ năng nào yếu.
 
@@ -423,10 +427,14 @@ Làm theo từng cấp. Người dùng chọn: HSK2–4 theo **danh sách chính
 
 ## Phase 13 — Deploy & PWA (tùy chọn)
 
-- [ ] Đổi `provider` sang `postgresql`, dùng Supabase/Neon
-- [ ] Thêm đăng nhập (Auth.js) nếu public lên mạng — **bắt buộc** nếu có API LLM để tránh bị lạm dụng key
-- [ ] Deploy Vercel, biến môi trường cho DB + API key
-- [ ] PWA: manifest + service worker cache dữ liệu từ vựng để ôn offline
+Người dùng chọn: làm PWA + chuẩn bị deploy, DB cloud là **Turso** (giữ SQLite) thay cho Postgres. Hướng dẫn từng bước cho phần cần tài khoản: [DEPLOY.md](DEPLOY.md).
+
+- [x] DB cloud: **Turso** thay cho Postgres (giữ nguyên schema/migration SQLite). `src/lib/db.ts` có `TURSO_DATABASE_URL` thì dùng `@prisma/adapter-libsql` (7.10.1), không có thì dùng file SQLite như cũ. `scripts/turso-migrate.ts` áp `prisma/migrations/*/migration.sql` lên Turso (ghi bảng `_turso_migrations`, chạy lại an toàn) vì `prisma migrate` không chạy thẳng trên Turso; seed dùng chung `prisma/seed.ts`.
+- [x] Đăng nhập: thay Auth.js bằng **một mật khẩu** (web chỉ một người dùng, không cần bảng user hay thư viện): `APP_PASSWORD` + `AUTH_SECRET`, cookie session ký HMAC-SHA256 (30 ngày, httpOnly, secure ở production), so mật khẩu theo thời gian hằng, nhập sai chờ 0,8 s; `src/proxy.ts` (Next 16 đổi middleware thành proxy) chặn mọi trang, server action và API — trang chuyển tới `/login?next=…`, API/POST trả 401; bỏ qua file tĩnh, icon, manifest, `sw.js`. Không đặt `APP_PASSWORD` (chạy local) thì web mở như trước. Nút Đăng xuất trên thanh đầu trang. Có test (`tests/auth.test.ts`: cookie hết hạn/bị sửa/sai secret, chuyển hướng chỉ trong nội bộ).
+- [x] Chuẩn bị deploy Vercel: `DEPLOY.md` (tạo DB Turso, migrate + seed, chuyển tiến độ bằng file backup Phase 12, biến môi trường, cài PWA); `.env.example` liệt kê 4 biến; `build` chạy `prisma generate` trước để không phụ thuộc postinstall; header bảo mật (`nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`). **Chưa deploy** — cần bạn tạo tài khoản Turso/Vercel và nhập key.
+- [x] PWA: `app/manifest.ts` (tên, màu, phím tắt Ôn tập / Ôn offline), icon 192/512 (dùng được cho maskable) + `apple-icon.png` — chữ 学 vẽ bằng font Noto Sans SC (OFL). `public/sw.js` viết tay: file tĩnh lấy cache trước; trang và bộ từ lấy mạng trước, mất mạng dùng bản đã lưu, trang chưa từng mở chuyển sang `/offline`. Service worker chỉ đăng ký ở bản production; khi đổi trang (tối đa mỗi giờ) tải trước `/offline`, JS/CSS của nó và `/api/offline-deck` (từ đã học, đến hạn sớm trước; chưa học thì HSK1). Trang **Ôn offline** (menu Học): thẻ lật Nhớ/Quên, không ghi lịch FSRS (ghi `shortcut:`).
+
+> Xác minh: 71 test, lint, `tsc --noEmit`, build đạt; adapter libsql + `turso-migrate.ts` + seed chạy thử với file libsql local (4 migration, 1198 từ, chạy lại bỏ qua). Bản production chạy với mật khẩu test: chưa đăng nhập → `/login`, API/server action → 401, manifest/icon/`sw.js` vẫn tải được, sai mật khẩu báo lỗi, đúng thì vào trang chủ; service worker kích hoạt và lưu `/offline` + bộ từ; tắt server (giả lập mất mạng) → mở `/reading` chưa từng xem được chuyển sang Ôn offline, lật thẻ chạy. Dev server local (không mật khẩu) vẫn mở mọi trang, không đăng ký service worker. Chưa thử trên Turso/Vercel thật và chưa thử cài PWA trên điện thoại.
 
 ---
 

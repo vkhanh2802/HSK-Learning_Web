@@ -18,6 +18,7 @@ const items: NavItem[] = [
       { href: "/tones", label: "Thanh điệu" },
       { href: "/write", label: "Tập viết" },
       { href: "/radicals", label: "Bộ thủ" },
+      { href: "/offline", label: "Ôn offline" },
     ],
   },
   { href: "/review", label: "Ôn tập" },
@@ -35,6 +36,7 @@ const items: NavItem[] = [
     label: "Thi thử",
     children: levels.map((n) => ({ href: `/mock-test/${n}`, label: `HSK${n}` })),
   },
+  { href: "/stats", label: "Thống kê" },
 ];
 
 const section = (href: string) => href.split("/")[1];

@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
+import { SKILL_NAMES, accuracyBySkill } from "@/lib/stats";
 import { streak } from "@/lib/streak";
+
+const SKILL_HREF: Record<string, string> = {
+  listening: "/listening",
+  speaking: "/speaking",
+  reading: "/reading",
+  writing: "/writing",
+  grammar: "/grammar",
+};
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +21,7 @@ export default async function Home() {
     prisma.reviewCard.count({ where: { due: { lte: now }, suspended: false } }),
     prisma.level.findMany({ orderBy: { id: "asc" }, include: { _count: { select: { words: true } } } }),
     prisma.reviewCard.findMany({ where: { itemType: "word" }, distinct: ["itemId"], select: { itemId: true } }),
-    prisma.attempt.findMany({ where: { createdAt: { gte: since } }, select: { createdAt: true } }),
+    prisma.attempt.findMany({ where: { createdAt: { gte: since } }, select: { createdAt: true, skill: true, correct: true } }),
     prisma.lesson.findMany({ where: { doneAt: { gte: since } }, select: { doneAt: true } }),
     prisma.lesson.findFirst({ where: { doneAt: null }, orderBy: [{ levelId: "asc" }, { order: "asc" }] }),
   ]);
@@ -22,6 +31,9 @@ export default async function Home() {
   const learnedByLevel = new Map<number, number>();
   for (const w of await prisma.word.findMany({ select: { id: true, levelId: true } }))
     if (learned.has(w.id)) learnedByLevel.set(w.levelId, (learnedByLevel.get(w.levelId) ?? 0) + 1);
+  const month = new Date(now.getTime() - 30 * 86_400_000);
+  const skills = accuracyBySkill(attempts.filter((a) => a.createdAt >= month));
+  const weak = skills.rows.find((r) => r.skill === skills.weakest);
   const days = streak([...attempts.map((a) => a.createdAt), ...lessonsDone.flatMap((l) => l.doneAt ?? [])], now);
 
   return (
@@ -53,6 +65,23 @@ export default async function Home() {
           )}
         </div>
       </div>
+
+      <p className="mt-4">
+        {weak ? (
+          <>
+            Kỹ năng yếu nhất 30 ngày qua: <strong>{SKILL_NAMES[weak.skill]}</strong> ({Math.round(weak.rate! * 100)}% đúng) —{" "}
+            <Link href={SKILL_HREF[weak.skill]} className="text-accent underline">
+              luyện ngay
+            </Link>
+            .{" "}
+          </>
+        ) : (
+          "Làm thêm bài luyện để biết kỹ năng nào còn yếu. "
+        )}
+        <Link href="/stats" className="text-accent underline">
+          Xem thống kê
+        </Link>
+      </p>
 
       <h2 className="mt-8 text-lg font-semibold">Tiến độ từ vựng</h2>
       <ul className="mt-3 grid gap-3">
