@@ -87,3 +87,203 @@ h2 {
   font-weight: 400;
   letter-spacing: -0.01em;
 }
+
+/* Native, opt-in motion; no runtime/library needed. Inspiration:
+   https://animejs.com/documentation/utilities/stagger/ and https://animejs.com/ (SVG draw)
+   https://microkit.co/components/sliding-underline-tabs
+   https://microkit.co/components/next-dot-fill-button */
+:root {
+  --motion-fast: 150ms;
+  --motion-interaction: 220ms;
+  --motion-entrance: 450ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-stagger > .motion-enter:nth-child(2) {
+  --motion-delay: 70ms;
+}
+
+.motion-stagger > .motion-enter:nth-child(3) {
+  --motion-delay: 140ms;
+}
+
+.motion-stagger > .motion-enter:nth-child(4) {
+  --motion-delay: 210ms;
+}
+
+.motion-stagger > .motion-enter:nth-child(n + 5) {
+  --motion-delay: 280ms;
+}
+
+.motion-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* A low-opacity ink fill keeps the existing CTA colors/contrast in both themes. */
+.motion-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: currentColor;
+  opacity: 0.1;
+  clip-path: circle(0% at 1rem 50%);
+}
+
+.motion-cta-arrow {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.75;
+}
+
+.motion-nav-link {
+  position: relative;
+}
+
+.motion-nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.75rem;
+  bottom: 0.15rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--brush);
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.motion-nav-link[data-active="true"]::after,
+.motion-nav-link:focus-visible::after,
+.motion-nav-details[open] > .motion-nav-link::after {
+  transform: scaleX(1);
+}
+
+.motion-nav-chevron {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-inline-start: 0.25rem;
+  vertical-align: middle;
+}
+
+.motion-nav-details[open] > summary .motion-nav-chevron {
+  transform: rotate(180deg);
+}
+
+.motion-nav-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.motion-cta:focus-visible,
+.motion-nav-link:focus-visible,
+.motion-control:focus-visible {
+  outline: 2px solid var(--brush);
+  outline-offset: 3px;
+}
+
+.motion-cta:focus-visible::before {
+  clip-path: circle(150% at 1rem 50%);
+}
+
+.motion-cta:active,
+.motion-control:active {
+  opacity: 0.8;
+}
+
+.motion-nav-link:active {
+  background: var(--muted);
+}
+
+/* Hover effects do not stick on touch screens. No control changes its bounds. */
+@media (hover: hover) and (pointer: fine) {
+  .motion-cta:hover::before {
+    clip-path: circle(150% at 1rem 50%);
+  }
+
+  .motion-nav-link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Opt in to movement, not out: reduced-motion works at first paint and at runtime. */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-enter {
+    animation: study-enter var(--motion-entrance) var(--motion-ease) var(--motion-delay, 0ms) backwards;
+  }
+
+  /* Focus immediately removes an entrance, including any stagger delay. */
+  .motion-enter:focus-within {
+    animation: none;
+  }
+
+  .motion-brush {
+    stroke-dasharray: 1;
+    animation: study-brush 650ms var(--motion-ease) 150ms backwards;
+  }
+
+  .motion-nav-details[open] > .motion-nav-menu {
+    animation: study-menu var(--motion-fast) var(--motion-ease);
+  }
+
+  .motion-cta::before {
+    transition: clip-path var(--motion-entrance) var(--motion-ease);
+  }
+
+  .motion-cta-arrow {
+    transform: translateX(-2px);
+    transition: transform var(--motion-interaction) var(--motion-ease), opacity var(--motion-fast) ease;
+  }
+
+  .motion-cta:focus-visible .motion-cta-arrow {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .motion-nav-link::after {
+    transition: transform var(--motion-interaction) var(--motion-ease);
+  }
+
+  .motion-nav-chevron {
+    transition: transform var(--motion-fast) var(--motion-ease);
+  }
+
+  .motion-control {
+    transition: background-color var(--motion-fast) ease, opacity var(--motion-fast) ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .motion-cta:hover .motion-cta-arrow {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes study-enter {
+  from {
+    opacity: 0.8;
+    transform: translateY(6px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes study-brush {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes study-menu {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}

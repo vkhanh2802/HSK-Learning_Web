@@ -22,7 +22,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={t("Đổi chế độ sáng/tối", "Toggle light/dark mode")}
       title={t("Đổi chế độ sáng/tối", "Toggle light/dark mode")}
-      className="rounded-full border border-border px-3 py-1 hover:bg-muted"
+      className="motion-control rounded-full border border-border px-3 py-1 hover:bg-muted"
     >
       ◐
     </button>

@@ -40,39 +40,45 @@ export default async function Home() {
 
   return (
     <main className="px-6 pb-16 pt-10">
-      <section className="mx-auto max-w-2xl text-center">
-        <h1 className="text-4xl leading-tight sm:text-5xl">
+      <section className="motion-stagger mx-auto max-w-2xl text-center">
+        <h1 className="motion-enter text-4xl leading-tight sm:text-5xl">
           {t("Mỗi ngày một chút,", "A little every day,")}
           <br />
           <span className="relative inline-block">
             {t("tiếng Trung tiến bộ.", "your Chinese grows.")}
             <svg aria-hidden className="absolute -bottom-3 left-0 w-full text-brush" viewBox="0 0 300 14" preserveAspectRatio="none">
-              <path d="M3 9 C60 3, 130 12, 190 6 S270 4, 297 8" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+              <path className="motion-brush" pathLength="1" d="M3 9 C60 3, 130 12, 190 6 S270 4, 297 8" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
             </svg>
           </span>
         </h1>
-        <p className="mx-auto mt-10 max-w-md opacity-80">
+        <p className="motion-enter mx-auto mt-10 max-w-md opacity-80">
           {t(
             "Từ vựng, ngữ pháp và đủ 4 kỹ năng Nghe, Nói, Đọc, Viết từ HSK1 đến HSK4, ôn theo lịch lặp lại ngắt quãng.",
             "Vocabulary, grammar and all four skills — listening, speaking, reading, writing — from HSK1 to HSK4, reviewed with spaced repetition.",
           )}
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="motion-enter mt-6 flex flex-wrap justify-center gap-3">
           {nextLesson && (
-            <Link href={`/lesson/${nextLesson.id}`} className="rounded-xl bg-accent px-6 py-3 font-semibold text-background hover:opacity-90">
+            <Link href={`/lesson/${nextLesson.id}`} className="motion-cta rounded-xl bg-accent px-6 py-3 font-semibold text-background">
               {t("Học bài tiếp theo", "Start next lesson")}
+              <svg aria-hidden="true" className="motion-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 10h12m-5-5 5 5-5 5" />
+              </svg>
             </Link>
           )}
           {due > 0 && (
-            <Link href="/review" className="rounded-xl border border-border px-6 py-3 font-semibold hover:bg-muted">
+            <Link href="/review" className="motion-cta rounded-xl border border-border px-6 py-3 font-semibold">
               {t(`Ôn ${due} thẻ đến hạn`, `Review ${due} due cards`)}
+              <svg aria-hidden="true" className="motion-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 10h12m-5-5 5 5-5 5" />
+              </svg>
             </Link>
           )}
         </div>
       </section>
 
-      <div className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-border bg-muted p-5">
+      <div className="motion-stagger mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
+        <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">{t("Thẻ đến hạn", "Cards due")}</p>
           <p className="font-serif text-4xl">{due}</p>
           {due > 0 && (
@@ -81,11 +87,11 @@ export default async function Home() {
             </Link>
           )}
         </div>
-        <div className="rounded-2xl border border-border bg-muted p-5">
+        <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">{t("Chuỗi ngày học", "Study streak")}</p>
           <p className="font-serif text-4xl">{days} {t("ngày", days === 1 ? "day" : "days")}</p>
         </div>
-        <div className="rounded-2xl border border-border bg-muted p-5">
+        <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">{t("Bài tiếp theo", "Next lesson")}</p>
           {nextLesson ? (
             <Link href={`/lesson/${nextLesson.id}`} className="mt-1 block font-semibold underline decoration-brush decoration-2 underline-offset-4">
@@ -116,12 +122,12 @@ export default async function Home() {
       </p>
 
       <h2 className="mt-10 text-2xl">{t("Tiến độ từ vựng", "Vocabulary progress")}</h2>
-      <ul className="mt-3 grid gap-3">
+      <ul className="motion-stagger mt-3 grid gap-3">
         {levels.map((l) => {
           const learned = learnedByLevel.get(l.id) ?? 0;
           const total = l._count.words;
           return (
-            <li key={l.id}>
+            <li key={l.id} className="motion-enter">
               <div className="flex justify-between text-sm">
                 <Link href={`/learn/${l.id}`} className="hover:underline">
                   {l.name}
