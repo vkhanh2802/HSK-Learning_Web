@@ -77,6 +77,24 @@ export default async function Home() {
         </div>
       </section>
 
+      <div aria-hidden className="mx-auto mt-12 flex max-w-md justify-center" lang="zh-CN">
+        {[
+          { h: "你好", p: "nǐ hǎo", m: t("Xin chào", "Hello"), tilt: "-7deg" },
+          { h: "谢谢", p: "xièxie", m: t("Cảm ơn", "Thank you"), tilt: "1deg" },
+          { h: "学习", p: "xuéxí", m: t("Học tập", "To study"), tilt: "8deg" },
+        ].map((c, i) => (
+          <div
+            key={c.h}
+            className="flashcard -mx-1 w-36 rounded-2xl border border-border bg-background px-4 py-6 text-center shadow-sm"
+            style={{ "--tilt": c.tilt, "--i": i } as React.CSSProperties}
+          >
+            <p className="font-serif text-5xl">{c.h}</p>
+            <p className="mt-2 text-sm opacity-70" lang="vi">{c.p}</p>
+            <p className="mt-1 text-sm font-semibold" lang={t("vi", "en")}>{c.m}</p>
+          </div>
+        ))}
+      </div>
+
       <div className="motion-stagger mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
         <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">{t("Thẻ đến hạn", "Cards due")}</p>
@@ -136,12 +154,16 @@ export default async function Home() {
                   {learned}/{total} {t("từ", "words")}
                 </span>
               </div>
-              <progress
-                className="mt-1 h-2 w-full accent-accent"
-                value={learned}
-                max={total || 1}
+              <div
+                role="progressbar"
+                className="mt-1 h-2 w-full overflow-hidden rounded-full bg-muted"
+                aria-valuenow={learned}
+                aria-valuemin={0}
+                aria-valuemax={total}
                 aria-label={t(`${l.name}: đã học ${learned} trên ${total} từ`, `${l.name}: ${learned} of ${total} words learned`)}
-              />
+              >
+                <div className="bar h-full rounded-full bg-accent" style={{ width: `${total ? (learned / total) * 100 : 0}%` }} />
+              </div>
             </li>
           );
         })}

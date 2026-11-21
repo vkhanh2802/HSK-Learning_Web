@@ -61,7 +61,7 @@ export default async function RootLayout({
         >
           {t("Bỏ qua tới nội dung", "Skip to content")}
         </a>
-        <header>
+        <header className="sticky top-0 z-20 bg-background/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-4">
             <Link href="/" className="font-serif text-2xl">
               学中文
