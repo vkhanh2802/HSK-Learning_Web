@@ -4,16 +4,49 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { reviewCard } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
 import StrokeQuiz from "@/components/StrokeQuiz";
+import { matchesDictation } from "@/lib/compare";
 import { writeGrade, type Grade } from "@/lib/srs";
 import { speak } from "@/lib/tts";
 import type { WordView } from "@/lib/words";
 
 export type ReviewItem = {
   cardId: number;
-  mode: "recognize" | "listen" | "write";
+  mode: "recognize" | "listen" | "write" | "recall";
   word: WordView;
   options?: string[]; // thẻ nghe: các chữ để chọn (đã gồm đáp án)
 };
+
+/** Thẻ nhớ lại: xem nghĩa, gõ chữ Hán hoặc pinyin (dấu thanh tuỳ ý). */
+function RecallFront({ word, onDone }: { word: WordView; onDone: (input: string, ok: boolean) => void }) {
+  const [text, setText] = useState("");
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (text.trim()) onDone(text, matchesDictation(text, word));
+      }}
+    >
+      <p className="text-sm opacity-75">Gõ từ có nghĩa</p>
+      <p className="mt-1 text-2xl">{word.meaningVi}</p>
+      {word.pos && <p className="text-sm opacity-75">({word.pos})</p>}
+      <label htmlFor="recall-input" className="sr-only">
+        Chữ Hán hoặc pinyin
+      </label>
+      <input
+        id="recall-input"
+        autoFocus
+        autoComplete="off"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="chữ Hán hoặc pinyin"
+        className="mt-3 w-full max-w-xs rounded border border-border bg-background px-3 py-2 text-center text-xl"
+      />
+      <button type="submit" disabled={!text.trim()} className="mt-2 block w-full rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40">
+        Kiểm tra <kbd className="text-sm opacity-75">Enter</kbd>
+      </button>
+    </form>
+  );
+}
 
 /** Thẻ viết: viết lần lượt từng chữ của từ, không có mẫu; báo tổng số lần sai khi xong. */
 function WriteFront({ word, onDone }: { word: WordView; onDone: (mistakes: number) => void }) {
@@ -74,8 +107,8 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
     setSuggested(
       (s) =>
         s ??
-        (mode === "write"
-          ? { grade: 1, note: "Chưa viết xong — gợi ý chấm Quên." }
+        (mode === "write" || mode === "recall"
+          ? { grade: 1, note: mode === "write" ? "Chưa viết xong — gợi ý chấm Quên." : "Chưa trả lời — gợi ý chấm Quên." }
           : mode === "listen" && queue[0]?.options
             ? { grade: 1, note: "Chưa chọn — gợi ý chấm Quên." }
             : null),
@@ -113,6 +146,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return; // đang gõ đáp án
       if (e.key === " " && !flipped) {
         e.preventDefault();
         flip();
@@ -155,6 +189,21 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
               }}
             />
           )
+        ) : current.mode === "recall" ? (
+          !flipped && (
+            <RecallFront
+              key={`${current.cardId}-${reviewed}`}
+              word={w}
+              onDone={(input, ok) => {
+                setSuggested(
+                  ok
+                    ? { grade: 3, note: "✓ Đúng — gợi ý chấm Nhớ." }
+                    : { grade: 1, note: `✗ Bạn gõ “${input}” — gợi ý chấm Quên.` },
+                );
+                setFlipped(true);
+              }}
+            />
+          )
         ) : (
           <div>
             <p className="text-sm opacity-75">{current.options ? "Nghe và chọn từ đúng" : "Nghe và nhớ lại từ"}</p>
@@ -187,7 +236,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
         )}
 
         {flipped && (
-          <div className={current.mode === "write" ? "" : "mt-4 border-t border-border pt-4"}>
+          <div className={current.mode === "write" || current.mode === "recall" ? "" : "mt-4 border-t border-border pt-4"}>
             {suggested && (
               <p role="status" className="mb-2 text-sm">
                 {suggested.note}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ListeningSession from "@/components/ListeningSession";
 import { prisma } from "@/lib/db";
-import type { ClientExercise } from "@/lib/exercises";
+import type { ListeningExercise } from "@/lib/exercises";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +12,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ l
     prisma.exercise.groupBy({ by: ["levelId"], where: { skill: "listening" }, orderBy: { levelId: "asc" } }),
   ]);
   // Không gửi đáp án xuống client; chấm ở server action submitExercise.
-  const exercises = rows.map((r) => ({ id: r.id, type: r.type, payload: JSON.parse(r.payload) }) as ClientExercise);
+  const exercises = rows.map((r) => ({ id: r.id, type: r.type, payload: JSON.parse(r.payload) }) as ListeningExercise);
 
   return (
     <main className="p-8">

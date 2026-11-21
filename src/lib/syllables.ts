@@ -59,3 +59,22 @@ export function getSyllables(): Syllable[] {
   cache = [...byBase.values()].sort((a, b) => a.base.localeCompare(b.base));
   return cache;
 }
+
+let soundsCache: Record<string, string[]> | null = null;
+
+/** Chữ -> mọi âm không thanh trong từ vựng HSK1–4 (gồm cả thanh nhẹ), để so chữ đồng âm khi chấm phát âm. */
+export function charSounds(): Record<string, string[]> {
+  if (soundsCache) return soundsCache;
+  const map = new Map<string, Set<string>>();
+  for (const list of [hsk1, hsk2, hsk3, hsk4] as RawWord[][])
+    for (const w of list) {
+      const chars = [...w.simplified];
+      for (const f of w.forms) {
+        const syl = f.transcriptions.numeric.toLowerCase().split(/\s+/);
+        if (syl.length === chars.length)
+          chars.forEach((c, i) => map.set(c, (map.get(c) ?? new Set()).add(syl[i].replace(/\d$/, ""))));
+      }
+    }
+  soundsCache = Object.fromEntries([...map].map(([c, s]) => [c, [...s]]));
+  return soundsCache;
+}

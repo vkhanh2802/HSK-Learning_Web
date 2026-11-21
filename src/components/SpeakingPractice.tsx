@@ -1,0 +1,239 @@
+"use client";
+
+import { useRef, useState, useSyncExternalStore } from "react";
+import { recordSpeaking } from "@/app/actions";
+import AudioButton from "@/components/AudioButton";
+import { alignSpeech } from "@/lib/compare";
+import { recognizeOnce, speechErrorMessage, speechRecognitionSupported } from "@/lib/speech";
+
+export type SpeakItem = { hanzi: string; pinyin: string; vi: string };
+export type SpeakLesson = { id: number; title: string; words: SpeakItem[]; sentences: SpeakItem[] };
+
+type Result = ReturnType<typeof alignSpeech> & { heard: string };
+const noSubscribe = () => () => {};
+
+/** Ghi âm micro bằng MediaRecorder để tự nghe lại; bản ghi chỉ giữ trong phiên (không lưu). */
+function useRecorder() {
+  const rec = useRef<MediaRecorder | null>(null);
+  const [url, setUrl] = useState<string | null>(null);
+
+  const start = async () => {
+    if (typeof MediaRecorder === "undefined" || !navigator.mediaDevices) return false;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const chunks: Blob[] = [];
+      const r = new MediaRecorder(stream);
+      r.ondataavailable = (e) => chunks.push(e.data);
+      r.onstop = () => {
+        stream.getTracks().forEach((t) => t.stop());
+        setUrl((old) => {
+          if (old) URL.revokeObjectURL(old);
+          return URL.createObjectURL(new Blob(chunks, { type: r.mimeType }));
+        });
+      };
+      r.start();
+      rec.current = r;
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  const stop = () => {
+    if (rec.current?.state === "recording") rec.current.stop();
+    rec.current = null;
+  };
+  const reset = () =>
+    setUrl((old) => {
+      if (old) URL.revokeObjectURL(old);
+      return null;
+    });
+  return { url, start, stop, reset };
+}
+
+function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, string[]> }) {
+  const [state, setState] = useState<"idle" | "listening" | "recording">("idle");
+  const [result, setResult] = useState<Result | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [showPinyin, setShowPinyin] = useState(true);
+  const stopRecognition = useRef<() => void>(() => {});
+  const recorder = useRecorder();
+  // Server không biết trình duyệt có hỗ trợ không: giả định có, client đọc giá trị thật sau hydrate.
+  const canRecognize = useSyncExternalStore(noSubscribe, speechRecognitionSupported, () => true);
+
+  const speak = async () => {
+    setError(null);
+    setResult(null);
+    recorder.reset();
+    await recorder.start(); // ghi âm song song để tự nghe lại; thiếu quyền micro thì bỏ qua
+    setState("listening");
+    const { result: heardPromise, stop } = recognizeOnce();
+    stopRecognition.current = stop;
+    try {
+      const heard = await heardPromise;
+      const r = { ...alignSpeech(item.hanzi, heard, sounds), heard };
+      setResult(r);
+      recordSpeaking({ text: item.hanzi, heard, score: r.score }).catch(() => {});
+    } catch (e) {
+      setError(speechErrorMessage((e as Error).message));
+    } finally {
+      recorder.stop();
+      setState("idle");
+    }
+  };
+
+  // Không có nhận diện giọng nói: chỉ ghi âm rồi tự nghe so với mẫu.
+  const toggleRecord = async () => {
+    if (state === "recording") {
+      recorder.stop();
+      setState("idle");
+    } else if (await recorder.start()) setState("recording");
+    else setError("Không dùng được micro (chưa cho phép hoặc trình duyệt không hỗ trợ ghi âm).");
+  };
+
+  const pct = result ? Math.round(result.score * 100) : 0;
+
+  return (
+    <div className="rounded border border-border p-5">
+      <p lang="zh-CN" className="text-4xl leading-relaxed">
+        {result
+          ? result.chars.map((c, i) => (
+              <span key={i} className={c.ok ? "" : "text-accent underline decoration-wavy"}>
+                {c.c}
+              </span>
+            ))
+          : item.hanzi}
+      </p>
+      {showPinyin && <p className="mt-1 text-lg">{item.pinyin}</p>}
+      <p className="text-sm opacity-75">{item.vi}</p>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <AudioButton key={item.hanzi} text={item.hanzi} label="Nghe mẫu" />
+        {canRecognize ? (
+          state === "listening" ? (
+            <button type="button" onClick={() => stopRecognition.current()} className="rounded bg-accent px-4 py-2 font-semibold text-background">
+              ⏹ Đang nghe… bấm để dừng
+            </button>
+          ) : (
+            <button type="button" onClick={speak} className="rounded bg-accent px-4 py-2 font-semibold text-background">
+              🎙 Nói
+            </button>
+          )
+        ) : (
+          <button type="button" onClick={toggleRecord} className="rounded bg-accent px-4 py-2 font-semibold text-background">
+            {state === "recording" ? "⏹ Dừng ghi âm" : "🎙 Ghi âm"}
+          </button>
+        )}
+        <button
+          type="button"
+          aria-pressed={showPinyin}
+          onClick={() => setShowPinyin(!showPinyin)}
+          className="rounded border border-border px-3 py-2 text-sm hover:bg-muted"
+        >
+          {showPinyin ? "Ẩn pinyin" : "Hiện pinyin"}
+        </button>
+      </div>
+
+      {!canRecognize && (
+        <p className="mt-2 text-sm opacity-75">
+          Trình duyệt không hỗ trợ nhận diện giọng nói (dùng Chrome hoặc Edge để được chấm điểm). Vẫn ghi âm được để tự nghe so với mẫu.
+        </p>
+      )}
+      {error && (
+        <p role="alert" className="mt-2 text-sm text-accent">
+          {error}
+        </p>
+      )}
+      {result && (
+        <div role="status" className="mt-3">
+          <p className="text-lg font-semibold">
+            Khớp {pct}% {pct >= 80 ? "✓ Tốt lắm!" : "— thử lại nhé"}
+          </p>
+          <p className="text-sm">
+            Máy nghe được: <span lang="zh-CN">{result.heard || "(không nghe rõ)"}</span>
+          </p>
+          {pct < 100 && <p className="text-sm opacity-75">Chữ gạch đỏ là chữ máy chưa nghe ra.</p>}
+        </div>
+      )}
+      {recorder.url && (
+        <div className="mt-3">
+          <p className="text-sm">Bản ghi của bạn:</p>
+          <audio controls src={recorder.url} className="mt-1" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLesson[]; sounds: Record<string, string[]> }) {
+  const [lessonId, setLessonId] = useState(lessons[0]?.id);
+  const [mode, setMode] = useState<"sentences" | "words">("sentences");
+  const [i, setI] = useState(0);
+  const lesson = lessons.find((l) => l.id === lessonId);
+  if (!lesson) return <p className="mt-4">Chưa có bài học.</p>;
+  const items = lesson[mode];
+  const item = items[Math.min(i, items.length - 1)];
+
+  return (
+    <div className="mt-4 space-y-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <label className="flex items-center gap-2 text-sm">
+          Bài
+          <select
+            value={lessonId}
+            onChange={(e) => {
+              setLessonId(Number(e.target.value));
+              setI(0);
+            }}
+            className="rounded border border-border bg-background px-2 py-1"
+          >
+            {lessons.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.title}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div role="group" aria-label="Luyện theo" className="flex gap-1 text-sm">
+          {(["sentences", "words"] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              aria-pressed={mode === m}
+              onClick={() => {
+                setMode(m);
+                setI(0);
+              }}
+              className={`rounded border border-border px-3 py-1 ${mode === m ? "bg-accent font-semibold text-background" : "hover:bg-muted"}`}
+            >
+              {m === "sentences" ? "Câu (shadowing)" : "Từ"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <p className="text-sm opacity-75">
+        {mode === "sentences" ? "Câu" : "Từ"} {Math.min(i, items.length - 1) + 1}/{items.length}
+      </p>
+      {item && <SpeakCard key={`${lesson.id}-${mode}-${item.hanzi}`} item={item} sounds={sounds} />}
+
+      <div className="flex gap-2">
+        <button
+          type="button"
+          disabled={i === 0}
+          onClick={() => setI(i - 1)}
+          className="rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40"
+        >
+          ← Trước
+        </button>
+        <button
+          type="button"
+          disabled={i >= items.length - 1}
+          onClick={() => setI(i + 1)}
+          className="rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40"
+        >
+          Tiếp →
+        </button>
+      </div>
+    </div>
+  );
+}

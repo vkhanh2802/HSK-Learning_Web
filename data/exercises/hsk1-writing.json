@@ -1,0 +1,50 @@
+[
+  { "key": "hsk1-writing-01", "type": "fill", "sentence": "我是学___。", "pinyin": "Wǒ shì xuésheng.", "vi": "Tôi là học sinh.", "answer": "生" },
+  { "key": "hsk1-writing-02", "type": "fill", "sentence": "你叫什么名___？", "pinyin": "Nǐ jiào shénme míngzi?", "vi": "Bạn tên là gì?", "answer": "字" },
+  { "key": "hsk1-writing-03", "type": "fill", "sentence": "我想喝___。", "pinyin": "Wǒ xiǎng hē shuǐ.", "vi": "Tôi muốn uống nước.", "answer": "水" },
+  { "key": "hsk1-writing-04", "type": "fill", "sentence": "今天天___很好。", "pinyin": "Jīntiān tiānqì hěn hǎo.", "vi": "Hôm nay trời đẹp.", "answer": "气" },
+  { "key": "hsk1-writing-05", "type": "fill", "sentence": "他在医___工作。", "pinyin": "Tā zài yīyuàn gōngzuò.", "vi": "Anh ấy làm việc ở bệnh viện.", "answer": "院" },
+  { "key": "hsk1-writing-06", "type": "fill", "sentence": "我坐飞___去北京。", "pinyin": "Wǒ zuò fēijī qù Běijīng.", "vi": "Tôi đi máy bay đến Bắc Kinh.", "answer": "机" },
+  { "key": "hsk1-writing-07", "type": "fill", "sentence": "这个杯子多___钱？", "pinyin": "Zhège bēizi duōshao qián?", "vi": "Cái cốc này bao nhiêu tiền?", "answer": "少" },
+  { "key": "hsk1-writing-08", "type": "fill", "sentence": "我有一个中国朋___。", "pinyin": "Wǒ yǒu yí ge Zhōngguó péngyou.", "vi": "Tôi có một người bạn Trung Quốc.", "answer": "友" },
+
+  { "key": "hsk1-writing-09", "type": "reorder", "words": ["喜欢", "我", "茶", "喝"], "vi": "Tôi thích uống trà.", "answer": ["我喜欢喝茶。"] },
+  { "key": "hsk1-writing-10", "type": "reorder", "words": ["在", "妈妈", "家"], "vi": "Mẹ ở nhà.", "answer": ["妈妈在家。"] },
+  { "key": "hsk1-writing-11", "type": "reorder", "words": ["几", "你", "岁", "了"], "vi": "Bạn mấy tuổi rồi?", "answer": ["你几岁了？"] },
+  { "key": "hsk1-writing-12", "type": "reorder", "words": ["我们", "学校", "去", "下午"], "vi": "Buổi chiều chúng tôi đến trường.", "answer": ["我们下午去学校。", "下午我们去学校。"] },
+  { "key": "hsk1-writing-13", "type": "reorder", "words": ["书", "桌子", "上", "有", "本", "一"], "vi": "Trên bàn có một quyển sách.", "answer": ["桌子上有一本书。"] },
+  { "key": "hsk1-writing-14", "type": "reorder", "words": ["女儿", "她", "漂亮", "很", "的"], "vi": "Con gái cô ấy rất xinh.", "answer": ["她的女儿很漂亮。"] },
+
+  {
+    "key": "hsk1-writing-15",
+    "type": "compose",
+    "words": ["喜欢", "苹果"],
+    "hint": "Nhìn tranh, viết một câu có dùng 喜欢 và 苹果.",
+    "picture": { "emoji": "🍎", "image": "/images/apple.webp", "label": "quả táo" },
+    "answer": { "hanzi": "我很喜欢吃苹果。", "pinyin": "Wǒ hěn xǐhuan chī píngguǒ.", "vi": "Tôi rất thích ăn táo." }
+  },
+  {
+    "key": "hsk1-writing-16",
+    "type": "compose",
+    "words": ["坐", "飞机"],
+    "hint": "Nhìn tranh, viết một câu có dùng 坐 và 飞机.",
+    "picture": { "emoji": "✈️", "image": "/images/airplane.webp", "label": "máy bay" },
+    "answer": { "hanzi": "明天我坐飞机去北京。", "pinyin": "Míngtiān wǒ zuò fēijī qù Běijīng.", "vi": "Ngày mai tôi đi máy bay đến Bắc Kinh." }
+  },
+  {
+    "key": "hsk1-writing-17",
+    "type": "compose",
+    "words": ["在", "睡觉"],
+    "hint": "Nhìn tranh, viết một câu có dùng 在 và 睡觉.",
+    "picture": { "emoji": "😴", "image": "/images/sleeping.jpg", "label": "ngủ" },
+    "answer": { "hanzi": "妈妈在睡觉。", "pinyin": "Māma zài shuìjiào.", "vi": "Mẹ đang ngủ." }
+  },
+  {
+    "key": "hsk1-writing-18",
+    "type": "compose",
+    "words": ["今天", "下雨"],
+    "hint": "Nhìn tranh, viết một câu có dùng 今天 và 下雨.",
+    "picture": { "emoji": "🌧️", "image": "/images/rain.webp", "label": "trời mưa" },
+    "answer": { "hanzi": "今天下雨了，我不想去商店。", "pinyin": "Jīntiān xià yǔ le, wǒ bù xiǎng qù shāngdiàn.", "vi": "Hôm nay trời mưa, tôi không muốn đi cửa hàng." }
+  }
+]

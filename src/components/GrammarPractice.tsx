@@ -16,7 +16,7 @@ const optionClass = (r: Result | undefined, i: number, picked: number | undefine
         : "opacity-60";
 
 /** Sắp xếp câu: bấm từ ở dưới để ghép lên trên, bấm từ đã ghép để trả về. Dùng được bằng bàn phím. */
-function ReorderSentence({
+export function ReorderSentence({
   words,
   disabled,
   onSubmit,

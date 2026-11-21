@@ -311,19 +311,20 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 ## Phase 8 — Kỹ năng Nói 说
 
 ### 8.1 Ghi âm
-- [ ] `Recorder.tsx` dùng `MediaRecorder`: ghi → nghe lại → so với mẫu
-- [ ] Lưu bản ghi vào IndexedDB (không cần lên server)
+- [x] Ghi âm bằng `MediaRecorder` (hook `useRecorder` trong `SpeakingPractice.tsx`, không tách `Recorder.tsx`): ghi cùng lúc với nhận diện, nghe lại bằng `<audio>` ngay dưới câu mẫu để tự so
+- [ ] Lưu bản ghi vào IndexedDB — bỏ qua: bản ghi chỉ giữ trong phiên; thêm khi cần nghe lại các lần luyện cũ
 
 ### 8.2 Nhận diện giọng nói
-- [ ] `src/lib/speech.ts`: `webkitSpeechRecognition`, `lang = "zh-CN"`
-- [ ] `src/lib/compare.ts`: so sánh text nhận được với câu gốc theo từng chữ (edit distance), tô xanh/đỏ
-- [ ] Fallback khi trình duyệt không hỗ trợ: chỉ còn chế độ ghi âm tự nghe
+- [x] `src/lib/speech.ts`: `SpeechRecognition`/`webkitSpeechRecognition`, `lang = "zh-CN"`, `recognizeOnce()` trả văn bản, thông báo lỗi tiếng Việt (chưa cho phép micro, không nghe thấy, không có micro, mất mạng)
+- [x] `src/lib/compare.ts` `alignSpeech`: so từng chữ bằng dãy con chung dài nhất, tô đỏ (gạch sóng) chữ chưa nghe ra, điểm = chữ khớp / tổng chữ; chữ đồng âm tính là đúng (他/她 — nhận diện hay ra chữ đồng âm) dựa trên bảng âm `charSounds()` từ dữ liệu HSK1–4; đổi chữ số trong kết quả (8点 → 八点, `toChineseNumber`). Có test.
+- [x] Trình duyệt không hỗ trợ nhận diện: chỉ còn nút ghi âm/dừng để tự nghe, có ghi chú dùng Chrome/Edge
 
 ### 8.3 Dạng bài
-- [ ] **Shadowing**: nghe câu → nói theo → điểm khớp %
-- [ ] **Đọc to** từ/câu trong bài học
-- [ ] **Trả lời câu hỏi** bằng giọng nói (HSK3–4)
-- [ ] (Tùy chọn) Azure Pronunciation Assessment để chấm thanh điệu → API route `api/pronounce`, key trong `.env`
+- [x] Trang `/speaking`: chọn bài học HSK1, luyện theo **Câu (shadowing)** — câu ví dụ của bài — hoặc **Từ** — đọc to từ vựng; nghe mẫu → 🎙 Nói → % khớp + câu máy nghe được; bật/tắt pinyin để luyện không nhìn. Mỗi lần ghi `Attempt` skill `speaking` (đạt khi ≥ 80%) qua server action `recordSpeaking`.
+- [ ] **Trả lời câu hỏi** bằng giọng nói (HSK3–4) — Phase 10
+- [ ] (Tùy chọn) Azure Pronunciation Assessment để chấm thanh điệu — chưa làm. Hiện máy chấm theo chữ nhận được, **chưa chấm thanh điệu**.
+
+> Xác minh: 51 test, lint, `tsc --noEmit`, build đạt. Trên dev server (khung xem không có micro nên cài lớp `SpeechRecognition` giả trong trang): câu "我是越南人。" nghe thành "我是中国人" → 越南 tô đỏ, khớp 60%; nghe đúng → 100%; lỗi `not-allowed` → "Trình duyệt chưa được phép dùng micro."; bỏ hỗ trợ nhận diện → chỉ còn nút "Ghi âm" kèm ghi chú; 2 `Attempt` speaking được ghi rồi đã xoá; không lỗi server. **Chưa thử với micro và giọng thật** — cần bạn thử trên Chrome.
 
 **Tiêu chí hoàn thành:** đọc 1 câu HSK1, thấy chữ nào sai được tô đỏ.
 
@@ -332,16 +333,21 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 ## Phase 9 — Kỹ năng Viết 写
 
 ### 9.1 Bài tập không cần AI
-- [ ] Gõ pinyin → chọn chữ (luyện bộ gõ)
-- [ ] Điền chữ còn thiếu theo pinyin (dạng đề HSK3)
-- [ ] Sắp xếp từ thành câu (dạng đề HSK3–4)
-- [ ] Bật mode `recall` của ReviewCard
+- [x] Trang `/writing`, tab **Gõ pinyin chọn chữ**: xem nghĩa, gõ pinyin không dấu (ü gõ v), danh sách gợi ý thu hẹp như bộ gõ thật (từ vựng HSK1), chọn đúng chữ. Chấm ngay ở client, không ghi `Attempt`.
+- [x] Tab **Điền chữ**: 8 câu `fill` — câu có ô trống + pinyin cả câu, gõ đúng chữ còn thiếu
+- [x] Tab **Sắp xếp câu**: 6 câu `reorder`, dùng lại `ReorderSentence` của phần ngữ pháp (bấm để ghép), chấp nhận nhiều đáp án
+- [x] Thêm 3 dạng `fill` / `reorder` / `compose` vào `src/lib/exercises.ts`, gộp chấm vào `gradeExercise` (có test); `submitExercise` dùng chung cho nghe và viết. Dữ liệu `data/exercises/hsk1-writing.json` (18 bài) — do Claude soạn, **cần duyệt**.
+- [x] Mode `recall` của ReviewCard: thẻ hiện nghĩa + loại từ, gõ chữ Hán hoặc pinyin (dấu thanh tuỳ ý, dùng `matchesDictation`) → gợi ý Nhớ/Quên. Bài học mới tạo 4 thẻ/từ; phím tắt bỏ qua khi đang gõ trong ô nhập (Space không lật thẻ).
 
 ### 9.2 Chấm bằng LLM (tùy chọn)
-- [ ] `POST /api/grade`: gửi đề + câu trả lời → nhận JSON `{ score, errors[], corrected, explanationVi }`
-- [ ] Validate output bằng `zod`; API key chỉ ở `.env`, không lộ ra client
-- [ ] Dạng bài: đặt câu với từ cho trước + tranh (HSK4), viết đoạn ngắn
-- [ ] Lưu lỗi hay mắc → gợi ý ôn điểm ngữ pháp liên quan
+- [x] **Đang khoá** bằng cờ `AI_GRADING_ENABLED = false` trong `src/lib/grader.ts`: tab "Đặt câu" hiện 🔒 và không bấm được, server action `gradeWriting` từ chối mọi lượt gọi. Mở khoá = viết thân `gradeComposition` + đổi cờ thành `true`.
+- [x] Khung chấm đã sẵn, **chưa nối AI** (người dùng sẽ chọn API và model): server action `gradeWriting` (thay `POST /api/grade`) gọi `gradeComposition()` trong `src/lib/grader.ts`; hàm này hiện ném `GraderNotConfigured` → trang báo "Chưa cấu hình chấm bằng AI" và hiện câu mẫu để tự so. Khi nối AI chỉ cần thay thân hàm `gradeComposition` (comment `shortcut:` đánh dấu chỗ đó).
+- [x] Kết quả AI phải qua `gradeResultSchema` (zod): `{ score 0–10, corrected, errors[{wrong, right, explanationVi}], explanationVi }`; key sẽ đọc từ biến môi trường ở server, không lộ ra client. Đạt khi điểm ≥ 7, ghi `Attempt` skill `writing`.
+- [x] Tab **Đặt câu**: 4 bài `compose` — ảnh + 2 từ bắt buộc (tô xanh khi đã dùng), ô viết, nút "Chấm bài"; hiện điểm, câu sửa, từng lỗi + giải thích khi đã có AI.
+- [ ] Viết đoạn ngắn (HSK4) — Phase 10
+- [ ] Lưu lỗi hay mắc → gợi ý ôn điểm ngữ pháp liên quan — làm sau khi nối AI (cần danh sách lỗi do AI trả về)
+
+> Xác minh: 56 test, lint, `tsc --noEmit`, build đạt. Trên dev server: gõ "h" → 9 gợi ý, "hany" → chỉ còn 汉语 → chọn đúng; điền 生 → đúng, điền 子 cho 名___ → sai, hiện chữ đúng 字; sắp xếp 下午我们去学校 → chấp nhận; đặt câu "我喜欢苹果" → 2 từ tô xanh, chấm → "Chưa cấu hình chấm bằng AI" + câu mẫu; học bài 1 → 40 thẻ (10 từ × 4 chế độ), thẻ recall "không": gõ "bu " (Space không lật thẻ) + Enter → "✓ Đúng — gợi ý chấm Nhớ"; không lỗi server. Đã xoá dữ liệu do test tạo (40 thẻ, 4 Attempt, trạng thái đã học của bài 1), giữ nguyên lượt luyện nói có sẵn của bạn. **Tiêu chí hoàn thành chỉ đạt khi nối AI.**
 
 **Tiêu chí hoàn thành:** viết 1 câu với từ cho trước, nhận câu sửa + giải thích tiếng Việt.
 

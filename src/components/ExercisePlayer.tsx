@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { submitExercise } from "@/app/actions";
 import Picture from "@/components/Picture";
-import type { ClientExercise, Line } from "@/lib/exercises";
+import type { Line, ListeningExercise } from "@/lib/exercises";
 import { speakLines } from "@/lib/tts";
 
 export type Result = { correct: boolean };
@@ -43,12 +43,12 @@ export default function ExercisePlayer({
   rate,
   onDone,
 }: {
-  exercise: ClientExercise;
+  exercise: ListeningExercise;
   rate: number;
   onDone: (r: Result) => void;
 }) {
   const [picked, setPicked] = useState<boolean | number | string | null>(null);
-  const [result, setResult] = useState<{ correct: boolean; answer: boolean | number | null } | null>(null);
+  const [result, setResult] = useState<{ correct: boolean; answer: unknown } | null>(null);
   const [plays, setPlays] = useState(1); // effect bên dưới tự phát lần đầu
   const [unsupported, setUnsupported] = useState(false);
   const [error, setError] = useState<string | null>(null);

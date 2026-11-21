@@ -33,10 +33,57 @@ export const exerciseSchema = z.discriminatedUnion("type", [
   }),
   // Nghe câu, gõ lại bằng chữ Hán hoặc pinyin.
   z.object({ key: z.string(), type: z.literal("dictation"), audio: z.array(line).length(1), answer: z.null().optional() }),
+  // Viết: điền chữ còn thiếu (___) theo pinyin của cả câu (dạng đề HSK3).
+  z.object({
+    key: z.string(),
+    type: z.literal("fill"),
+    sentence: z.string().includes("___"),
+    pinyin: z.string().min(1),
+    vi: z.string().min(1),
+    answer: z.string().length(1),
+  }),
+  // Viết: sắp xếp từ (đã xáo sẵn) thành câu; answer = các câu chấp nhận được.
+  z.object({
+    key: z.string(),
+    type: z.literal("reorder"),
+    words: z.array(z.string().min(1)).min(2),
+    vi: z.string().min(1),
+    answer: z.array(z.string().min(1)).min(1),
+  }),
+  // Viết: đặt câu với các từ cho trước (có thể kèm tranh); chấm bằng AI, answer = câu mẫu để tự so.
+  z.object({
+    key: z.string(),
+    type: z.literal("compose"),
+    words: z.array(z.string().min(1)).min(1),
+    hint: z.string().min(1),
+    picture: picture.optional(),
+    answer: line,
+  }),
 ]);
 
 export type ExerciseData = z.infer<typeof exerciseSchema>;
 export type Line = z.infer<typeof line>;
+
+const clean = (s: string) => s.replace(/[\s\p{P}]/gu, "");
+
+/**
+ * Chấm các dạng chấm được không cần AI. `matchesDictation` truyền vào để file này không phụ thuộc compare.ts.
+ * compose không chấm ở đây (cần AI) — luôn trả false.
+ */
+export function gradeExercise(
+  type: ExerciseData["type"],
+  answer: unknown,
+  payload: { audio?: Line[] },
+  response: unknown,
+  matchesDictation: (input: string, expected: { hanzi: string; pinyin: string }) => boolean,
+): boolean {
+  if (type === "dictation") return typeof response === "string" && !!payload.audio && matchesDictation(response, payload.audio[0]);
+  if (type === "fill") return typeof response === "string" && clean(response) === answer;
+  if (type === "reorder")
+    return Array.isArray(response) && (answer as string[]).some((a) => clean(a) === clean(response.join("")));
+  if (type === "compose") return false;
+  return response === answer;
+}
 
 /** Tách phần đáp án ra khỏi đề: payload gửi xuống client không cần chứa answer. */
 export function splitExercise({ key, type, answer, ...payload }: ExerciseData) {
@@ -49,3 +96,8 @@ type Payload<T extends ExerciseData["type"]> = Omit<Extract<ExerciseData, { type
 export type ClientExercise = {
   [T in ExerciseData["type"]]: { id: number; type: T; payload: Payload<T> };
 }[ExerciseData["type"]];
+
+/** Các dạng bài nghe (có audio) — dùng cho ExercisePlayer / trang Luyện nghe. */
+export type ListeningExercise = Extract<ClientExercise, { type: "picture_tf" | "picture_mcq" | "mcq" | "dictation" }>;
+/** Các dạng bài viết — dùng cho trang Luyện viết. */
+export type WritingExercise = Extract<ClientExercise, { type: "fill" | "reorder" | "compose" }>;

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ExercisePlayer from "@/components/ExercisePlayer";
-import type { ClientExercise } from "@/lib/exercises";
+import type { ListeningExercise } from "@/lib/exercises";
 
 const RATES = [
   { rate: 0.68, label: "0.75x" },
@@ -16,8 +16,8 @@ const shuffle = <T,>(xs: T[]) =>
     .sort((a, b) => a[0] - b[0])
     .map(([, x]) => x);
 
-export default function ListeningSession({ exercises }: { exercises: ClientExercise[] }) {
-  const [queue, setQueue] = useState<ClientExercise[] | null>(null);
+export default function ListeningSession({ exercises }: { exercises: ListeningExercise[] }) {
+  const [queue, setQueue] = useState<ListeningExercise[] | null>(null);
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
   const [rate, setRate] = useState(0.9);

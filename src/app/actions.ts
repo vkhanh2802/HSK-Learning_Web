@@ -3,13 +3,14 @@
 import { z } from "zod";
 import { matchesDictation } from "@/lib/compare";
 import { prisma } from "@/lib/db";
-import type { Line } from "@/lib/exercises";
+import { gradeExercise, type ExerciseData, type Line } from "@/lib/exercises";
+import { AI_GRADING_ENABLED, GraderNotConfigured, gradeComposition } from "@/lib/grader";
 import { gradeGrammar, revealGrammar, type GrammarExercise } from "@/lib/grammar";
 import type { Question } from "@/lib/passages";
 import { newCard, review, type Grade } from "@/lib/srs";
 
 // Chế độ thẻ cho mỗi từ; recall (gõ pinyin/chữ) bật ở Phase 9.
-const MODES = ["recognize", "listen", "write"] as const;
+const MODES = ["recognize", "listen", "write", "recall"] as const;
 
 /** Tạo thẻ ôn cho một từ ở mọi chế độ còn thiếu; không đụng thẻ đã có. Trả về số thẻ mới tạo. */
 async function createWordCards(itemId: number, now: Date) {
@@ -79,7 +80,7 @@ export async function reviewCard(input: z.input<typeof reviewInput>) {
     prisma.attempt.create({
       data: {
         cardId,
-        skill: card.mode === "listen" ? "listening" : card.mode === "write" ? "writing" : "reading",
+        skill: card.mode === "listen" ? "listening" : card.mode === "write" || card.mode === "recall" ? "writing" : "reading",
         correct: grade > 1,
         rating: grade,
         durationMs,
@@ -91,7 +92,12 @@ export async function reviewCard(input: z.input<typeof reviewInput>) {
 
 const submitInput = z.object({
   exerciseId: z.number().int().positive(),
-  response: z.union([z.boolean(), z.number().int().min(0).max(20), z.string().max(200)]),
+  response: z.union([
+    z.boolean(),
+    z.number().int().min(0).max(20),
+    z.string().max(200),
+    z.array(z.string().max(20)).max(30),
+  ]),
   durationMs: z.number().int().min(0).max(3_600_000).optional(),
 });
 
@@ -99,19 +105,42 @@ const submitInput = z.object({
 export async function submitExercise(input: z.input<typeof submitInput>) {
   const { exerciseId, response, durationMs } = submitInput.parse(input);
   const ex = await prisma.exercise.findUnique({ where: { id: exerciseId } });
-  if (!ex) throw new Error("Không tìm thấy bài tập");
+  if (!ex || ex.type === "compose") throw new Error("Không tìm thấy bài tập");
 
-  const answer = JSON.parse(ex.answer) as boolean | number | null;
-  const payload = JSON.parse(ex.payload) as { audio: Line[] };
-  const correct =
-    ex.type === "dictation"
-      ? typeof response === "string" && matchesDictation(response, payload.audio[0])
-      : response === answer;
+  const answer = JSON.parse(ex.answer) as boolean | number | string | string[] | null;
+  const payload = JSON.parse(ex.payload) as { audio?: Line[] };
+  const correct = gradeExercise(ex.type as ExerciseData["type"], answer, payload, response, matchesDictation);
 
   await prisma.attempt.create({
     data: { exerciseId, skill: ex.skill, correct, response: JSON.stringify(response), durationMs },
   });
   return { correct, answer };
+}
+
+const writingInput = z.object({ exerciseId: z.number().int().positive(), text: z.string().trim().min(1).max(200) });
+
+/**
+ * Chấm câu tự viết (dạng compose) bằng AI. Chưa cấu hình AI thì trả `configured: false` kèm câu mẫu để tự so.
+ * Đạt khi điểm ≥ 7/10.
+ */
+export async function gradeWriting(input: z.input<typeof writingInput>) {
+  if (!AI_GRADING_ENABLED) throw new Error("Chấm bằng AI đang bị khoá");
+  const { exerciseId, text } = writingInput.parse(input);
+  const ex = await prisma.exercise.findUnique({ where: { id: exerciseId } });
+  if (!ex || ex.type !== "compose") throw new Error("Không tìm thấy bài tập");
+  const sample = JSON.parse(ex.answer) as Line;
+  const { words, hint } = JSON.parse(ex.payload) as { words: string[]; hint: string };
+
+  try {
+    const result = await gradeComposition({ words, hint, sample: sample.hanzi }, text);
+    await prisma.attempt.create({
+      data: { exerciseId, skill: ex.skill, correct: result.score >= 7, response: JSON.stringify({ text, result }) },
+    });
+    return { configured: true as const, result, sample };
+  } catch (e) {
+    if (e instanceof GraderNotConfigured) return { configured: false as const, sample };
+    throw e;
+  }
 }
 
 const grammarInput = z.object({
@@ -132,4 +161,18 @@ export async function submitGrammar(input: z.input<typeof grammarInput>) {
     data: { skill: "grammar", correct, response: JSON.stringify({ point: point.key, exercise, response }) },
   });
   return { correct, ...revealGrammar(ex) };
+}
+
+const speakingInput = z.object({
+  text: z.string().min(1).max(100),
+  heard: z.string().max(200),
+  score: z.number().min(0).max(1),
+});
+
+/** Ghi một lần luyện nói (chấm ở client bằng nhận diện giọng nói của trình duyệt): đạt khi khớp ≥ 80%. */
+export async function recordSpeaking(input: z.input<typeof speakingInput>) {
+  const { text, heard, score } = speakingInput.parse(input);
+  await prisma.attempt.create({
+    data: { skill: "speaking", correct: score >= 0.8, response: JSON.stringify({ text, heard, score }) },
+  });
 }
