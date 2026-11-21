@@ -1,0 +1,884 @@
+[
+  {
+    "key": "hsk3-reading-01",
+    "type": "reading",
+    "title": "Hàng xóm mới",
+    "text": "上 个 月 我们 搬 到 了 一 个 新 的 地方 。 我 家 在 八 层 ， 楼 里 有 电梯 ， 很 方便 。 我们 的 邻居 是 一 位 老 奶奶 ， 她 对 我们 特别 热情 。 我们 刚 搬 来 的 时候 ， 她 送 给 我们 一 个 蛋糕 。 她 的 孩子 都 在 别 的 城市 工作 ， 所以 她 一 个 人 住 。 周末 我 经常 去 看 她 ， 帮 她 打扫 房间 。 她 总是 给 我 讲 过去 的 故事 。",
+    "translation": "Tháng trước chúng tôi chuyển đến một nơi mới. Nhà tôi ở tầng tám, tòa nhà có thang máy, rất tiện. Hàng xóm của chúng tôi là một bà cụ, bà đặc biệt nhiệt tình với chúng tôi. Lúc chúng tôi mới chuyển đến, bà tặng chúng tôi một cái bánh. Con cái bà đều làm việc ở thành phố khác, nên bà sống một mình. Cuối tuần tôi thường sang thăm bà, giúp bà dọn phòng. Bà luôn kể cho tôi nghe những câu chuyện ngày xưa.",
+    "gloss": {
+      "刚": {
+        "p": "gāng",
+        "vi": "vừa mới"
+      },
+      "帮": {
+        "p": "bāng",
+        "vi": "giúp"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "他们家住在八层。",
+          "pinyin": "Tāmen jiā zhù zài bā céng.",
+          "vi": "Nhà họ ở tầng tám."
+        },
+        "answer": true
+      },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "老奶奶跟孩子们住在一起。",
+          "pinyin": "Lǎo nǎinai gēn háizimen zhù zài yìqǐ.",
+          "vi": "Bà cụ sống cùng các con."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "周末“我”经常做什么？",
+          "pinyin": "Zhōumò “wǒ” jīngcháng zuò shénme?",
+          "vi": "Cuối tuần “tôi” thường làm gì?"
+        },
+        "options": [
+          {
+            "hanzi": "帮奶奶打扫房间",
+            "pinyin": "bāng nǎinai dǎsǎo fángjiān"
+          },
+          {
+            "hanzi": "去别的城市工作",
+            "pinyin": "qù bié de chéngshì gōngzuò"
+          },
+          {
+            "hanzi": "给奶奶做蛋糕",
+            "pinyin": "gěi nǎinai zuò dàngāo"
+          }
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-02",
+    "type": "dialogue",
+    "title": "Đi khám bệnh",
+    "text": "医生 ： 你 哪儿 不 舒服 ？\n小王 ： 我 头 疼 ， 还 有 点儿 发烧 。\n医生 ： 从 什么 时候 开始 的 ？\n小王 ： 昨天 晚上 。 我 回 家 的 时候 忘 了 带 伞 ， 被 雨 淋 了 。\n医生 ： 我 给 你 检查 一下 。 …… 你 感冒 了 ， 不 是 大 问题 。 这 几 天 要 多 喝 水 ， 多 休息 。\n小王 ： 我 明天 能 去 上班 吗 ？\n医生 ： 最 好 请 两 天 假 。",
+    "translation": "Bác sĩ: Anh thấy khó chịu ở đâu?\nTiểu Vương: Tôi đau đầu, còn hơi sốt.\nBác sĩ: Bắt đầu từ lúc nào?\nTiểu Vương: Tối qua. Lúc về nhà tôi quên mang ô, bị mưa ướt.\nBác sĩ: Để tôi khám cho anh. … Anh bị cảm rồi, không phải vấn đề lớn. Mấy ngày này phải uống nhiều nước, nghỉ ngơi nhiều.\nTiểu Vương: Mai tôi đi làm được không?\nBác sĩ: Tốt nhất là xin nghỉ hai ngày.",
+    "gloss": {
+      "小王": {
+        "p": "Xiǎo Wáng",
+        "vi": "Tiểu Vương"
+      },
+      "头": {
+        "p": "tóu",
+        "vi": "đầu"
+      },
+      "淋": {
+        "p": "lín",
+        "vi": "dầm, ướt (mưa)"
+      },
+      "忘": {
+        "p": "wàng",
+        "vi": "quên"
+      },
+      "点儿": {
+        "p": "diǎnr",
+        "vi": "một chút"
+      },
+      "假": {
+        "p": "jià",
+        "vi": "kỳ nghỉ, phép"
+      },
+      "雨": {
+        "p": "yǔ",
+        "vi": "mưa"
+      },
+      "天": {
+        "p": "tiān",
+        "vi": "ngày; trời"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "小王昨天带了伞。",
+          "pinyin": "Xiǎo Wáng zuótiān dài le sǎn.",
+          "vi": "Hôm qua Tiểu Vương có mang ô."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "小王怎么了？",
+          "pinyin": "Xiǎo Wáng zěnme le?",
+          "vi": "Tiểu Vương bị làm sao?"
+        },
+        "options": [
+          {
+            "hanzi": "感冒了",
+            "pinyin": "gǎnmào le"
+          },
+          {
+            "hanzi": "脚疼",
+            "pinyin": "jiǎo téng"
+          },
+          {
+            "hanzi": "吃得太饱",
+            "pinyin": "chī de tài bǎo"
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "医生让小王做什么？",
+          "pinyin": "Yīshēng ràng Xiǎo Wáng zuò shénme?",
+          "vi": "Bác sĩ bảo Tiểu Vương làm gì?"
+        },
+        "options": [
+          {
+            "hanzi": "明天去上班",
+            "pinyin": "míngtiān qù shàngbān"
+          },
+          {
+            "hanzi": "多喝水，多休息",
+            "pinyin": "duō hē shuǐ, duō xiūxi"
+          },
+          {
+            "hanzi": "去医院住两天",
+            "pinyin": "qù yīyuàn zhù liǎng tiān"
+          }
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-03",
+    "type": "reading",
+    "title": "Bốn mùa ở Bắc Kinh",
+    "text": "北京 一 年 有 四 个 季节 。 春天 不 冷 也 不 热 ， 可是 经常 刮风 。 夏天 很 热 ， 也 常常 下雨 ， 出门 要 记得 带 伞 。 秋天 是 北京 最 好 的 季节 ， 天 很 蓝 ， 太阳 也 不 太 大 ， 很 多 人 喜欢 去 爬山 。 冬天 特别 冷 ， 有时候 会 下 雪 。 如果 你 想 来 北京 旅游 ， 我 认为 秋天 来 最 好 。",
+    "translation": "Bắc Kinh một năm có bốn mùa. Mùa xuân không lạnh cũng không nóng, nhưng thường có gió. Mùa hè rất nóng, cũng hay mưa, ra ngoài phải nhớ mang ô. Mùa thu là mùa đẹp nhất ở Bắc Kinh, trời rất xanh, nắng cũng không gắt lắm, nhiều người thích đi leo núi. Mùa đông đặc biệt lạnh, có lúc có tuyết. Nếu bạn muốn đến Bắc Kinh du lịch, tôi cho rằng mùa thu là tốt nhất.",
+    "gloss": {
+      "可是": {
+        "p": "kěshì",
+        "vi": "nhưng"
+      },
+      "出门": {
+        "p": "chūmén",
+        "vi": "ra ngoài"
+      },
+      "有时候": {
+        "p": "yǒu shíhou",
+        "vi": "có lúc"
+      },
+      "天": {
+        "p": "tiān",
+        "vi": "ngày; trời"
+      },
+      "常常": {
+        "p": "chángcháng",
+        "vi": "thường thường"
+      },
+      "春天": {
+        "p": "chūntiān",
+        "vi": "mùa xuân"
+      },
+      "夏天": {
+        "p": "xiàtiān",
+        "vi": "mùa hè"
+      },
+      "秋天": {
+        "p": "qiūtiān",
+        "vi": "mùa thu"
+      },
+      "冬天": {
+        "p": "dōngtiān",
+        "vi": "mùa đông"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "北京的春天经常刮风。",
+          "pinyin": "Běijīng de chūntiān jīngcháng guāfēng.",
+          "vi": "Mùa xuân ở Bắc Kinh thường có gió."
+        },
+        "answer": true
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "作者认为什么时候去北京最好？",
+          "pinyin": "Zuòzhě rènwéi shénme shíhou qù Běijīng zuì hǎo?",
+          "vi": "Tác giả cho rằng khi nào đến Bắc Kinh là tốt nhất?"
+        },
+        "options": [
+          {
+            "hanzi": "春天",
+            "pinyin": "chūntiān"
+          },
+          {
+            "hanzi": "夏天",
+            "pinyin": "xiàtiān"
+          },
+          {
+            "hanzi": "秋天",
+            "pinyin": "qiūtiān"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "北京的夏天 ___ 下雨。",
+          "pinyin": "Běijīng de xiàtiān ___ xià yǔ.",
+          "vi": "Chọn từ điền vào chỗ trống: Mùa hè Bắc Kinh ___ mưa."
+        },
+        "options": [
+          {
+            "hanzi": "常常",
+            "pinyin": "chángcháng"
+          },
+          {
+            "hanzi": "从来不",
+            "pinyin": "cónglái bù"
+          },
+          {
+            "hanzi": "终于",
+            "pinyin": "zhōngyú"
+          }
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-04",
+    "type": "dialogue",
+    "title": "Hỏi đường",
+    "text": "小李 ： 请 问 ， 附近 有 银行 吗 ？\n路人 ： 有 。 你 一直 往 前 走 ， 经过 一 个 超市 ， 然后 向 左 ， 银行 就 在 公园 和 饭店 中间 。\n小李 ： 远 不 远 ？ 我 需要 坐 地铁 吗 ？\n路人 ： 不 远 ， 走 路 十 分钟 就 到 了 。 你 也 可以 骑 自行车 。\n小李 ： 太 谢谢 你 了 ！\n路人 ： 不客气 。 现在 是 下午 四 点 半 ， 银行 五 点 关门 ， 你 快 去 吧 。",
+    "translation": "Tiểu Lý: Xin hỏi, gần đây có ngân hàng không?\nNgười đi đường: Có. Bạn cứ đi thẳng, qua một siêu thị, rồi rẽ trái, ngân hàng ở giữa công viên và nhà hàng.\nTiểu Lý: Có xa không? Tôi có cần đi tàu điện ngầm không?\nNgười đi đường: Không xa, đi bộ mười phút là đến. Bạn cũng có thể đạp xe.\nTiểu Lý: Cảm ơn bạn nhiều!\nNgười đi đường: Không có gì. Bây giờ là bốn rưỡi chiều, ngân hàng năm giờ đóng cửa, bạn đi nhanh lên.",
+    "gloss": {
+      "小李": {
+        "p": "Xiǎo Lǐ",
+        "vi": "Tiểu Lý"
+      },
+      "路人": {
+        "p": "lùrén",
+        "vi": "người đi đường"
+      },
+      "关门": {
+        "p": "guānmén",
+        "vi": "đóng cửa"
+      },
+      "前": {
+        "p": "qián",
+        "vi": "phía trước"
+      },
+      "左": {
+        "p": "zuǒ",
+        "vi": "bên trái"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "银行离这儿很远。",
+          "pinyin": "Yínháng lí zhèr hěn yuǎn.",
+          "vi": "Ngân hàng cách đây rất xa."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "银行在哪儿？",
+          "pinyin": "Yínháng zài nǎr?",
+          "vi": "Ngân hàng ở đâu?"
+        },
+        "options": [
+          {
+            "hanzi": "超市旁边",
+            "pinyin": "chāoshì pángbiān"
+          },
+          {
+            "hanzi": "公园和饭店中间",
+            "pinyin": "gōngyuán hé fàndiàn zhōngjiān"
+          },
+          {
+            "hanzi": "地铁站里",
+            "pinyin": "dìtiězhàn lǐ"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "银行几点关门？",
+          "pinyin": "Yínháng jǐ diǎn guānmén?",
+          "vi": "Ngân hàng mấy giờ đóng cửa?"
+        },
+        "options": [
+          {
+            "hanzi": "四点半",
+            "pinyin": "sì diǎn bàn"
+          },
+          {
+            "hanzi": "五点",
+            "pinyin": "wǔ diǎn"
+          },
+          {
+            "hanzi": "十点",
+            "pinyin": "shí diǎn"
+          }
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-05",
+    "type": "reading",
+    "title": "Học tiếng Trung",
+    "text": "我 学 汉语 已经 两 年 了 。 刚 开始 的 时候 ， 我 觉得 汉字 特别 难 ， 老师 说 的 话 我 也 听 不 懂 。 后来 ， 我 每 天 练习 写 汉字 ， 还 一边 听 中文 音乐 一边 学 句子 。 现在 我 的 水平 提高 了 很 多 ， 不但 能 看 简单 的 中文 书 ， 而且 能 跟 中国 朋友 聊天 。 我 发现 ， 只有 多 练习 ， 才 能 学 好 一 种 语言 。",
+    "translation": "Tôi học tiếng Trung đã hai năm rồi. Lúc mới bắt đầu, tôi thấy chữ Hán đặc biệt khó, lời thầy nói tôi cũng nghe không hiểu. Sau đó, ngày nào tôi cũng luyện viết chữ Hán, còn vừa nghe nhạc Trung vừa học câu. Bây giờ trình độ của tôi đã nâng cao nhiều, không những đọc được sách tiếng Trung đơn giản mà còn trò chuyện được với bạn Trung Quốc. Tôi nhận ra rằng chỉ có luyện tập nhiều mới học tốt được một ngôn ngữ.",
+    "gloss": {
+      "刚": {
+        "p": "gāng",
+        "vi": "vừa mới"
+      },
+      "学": {
+        "p": "xué",
+        "vi": "học"
+      },
+      "语言": {
+        "p": "yǔyán",
+        "vi": "ngôn ngữ"
+      },
+      "汉字": {
+        "p": "Hànzì",
+        "vi": "chữ Hán"
+      },
+      "话": {
+        "p": "huà",
+        "vi": "lời nói"
+      },
+      "天": {
+        "p": "tiān",
+        "vi": "ngày; trời"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "作者学汉语两年了。",
+          "pinyin": "Zuòzhě xué Hànyǔ liǎng nián le.",
+          "vi": "Tác giả học tiếng Trung được hai năm."
+        },
+        "answer": true
+      },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "作者现在还听不懂中国朋友说话。",
+          "pinyin": "Zuòzhě xiànzài hái tīng bu dǒng Zhōngguó péngyou shuōhuà.",
+          "vi": "Bây giờ tác giả vẫn nghe không hiểu bạn Trung Quốc nói."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "作者认为怎么才能学好语言？",
+          "pinyin": "Zuòzhě rènwéi zěnme cái néng xué hǎo yǔyán?",
+          "vi": "Tác giả cho rằng làm thế nào mới học tốt ngôn ngữ?"
+        },
+        "options": [
+          {
+            "hanzi": "多练习",
+            "pinyin": "duō liànxí"
+          },
+          {
+            "hanzi": "去中国留学",
+            "pinyin": "qù Zhōngguó liúxué"
+          },
+          {
+            "hanzi": "买词典",
+            "pinyin": "mǎi cídiǎn"
+          }
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-06",
+    "type": "dialogue",
+    "title": "Mua quần áo",
+    "text": "服务员 ： 欢迎 ！ 您 想 买 什么 ？\n小张 ： 我 想 买 一 条 裙子 ， 下 个 星期 参加 朋友 的 婚礼 。\n服务员 ： 您 看看 这 条 蓝 的 ， 还是 那 条 绿 的 ？\n小张 ： 蓝 的 很 漂亮 。 我 可以 试 一下 吗 ？\n服务员 ： 当然 可以 。 …… 您 穿 这 条 裙子 特别 好看 。\n小张 ： 我 也 很 满意 。 一共 多少 钱 ？\n服务员 ： 三百 五十 元 。 您 用 信用卡 还是 现金 ？\n小张 ： 信用卡 。",
+    "translation": "Nhân viên: Xin chào! Chị muốn mua gì ạ?\nTiểu Trương: Tôi muốn mua một chiếc váy, tuần sau đi dự đám cưới bạn.\nNhân viên: Chị xem chiếc màu xanh lam này, hay chiếc màu xanh lá kia?\nTiểu Trương: Chiếc xanh lam đẹp lắm. Tôi thử một chút được không?\nNhân viên: Tất nhiên được ạ. … Chị mặc chiếc váy này đẹp lắm.\nTiểu Trương: Tôi cũng rất hài lòng. Tổng cộng bao nhiêu tiền?\nNhân viên: Ba trăm năm mươi tệ. Chị dùng thẻ tín dụng hay tiền mặt?\nTiểu Trương: Thẻ tín dụng.",
+    "gloss": {
+      "小张": {
+        "p": "Xiǎo Zhāng",
+        "vi": "Tiểu Trương"
+      },
+      "婚礼": {
+        "p": "hūnlǐ",
+        "vi": "đám cưới"
+      },
+      "现金": {
+        "p": "xiànjīn",
+        "vi": "tiền mặt"
+      },
+      "三百": {
+        "p": "sānbǎi",
+        "vi": "ba trăm"
+      },
+      "五十": {
+        "p": "wǔshí",
+        "vi": "năm mươi"
+      },
+      "好看": {
+        "p": "hǎokàn",
+        "vi": "đẹp, ưa nhìn"
+      },
+      "看看": {
+        "p": "kànkan",
+        "vi": "xem thử"
+      }
+    },
+    "questions": [
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "小张为什么买裙子？",
+          "pinyin": "Xiǎo Zhāng wèishénme mǎi qúnzi?",
+          "vi": "Vì sao Tiểu Trương mua váy?"
+        },
+        "options": [
+          {
+            "hanzi": "参加婚礼",
+            "pinyin": "cānjiā hūnlǐ"
+          },
+          {
+            "hanzi": "去旅游",
+            "pinyin": "qù lǚyóu"
+          },
+          {
+            "hanzi": "送给妈妈",
+            "pinyin": "sòng gěi māma"
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "小张买了绿色的裙子。",
+          "pinyin": "Xiǎo Zhāng mǎi le lǜsè de qúnzi.",
+          "vi": "Tiểu Trương mua chiếc váy màu xanh lá."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "裙子多少钱？",
+          "pinyin": "Qúnzi duōshao qián?",
+          "vi": "Chiếc váy bao nhiêu tiền?"
+        },
+        "options": [
+          {
+            "hanzi": "三十五元",
+            "pinyin": "sānshíwǔ yuán"
+          },
+          {
+            "hanzi": "三百元",
+            "pinyin": "sānbǎi yuán"
+          },
+          {
+            "hanzi": "三百五十元",
+            "pinyin": "sānbǎi wǔshí yuán"
+          }
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-07",
+    "type": "reading",
+    "title": "Chuyến du lịch không suôn sẻ",
+    "text": "去年 夏天 ， 我 跟 同事 一起 去 南方 旅游 。 到 了 机场 ， 我 才 发现 护照 没 带 ， 只好 马上 打车 回 家 拿 。 回到 机场 的 时候 ， 飞机 已经 起飞 了 。 我们 又 买 了 第二 天 的 机票 。 第二 天 ， 我 的 行李箱 还 被 别人 拿 错 了 。 虽然 这 次 旅游 遇到 了 很 多 问题 ， 但是 那里 的 环境 特别 好 ， 我们 照 了 很 多 照片 ， 最后 大家 都 很 高兴 。",
+    "translation": "Mùa hè năm ngoái, tôi cùng đồng nghiệp đi du lịch miền nam. Đến sân bay, tôi mới phát hiện quên mang hộ chiếu, đành phải lập tức bắt xe về nhà lấy. Lúc quay lại sân bay thì máy bay đã cất cánh. Chúng tôi lại mua vé máy bay ngày hôm sau. Hôm sau, va li của tôi còn bị người khác cầm nhầm. Tuy chuyến du lịch này gặp nhiều trục trặc, nhưng môi trường ở đó rất đẹp, chúng tôi chụp rất nhiều ảnh, cuối cùng mọi người đều rất vui.",
+    "gloss": {
+      "南方": {
+        "p": "nánfāng",
+        "vi": "miền nam"
+      },
+      "只好": {
+        "p": "zhǐhǎo",
+        "vi": "đành phải"
+      },
+      "打车": {
+        "p": "dǎchē",
+        "vi": "bắt taxi"
+      },
+      "回到": {
+        "p": "huídào",
+        "vi": "quay về đến"
+      },
+      "第二": {
+        "p": "dì-èr",
+        "vi": "thứ hai"
+      },
+      "机票": {
+        "p": "jīpiào",
+        "vi": "vé máy bay"
+      },
+      "照": {
+        "p": "zhào",
+        "vi": "chụp (ảnh)"
+      },
+      "夏天": {
+        "p": "xiàtiān",
+        "vi": "mùa hè"
+      },
+      "天": {
+        "p": "tiān",
+        "vi": "ngày; trời"
+      },
+      "那里": {
+        "p": "nàlǐ",
+        "vi": "ở đó"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "作者忘记带护照了。",
+          "pinyin": "Zuòzhě wàngjì dài hùzhào le.",
+          "vi": "Tác giả quên mang hộ chiếu."
+        },
+        "answer": true
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "第二天发生了什么事？",
+          "pinyin": "Dì-èr tiān fāshēng le shénme shì?",
+          "vi": "Hôm sau đã xảy ra chuyện gì?"
+        },
+        "options": [
+          {
+            "hanzi": "飞机起飞了",
+            "pinyin": "fēijī qǐfēi le"
+          },
+          {
+            "hanzi": "行李箱被拿错了",
+            "pinyin": "xínglǐxiāng bèi ná cuò le"
+          },
+          {
+            "hanzi": "照相机坏了",
+            "pinyin": "zhàoxiàngjī huài le"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "这次旅游，大家最后觉得怎么样？",
+          "pinyin": "Zhè cì lǚyóu, dàjiā zuìhòu juéde zěnmeyàng?",
+          "vi": "Chuyến du lịch này, cuối cùng mọi người thấy thế nào?"
+        },
+        "options": [
+          {
+            "hanzi": "很生气",
+            "pinyin": "hěn shēngqì"
+          },
+          {
+            "hanzi": "很难过",
+            "pinyin": "hěn nánguò"
+          },
+          {
+            "hanzi": "很高兴",
+            "pinyin": "hěn gāoxìng"
+          }
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-08",
+    "type": "dialogue",
+    "title": "Cuộc họp chiều nay",
+    "text": "经理 ： 小刘 ， 下午 的 会议 你 准备 好 了 吗 ？\n小刘 ： 还 没有 ， 我 需要 一 个 小时 才 能 完成 。\n经理 ： 会议 三 点 开始 ， 你 必须 两 点 半 以前 把 材料 发 给 我 。\n小刘 ： 好 的 ， 我 一 做 完 就 给 您 发 电子邮件 。\n经理 ： 还 有 ， 别 忘 了 告诉 其他 同事 ， 会议 在 五 层 的 办公室 。\n小刘 ： 我 马上 就 去 告诉 他们 。",
+    "translation": "Giám đốc: Tiểu Lưu, cuộc họp chiều nay cậu chuẩn bị xong chưa?\nTiểu Lưu: Chưa ạ, em cần một tiếng nữa mới hoàn thành được.\nGiám đốc: Cuộc họp bắt đầu lúc ba giờ, trước hai rưỡi cậu phải gửi tài liệu cho tôi.\nTiểu Lưu: Vâng, em làm xong là gửi email cho anh ngay.\nGiám đốc: Còn nữa, đừng quên báo các đồng nghiệp khác là họp ở văn phòng tầng năm.\nTiểu Lưu: Em đi báo họ ngay đây.",
+    "gloss": {
+      "小刘": {
+        "p": "Xiǎo Liú",
+        "vi": "Tiểu Lưu"
+      },
+      "材料": {
+        "p": "cáiliào",
+        "vi": "tài liệu"
+      },
+      "忘": {
+        "p": "wàng",
+        "vi": "quên"
+      },
+      "他们": {
+        "p": "tāmen",
+        "vi": "họ, bọn họ"
+      }
+    },
+    "questions": [
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "会议几点开始？",
+          "pinyin": "Huìyì jǐ diǎn kāishǐ?",
+          "vi": "Cuộc họp mấy giờ bắt đầu?"
+        },
+        "options": [
+          {
+            "hanzi": "两点半",
+            "pinyin": "liǎng diǎn bàn"
+          },
+          {
+            "hanzi": "三点",
+            "pinyin": "sān diǎn"
+          },
+          {
+            "hanzi": "五点",
+            "pinyin": "wǔ diǎn"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "小刘已经准备好了。",
+          "pinyin": "Xiǎo Liú yǐjīng zhǔnbèi hǎo le.",
+          "vi": "Tiểu Lưu đã chuẩn bị xong rồi."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "会议在哪儿？",
+          "pinyin": "Huìyì zài nǎr?",
+          "vi": "Cuộc họp ở đâu?"
+        },
+        "options": [
+          {
+            "hanzi": "经理家",
+            "pinyin": "jīnglǐ jiā"
+          },
+          {
+            "hanzi": "五层的办公室",
+            "pinyin": "wǔ céng de bàngōngshì"
+          },
+          {
+            "hanzi": "饭店",
+            "pinyin": "fàndiàn"
+          }
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-09",
+    "type": "reading",
+    "title": "Gấu trúc",
+    "text": "熊猫 是 中国 很 有名 的 动物 ， 世界 上 很 多 人 都 对 它 很 感兴趣 。 熊猫 的 身体 是 白色 的 ， 耳朵 和 眼睛 周围 是 黑色 的 ， 看 起来 特别 可爱 。 它们 主要 吃 竹子 ， 一 天 要 吃 十 几 公斤 。 熊猫 一般 不 太 喜欢 动 ， 吃 饱 了 就 睡觉 。 如果 你 去 四川 旅游 ， 一定 要 去 看看 熊猫 。",
+    "translation": "Gấu trúc là con vật rất nổi tiếng của Trung Quốc, nhiều người trên thế giới đều rất hứng thú với nó. Thân gấu trúc màu trắng, tai và quanh mắt màu đen, trông đặc biệt đáng yêu. Chúng chủ yếu ăn tre, một ngày phải ăn hơn chục cân. Gấu trúc thường không thích vận động lắm, ăn no là đi ngủ. Nếu bạn đến Tứ Xuyên du lịch, nhất định phải đi xem gấu trúc.",
+    "gloss": {
+      "它们": {
+        "p": "tāmen",
+        "vi": "chúng nó"
+      },
+      "白色": {
+        "p": "báisè",
+        "vi": "màu trắng"
+      },
+      "黑色": {
+        "p": "hēisè",
+        "vi": "màu đen"
+      },
+      "周围": {
+        "p": "zhōuwéi",
+        "vi": "xung quanh"
+      },
+      "竹子": {
+        "p": "zhúzi",
+        "vi": "cây tre, trúc"
+      },
+      "动": {
+        "p": "dòng",
+        "vi": "động, cử động"
+      },
+      "四川": {
+        "p": "Sìchuān",
+        "vi": "Tứ Xuyên (tỉnh)"
+      },
+      "看看": {
+        "p": "kànkan",
+        "vi": "xem thử"
+      },
+      "天": {
+        "p": "tiān",
+        "vi": "ngày; trời"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "熊猫的耳朵是白色的。",
+          "pinyin": "Xióngmāo de ěrduo shì báisè de.",
+          "vi": "Tai gấu trúc màu trắng."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "熊猫主要吃什么？",
+          "pinyin": "Xióngmāo zhǔyào chī shénme?",
+          "vi": "Gấu trúc chủ yếu ăn gì?"
+        },
+        "options": [
+          {
+            "hanzi": "鱼",
+            "pinyin": "yú"
+          },
+          {
+            "hanzi": "竹子",
+            "pinyin": "zhúzi"
+          },
+          {
+            "hanzi": "水果",
+            "pinyin": "shuǐguǒ"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "熊猫吃饱了 ___ 睡觉。",
+          "pinyin": "Xióngmāo chī bǎo le ___ shuìjiào.",
+          "vi": "Chọn từ điền vào chỗ trống: Gấu trúc ăn no ___ ngủ."
+        },
+        "options": [
+          {
+            "hanzi": "就",
+            "pinyin": "jiù"
+          },
+          {
+            "hanzi": "才",
+            "pinyin": "cái"
+          },
+          {
+            "hanzi": "被",
+            "pinyin": "bèi"
+          }
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk3-reading-10",
+    "type": "reading",
+    "title": "Thói quen tốt",
+    "text": "我 爷爷 今年 八十 岁 了 ， 身体 还 很 健康 。 他 说 ， 这 是 因为 他 有 很 多 好 习惯 。 他 每 天 早上 六 点 起床 ， 先 去 公园 锻炼 一 个 小时 ， 然后 回 家 吃 早饭 。 他 吃 饭 吃 得 很 简单 ， 不 喝 啤酒 ， 也 不 吃 太 甜 的 东西 。 下午 他 一边 喝 茶 一边 看 报纸 ， 晚上 十 点 以前 一定 睡觉 。 我 觉得 我 也 应该 像 爷爷 一样 ， 养成 好 习惯 。",
+    "translation": "Ông nội tôi năm nay tám mươi tuổi, sức khỏe vẫn rất tốt. Ông nói, đó là vì ông có nhiều thói quen tốt. Mỗi sáng ông dậy lúc sáu giờ, trước tiên ra công viên tập một tiếng, sau đó về nhà ăn sáng. Ông ăn uống rất đơn giản, không uống bia, cũng không ăn đồ quá ngọt. Buổi chiều ông vừa uống trà vừa đọc báo, buổi tối nhất định đi ngủ trước mười giờ. Tôi thấy mình cũng nên giống ông, tạo thói quen tốt.",
+    "gloss": {
+      "八十": {
+        "p": "bāshí",
+        "vi": "tám mươi"
+      },
+      "早饭": {
+        "p": "zǎofàn",
+        "vi": "bữa sáng"
+      },
+      "饭": {
+        "p": "fàn",
+        "vi": "cơm, bữa ăn"
+      },
+      "养成": {
+        "p": "yǎngchéng",
+        "vi": "tạo thành, hình thành (thói quen)"
+      },
+      "今年": {
+        "p": "jīnnián",
+        "vi": "năm nay"
+      },
+      "天": {
+        "p": "tiān",
+        "vi": "ngày; trời"
+      }
+    },
+    "questions": [
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "爷爷每天早上去公园锻炼。",
+          "pinyin": "Yéye měi tiān zǎoshang qù gōngyuán duànliàn.",
+          "vi": "Sáng nào ông cũng ra công viên tập thể dục."
+        },
+        "answer": true
+      },
+      {
+        "type": "tf",
+        "statement": {
+          "hanzi": "爷爷经常喝啤酒。",
+          "pinyin": "Yéye jīngcháng hē píjiǔ.",
+          "vi": "Ông thường uống bia."
+        },
+        "answer": false
+      },
+      {
+        "type": "mcq",
+        "question": {
+          "hanzi": "爷爷下午做什么？",
+          "pinyin": "Yéye xiàwǔ zuò shénme?",
+          "vi": "Buổi chiều ông làm gì?"
+        },
+        "options": [
+          {
+            "hanzi": "去公园跑步",
+            "pinyin": "qù gōngyuán pǎobù"
+          },
+          {
+            "hanzi": "喝茶，看报纸",
+            "pinyin": "hē chá, kàn bàozhǐ"
+          },
+          {
+            "hanzi": "睡觉",
+            "pinyin": "shuìjiào"
+          }
+        ],
+        "answer": 1
+      }
+    ]
+  }
+]

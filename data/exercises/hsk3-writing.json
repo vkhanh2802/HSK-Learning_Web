@@ -1,0 +1,230 @@
+[
+  {
+    "key": "hsk3-writing-01",
+    "type": "fill",
+    "sentence": "我的房间打扫得很干___。",
+    "pinyin": "Wǒ de fángjiān dǎsǎo de hěn gānjìng.",
+    "vi": "Phòng tôi được dọn rất sạch.",
+    "answer": "净"
+  },
+  {
+    "key": "hsk3-writing-02",
+    "type": "fill",
+    "sentence": "周末我们去爬___吧。",
+    "pinyin": "Zhōumò wǒmen qù páshān ba.",
+    "vi": "Cuối tuần chúng ta đi leo núi đi.",
+    "answer": "山"
+  },
+  {
+    "key": "hsk3-writing-03",
+    "type": "fill",
+    "sentence": "你别着___，慢慢说。",
+    "pinyin": "Nǐ bié zháojí, mànman shuō.",
+    "vi": "Bạn đừng vội, nói từ từ.",
+    "answer": "急"
+  },
+  {
+    "key": "hsk3-writing-04",
+    "type": "fill",
+    "sentence": "这个问题很简___。",
+    "pinyin": "Zhège wèntí hěn jiǎndān.",
+    "vi": "Câu hỏi này rất đơn giản.",
+    "answer": "单"
+  },
+  {
+    "key": "hsk3-writing-05",
+    "type": "fill",
+    "sentence": "我每天早上都锻___身体。",
+    "pinyin": "Wǒ měi tiān zǎoshang dōu duànliàn shēntǐ.",
+    "vi": "Sáng nào tôi cũng tập thể dục.",
+    "answer": "炼"
+  },
+  {
+    "key": "hsk3-writing-06",
+    "type": "fill",
+    "sentence": "你的汉语水___提高了很多。",
+    "pinyin": "Nǐ de Hànyǔ shuǐpíng tígāo le hěn duō.",
+    "vi": "Trình độ tiếng Trung của bạn đã nâng cao nhiều.",
+    "answer": "平"
+  },
+  {
+    "key": "hsk3-writing-07",
+    "type": "fill",
+    "sentence": "请问，洗手___在哪儿？",
+    "pinyin": "Qǐngwèn, xǐshǒujiān zài nǎr?",
+    "vi": "Xin hỏi, nhà vệ sinh ở đâu?",
+    "answer": "间"
+  },
+  {
+    "key": "hsk3-writing-08",
+    "type": "fill",
+    "sentence": "我的护照___他拿走了。",
+    "pinyin": "Wǒ de hùzhào bèi tā ná zǒu le.",
+    "vi": "Hộ chiếu của tôi bị anh ấy cầm đi rồi.",
+    "answer": "被"
+  },
+  {
+    "key": "hsk3-writing-09",
+    "type": "reorder",
+    "words": [
+      "把",
+      "我",
+      "了",
+      "作业",
+      "完成"
+    ],
+    "vi": "Tôi đã làm xong bài tập.",
+    "answer": [
+      "我把作业完成了。"
+    ]
+  },
+  {
+    "key": "hsk3-writing-10",
+    "type": "reorder",
+    "words": [
+      "越来越",
+      "天气",
+      "了",
+      "热"
+    ],
+    "vi": "Trời càng ngày càng nóng.",
+    "answer": [
+      "天气越来越热了。"
+    ]
+  },
+  {
+    "key": "hsk3-writing-11",
+    "type": "reorder",
+    "words": [
+      "对",
+      "他",
+      "很",
+      "感兴趣",
+      "历史"
+    ],
+    "vi": "Anh ấy rất hứng thú với lịch sử.",
+    "answer": [
+      "他对历史很感兴趣。"
+    ]
+  },
+  {
+    "key": "hsk3-writing-12",
+    "type": "reorder",
+    "words": [
+      "一边",
+      "一边",
+      "我们",
+      "聊天",
+      "喝茶"
+    ],
+    "vi": "Chúng tôi vừa uống trà vừa trò chuyện.",
+    "answer": [
+      "我们一边喝茶一边聊天。"
+    ]
+  },
+  {
+    "key": "hsk3-writing-13",
+    "type": "reorder",
+    "words": [
+      "才",
+      "他",
+      "起床",
+      "十点"
+    ],
+    "vi": "Mười giờ anh ấy mới dậy.",
+    "answer": [
+      "他十点才起床。"
+    ]
+  },
+  {
+    "key": "hsk3-writing-14",
+    "type": "reorder",
+    "words": [
+      "跟",
+      "我",
+      "一样",
+      "哥哥",
+      "高"
+    ],
+    "vi": "Tôi cao bằng anh trai.",
+    "answer": [
+      "我跟哥哥一样高。"
+    ]
+  },
+  {
+    "key": "hsk3-writing-15",
+    "type": "compose",
+    "words": [
+      "一边",
+      "看"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 一边…一边… và 看.",
+    "picture": {
+      "emoji": "🍵",
+      "image": "/images/tea.jpg",
+      "label": "trà"
+    },
+    "answer": {
+      "hanzi": "爷爷一边喝茶一边看报纸。",
+      "pinyin": "Yéye yìbiān hē chá yìbiān kàn bàozhǐ.",
+      "vi": "Ông vừa uống trà vừa đọc báo."
+    }
+  },
+  {
+    "key": "hsk3-writing-16",
+    "type": "compose",
+    "words": [
+      "越来越",
+      "冷"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 越来越 và 冷.",
+    "picture": {
+      "emoji": "❄️",
+      "image": "/images/snow.jpg",
+      "label": "trời tuyết"
+    },
+    "answer": {
+      "hanzi": "冬天到了，天气越来越冷了。",
+      "pinyin": "Dōngtiān dào le, tiānqì yuè lái yuè lěng le.",
+      "vi": "Mùa đông đến, trời ngày càng lạnh."
+    }
+  },
+  {
+    "key": "hsk3-writing-17",
+    "type": "compose",
+    "words": [
+      "把",
+      "放"
+    ],
+    "hint": "Nhìn tranh, viết một câu chữ 把 có dùng 放.",
+    "picture": {
+      "emoji": "👕",
+      "image": "/images/clothes.jpg",
+      "label": "quần áo"
+    },
+    "answer": {
+      "hanzi": "我把衣服放在床上了。",
+      "pinyin": "Wǒ bǎ yīfu fàng zài chuáng shang le.",
+      "vi": "Tôi để quần áo lên giường rồi."
+    }
+  },
+  {
+    "key": "hsk3-writing-18",
+    "type": "compose",
+    "words": [
+      "被",
+      "吃"
+    ],
+    "hint": "Nhìn tranh, viết một câu bị động với 被 và 吃.",
+    "picture": {
+      "emoji": "🐟",
+      "image": "/images/fish.webp",
+      "label": "con cá"
+    },
+    "answer": {
+      "hanzi": "我的鱼被小猫吃了。",
+      "pinyin": "Wǒ de yú bèi xiǎo māo chī le.",
+      "vi": "Con cá của tôi bị mèo con ăn mất rồi."
+    }
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "key": "hsk3-g01",
+    "title": "Lặp động từ: 看看, 试一试, 照顾照顾",
+    "pattern": "Động từ + (一) + Động từ / AB + AB",
+    "explanation": "Lặp động từ làm hành động nhẹ đi, ngắn, mang ý thử hoặc gợi ý nhẹ nhàng: 看看 = xem thử, xem một chút. Động từ một chữ có thể chen 一: 看一看, 试一试. Động từ hai chữ lặp nguyên khối AB + AB: 休息休息, 照顾照顾 (không nói 照照顾顾). Nghĩa gần với động từ + 一下.",
+    "examples": [
+      { "hanzi": "你看看这本书吧。", "pinyin": "Nǐ kànkan zhè běn shū ba.", "vi": "Bạn xem thử quyển sách này đi." },
+      { "hanzi": "我可以试一试吗？", "pinyin": "Wǒ kěyǐ shì yi shì ma?", "vi": "Tôi thử một chút được không?" },
+      { "hanzi": "周末你应该休息休息。", "pinyin": "Zhōumò nǐ yīnggāi xiūxi xiūxi.", "vi": "Cuối tuần bạn nên nghỉ ngơi một chút." }
+    ],
+    "mistakes": [{ "wrong": "你休休息息吧。", "right": "你休息休息吧。", "note": "Động từ hai chữ lặp theo kiểu AB + AB." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这件衣服很漂亮，你 ___ 吧。", "vi": "Bộ quần áo này đẹp lắm, bạn thử xem." }, "options": ["试试", "试试试", "试了试了"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "奶奶病了，你去 ___ 她吧。", "vi": "Bà ốm rồi, bạn đi chăm bà một chút đi." }, "options": ["照照顾顾", "照顾照顾", "照一照顾"], "answer": 1 },
+      { "type": "reorder", "words": ["看", "我", "一", "看", "想"], "vi": "Tôi muốn xem thử.", "answers": ["我想看一看。"] },
+      { "type": "error", "options": ["你听听这个音乐。", "我们休休息息吧。", "你尝一尝这个菜。"], "answer": 1, "explain": "Động từ hai chữ lặp AB + AB: 我们休息休息吧。" }
+    ]
+  },
+  {
+    "key": "hsk3-g02",
+    "title": "So sánh bằng: A 跟 B 一样",
+    "pattern": "A + 跟 + B + (不) 一样 (+ Tính từ)",
+    "explanation": "Nói A giống B: A 跟 B 一样. Thêm tính từ để nói giống ở điểm nào: 我跟哥哥一样高 = tôi cao bằng anh trai. Phủ định đặt 不 trước 一样: 我的看法跟你不一样. Muốn nói “trông giống ai” dùng 像: 你很像你妈妈.",
+    "examples": [
+      { "hanzi": "我的手机跟你的一样。", "pinyin": "Wǒ de shǒujī gēn nǐ de yíyàng.", "vi": "Điện thoại của tôi giống của bạn." },
+      { "hanzi": "弟弟跟爸爸一样高。", "pinyin": "Dìdi gēn bàba yíyàng gāo.", "vi": "Em trai cao bằng bố." },
+      { "hanzi": "北方的天气跟南方不一样。", "pinyin": "Běifāng de tiānqì gēn nánfāng bù yíyàng.", "vi": "Thời tiết miền bắc khác miền nam." }
+    ],
+    "mistakes": [{ "wrong": "我跟他一样很高。", "right": "我跟他一样高。", "note": "Sau 一样 không thêm 很." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "她 ___ 她妈妈一样漂亮。", "vi": "Cô ấy đẹp như mẹ cô ấy." }, "options": ["比", "跟", "被"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "我的爱好跟你 ___。", "vi": "Sở thích của tôi khác bạn." }, "options": ["没一样", "一样不", "不一样"], "answer": 2 },
+      { "type": "reorder", "words": ["一样", "我", "哥哥", "跟", "高"], "vi": "Tôi cao bằng anh trai.", "answers": ["我跟哥哥一样高。"] },
+      { "type": "error", "options": ["这个跟那个一样。", "我跟他一样很胖。", "你的书跟我的不一样。"], "answer": 1, "explain": "Sau 一样 không dùng 很: 我跟他一样胖。" }
+    ]
+  },
+  {
+    "key": "hsk3-g03",
+    "title": "一…就…: hễ… là…, vừa… đã…",
+    "pattern": "Chủ ngữ + 一 + Việc 1, (Chủ ngữ) + 就 + Việc 2",
+    "explanation": "Việc 2 xảy ra ngay sau việc 1, hoặc cứ có việc 1 là có việc 2. 我一到家就睡觉了 = vừa về đến nhà tôi đã ngủ. 他一喝啤酒就脸红 = hễ uống bia là anh ấy đỏ mặt. 一 và 就 đều đứng sau chủ ngữ, trước động từ.",
+    "examples": [
+      { "hanzi": "我一到家就洗澡。", "pinyin": "Wǒ yí dào jiā jiù xǐzǎo.", "vi": "Tôi vừa về đến nhà là đi tắm." },
+      { "hanzi": "她一感冒就发烧。", "pinyin": "Tā yì gǎnmào jiù fāshāo.", "vi": "Hễ bị cảm là cô ấy sốt." },
+      { "hanzi": "老师一说我就明白了。", "pinyin": "Lǎoshī yì shuō wǒ jiù míngbai le.", "vi": "Thầy vừa nói là tôi hiểu ngay." }
+    ],
+    "mistakes": [{ "wrong": "一我到家就睡觉。", "right": "我一到家就睡觉。", "note": "一 đứng sau chủ ngữ, ngay trước động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我一下课 ___ 去吃饭。", "vi": "Tôi vừa tan học là đi ăn ngay." }, "options": ["才", "就", "都"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "他 ___ 喝咖啡就睡不着。", "vi": "Hễ uống cà phê là anh ấy không ngủ được." }, "options": ["一", "又", "越"], "answer": 0 },
+      { "type": "reorder", "words": ["就", "他", "起床", "一", "刷牙"], "vi": "Anh ấy vừa dậy là đánh răng.", "answers": ["他一起床就刷牙。"] },
+      { "type": "error", "options": ["我一累就想睡觉。", "一她到学校就上课。", "他一看书就想睡觉。"], "answer": 1, "explain": "一 đứng sau chủ ngữ: 她一到学校就上课。" }
+    ]
+  },
+  {
+    "key": "hsk3-g04",
+    "title": "Câu chữ 把: đem tân ngữ lên trước động từ",
+    "pattern": "Chủ ngữ + 把 + Tân ngữ + Động từ + Thành phần khác",
+    "explanation": "Câu 把 nói ta làm gì với một vật cụ thể và vật đó thay đổi ra sao (đóng lại, để ở đâu, làm xong…). Tân ngữ phải là vật đã xác định (cái này, cái đó). Sau động từ phải có thêm thành phần: 了, bổ ngữ, 在 + nơi chốn… Không nói 我把门关, phải nói 我把门关上了. Phủ định đặt 没/不 trước 把.",
+    "examples": [
+      { "hanzi": "请把门关上。", "pinyin": "Qǐng bǎ mén guānshang.", "vi": "Làm ơn đóng cửa lại." },
+      { "hanzi": "我把书放在桌子上了。", "pinyin": "Wǒ bǎ shū fàng zài zhuōzi shang le.", "vi": "Tôi để sách lên bàn rồi." },
+      { "hanzi": "他没把作业写完。", "pinyin": "Tā méi bǎ zuòyè xiě wán.", "vi": "Cậu ấy chưa làm xong bài tập." }
+    ],
+    "mistakes": [{ "wrong": "我把房间打扫。", "right": "我把房间打扫干净了。", "note": "Sau động từ trong câu 把 phải có kết quả hoặc thành phần khác." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "请 ___ 牛奶放在冰箱里。", "vi": "Làm ơn để sữa vào tủ lạnh." }, "options": ["被", "把", "给"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "我把灯 ___。", "vi": "Tôi đã tắt đèn." }, "options": ["关", "关了", "关吗"], "answer": 1 },
+      { "type": "reorder", "words": ["把", "我", "了", "打扫干净", "房间"], "vi": "Tôi đã dọn phòng sạch sẽ.", "answers": ["我把房间打扫干净了。"] },
+      { "type": "error", "options": ["他把空调关了。", "我把冰箱。", "请把盘子拿过来。"], "answer": 1, "explain": "Câu 把 phải có động từ và thành phần sau nó, vd. 我把冰箱打开了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g05",
+    "title": "Tính từ + 极了: cực kỳ",
+    "pattern": "Tính từ / Động từ tâm lý + 极了",
+    "explanation": "极了 đặt sau tính từ để nói mức độ rất cao, thường dùng trong khẩu ngữ: 好吃极了 = ngon cực kỳ, 高兴极了 = vui vô cùng. Đã có 极了 thì không thêm 很 phía trước.",
+    "examples": [
+      { "hanzi": "这个蛋糕好吃极了！", "pinyin": "Zhège dàngāo hǎochī jí le!", "vi": "Cái bánh này ngon cực kỳ!" },
+      { "hanzi": "今天热极了。", "pinyin": "Jīntiān rè jí le.", "vi": "Hôm nay nóng kinh khủng." },
+      { "hanzi": "听到这个消息，她高兴极了。", "pinyin": "Tīng dào zhège xiāoxi, tā gāoxìng jí le.", "vi": "Nghe tin này, cô ấy vui vô cùng." }
+    ],
+    "mistakes": [{ "wrong": "这个西瓜很甜极了。", "right": "这个西瓜甜极了。", "note": "极了 đã chỉ mức độ, bỏ 很." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这里的水果新鲜 ___。", "vi": "Hoa quả ở đây tươi cực kỳ." }, "options": ["极了", "很", "太"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Tôi đói lắm rồi.”" }, "options": ["我很饿极了。", "我饿极了。", "我极了饿。"], "answer": 1 },
+      { "type": "reorder", "words": ["极了", "这个", "甜", "香蕉"], "vi": "Quả chuối này ngọt cực kỳ.", "answers": ["这个香蕉甜极了。"] },
+      { "type": "error", "options": ["这个饭店好极了。", "今天冷极了。", "这个菜非常好吃极了。"], "answer": 2, "explain": "Bỏ 非常 khi đã có 极了: 这个菜好吃极了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g06",
+    "title": "还是 và 或者: “hay là” và “hoặc”",
+    "pattern": "A + 还是 + B? (câu hỏi) / A + 或者 + B (câu kể)",
+    "explanation": "Cả hai đều nối hai lựa chọn. 还是 dùng trong câu hỏi lựa chọn, cuối câu không có 吗: 你要红的还是蓝的？ 或者 dùng trong câu kể: 我们坐地铁或者坐出租车都可以. Câu “không biết A hay B” vẫn dùng 还是: 我不知道他去还是不去.",
+    "examples": [
+      { "hanzi": "你想喝茶还是喝咖啡？", "pinyin": "Nǐ xiǎng hē chá háishi hē kāfēi?", "vi": "Bạn muốn uống trà hay cà phê?" },
+      { "hanzi": "你可以用信用卡或者现金。", "pinyin": "Nǐ kěyǐ yòng xìnyòngkǎ huòzhě xiànjīn.", "vi": "Bạn có thể dùng thẻ tín dụng hoặc tiền mặt." },
+      { "hanzi": "我们周六或者周日去超市。", "pinyin": "Wǒmen zhōuliù huòzhě zhōurì qù chāoshì.", "vi": "Chúng tôi đi siêu thị vào thứ bảy hoặc chủ nhật." }
+    ],
+    "mistakes": [{ "wrong": "你买裙子或者裤子？", "right": "你买裙子还是裤子？", "note": "Câu hỏi lựa chọn dùng 还是." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这件衬衫你要白的 ___ 蓝的？", "vi": "Áo sơ mi này bạn lấy cái trắng hay cái xanh?" }, "options": ["或者", "还是", "和"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "周末我在家看书 ___ 上网。", "vi": "Cuối tuần tôi ở nhà đọc sách hoặc lên mạng." }, "options": ["还是", "或者", "吗"], "answer": 1 },
+      { "type": "reorder", "words": ["还是", "你", "去", "明天", "今天"], "vi": "Bạn đi hôm nay hay ngày mai?", "answers": ["你今天还是明天去？"] },
+      { "type": "error", "options": ["你喜欢红色还是绿色？", "你喝啤酒或者喝饮料？", "我们坐船或者坐飞机去。"], "answer": 1, "explain": "Câu hỏi lựa chọn dùng 还是: 你喝啤酒还是喝饮料？" }
+    ]
+  },
+  {
+    "key": "hsk3-g07",
+    "title": "Bổ ngữ xu hướng kép: 走进去, 拿出来",
+    "pattern": "Động từ + 上/下/进/出/回/过/起 + 来/去",
+    "explanation": "Sau động từ chuyển động thêm hai chữ: chữ đầu chỉ hướng (上 lên, 下 xuống, 进 vào, 出 ra, 回 về, 过 qua, 起 lên), chữ sau chỉ hướng so với người nói (来 về phía người nói, 去 ra xa). 他走进来了 = anh ấy đi vào (về phía tôi). Tân ngữ chỉ nơi chốn đặt trước 来/去: 走进教室来.",
+    "examples": [
+      { "hanzi": "老师走进教室来了。", "pinyin": "Lǎoshī zǒu jìn jiàoshì lai le.", "vi": "Thầy giáo đi vào lớp rồi." },
+      { "hanzi": "他从包里拿出来一本书。", "pinyin": "Tā cóng bāo lǐ ná chulai yì běn shū.", "vi": "Anh ấy lấy từ trong túi ra một quyển sách." },
+      { "hanzi": "一辆自行车骑过来了。", "pinyin": "Yí liàng zìxíngchē qí guolai le.", "vi": "Một chiếc xe đạp đạp tới đây." }
+    ],
+    "mistakes": [{ "wrong": "他走进来教室。", "right": "他走进教室来。", "note": "Từ chỉ nơi chốn đứng giữa 进 và 来." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我在楼下，你快走 ___ 吧！", "vi": "Tôi ở dưới nhà, bạn mau đi xuống đây!" }, "options": ["下来", "下去", "上来"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他从地铁站里跑 ___ 了。", "vi": "Anh ấy chạy từ trong ga tàu điện ra." }, "options": ["进来", "出来", "回去"], "answer": 1 },
+      { "type": "reorder", "words": ["了", "走", "他", "进去"], "vi": "Anh ấy đi vào rồi.", "answers": ["他走进去了。"] },
+      { "type": "error", "options": ["她跑回家去了。", "他走进来教室了。", "你快爬上来吧。"], "answer": 1, "explain": "Nơi chốn đặt trước 来: 他走进教室来了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g08",
+    "title": "Câu bị động với 被",
+    "pattern": "Vật / Người chịu tác động + 被 + (Người làm) + Động từ + Thành phần khác",
+    "explanation": "被 = bị, được: đưa vật chịu tác động lên đầu câu. 我的护照被他拿走了 = hộ chiếu của tôi bị anh ấy lấy đi. Người làm có thể lược đi: 我的手机被偷了. Giống câu 把, sau động từ phải có thành phần khác (了, bổ ngữ…). Thường dùng cho việc không như ý.",
+    "examples": [
+      { "hanzi": "我的蛋糕被弟弟吃了。", "pinyin": "Wǒ de dàngāo bèi dìdi chī le.", "vi": "Bánh của tôi bị em trai ăn mất rồi." },
+      { "hanzi": "照相机被我忘在出租车上了。", "pinyin": "Zhàoxiàngjī bèi wǒ wàng zài chūzūchē shang le.", "vi": "Máy ảnh bị tôi để quên trên taxi." },
+      { "hanzi": "他的自行车被人骑走了。", "pinyin": "Tā de zìxíngchē bèi rén qí zǒu le.", "vi": "Xe đạp của anh ấy bị người ta đạp đi mất." }
+    ],
+    "mistakes": [{ "wrong": "我的书被他借。", "right": "我的书被他借走了。", "note": "Sau động từ trong câu 被 phải có kết quả hoặc 了." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我的行李箱 ___ 拿错了。", "vi": "Va li của tôi bị cầm nhầm rồi." }, "options": ["把", "被", "给"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Ảnh bị em gái làm hỏng rồi.”" }, "options": ["照片被妹妹弄坏了。", "妹妹被照片弄坏了。", "照片把妹妹弄坏了。"], "answer": 0 },
+      { "type": "reorder", "words": ["被", "我的", "了", "吃", "面包", "猫"], "vi": "Bánh mì của tôi bị mèo ăn mất rồi.", "answers": ["我的面包被猫吃了。"] },
+      { "type": "error", "options": ["我的伞被朋友借走了。", "我的手机被坏了。", "他的护照被人拿走了。"], "answer": 1, "explain": "坏 là tính từ, không dùng 被: 我的手机坏了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g09",
+    "title": "越来越… và 越 A 越 B",
+    "pattern": "Chủ ngữ + 越来越 + Tính từ / A + 越 + Việc 1 + 越 + Việc 2",
+    "explanation": "越来越 + tính từ = càng ngày càng: 天气越来越冷了. 越 A 越 B = càng A càng B: 雨越下越大 (mưa càng lúc càng to), 越看越喜欢 (càng xem càng thích). Không thêm 很 hay 非常 sau 越.",
+    "examples": [
+      { "hanzi": "天气越来越热了。", "pinyin": "Tiānqì yuè lái yuè rè le.", "vi": "Trời càng ngày càng nóng." },
+      { "hanzi": "雨越下越大。", "pinyin": "Yǔ yuè xià yuè dà.", "vi": "Mưa càng lúc càng to." },
+      { "hanzi": "这个城市的变化越来越大。", "pinyin": "Zhège chéngshì de biànhuà yuè lái yuè dà.", "vi": "Thành phố này thay đổi ngày càng nhiều." }
+    ],
+    "mistakes": [{ "wrong": "他越来越很高了。", "right": "他越来越高了。", "note": "Sau 越来越 không dùng 很." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "秋天到了，树叶越来越 ___ 了。", "vi": "Mùa thu đến, lá cây ngày càng vàng." }, "options": ["很黄", "黄", "非常黄"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "这首歌我越听 ___ 喜欢。", "vi": "Bài hát này tôi càng nghe càng thích." }, "options": ["越", "就", "更"], "answer": 0 },
+      { "type": "reorder", "words": ["越来越", "的", "我", "好", "汉语", "了"], "vi": "Tiếng Trung của tôi ngày càng tốt.", "answers": ["我的汉语越来越好了。"] },
+      { "type": "error", "options": ["风越刮越大。", "他越来越胖了。", "天气越来越非常冷了。"], "answer": 2, "explain": "Bỏ 非常: 天气越来越冷了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g10",
+    "title": "除了…以外: ngoài… ra",
+    "pattern": "除了 + A + (以外)，Chủ ngữ + 都… / 还/也…",
+    "explanation": "Hai cách dùng. Loại trừ: 除了 A 以外，(mọi người khác) 都… = trừ A ra thì tất cả đều…: 除了他以外，大家都来了. Bổ sung: 除了 A 以外，还/也 B = ngoài A ra còn có B: 除了数学，我还喜欢历史. 以外 có thể lược bỏ.",
+    "examples": [
+      { "hanzi": "除了小王以外，我们都去了。", "pinyin": "Chúle Xiǎo Wáng yǐwài, wǒmen dōu qù le.", "vi": "Trừ Tiểu Vương ra, chúng tôi đều đi cả." },
+      { "hanzi": "除了数学，我还喜欢历史。", "pinyin": "Chúle shùxué, wǒ hái xǐhuan lìshǐ.", "vi": "Ngoài toán ra, tôi còn thích lịch sử." },
+      { "hanzi": "除了作业以外，老师也让我们复习。", "pinyin": "Chúle zuòyè yǐwài, lǎoshī yě ràng wǒmen fùxí.", "vi": "Ngoài bài tập ra, thầy còn bảo chúng tôi ôn bài." }
+    ],
+    "mistakes": [{ "wrong": "除了英语以外，我会说汉语。", "right": "除了英语以外，我还会说汉语。", "note": "Nghĩa bổ sung cần 还 hoặc 也 ở vế sau." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "除了星期天以外，他每天 ___ 去学校。", "vi": "Trừ chủ nhật ra, ngày nào cậu ấy cũng đến trường." }, "options": ["都", "还", "才"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "除了体育，我 ___ 喜欢音乐。", "vi": "Ngoài thể thao, tôi còn thích âm nhạc." }, "options": ["都", "还", "就"], "answer": 1 },
+      { "type": "reorder", "words": ["以外", "除了", "都", "他", "大家", "来了"], "vi": "Trừ anh ấy ra, mọi người đều đến rồi.", "answers": ["除了他以外大家都来了。"] },
+      { "type": "error", "options": ["除了他，大家都知道。", "除了数学以外，我还学历史。", "除了汉语以外，我会说英语。"], "answer": 2, "explain": "Nghĩa bổ sung cần 还: 除了汉语以外，我还会说英语。" }
+    ]
+  },
+  {
+    "key": "hsk3-g11",
+    "title": "Bổ ngữ khả năng: 听得懂, 看不清楚",
+    "pattern": "Động từ + 得 / 不 + Bổ ngữ kết quả / xu hướng",
+    "explanation": "Chen 得 giữa động từ và bổ ngữ = làm được: 听得懂 = nghe hiểu được; chen 不 = không làm được: 听不懂 = nghe không hiểu. Câu hỏi: 你听得懂听不懂？ hoặc 你听得懂吗？ Thường gặp: 看得见/看不见, 买得到/买不到, 吃得完/吃不完, 回得来/回不来.",
+    "examples": [
+      { "hanzi": "老师说的话我听得懂。", "pinyin": "Lǎoshī shuō de huà wǒ tīng de dǒng.", "vi": "Lời thầy nói tôi nghe hiểu được." },
+      { "hanzi": "黑板上的字我看不清楚。", "pinyin": "Hēibǎn shang de zì wǒ kàn bu qīngchu.", "vi": "Chữ trên bảng tôi nhìn không rõ." },
+      { "hanzi": "这么多菜，我们吃不完。", "pinyin": "Zhème duō cài, wǒmen chī bu wán.", "vi": "Nhiều món thế này, chúng ta ăn không hết." }
+    ],
+    "mistakes": [{ "wrong": "我不听得懂。", "right": "我听不懂。", "note": "不 chen giữa động từ và bổ ngữ, không đứng trước động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这本中文书太难了，我看 ___。", "vi": "Quyển sách tiếng Trung này khó quá, tôi đọc không hiểu." }, "options": ["不懂", "没懂", "得不懂"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你说得太快，我听 ___ 清楚。", "vi": "Bạn nói nhanh quá, tôi nghe không rõ." }, "options": ["得", "不", "没"], "answer": 1 },
+      { "type": "reorder", "words": ["听得懂", "你", "吗", "汉语"], "vi": "Bạn nghe hiểu tiếng Trung không?", "answers": ["你听得懂汉语吗？"] },
+      { "type": "error", "options": ["我看不见黑板。", "这个问题我不回答得了。", "作业我做得完。"], "answer": 1, "explain": "Bổ ngữ khả năng phủ định: 这个问题我回答不了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g12",
+    "title": "先…然后… / 再: trình tự việc",
+    "pattern": "先 + Việc 1，然后 / 再 + Việc 2 (，最后 + Việc 3)",
+    "explanation": "Kể các việc theo thứ tự: 先 = trước tiên, 然后 = sau đó, 最后 = cuối cùng. 再 = rồi mới (việc chưa làm, sắp làm): 你先吃饭，再去上班. 先 và 再 đứng sau chủ ngữ, trước động từ; 然后 thường đứng đầu vế sau.",
+    "examples": [
+      { "hanzi": "我先完成作业，然后上网。", "pinyin": "Wǒ xiān wánchéng zuòyè, ránhòu shàngwǎng.", "vi": "Tôi làm xong bài trước, sau đó mới lên mạng." },
+      { "hanzi": "你先休息一下，再开会吧。", "pinyin": "Nǐ xiān xiūxi yíxià, zài kāihuì ba.", "vi": "Bạn nghỉ một chút trước rồi hãy họp." },
+      { "hanzi": "先往前走，然后向左，最后就到了。", "pinyin": "Xiān wǎng qián zǒu, ránhòu xiàng zuǒ, zuìhòu jiù dào le.", "vi": "Đi thẳng trước, sau đó rẽ trái, cuối cùng là đến." }
+    ],
+    "mistakes": [{ "wrong": "先我吃饭，然后去上班。", "right": "我先吃饭，然后去上班。", "note": "先 đứng sau chủ ngữ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我们先开会，___ 一起吃饭。", "vi": "Chúng ta họp trước, sau đó cùng đi ăn." }, "options": ["然后", "以前", "刚才"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你 ___ 给经理发电子邮件，再打电话。", "vi": "Bạn gửi email cho giám đốc trước, rồi gọi điện." }, "options": ["再", "先", "又"], "answer": 1 },
+      { "type": "reorder", "words": ["先", "我", "然后", "洗澡", "睡觉"], "vi": "Tôi tắm trước, sau đó đi ngủ.", "answers": ["我先洗澡然后睡觉。"] },
+      { "type": "error", "options": ["你先吃，我再吃。", "先他去银行，然后去超市。", "我先复习，然后做作业。"], "answer": 1, "explain": "先 đứng sau chủ ngữ: 他先去银行，然后去超市。" }
+    ]
+  },
+  {
+    "key": "hsk3-g13",
+    "title": "对…感兴趣 / 对…很好: giới từ 对",
+    "pattern": "Chủ ngữ + 对 + Đối tượng + 感兴趣 / Tính từ",
+    "explanation": "对 = đối với: đưa đối tượng ra trước động từ hay tính từ. 我对音乐感兴趣 = tôi hứng thú với âm nhạc (không nói 我感兴趣音乐). Tương tự: 对…很热情 (nhiệt tình với), 对…满意 (hài lòng với), 对身体好 (tốt cho sức khỏe).",
+    "examples": [
+      { "hanzi": "我对中国历史很感兴趣。", "pinyin": "Wǒ duì Zhōngguó lìshǐ hěn gǎn xìngqù.", "vi": "Tôi rất hứng thú với lịch sử Trung Quốc." },
+      { "hanzi": "爬山对身体很好。", "pinyin": "Páshān duì shēntǐ hěn hǎo.", "vi": "Leo núi rất tốt cho sức khỏe." },
+      { "hanzi": "他对这个比赛的成绩不满意。", "pinyin": "Tā duì zhège bǐsài de chéngjì bù mǎnyì.", "vi": "Anh ấy không hài lòng với kết quả trận đấu này." }
+    ],
+    "mistakes": [{ "wrong": "我感兴趣画画儿。", "right": "我对画画儿感兴趣。", "note": "感兴趣 không mang tân ngữ trực tiếp, dùng 对 + đối tượng." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "孩子们 ___ 熊猫很感兴趣。", "vi": "Bọn trẻ rất hứng thú với gấu trúc." }, "options": ["对", "跟", "被"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Tôi hứng thú với âm nhạc.”" }, "options": ["我感兴趣音乐。", "我对音乐感兴趣。", "我音乐对感兴趣。"], "answer": 1 },
+      { "type": "reorder", "words": ["对", "他", "感兴趣", "游戏", "很"], "vi": "Cậu ấy rất hứng thú với trò chơi.", "answers": ["他对游戏很感兴趣。"] },
+      { "type": "error", "options": ["我对动物很感兴趣。", "她对客人很热情。", "我很感兴趣体育节目。"], "answer": 2, "explain": "Dùng 对: 我对体育节目很感兴趣。" }
+    ]
+  },
+  {
+    "key": "hsk3-g14",
+    "title": "Trợ từ 地: trạng ngữ + 地 + động từ",
+    "pattern": "Tính từ / Phó từ + 地 + Động từ",
+    "explanation": "地 (đọc de) nối từ miêu tả cách làm với động từ phía sau: 高兴地说 = nói một cách vui vẻ, 认真地学习 = học chăm chú. Phân biệt ba chữ de: 的 + danh từ (我的书), 地 + động từ (慢慢地走), động từ + 得 + bổ ngữ (走得很慢).",
+    "examples": [
+      { "hanzi": "他高兴地笑了。", "pinyin": "Tā gāoxìng de xiào le.", "vi": "Anh ấy vui vẻ cười." },
+      { "hanzi": "孩子们认真地听老师讲故事。", "pinyin": "Háizimen rènzhēn de tīng lǎoshī jiǎng gùshi.", "vi": "Bọn trẻ chăm chú nghe cô kể chuyện." },
+      { "hanzi": "她着急地问：“我的包呢？”", "pinyin": "Tā zháojí de wèn: “Wǒ de bāo ne?”", "vi": "Cô ấy sốt ruột hỏi: “Túi của tôi đâu?”" }
+    ],
+    "mistakes": [{ "wrong": "他慢慢的走过来。", "right": "他慢慢地走过来。", "note": "Trước động từ dùng 地, không dùng 的." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "妈妈生气 ___ 说：“快去睡觉！”", "vi": "Mẹ giận dữ nói: “Mau đi ngủ!”" }, "options": ["的", "地", "得"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "他跑 ___ 很快。", "vi": "Anh ấy chạy rất nhanh." }, "options": ["地", "的", "得"], "answer": 2 },
+      { "type": "reorder", "words": ["地", "她", "哭了", "难过"], "vi": "Cô ấy buồn bã khóc.", "answers": ["她难过地哭了。"] },
+      { "type": "error", "options": ["他热情地欢迎我们。", "我们认真的复习了。", "这是我的照相机。"], "answer": 1, "explain": "Trước động từ dùng 地: 我们认真地复习了。" }
+    ]
+  },
+  {
+    "key": "hsk3-g15",
+    "title": "又 và 再: lại, nữa",
+    "pattern": "又 + Động từ + 了 (đã lặp lại) / 再 + Động từ (sẽ lặp lại)",
+    "explanation": "Cả hai đều là “lại”. 又 dùng cho việc đã lặp lại trong quá khứ, thường có 了: 他昨天又迟到了. 再 dùng cho việc chưa làm, sẽ lặp lại: 明天再来吧, 请再说一遍. 又…又… còn có nghĩa “vừa… vừa…”: 又便宜又好吃.",
+    "examples": [
+      { "hanzi": "他今天又忘记带书了。", "pinyin": "Tā jīntiān yòu wàngjì dài shū le.", "vi": "Hôm nay cậu ấy lại quên mang sách." },
+      { "hanzi": "请你再说一遍。", "pinyin": "Qǐng nǐ zài shuō yí biàn.", "vi": "Làm ơn nói lại một lần nữa." },
+      { "hanzi": "这家饭店的菜又便宜又好吃。", "pinyin": "Zhè jiā fàndiàn de cài yòu piányi yòu hǎochī.", "vi": "Món ăn nhà hàng này vừa rẻ vừa ngon." }
+    ],
+    "mistakes": [{ "wrong": "欢迎你明天又来。", "right": "欢迎你明天再来。", "note": "Việc chưa xảy ra dùng 再." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我的手机昨天 ___ 坏了。", "vi": "Điện thoại của tôi hôm qua lại hỏng rồi." }, "options": ["再", "又", "才"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "太晚了，我们明天 ___ 聊天吧。", "vi": "Muộn quá rồi, mai chúng ta nói chuyện tiếp nhé." }, "options": ["又", "再", "还是"], "answer": 1 },
+      { "type": "reorder", "words": ["又", "他", "迟到", "了"], "vi": "Anh ấy lại đến muộn rồi.", "answers": ["他又迟到了。"] },
+      { "type": "error", "options": ["欢迎你们下次再来。", "他上个星期又去了北京。", "我明天又给你打电话。"], "answer": 2, "explain": "Việc chưa xảy ra dùng 再: 我明天再给你打电话。" }
+    ]
+  },
+  {
+    "key": "hsk3-g16",
+    "title": "才 và 就: muộn hơn hay sớm hơn dự kiến",
+    "pattern": "Thời gian + 才 + Động từ / Thời gian + 就 + Động từ + 了",
+    "explanation": "才 = mới: việc xảy ra muộn, chậm hơn mong đợi; câu với 才 không có 了 ở cuối: 他十点才起床. 就 = đã: việc xảy ra sớm, nhanh hơn mong đợi, thường có 了: 他六点就起床了. Cả hai đứng ngay trước động từ.",
+    "examples": [
+      { "hanzi": "会议九点开始，他九点半才来。", "pinyin": "Huìyì jiǔ diǎn kāishǐ, tā jiǔ diǎn bàn cái lái.", "vi": "Cuộc họp bắt đầu lúc chín giờ, chín rưỡi anh ấy mới đến." },
+      { "hanzi": "她七点就到了。", "pinyin": "Tā qī diǎn jiù dào le.", "vi": "Bảy giờ cô ấy đã đến rồi." },
+      { "hanzi": "我学了三年才学会。", "pinyin": "Wǒ xué le sān nián cái xué huì.", "vi": "Tôi học ba năm mới biết." }
+    ],
+    "mistakes": [{ "wrong": "他十一点才睡觉了。", "right": "他十一点才睡觉。", "note": "Câu với 才 không thêm 了 ở cuối." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "飞机晚了，十二点 ___ 起飞。", "vi": "Máy bay trễ, mười hai giờ mới cất cánh." }, "options": ["就", "才", "都"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "他很早，六点 ___ 到办公室了。", "vi": "Anh ấy đến sớm lắm, sáu giờ đã có mặt ở văn phòng." }, "options": ["才", "就", "再"], "answer": 1 },
+      { "type": "reorder", "words": ["才", "他", "回家", "十点"], "vi": "Mười giờ anh ấy mới về nhà.", "answers": ["他十点才回家。"] },
+      { "type": "error", "options": ["我等了一个小时他才来。", "他五点就起床了。", "她昨天十二点才睡觉了。"], "answer": 2, "explain": "Câu với 才 bỏ 了: 她昨天十二点才睡觉。" }
+    ]
+  },
+  {
+    "key": "hsk3-g17",
+    "title": "为了: để, vì (mục đích)",
+    "pattern": "为了 + Mục đích，Chủ ngữ + Việc làm",
+    "explanation": "为了 nêu mục đích, thường đứng đầu câu: 为了健康，我每天锻炼 = để khỏe mạnh, ngày nào tôi cũng tập. Phân biệt với 因为 (vì, nêu nguyên nhân): 因为下雨，我没去. Mục đích (muốn đạt được) dùng 为了; lý do (đã xảy ra) dùng 因为.",
+    "examples": [
+      { "hanzi": "为了提高汉语水平，他去中国留学。", "pinyin": "Wèile tígāo Hànyǔ shuǐpíng, tā qù Zhōngguó liúxué.", "vi": "Để nâng cao trình độ tiếng Trung, anh ấy sang Trung Quốc du học." },
+      { "hanzi": "为了身体健康，你应该早点儿睡觉。", "pinyin": "Wèile shēntǐ jiànkāng, nǐ yīnggāi zǎo diǎnr shuìjiào.", "vi": "Vì sức khỏe, bạn nên ngủ sớm một chút." },
+      { "hanzi": "为了这次比赛，我们练习了一个月。", "pinyin": "Wèile zhè cì bǐsài, wǒmen liànxí le yí ge yuè.", "vi": "Vì cuộc thi lần này, chúng tôi đã luyện tập một tháng." }
+    ],
+    "mistakes": [{ "wrong": "为了下雨，我没去。", "right": "因为下雨，我没去。", "note": "Nêu nguyên nhân dùng 因为, nêu mục đích dùng 为了." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "___ 买新房子，他们每天努力工作。", "vi": "Để mua nhà mới, ngày nào họ cũng làm việc chăm chỉ." }, "options": ["因为", "为了", "所以"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "___ 感冒了，她今天请假了。", "vi": "Vì bị cảm, hôm nay cô ấy xin nghỉ." }, "options": ["因为", "为了", "如果"], "answer": 0 },
+      { "type": "reorder", "words": ["为了", "健康", "我", "锻炼", "每天"], "vi": "Vì sức khỏe, ngày nào tôi cũng tập thể dục.", "answers": ["为了健康我每天锻炼。"] },
+      { "type": "error", "options": ["为了考试，他每天复习。", "为了天气不好，我们没去爬山。", "为了学好汉语，她每天听新闻。"], "answer": 1, "explain": "Nguyên nhân dùng 因为: 因为天气不好，我们没去爬山。" }
+    ]
+  },
+  {
+    "key": "hsk3-g18",
+    "title": "如果…就… và 只有…才…",
+    "pattern": "如果 + Điều kiện，(Chủ ngữ) + 就 + Kết quả / 只有 + Điều kiện，才 + Kết quả",
+    "explanation": "如果…就… = nếu… thì…: 如果明天下雨，我们就不去了. 只有…才… = chỉ có… mới…: điều kiện là duy nhất, thiếu nó thì không được: 只有努力，才能成功. 就 và 才 đứng sau chủ ngữ của vế sau.",
+    "examples": [
+      { "hanzi": "如果你有时间，就来我家玩儿吧。", "pinyin": "Rúguǒ nǐ yǒu shíjiān, jiù lái wǒ jiā wánr ba.", "vi": "Nếu bạn có thời gian thì đến nhà tôi chơi nhé." },
+      { "hanzi": "只有多练习，你才能说好汉语。", "pinyin": "Zhǐyǒu duō liànxí, nǐ cái néng shuō hǎo Hànyǔ.", "vi": "Chỉ có luyện tập nhiều, bạn mới nói tốt tiếng Trung được." },
+      { "hanzi": "如果你不舒服，我们就去医院。", "pinyin": "Rúguǒ nǐ bù shūfu, wǒmen jiù qù yīyuàn.", "vi": "Nếu bạn không khỏe thì chúng ta đi bệnh viện." }
+    ],
+    "mistakes": [{ "wrong": "只有你去，我就去。", "right": "只有你去，我才去。", "note": "只有 đi với 才, 如果 đi với 就." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "如果明天天气好，我们 ___ 去公园。", "vi": "Nếu mai trời đẹp thì chúng ta đi công viên." }, "options": ["才", "就", "都"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "只有认真复习，你 ___ 能考好。", "vi": "Chỉ có ôn tập nghiêm túc bạn mới thi tốt được." }, "options": ["就", "也", "才"], "answer": 2 },
+      { "type": "reorder", "words": ["如果", "就", "你", "我", "不去", "去"], "vi": "Nếu bạn đi thì tôi không đi.", "answers": ["如果你去我就不去。"] },
+      { "type": "error", "options": ["如果你饿了，就先吃吧。", "只有多听，才能听懂。", "只有你帮我，我就能完成。"], "answer": 2, "explain": "只有 đi với 才: 只有你帮我，我才能完成。" }
+    ]
+  },
+  {
+    "key": "hsk3-g19",
+    "title": "一边…一边…: vừa… vừa…",
+    "pattern": "Chủ ngữ + 一边 + Động từ 1 + 一边 + Động từ 2",
+    "explanation": "Hai hành động diễn ra cùng lúc do cùng một người làm: 他一边吃饭一边看电视. Chỉ dùng với hành động (động từ), không dùng với tính từ — muốn nói “vừa rẻ vừa ngon” dùng 又…又…: 又便宜又好吃.",
+    "examples": [
+      { "hanzi": "我们一边喝茶一边聊天。", "pinyin": "Wǒmen yìbiān hē chá yìbiān liáotiān.", "vi": "Chúng tôi vừa uống trà vừa trò chuyện." },
+      { "hanzi": "他一边听音乐一边做作业。", "pinyin": "Tā yìbiān tīng yīnyuè yìbiān zuò zuòyè.", "vi": "Cậu ấy vừa nghe nhạc vừa làm bài tập." },
+      { "hanzi": "别一边走路一边看手机。", "pinyin": "Bié yìbiān zǒulù yìbiān kàn shǒujī.", "vi": "Đừng vừa đi vừa xem điện thoại." }
+    ],
+    "mistakes": [{ "wrong": "这个苹果一边大一边甜。", "right": "这个苹果又大又甜。", "note": "一边…一边… dùng cho hành động; tính từ dùng 又…又…." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "妈妈一边做饭，___ 唱歌。", "vi": "Mẹ vừa nấu cơm vừa hát." }, "options": ["一边", "又", "也"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "这件衣服 ___ 漂亮又便宜。", "vi": "Bộ quần áo này vừa đẹp vừa rẻ." }, "options": ["一边", "又", "越"], "answer": 1 },
+      { "type": "reorder", "words": ["一边", "他", "一边", "走", "唱歌"], "vi": "Anh ấy vừa đi vừa hát.", "answers": ["他一边走一边唱歌。"] },
+      { "type": "error", "options": ["我一边吃饭一边看新闻。", "她一边高一边漂亮。", "他们一边跑一边笑。"], "answer": 1, "explain": "Tính từ dùng 又…又…: 她又高又漂亮。" }
+    ]
+  },
+  {
+    "key": "hsk3-g20",
+    "title": "不但…而且…: không những… mà còn…",
+    "pattern": "Chủ ngữ + 不但 + A，而且 + (还/也) + B",
+    "explanation": "Thêm một ý mạnh hơn ý trước: 他不但会说汉语，而且说得很好. Nếu hai vế cùng chủ ngữ, chủ ngữ đứng trước 不但. Nếu hai vế khác chủ ngữ, 不但 đứng trước chủ ngữ thứ nhất: 不但我去，而且他也去. Vế sau thường có 也 hoặc 还.",
+    "examples": [
+      { "hanzi": "这里不但交通方便，而且环境也很好。", "pinyin": "Zhèlǐ búdàn jiāotōng fāngbiàn, érqiě huánjìng yě hěn hǎo.", "vi": "Ở đây không những giao thông thuận tiện mà môi trường cũng rất tốt." },
+      { "hanzi": "她不但聪明，而且很努力。", "pinyin": "Tā búdàn cōngming, érqiě hěn nǔlì.", "vi": "Cô ấy không những thông minh mà còn rất chăm chỉ." },
+      { "hanzi": "不但我喜欢熊猫，而且我的孩子也喜欢。", "pinyin": "Búdàn wǒ xǐhuan xióngmāo, érqiě wǒ de háizi yě xǐhuan.", "vi": "Không chỉ tôi thích gấu trúc mà con tôi cũng thích." }
+    ],
+    "mistakes": [{ "wrong": "不但他会唱歌，而且会跳舞。", "right": "他不但会唱歌，而且会跳舞。", "note": "Cùng chủ ngữ thì chủ ngữ đứng trước 不但." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这个超市不但东西多，___ 很便宜。", "vi": "Siêu thị này không những nhiều đồ mà còn rẻ." }, "options": ["而且", "或者", "所以"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Anh ấy không những cao mà còn đẹp trai.”" }, "options": ["不但他高，而且帅。", "他不但高，而且很帅。", "他高不但，而且帅。"], "answer": 1 },
+      { "type": "reorder", "words": ["不但", "而且", "她", "唱歌", "会", "会跳舞"], "vi": "Cô ấy không những biết hát mà còn biết nhảy.", "answers": ["她不但会唱歌而且会跳舞。"] },
+      { "type": "error", "options": ["他不但会开车，而且开得很好。", "不但我去，而且他也去。", "不但她聪明，而且她很努力。"], "answer": 2, "explain": "Cùng chủ ngữ thì đặt chủ ngữ trước 不但: 她不但聪明，而且很努力。" }
+    ]
+  }
+]

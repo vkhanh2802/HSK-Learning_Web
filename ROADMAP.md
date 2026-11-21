@@ -368,12 +368,19 @@ Làm theo từng cấp. Người dùng chọn: HSK2–4 theo **danh sách chính
 - [x] 20 bài nghe, 10 bài đọc (70–100 chữ, qua kiểm tra từ vượt cấp HSK1–2), 18 bài viết. Thêm 9 ảnh CC0/Public Domain qua Openverse cho tranh mới (bóng đá, bơi, trứng, mì, dưa hấu, bóng rổ, cà phê, quần áo, quà) — nguồn trong `public/images/CREDITS.md`; không còn tranh nào chỉ có emoji.
 - [x] Trang Luyện viết có chọn cấp (`?level=`), luyện gõ dùng từ ≤ cấp đang chọn; Luyện nghe, Bài đọc, Ngữ pháp, Luyện nói, Học, dashboard tự hiện HSK2
 
-### HSK3, HSK4 — chưa làm
-- [ ] HSK3 (300 từ) — đợt sau, cùng quy trình
-- [ ] HSK4 (600 từ) — đợt sau
-- [ ] Dạng bài để dành: hội thoại dài (nghe), điền từ / sắp xếp đoạn (đọc), viết đoạn ngắn, trả lời bằng giọng nói
+### HSK3 — xong
+- [x] Từ vựng `data/vocab/hsk3.json`: 297 từ (300 từ L3 bản 2012 trừ 过 还 长 đã có ở HSK2), nghĩa Việt + loại từ + 1 câu ví dụ — do Claude soạn, **cần duyệt**. Pinyin tách âm tiết từ cột số của file 2012; từ nhiều cách đọc chọn cách đọc của HSK3: 地 de (trợ từ), 只 zhī (lượng từ), 发 fā, 分 fēn, 教 jiāo, 角 jiǎo — nghĩa ghi chú cách đọc còn lại.
+- [x] 20 bài theo chủ đề (`data/lessons/hsk3.json`, 10–17 từ/bài)
+- [x] 20 điểm ngữ pháp, 80 bài (`data/grammar/hsk3.json`): lặp động từ, 跟…一样, 一…就…, 把, 极了, 还是/或者, bổ ngữ xu hướng kép, 被, 越来越 / 越…越…, 除了…以外, bổ ngữ khả năng, 先…然后…/再, 对…感兴趣, 地, 又/再, 才/就, 为了, 如果…就… / 只有…才…, 一边…一边…, 不但…而且… — seed bắt được 1 đáp án sắp xếp không ghép được và đã sửa
+- [x] 10 bài đọc (107–136 chữ, qua kiểm tra từ vượt cấp HSK1–3; 2 câu chọn từ điền chỗ trống dùng dạng `mcq`), 20 bài nghe (6 hội thoại `mcq`, 3 trong đó dài 4 lượt), 18 bài viết. Dùng lại ảnh có sẵn, không tải ảnh mới.
+
+### HSK4 — chưa làm
+- [ ] HSK4 (600 từ) — đợt sau, cùng quy trình
+- [ ] Dạng bài để dành: sắp xếp đoạn (đọc), viết đoạn ngắn, trả lời bằng giọng nói
 - [x] Mặc định tắt pinyin từ HSK3 (trình đọc: `pinyinDefault = level <= 2`, có từ Phase 6)
 - [ ] Kiểm tra hiệu năng ôn tập khi có >2000 thẻ (`ReviewCard.due` đã có index từ Phase 2) — làm khi có đủ HSK3–4
+
+> Xác minh HSK3: seed `HSK3: 297 từ, 399 chữ, 20 bài` + 20 điểm ngữ pháp/80 bài + 10 bài đọc + 20 nghe + 18 viết; 56 test, lint, `tsc --noEmit`, build đạt; trên dev server `/`, `/learn/3` (20 bài), `/grammar`, `/reading`, `/listening?level=3`, `/writing?level=3`, `/speaking`, bài học đầu/cuối, điểm ngữ pháp và bài đọc HSK3 cuối đều 200; bài đọc HSK3 tắt pinyin mặc định; không lỗi console.
 
 > Xác minh HSK2: seed `HSK2: 153 từ, 212 chữ, 15 bài` + 15 điểm ngữ pháp/60 bài + 10 bài đọc + 20 nghe + 18 viết; cách đọc chữ dùng chung giữ đúng (好 hǎo, 长 cháng…); 56 test, lint, `tsc --noEmit`, build đạt; trên dev server `/`, `/learn/2`, `/grammar`, `/reading`, `/listening?level=2`, `/writing?level=2`, `/speaking`, bài học/ngữ pháp/bài đọc đầu tiên của HSK2 đều 200 và hiện đúng nội dung (bài đọc HSK2 có pinyin ruby).
 

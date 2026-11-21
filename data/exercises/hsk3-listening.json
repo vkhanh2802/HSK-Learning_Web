@@ -1,0 +1,576 @@
+[
+  {
+    "key": "hsk3-listening-01",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "外面雪下得越来越大了。",
+        "pinyin": "Wàimiàn xuě xià de yuè lái yuè dà le.",
+        "vi": "Tuyết bên ngoài rơi ngày càng dày."
+      }
+    ],
+    "picture": {
+      "emoji": "❄️",
+      "image": "/images/snow.jpg",
+      "label": "trời tuyết"
+    },
+    "answer": true
+  },
+  {
+    "key": "hsk3-listening-02",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "我的小猫正在睡觉呢。",
+        "pinyin": "Wǒ de xiǎo māo zhèngzài shuìjiào ne.",
+        "vi": "Con mèo nhỏ của tôi đang ngủ."
+      }
+    ],
+    "picture": {
+      "emoji": "🐶",
+      "image": "/images/dog.jpg",
+      "label": "con chó"
+    },
+    "answer": false
+  },
+  {
+    "key": "hsk3-listening-03",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "爷爷一边喝茶一边看报纸。",
+        "pinyin": "Yéye yìbiān hē chá yìbiān kàn bàozhǐ.",
+        "vi": "Ông vừa uống trà vừa đọc báo."
+      }
+    ],
+    "picture": {
+      "emoji": "🍵",
+      "image": "/images/tea.jpg",
+      "label": "trà"
+    },
+    "answer": true
+  },
+  {
+    "key": "hsk3-listening-04",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "飞机马上就要起飞了。",
+        "pinyin": "Fēijī mǎshàng jiù yào qǐfēi le.",
+        "vi": "Máy bay sắp cất cánh rồi."
+      }
+    ],
+    "picture": {
+      "emoji": "🚆",
+      "image": "/images/train.webp",
+      "label": "tàu hỏa"
+    },
+    "answer": false
+  },
+  {
+    "key": "hsk3-listening-05",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "我把买的衣服放在床上了。",
+        "pinyin": "Wǒ bǎ mǎi de yīfu fàng zài chuáng shang le.",
+        "vi": "Tôi để quần áo mới mua lên giường rồi."
+      }
+    ],
+    "picture": {
+      "emoji": "👕",
+      "image": "/images/clothes.jpg",
+      "label": "quần áo"
+    },
+    "answer": true
+  },
+  {
+    "key": "hsk3-listening-06",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "天气太热了，我们去游泳吧。",
+        "pinyin": "Tiānqì tài rè le, wǒmen qù yóuyǒng ba.",
+        "vi": "Trời nóng quá, chúng ta đi bơi đi."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "🏊",
+        "image": "/images/swimming.jpg",
+        "label": "bơi"
+      },
+      {
+        "emoji": "🏀",
+        "image": "/images/basketball.jpg",
+        "label": "bóng rổ"
+      },
+      {
+        "emoji": "📖",
+        "image": "/images/reading.webp",
+        "label": "đọc sách"
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk3-listening-07",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "我每天早上都要喝一杯咖啡，不喝就不舒服。",
+        "pinyin": "Wǒ měi tiān zǎoshang dōu yào hē yì bēi kāfēi, bù hē jiù bù shūfu.",
+        "vi": "Sáng nào tôi cũng phải uống một cốc cà phê, không uống là khó chịu."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "🥛",
+        "image": "/images/milk.jpg",
+        "label": "sữa"
+      },
+      {
+        "emoji": "🍵",
+        "image": "/images/tea.jpg",
+        "label": "trà"
+      },
+      {
+        "emoji": "☕",
+        "image": "/images/coffee.jpg",
+        "label": "cà phê"
+      }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk3-listening-08",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "这个西瓜又大又甜，是在超市买的。",
+        "pinyin": "Zhège xīguā yòu dà yòu tián, shì zài chāoshì mǎi de.",
+        "vi": "Quả dưa hấu này vừa to vừa ngọt, mua ở siêu thị."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "🍎",
+        "image": "/images/apple.webp",
+        "label": "quả táo"
+      },
+      {
+        "emoji": "🍉",
+        "image": "/images/watermelon.jpg",
+        "label": "dưa hấu"
+      },
+      {
+        "emoji": "🍜",
+        "image": "/images/noodles.jpg",
+        "label": "mì"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk3-listening-09",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "你怎么又迟到了？",
+        "pinyin": "Nǐ zěnme yòu chídào le?",
+        "vi": "Sao bạn lại đến muộn nữa?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "对不起，地铁坏了，我是坐出租车来的。",
+        "pinyin": "Duìbuqǐ, dìtiě huài le, wǒ shì zuò chūzūchē lái de.",
+        "vi": "Xin lỗi, tàu điện ngầm hỏng, tôi đi taxi tới."
+      }
+    ],
+    "question": {
+      "hanzi": "男的是怎么来的？",
+      "pinyin": "Nán de shì zěnme lái de?",
+      "vi": "Người nam đến bằng cách nào?"
+    },
+    "options": [
+      {
+        "hanzi": "坐地铁",
+        "pinyin": "zuò dìtiě"
+      },
+      {
+        "hanzi": "坐出租车",
+        "pinyin": "zuò chūzūchē"
+      },
+      {
+        "hanzi": "骑自行车",
+        "pinyin": "qí zìxíngchē"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk3-listening-10",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nam",
+        "hanzi": "这件衬衫有点儿小，能换一件吗？",
+        "pinyin": "Zhè jiàn chènshān yǒudiǎnr xiǎo, néng huàn yí jiàn ma?",
+        "vi": "Áo sơ mi này hơi nhỏ, đổi cái khác được không?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "可以，您要大一点儿的还是换别的颜色？",
+        "pinyin": "Kěyǐ, nín yào dà yìdiǎnr de háishi huàn bié de yánsè?",
+        "vi": "Được ạ, anh muốn cái to hơn hay đổi màu khác?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "颜色不用换，要大一点儿的。",
+        "pinyin": "Yánsè búyòng huàn, yào dà yìdiǎnr de.",
+        "vi": "Không cần đổi màu, lấy cái to hơn."
+      }
+    ],
+    "question": {
+      "hanzi": "男的想要什么样的衬衫？",
+      "pinyin": "Nán de xiǎng yào shénme yàng de chènshān?",
+      "vi": "Người nam muốn áo sơ mi thế nào?"
+    },
+    "options": [
+      {
+        "hanzi": "颜色不一样的",
+        "pinyin": "yánsè bù yíyàng de"
+      },
+      {
+        "hanzi": "小一点儿的",
+        "pinyin": "xiǎo yìdiǎnr de"
+      },
+      {
+        "hanzi": "大一点儿的",
+        "pinyin": "dà yìdiǎnr de"
+      }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk3-listening-11",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "你的汉语说得真好，学了多长时间了？",
+        "pinyin": "Nǐ de Hànyǔ shuō de zhēn hǎo, xué le duō cháng shíjiān le?",
+        "vi": "Bạn nói tiếng Trung giỏi thật, học bao lâu rồi?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "三年了。我以前在北京留学过一年。",
+        "pinyin": "Sān nián le. Wǒ yǐqián zài Běijīng liúxué guo yì nián.",
+        "vi": "Ba năm rồi. Trước đây tôi từng du học ở Bắc Kinh một năm."
+      }
+    ],
+    "question": {
+      "hanzi": "男的学了多长时间汉语？",
+      "pinyin": "Nán de xué le duō cháng shíjiān Hànyǔ?",
+      "vi": "Người nam học tiếng Trung bao lâu?"
+    },
+    "options": [
+      {
+        "hanzi": "一年",
+        "pinyin": "yì nián"
+      },
+      {
+        "hanzi": "两年",
+        "pinyin": "liǎng nián"
+      },
+      {
+        "hanzi": "三年",
+        "pinyin": "sān nián"
+      }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk3-listening-12",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nam",
+        "hanzi": "明天的会议几点开始？",
+        "pinyin": "Míngtiān de huìyì jǐ diǎn kāishǐ?",
+        "vi": "Cuộc họp ngày mai mấy giờ bắt đầu?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "本来是九点，经理说改到十点了。",
+        "pinyin": "Běnlái shì jiǔ diǎn, jīnglǐ shuō gǎi dào shí diǎn le.",
+        "vi": "Ban đầu là chín giờ, giám đốc nói đổi sang mười giờ rồi."
+      }
+    ],
+    "question": {
+      "hanzi": "会议现在几点开始？",
+      "pinyin": "Huìyì xiànzài jǐ diǎn kāishǐ?",
+      "vi": "Bây giờ cuộc họp mấy giờ bắt đầu?"
+    },
+    "options": [
+      {
+        "hanzi": "九点",
+        "pinyin": "jiǔ diǎn"
+      },
+      {
+        "hanzi": "十点",
+        "pinyin": "shí diǎn"
+      },
+      {
+        "hanzi": "十一点",
+        "pinyin": "shíyī diǎn"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk3-listening-13",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "周末你打算做什么？",
+        "pinyin": "Zhōumò nǐ dǎsuàn zuò shénme?",
+        "vi": "Cuối tuần bạn định làm gì?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "如果天气好，我就去爬山。",
+        "pinyin": "Rúguǒ tiānqì hǎo, wǒ jiù qù páshān.",
+        "vi": "Nếu trời đẹp thì tôi đi leo núi."
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "听说周末要下雨。",
+        "pinyin": "Tīngshuō zhōumò yào xià yǔ.",
+        "vi": "Nghe nói cuối tuần sẽ mưa."
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "那我就在家看书吧。",
+        "pinyin": "Nà wǒ jiù zài jiā kàn shū ba.",
+        "vi": "Vậy thì tôi ở nhà đọc sách vậy."
+      }
+    ],
+    "question": {
+      "hanzi": "周末男的可能做什么？",
+      "pinyin": "Zhōumò nán de kěnéng zuò shénme?",
+      "vi": "Cuối tuần người nam có thể sẽ làm gì?"
+    },
+    "options": [
+      {
+        "hanzi": "去爬山",
+        "pinyin": "qù páshān"
+      },
+      {
+        "hanzi": "在家看书",
+        "pinyin": "zài jiā kàn shū"
+      },
+      {
+        "hanzi": "去游泳",
+        "pinyin": "qù yóuyǒng"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk3-listening-14",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "喂，你到哪儿了？电影快开始了。",
+        "pinyin": "Wéi, nǐ dào nǎr le? Diànyǐng kuài kāishǐ le.",
+        "vi": "Alô, bạn đến đâu rồi? Phim sắp bắt đầu rồi."
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "我刚下地铁，还要走十分钟。",
+        "pinyin": "Wǒ gāng xià dìtiě, hái yào zǒu shí fēnzhōng.",
+        "vi": "Tôi vừa xuống tàu điện ngầm, còn phải đi bộ mười phút."
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "别着急，我先进去，把票放在门口了。",
+        "pinyin": "Bié zháojí, wǒ xiān jìnqu, bǎ piào fàng zài ménkǒu le.",
+        "vi": "Đừng vội, tôi vào trước, để vé ở cửa rồi nhé."
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "好的，谢谢！",
+        "pinyin": "Hǎo de, xièxie!",
+        "vi": "Được, cảm ơn!"
+      }
+    ],
+    "question": {
+      "hanzi": "他们要去做什么？",
+      "pinyin": "Tāmen yào qù zuò shénme?",
+      "vi": "Họ sắp đi làm gì?"
+    },
+    "options": [
+      {
+        "hanzi": "坐地铁",
+        "pinyin": "zuò dìtiě"
+      },
+      {
+        "hanzi": "买票",
+        "pinyin": "mǎi piào"
+      },
+      {
+        "hanzi": "看电影",
+        "pinyin": "kàn diànyǐng"
+      }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk3-listening-15",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "医生，我孩子已经发烧两天了。",
+        "pinyin": "Yīshēng, wǒ háizi yǐjīng fāshāo liǎng tiān le.",
+        "vi": "Bác sĩ, con tôi sốt hai ngày rồi."
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "我检查一下。……是感冒，不用担心。",
+        "pinyin": "Wǒ jiǎnchá yíxià. …… Shì gǎnmào, búyòng dānxīn.",
+        "vi": "Để tôi khám. … Là cảm thôi, không cần lo."
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "他还能去上学吗？",
+        "pinyin": "Tā hái néng qù shàngxué ma?",
+        "vi": "Cháu còn đi học được không?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "这几天最好在家休息，多喝水。",
+        "pinyin": "Zhè jǐ tiān zuìhǎo zài jiā xiūxi, duō hē shuǐ.",
+        "vi": "Mấy ngày này tốt nhất nên ở nhà nghỉ, uống nhiều nước."
+      }
+    ],
+    "question": {
+      "hanzi": "孩子怎么了？",
+      "pinyin": "Háizi zěnme le?",
+      "vi": "Đứa trẻ bị làm sao?"
+    },
+    "options": [
+      {
+        "hanzi": "感冒了",
+        "pinyin": "gǎnmào le"
+      },
+      {
+        "hanzi": "腿疼",
+        "pinyin": "tuǐ téng"
+      },
+      {
+        "hanzi": "不想上学",
+        "pinyin": "bù xiǎng shàngxué"
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk3-listening-16",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nam",
+        "hanzi": "小王，你的新家怎么样？",
+        "pinyin": "Xiǎo Wáng, nǐ de xīn jiā zěnmeyàng?",
+        "vi": "Tiểu Vương, nhà mới của bạn thế nào?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "不但比以前大，而且离公司很近。",
+        "pinyin": "Búdàn bǐ yǐqián dà, érqiě lí gōngsī hěn jìn.",
+        "vi": "Không những rộng hơn trước mà còn gần công ty."
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "那你每天怎么上班？",
+        "pinyin": "Nà nǐ měi tiān zěnme shàngbān?",
+        "vi": "Vậy hằng ngày bạn đi làm thế nào?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "走路十分钟就到了，不用坐车了。",
+        "pinyin": "Zǒulù shí fēnzhōng jiù dào le, búyòng zuò chē le.",
+        "vi": "Đi bộ mười phút là đến, không cần đi xe nữa."
+      }
+    ],
+    "question": {
+      "hanzi": "小王现在怎么去上班？",
+      "pinyin": "Xiǎo Wáng xiànzài zěnme qù shàngbān?",
+      "vi": "Bây giờ Tiểu Vương đi làm bằng cách nào?"
+    },
+    "options": [
+      {
+        "hanzi": "坐公共汽车",
+        "pinyin": "zuò gōnggòng qìchē"
+      },
+      {
+        "hanzi": "走路",
+        "pinyin": "zǒulù"
+      },
+      {
+        "hanzi": "开车",
+        "pinyin": "kāichē"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk3-listening-17",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "我对中国文化很感兴趣。",
+        "pinyin": "Wǒ duì Zhōngguó wénhuà hěn gǎn xìngqù.",
+        "vi": "Tôi rất hứng thú với văn hóa Trung Quốc."
+      }
+    ]
+  },
+  {
+    "key": "hsk3-listening-18",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "请把门关上。",
+        "pinyin": "Qǐng bǎ mén guānshang.",
+        "vi": "Làm ơn đóng cửa lại."
+      }
+    ]
+  },
+  {
+    "key": "hsk3-listening-19",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "他今天又迟到了。",
+        "pinyin": "Tā jīntiān yòu chídào le.",
+        "vi": "Hôm nay anh ấy lại đến muộn."
+      }
+    ]
+  },
+  {
+    "key": "hsk3-listening-20",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "天气越来越冷了。",
+        "pinyin": "Tiānqì yuè lái yuè lěng le.",
+        "vi": "Trời càng ngày càng lạnh."
+      }
+    ]
+  }
+]
