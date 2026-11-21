@@ -20,15 +20,22 @@ export function ReorderSentence({
   words,
   disabled,
   onSubmit,
+  onChange,
 }: {
   words: string[];
   disabled: boolean;
-  onSubmit: (order: string[]) => void;
+  onSubmit?: (order: string[]) => void;
+  /** Có onChange (dùng trong đề thi): báo mỗi lần ghép/bỏ từ và không hiện nút Kiểm tra. */
+  onChange?: (order: string[]) => void;
 }) {
   // Lưu chỉ số để từ lặp lại (vd. 几 … 几) vẫn phân biệt được.
   const [chosen, setChosen] = useState<number[]>([]);
   const remaining = words.map((w, i) => ({ w, i })).filter(({ i }) => !chosen.includes(i));
   const chip = "rounded border border-border px-3 py-1.5 text-xl disabled:opacity-40";
+  const update = (next: number[]) => {
+    setChosen(next);
+    onChange?.(next.map((i) => words[i]));
+  };
 
   return (
     <div>
@@ -44,7 +51,7 @@ export function ReorderSentence({
             type="button"
             disabled={disabled}
             aria-label={`Bỏ ${words[i]}`}
-            onClick={() => setChosen((c) => c.filter((x) => x !== i))}
+            onClick={() => update(chosen.filter((x) => x !== i))}
             className={`${chip} bg-muted`}
           >
             {words[i]}
@@ -53,19 +60,21 @@ export function ReorderSentence({
       </div>
       <div className="mt-2 flex flex-wrap gap-2" lang="zh-CN">
         {remaining.map(({ w, i }) => (
-          <button key={i} type="button" disabled={disabled} onClick={() => setChosen((c) => [...c, i])} className={`${chip} hover:bg-muted`}>
+          <button key={i} type="button" disabled={disabled} onClick={() => update([...chosen, i])} className={`${chip} hover:bg-muted`}>
             {w}
           </button>
         ))}
       </div>
-      <button
-        type="button"
-        disabled={disabled || remaining.length > 0}
-        onClick={() => onSubmit(chosen.map((i) => words[i]))}
-        className="mt-3 rounded bg-accent px-4 py-2 font-semibold text-background disabled:opacity-40"
-      >
-        Kiểm tra
-      </button>
+      {!onChange && (
+        <button
+          type="button"
+          disabled={disabled || remaining.length > 0}
+          onClick={() => onSubmit?.(chosen.map((i) => words[i]))}
+          className="mt-3 rounded bg-accent px-4 py-2 font-semibold text-background disabled:opacity-40"
+        >
+          Kiểm tra
+        </button>
+      )}
     </div>
   );
 }

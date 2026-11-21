@@ -1,11 +1,14 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { matchesDictation } from "@/lib/compare";
 import { prisma } from "@/lib/db";
 import { gradeExercise, type ExerciseData, type Line } from "@/lib/exercises";
 import { AI_GRADING_ENABLED, GraderNotConfigured, gradeComposition } from "@/lib/grader";
 import { gradeGrammar, revealGrammar, type GrammarExercise } from "@/lib/grammar";
+import { BLUEPRINT, findWords, pickSection, scoreSections } from "@/lib/mock";
+import { buildPool, gradeItem, itemText, loadItems, recentRefs, type Section } from "@/lib/mockData";
 import type { Question } from "@/lib/passages";
 import { newCard, review, type Grade } from "@/lib/srs";
 
@@ -161,6 +164,102 @@ export async function submitGrammar(input: z.input<typeof grammarInput>) {
     data: { skill: "grammar", correct, response: JSON.stringify({ point: point.key, exercise, response }) },
   });
   return { correct, ...revealGrammar(ex) };
+}
+
+/** Tạo đề thi thử mới cho cấp `level` rồi chuyển sang trang làm bài. */
+export async function startMockTest(level: number) {
+  const lv = z.number().int().min(1).max(4).parse(level);
+  const spec = BLUEPRINT[lv];
+  const [pool, recent] = await Promise.all([buildPool(lv), recentRefs(lv)]);
+  const sections: Section[] = spec.sections.map((s) => ({
+    skill: s.skill,
+    minutes: s.minutes,
+    items: pickSection(pool[s.skill], s.count, lv, recent, Math.random),
+  }));
+  const test = await prisma.mockTest.create({ data: { levelId: lv, sections: JSON.stringify(sections) } });
+  redirect(`/mock-test/run/${test.id}`);
+}
+
+const mockInput = z.object({
+  testId: z.number().int().positive(),
+  answers: z.record(
+    z.string().max(20),
+    z.union([z.boolean(), z.number().int().min(0).max(20), z.string().max(200), z.array(z.string().max(20)).max(30)]),
+  ),
+});
+
+/** Nộp bài thi thử: chấm ở server, lưu MockResult + Attempt cho từng câu, trả id kết quả. Mỗi đề chỉ nộp 1 lần. */
+export async function submitMockTest(input: z.input<typeof mockInput>) {
+  const { testId, answers } = mockInput.parse(input);
+  const test = await prisma.mockTest.findUnique({ where: { id: testId }, include: { results: { select: { id: true } } } });
+  if (!test) throw new Error("Không tìm thấy đề");
+  if (test.results.length) return test.results[0].id;
+
+  const sections = JSON.parse(test.sections) as Section[];
+  const items = new Map((await loadItems(sections.flatMap((s) => s.items))).map((i) => [i.ref, i]));
+  const graded = sections.map((s) => ({
+    skill: s.skill,
+    items: s.items.flatMap((ref) => {
+      const item = items.get(ref);
+      return item ? [{ item, response: answers[ref] ?? null, correct: gradeItem(item, answers[ref]) }] : [];
+    }),
+  }));
+  const scores = scoreSections(
+    graded.map((g) => ({ skill: g.skill, results: g.items.map((i) => i.correct) })),
+    BLUEPRINT[test.levelId].pass,
+  );
+
+  const [result] = await prisma.$transaction([
+    prisma.mockResult.create({
+      data: {
+        mockTestId: testId,
+        scores: JSON.stringify(scores),
+        answers: JSON.stringify(graded.flatMap((g) => g.items.map(({ item, response, correct }) => ({ ref: item.ref, response, correct })))),
+      },
+    }),
+    prisma.attempt.createMany({
+      data: graded.flatMap((g) =>
+        g.items.map(({ item, response, correct }) => ({
+          exerciseId: item.kind === "ex" ? item.exerciseId : null,
+          skill: g.skill,
+          correct,
+          response: JSON.stringify({ mock: testId, ref: item.ref, response }),
+        })),
+      ),
+    }),
+  ]);
+  return result.id;
+}
+
+/** Từ vựng (cấp ≤ cấp đề) xuất hiện trong các câu làm sai của một lần thi. */
+export async function mistakeWords(resultId: number) {
+  const result = await prisma.mockResult.findUnique({ where: { id: resultId }, include: { mockTest: true } });
+  if (!result) return [];
+  const wrong = (JSON.parse(result.answers) as { ref: string; correct: boolean }[]).filter((a) => !a.correct).map((a) => a.ref);
+  const text = (await loadItems(wrong)).map(itemText).join(" ");
+  const words = await prisma.word.findMany({ where: { levelId: { lte: result.mockTest.levelId } }, select: { id: true, hanzi: true } });
+  const byHanzi = new Map(words.map((w) => [w.hanzi, w.id]));
+  const found = findWords(text, new Set(byHanzi.keys())).map((hanzi) => ({ hanzi, id: byHanzi.get(hanzi)! }));
+  // Chỉ giữ từ chưa có trong ôn tập.
+  const carded = new Set(
+    (
+      await prisma.reviewCard.findMany({
+        where: { itemType: "word", itemId: { in: found.map((w) => w.id) } },
+        distinct: ["itemId"],
+        select: { itemId: true },
+      })
+    ).map((c) => c.itemId),
+  );
+  return found.filter((w) => !carded.has(w.id));
+}
+
+/** Đưa từ trong các câu làm sai vào ôn tập. Trả về số từ có thẻ mới. */
+export async function addMockMistakes(resultId: number) {
+  const id = z.number().int().positive().parse(resultId);
+  const now = new Date();
+  let added = 0;
+  for (const w of await mistakeWords(id)) if ((await createWordCards(w.id, now)) > 0) added++;
+  return added;
 }
 
 const speakingInput = z.object({

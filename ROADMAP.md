@@ -133,12 +133,12 @@ web_chinese/
 - [x] ~~Script `scripts/build-vocab.ts`~~ — không cần: seed đọc thẳng file gốc + file bổ sung. Bản gốc chỉ có nghĩa tiếng Anh, pinyin có chỗ lẫn cách đọc phụ (听 ghi `yǐn` trước `tīng`), nên pinyin lấy từ file bổ sung.
 - [x] File bổ sung `data/vocab/hsk1.json` (định dạng: xem [Phụ lục B](#phụ-lục-b--định-dạng-dữ-liệu-json)): pinyin chuẩn tách âm tiết, loại từ, nghĩa Việt cho đủ 150 từ HSK1 — do Claude soạn, **cần bạn duyệt lại**.
 - [x] 1 câu ví dụ cho mỗi từ HSK1, chủ yếu dùng từ HSK1 (vài tên riêng/từ ghép dễ đoán như 越南, 汉字, 这里) — **cần duyệt**.
-- [ ] HSK2–4: soạn `data/vocab/hsk2..4.json` (làm ở Phase 10).
+- [x] HSK2–4: soạn `data/vocab/hsk2..4.json` (đã làm ở Phase 10).
 - [x] Đối chiếu với danh sách chính thức HSK 2012 (repo glxxyz/hskhsk.com, MIT, file `HSK Official With Definitions 2012 L1–L4`): HSK1 lệch 6 từ — bản 2012 có 饭店 号 没有 哪儿 说 一点儿, danh sách hiện tại có 饭馆 火车站 零 没 日 说话 thay vào; các cấp 2–4 của nguồn hiện tại chỉ có 147/298/598 từ (bản 2012: 150/300/600). Người dùng chọn **giữ danh sách hiện tại**, dùng repo đó để tham khảo khi duyệt nghĩa; nên xem lại khi làm HSK2–4 ở Phase 10.
 
 ### 2.2 Chia bài học
 - [x] HSK1: 15 bài × 10 từ theo chủ đề → `data/lessons/hsk1.json`
-- [ ] HSK2: 15 bài × ~10 từ; HSK3: 20 bài × ~15 từ; HSK4: 20 bài × ~30 từ (Phase 10)
+- [x] HSK2: 15 bài × ~10 từ; HSK3: 20 bài × ~15 từ; HSK4: 20 bài × ~30 từ (Phase 10)
 
 ### 2.3 Schema & seed
 - [x] Schema Phụ lục A chuyển sang cú pháp Prisma 7: `datasource` không còn `url` (URL ở `prisma7.config.ts`), generator `prisma-client` ra `src/generated/prisma`; thêm `onDelete: Cascade` cho bảng nối, `@@unique([lessonId, itemType, itemId])` cho `LessonItem`.
@@ -374,11 +374,16 @@ Làm theo từng cấp. Người dùng chọn: HSK2–4 theo **danh sách chính
 - [x] 20 điểm ngữ pháp, 80 bài (`data/grammar/hsk3.json`): lặp động từ, 跟…一样, 一…就…, 把, 极了, 还是/或者, bổ ngữ xu hướng kép, 被, 越来越 / 越…越…, 除了…以外, bổ ngữ khả năng, 先…然后…/再, 对…感兴趣, 地, 又/再, 才/就, 为了, 如果…就… / 只有…才…, 一边…一边…, 不但…而且… — seed bắt được 1 đáp án sắp xếp không ghép được và đã sửa
 - [x] 10 bài đọc (107–136 chữ, qua kiểm tra từ vượt cấp HSK1–3; 2 câu chọn từ điền chỗ trống dùng dạng `mcq`), 20 bài nghe (6 hội thoại `mcq`, 3 trong đó dài 4 lượt), 18 bài viết. Dùng lại ảnh có sẵn, không tải ảnh mới.
 
-### HSK4 — chưa làm
-- [ ] HSK4 (600 từ) — đợt sau, cùng quy trình
-- [ ] Dạng bài để dành: sắp xếp đoạn (đọc), viết đoạn ngắn, trả lời bằng giọng nói
+### HSK4 — xong
+- [x] Từ vựng `data/vocab/hsk4.json`: 598 từ (600 từ L4 bản 2012 trừ 得 等 đã có ở cấp dưới) — do Claude soạn, **cần duyệt**. Từ nhiều cách đọc: 倒 dǎo, 假 jiǎ, 空 kòng, 趟 tàng, 转 zhuǎn (nghĩa ghi chú cách đọc còn lại); pinyin 差不多 / 来不及 / 来得及 / 受不了 ghi tay vì file 2012 thiếu dấu thanh nhẹ ở chữ giữa.
+- [x] 20 bài theo chủ đề (`data/lessons/hsk4.json`, 24–38 từ/bài)
+- [x] 20 điểm ngữ pháp, 80 bài (`data/grammar/hsk4.json`): 连…都, 让/使, 一点儿也不, 倍/百分之, 把…V进/到/给/成, V起来, 要是…的话, 既然…就, 随着, 不管/无论…都, 即使…也, 尽管…但是, 不仅…而且, 对于/关于, 难道…吗, 以为/认为, 只要…就, 到底/究竟, 原来/本来, 否则
+- [x] 10 bài đọc (120–165 chữ, qua kiểm tra từ vượt cấp HSK1–4), 20 bài nghe (10 hội thoại, 6 bài dài 3–4 lượt), 18 bài viết; dùng lại ảnh có sẵn.
+- [ ] Dạng bài để dành: sắp xếp đoạn (đọc, cần dạng câu hỏi mới), viết đoạn ngắn (cần AI chấm — đang khoá), trả lời bằng giọng nói
 - [x] Mặc định tắt pinyin từ HSK3 (trình đọc: `pinyinDefault = level <= 2`, có từ Phase 6)
-- [ ] Kiểm tra hiệu năng ôn tập khi có >2000 thẻ (`ReviewCard.due` đã có index từ Phase 2) — làm khi có đủ HSK3–4
+- [x] Kiểm tra hiệu năng ôn tập khi có >2000 thẻ: tạo tạm 4792 thẻ (1198 từ × 4 chế độ) → `/` ~50–110 ms, `/review` ~45 ms (lần đầu ~600 ms do biên dịch dev), `/speaking` ~100 ms; đã xoá thẻ tạm. Phát hiện và sửa lỗi 500 ở `/speaking`: truy vấn `id in [...]` vượt giới hạn 999 tham số của SQLite khi có đủ 4 cấp — `getWords` chia id thành từng phần 500, dashboard đếm từ đã học ở JS thay vì `in`.
+
+> Xác minh HSK4: seed `HSK4: 598 từ, 715 chữ, 20 bài` + 20 điểm ngữ pháp/80 bài + 10 bài đọc + 20 nghe + 18 viết (seed qua hết bước kiểm tra ngay lần đầu); 56 test, lint, `tsc --noEmit`, build đạt; trên dev server `/`, `/learn/4` (20 bài), `/grammar`, `/reading`, `/listening?level=4`, `/writing?level=4`, `/speaking`, bài học đầu/cuối, điểm ngữ pháp và bài đọc cuối đều 200.
 
 > Xác minh HSK3: seed `HSK3: 297 từ, 399 chữ, 20 bài` + 20 điểm ngữ pháp/80 bài + 10 bài đọc + 20 nghe + 18 viết; 56 test, lint, `tsc --noEmit`, build đạt; trên dev server `/`, `/learn/3` (20 bài), `/grammar`, `/reading`, `/listening?level=3`, `/writing?level=3`, `/speaking`, bài học đầu/cuối, điểm ngữ pháp và bài đọc HSK3 cuối đều 200; bài đọc HSK3 tắt pinyin mặc định; không lỗi console.
 
@@ -390,12 +395,14 @@ Làm theo từng cấp. Người dùng chọn: HSK2–4 theo **danh sách chính
 
 ## Phase 11 — Thi thử HSK
 
-- [ ] Định nghĩa cấu trúc đề theo [Phụ lục C](#phụ-lục-c--cấu-trúc-đề-hsk14) (lưu JSON trong `MockTest.sections`)
-- [ ] Tạo đề: bốc ngẫu nhiên `Exercise` theo dạng + cấp (không lặp câu đã làm gần đây)
-- [ ] Đồng hồ đếm ngược từng phần, nghe chỉ phát 1–2 lần
-- [ ] Nộp bài → điểm từng phần, quy đổi thang 100/phần, đỗ/trượt (HSK1–2: ≥120/200; HSK3–4: ≥180/300)
-- [ ] Xem lại đáp án + transcript; câu sai → thêm vào ôn tập
-- [ ] Lịch sử điểm thi thử
+- [x] Cấu trúc đề theo [Phụ lục C](#phụ-lục-c--cấu-trúc-đề-hsk14) trong `src/lib/mock.ts` (`BLUEPRINT`): số câu + phút từng phần (HSK1 Nghe 20/15′ Đọc 20/17′; HSK2 35/25′ 25/22′; HSK3 40/35′ 30/30′ Viết 10/15′; HSK4 45/30′ 40/40′ 15/25′), điểm đỗ, số lần nghe. Đề lưu ở `MockTest.sections` dạng `[{skill, minutes, items: ref[]}]`, ref = `ex:<id>` (bài nghe/viết), `pq:<bài đọc>:<câu>`, `gr:<điểm ngữ pháp>:<bài>`. Không cần migration.
+- [x] Tạo đề (`startMockTest`): kho câu lấy từ cấp đó **và các cấp dưới** (một cấp chỉ có 20 bài nghe, không đủ 35–45 câu); ưu tiên câu cùng cấp và câu chưa ra trong 3 đề đã nộp gần nhất (`pickSection`, có test). Nghe = mọi dạng bài nghe; Đọc = câu chọn từ/tìm câu sai của ngữ pháp + bài đọc lấy nguyên cụm (khoảng nửa phần); Viết = điền chữ + sắp xếp câu (bài viết và ngữ pháp). Đặt câu theo tranh chưa đưa vào vì cần AI chấm (đang khoá).
+- [x] Trang `/mock-test/run/[id]` (`MockTestRunner`): từng phần có màn hình bắt đầu, đồng hồ đếm ngược dính đầu trang (đỏ khi < 1 phút), hết giờ tự sang phần sau / tự nộp; mỗi câu nghe được phát tối đa 2 lần (HSK1–2) hoặc 1 lần (HSK3–4); pinyin chỉ hiện ở HSK1–2. Đáp án không gửi xuống client. `ReorderSentence` thêm prop `onChange` (dùng trong đề, ẩn nút Kiểm tra). Bài làm chỉ giữ trong trang (tải lại là mất — ghi `shortcut:`).
+- [x] Nộp bài (`submitMockTest`): chấm ở server bằng chính các hàm chấm đã có, mỗi phần quy về thang 100, tổng ≥ 120/200 (HSK1–2) hoặc ≥ 180/300 (HSK3–4) là đỗ; lưu `MockResult` (điểm + từng câu trả lời) và `Attempt` cho từng câu (cho Phase 12); mỗi đề chỉ nộp 1 lần, mở lại đề đã nộp sẽ chuyển sang trang kết quả.
+- [x] Trang `/mock-test/result/[id]`: điểm từng phần, đỗ/chưa đỗ, từng câu đúng/sai với câu đã chọn, đáp án, lời thoại bài nghe (chữ Hán, pinyin, nghĩa). Từ vựng (≤ cấp đề, chưa có trong ôn tập) trong các câu làm sai được liệt kê, nút "Thêm N từ vào ôn tập" (`addMockMistakes`, tách từ khớp dài nhất `findWords`, có test).
+- [x] Lịch sử điểm thi thử ở `/mock-test/[level]` (20 lần gần nhất, điểm từng phần, đỗ/chưa đỗ, link xem lại).
+
+> Xác minh: 62 test (thêm `tests/mock.test.ts`), lint, `tsc --noEmit`, build đạt. Trên dev server: làm trọn đề HSK1 (20 nghe + 20 đọc, 5 bài đọc có ruby pinyin): nút nghe hết lượt sau 2 lần, đồng hồ chạy, nộp → 50/200 "Chưa đỗ", trang kết quả hiện lời thoại + đáp án, thêm 70 từ vào ôn tập rồi danh sách về trống, lịch sử hiện lần thi, mở lại `/mock-test/run/1` chuyển sang kết quả. Đề HSK4 đủ 45/40/15 câu; giả lập đồng hồ nhảy 31 phút → phần Nghe tự chuyển sang Đọc; Viết: điền chữ đúng/sai và ghép câu chấm đúng (2/15 → 13 điểm). Đã xoá dữ liệu test (2 đề, 2 kết quả, 140 Attempt, 280 thẻ), còn Attempt id 17 của bạn.
 
 **Tiêu chí hoàn thành:** làm trọn 1 đề HSK1 có đồng hồ, ra điểm và xem lại được.
 
