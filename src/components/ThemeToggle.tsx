@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label="Đổi chế độ sáng/tối"
       title="Đổi chế độ sáng/tối"
-      className="ml-auto rounded border border-border px-3 py-1 hover:bg-muted"
+      className="ml-auto rounded-full border border-border px-3 py-1 hover:bg-muted"
     >
       ◐
     </button>

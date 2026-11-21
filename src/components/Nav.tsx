@@ -47,7 +47,7 @@ export default function Nav() {
     href === "/" ? pathname === "/" : section(pathname) === section(href);
 
   const linkClass = (active: boolean) =>
-    `block rounded px-2 py-1 hover:bg-muted ${active ? "font-semibold text-accent" : ""}`;
+    `block rounded-full px-3 py-1 hover:bg-muted ${active ? "font-semibold underline decoration-brush decoration-2 underline-offset-4" : ""}`;
 
   return (
     <nav aria-label="Điều hướng chính">
@@ -72,7 +72,7 @@ export default function Nav() {
                 >
                   {item.label} ▾
                 </summary>
-                <ul className="absolute left-0 z-10 mt-1 min-w-40 rounded border border-border bg-background p-1 shadow-lg">
+                <ul className="absolute left-0 z-10 mt-1 min-w-40 rounded-xl border border-border bg-background p-1 shadow-lg">
                   {item.children.map((c) => (
                     <li key={c.href}>
                       <Link

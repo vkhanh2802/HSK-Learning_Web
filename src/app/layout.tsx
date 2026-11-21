@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import { Noto_Sans, Noto_Sans_SC } from "next/font/google";
+import { Fraunces, Instrument_Sans, Noto_Sans, Noto_Sans_SC } from "next/font/google";
 import { LogoutButton } from "@/components/LoginForm";
 import Nav from "@/components/Nav";
 import ServiceWorker from "@/components/ServiceWorker";
@@ -20,13 +20,16 @@ const notoSansSC = Noto_Sans_SC({
   subsets: ["latin"],
 });
 
+const instrument = Instrument_Sans({ variable: "--font-instrument", subsets: ["latin", "latin-ext"] });
+const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin", "latin-ext", "vietnamese"] });
+
 export const metadata: Metadata = {
   title: "Học tiếng Trung HSK1–HSK4",
   description: "Học tiếng Trung từ HSK1 đến HSK4 với đủ 4 kỹ năng Nghe, Nói, Đọc, Viết",
   appleWebApp: { capable: true, title: "学中文" },
 };
 
-export const viewport: Viewport = { themeColor: "#b91c1c" };
+export const viewport: Viewport = { themeColor: "#3b2c20" };
 
 export default function RootLayout({
   children,
@@ -34,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${notoSans.variable} ${notoSansSC.variable}`} suppressHydrationWarning>
+    <html lang="vi" className={`${instrument.variable} ${fraunces.variable} ${notoSans.variable} ${notoSansSC.variable}`} suppressHydrationWarning>
       <body className="antialiased">
         <ThemeScript />
         <ServiceWorker />
@@ -44,9 +47,9 @@ export default function RootLayout({
         >
           Bỏ qua tới nội dung
         </a>
-        <header className="border-b border-border">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
-            <Link href="/" className="text-lg font-bold text-accent">
+        <header>
+          <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-4">
+            <Link href="/" className="font-serif text-2xl font-medium">
               学中文
             </Link>
             <Nav />

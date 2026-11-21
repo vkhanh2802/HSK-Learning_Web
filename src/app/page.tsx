@@ -37,27 +37,53 @@ export default async function Home() {
   const days = streak([...attempts.map((a) => a.createdAt), ...lessonsDone.flatMap((l) => l.doneAt ?? [])], now);
 
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold">Hôm nay</h1>
-
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <div className="rounded border border-border p-4">
-          <p className="text-sm opacity-75">Thẻ đến hạn</p>
-          <p className="text-3xl font-bold">{due}</p>
+    <main className="px-6 pb-16 pt-10">
+      <section className="mx-auto max-w-2xl text-center">
+        <h1 className="text-4xl leading-tight sm:text-5xl">
+          Mỗi ngày một chút,
+          <br />
+          <span className="relative inline-block">
+            tiếng Trung tiến bộ.
+            <svg aria-hidden className="absolute -bottom-3 left-0 w-full text-brush" viewBox="0 0 300 14" preserveAspectRatio="none">
+              <path d="M3 9 C60 3, 130 12, 190 6 S270 4, 297 8" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+            </svg>
+          </span>
+        </h1>
+        <p className="mx-auto mt-10 max-w-md opacity-80">
+          Từ vựng, ngữ pháp và đủ 4 kỹ năng Nghe, Nói, Đọc, Viết từ HSK1 đến HSK4, ôn theo lịch lặp lại ngắt quãng.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {nextLesson && (
+            <Link href={`/lesson/${nextLesson.id}`} className="rounded-xl bg-accent px-6 py-3 font-semibold text-background hover:opacity-90">
+              Học bài tiếp theo
+            </Link>
+          )}
           {due > 0 && (
-            <Link href="/review" className="text-accent underline">
+            <Link href="/review" className="rounded-xl border border-border px-6 py-3 font-semibold hover:bg-muted">
+              Ôn {due} thẻ đến hạn
+            </Link>
+          )}
+        </div>
+      </section>
+
+      <div className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
+        <div className="rounded-2xl border border-border bg-muted p-5">
+          <p className="text-sm opacity-75">Thẻ đến hạn</p>
+          <p className="font-serif text-4xl">{due}</p>
+          {due > 0 && (
+            <Link href="/review" className="underline decoration-brush decoration-2 underline-offset-4">
               Ôn tập ngay
             </Link>
           )}
         </div>
-        <div className="rounded border border-border p-4">
+        <div className="rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">Chuỗi ngày học</p>
-          <p className="text-3xl font-bold">{days} ngày</p>
+          <p className="font-serif text-4xl">{days} ngày</p>
         </div>
-        <div className="rounded border border-border p-4">
+        <div className="rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">Bài tiếp theo</p>
           {nextLesson ? (
-            <Link href={`/lesson/${nextLesson.id}`} className="mt-1 block font-semibold text-accent underline">
+            <Link href={`/lesson/${nextLesson.id}`} className="mt-1 block font-semibold underline decoration-brush decoration-2 underline-offset-4">
               HSK{nextLesson.levelId} · Bài {nextLesson.order}: {nextLesson.title}
             </Link>
           ) : (
@@ -66,11 +92,12 @@ export default async function Home() {
         </div>
       </div>
 
+      <div className="mx-auto max-w-4xl">
       <p className="mt-4">
         {weak ? (
           <>
             Kỹ năng yếu nhất 30 ngày qua: <strong>{SKILL_NAMES[weak.skill]}</strong> ({Math.round(weak.rate! * 100)}% đúng) —{" "}
-            <Link href={SKILL_HREF[weak.skill]} className="text-accent underline">
+            <Link href={SKILL_HREF[weak.skill]} className="underline decoration-brush decoration-2 underline-offset-4">
               luyện ngay
             </Link>
             .{" "}
@@ -78,12 +105,12 @@ export default async function Home() {
         ) : (
           "Làm thêm bài luyện để biết kỹ năng nào còn yếu. "
         )}
-        <Link href="/stats" className="text-accent underline">
+        <Link href="/stats" className="underline decoration-brush decoration-2 underline-offset-4">
           Xem thống kê
         </Link>
       </p>
 
-      <h2 className="mt-8 text-lg font-semibold">Tiến độ từ vựng</h2>
+      <h2 className="mt-10 text-2xl">Tiến độ từ vựng</h2>
       <ul className="mt-3 grid gap-3">
         {levels.map((l) => {
           const learned = learnedByLevel.get(l.id) ?? 0;
@@ -108,6 +135,7 @@ export default async function Home() {
           );
         })}
       </ul>
+      </div>
     </main>
   );
 }
