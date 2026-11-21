@@ -1,0 +1,510 @@
+[
+  {
+    "key": "hsk2-listening-01",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "他在踢足球。",
+        "pinyin": "Tā zài tī zúqiú.",
+        "vi": "Anh ấy đang đá bóng."
+      }
+    ],
+    "picture": {
+      "emoji": "⚽",
+      "image": "/images/soccer.jpg",
+      "label": "đá bóng"
+    },
+    "answer": true
+  },
+  {
+    "key": "hsk2-listening-02",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "我喜欢喝牛奶。",
+        "pinyin": "Wǒ xǐhuan hē niúnǎi.",
+        "vi": "Tôi thích uống sữa."
+      }
+    ],
+    "picture": {
+      "emoji": "🥛",
+      "image": "/images/milk.jpg",
+      "label": "cốc sữa"
+    },
+    "answer": true
+  },
+  {
+    "key": "hsk2-listening-03",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "外面下雪了。",
+        "pinyin": "Wàimiàn xià xuě le.",
+        "vi": "Bên ngoài có tuyết rơi rồi."
+      }
+    ],
+    "picture": {
+      "emoji": "🌧️",
+      "image": "/images/rain.webp",
+      "label": "trời mưa"
+    },
+    "answer": false
+  },
+  {
+    "key": "hsk2-listening-04",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "她在游泳。",
+        "pinyin": "Tā zài yóuyǒng.",
+        "vi": "Cô ấy đang bơi."
+      }
+    ],
+    "picture": {
+      "emoji": "🏊",
+      "image": "/images/swimming.jpg",
+      "label": "bơi"
+    },
+    "answer": true
+  },
+  {
+    "key": "hsk2-listening-05",
+    "type": "picture_tf",
+    "audio": [
+      {
+        "hanzi": "我坐公共汽车去学校。",
+        "pinyin": "Wǒ zuò gōnggòng qìchē qù xuéxiào.",
+        "vi": "Tôi đi xe buýt đến trường."
+      }
+    ],
+    "picture": {
+      "emoji": "🚕",
+      "image": "/images/taxi.webp",
+      "label": "taxi"
+    },
+    "answer": false
+  },
+  {
+    "key": "hsk2-listening-06",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "我早上吃了两个鸡蛋。",
+        "pinyin": "Wǒ zǎoshang chī le liǎng ge jīdàn.",
+        "vi": "Buổi sáng tôi đã ăn hai quả trứng."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "🥚",
+        "image": "/images/egg.jpg",
+        "label": "trứng gà"
+      },
+      {
+        "emoji": "🍜",
+        "image": "/images/noodles.jpg",
+        "label": "mì"
+      },
+      {
+        "emoji": "🍉",
+        "image": "/images/watermelon.jpg",
+        "label": "dưa hấu"
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk2-listening-07",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "他们在打篮球。",
+        "pinyin": "Tāmen zài dǎ lánqiú.",
+        "vi": "Họ đang chơi bóng rổ."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "⚽",
+        "image": "/images/soccer.jpg",
+        "label": "đá bóng"
+      },
+      {
+        "emoji": "🏀",
+        "image": "/images/basketball.jpg",
+        "label": "bóng rổ"
+      },
+      {
+        "emoji": "🏊",
+        "image": "/images/swimming.jpg",
+        "label": "bơi"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk2-listening-08",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "今天是阴天，可能下雨。",
+        "pinyin": "Jīntiān shì yīntiān, kěnéng xià yǔ.",
+        "vi": "Hôm nay trời âm u, có lẽ sẽ mưa."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "☀️",
+        "image": "/images/sunny.webp",
+        "label": "trời nắng"
+      },
+      {
+        "emoji": "❄️",
+        "image": "/images/snow.jpg",
+        "label": "trời tuyết"
+      },
+      {
+        "emoji": "🌧️",
+        "image": "/images/rain.webp",
+        "label": "trời mưa"
+      }
+    ],
+    "answer": 2
+  },
+  {
+    "key": "hsk2-listening-09",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "我想喝咖啡。",
+        "pinyin": "Wǒ xiǎng hē kāfēi.",
+        "vi": "Tôi muốn uống cà phê."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "🍵",
+        "image": "/images/tea.jpg",
+        "label": "trà"
+      },
+      {
+        "emoji": "☕",
+        "image": "/images/coffee.jpg",
+        "label": "cà phê"
+      },
+      {
+        "emoji": "🥛",
+        "image": "/images/milk.jpg",
+        "label": "sữa"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk2-listening-10",
+    "type": "picture_mcq",
+    "audio": [
+      {
+        "hanzi": "我们坐飞机去旅游。",
+        "pinyin": "Wǒmen zuò fēijī qù lǚyóu.",
+        "vi": "Chúng tôi đi du lịch bằng máy bay."
+      }
+    ],
+    "options": [
+      {
+        "emoji": "🚆",
+        "image": "/images/train.webp",
+        "label": "tàu hỏa"
+      },
+      {
+        "emoji": "✈️",
+        "image": "/images/airplane.webp",
+        "label": "máy bay"
+      },
+      {
+        "emoji": "🚌",
+        "image": "/images/bus.webp",
+        "label": "xe buýt"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk2-listening-11",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "你哥哥比你高吗？",
+        "pinyin": "Nǐ gēge bǐ nǐ gāo ma?",
+        "vi": "Anh trai bạn cao hơn bạn à?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "不，我比我哥哥高一点儿。",
+        "pinyin": "Bù, wǒ bǐ wǒ gēge gāo yìdiǎnr.",
+        "vi": "Không, tôi cao hơn anh trai một chút."
+      }
+    ],
+    "question": {
+      "hanzi": "谁高？",
+      "pinyin": "Shéi gāo?",
+      "vi": "Ai cao hơn?"
+    },
+    "options": [
+      {
+        "hanzi": "男的",
+        "pinyin": "nán de"
+      },
+      {
+        "hanzi": "男的哥哥",
+        "pinyin": "nán de gēge"
+      },
+      {
+        "hanzi": "女的",
+        "pinyin": "nǚ de"
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk2-listening-12",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nam",
+        "hanzi": "你每天几点起床？",
+        "pinyin": "Nǐ měi tiān jǐ diǎn qǐchuáng?",
+        "vi": "Mỗi ngày bạn dậy lúc mấy giờ?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "我六点起床，七点去公司。",
+        "pinyin": "Wǒ liù diǎn qǐchuáng, qī diǎn qù gōngsī.",
+        "vi": "Tôi dậy lúc sáu giờ, bảy giờ đi công ty."
+      }
+    ],
+    "question": {
+      "hanzi": "女的几点起床？",
+      "pinyin": "Nǚ de jǐ diǎn qǐchuáng?",
+      "vi": "Người nữ dậy lúc mấy giờ?"
+    },
+    "options": [
+      {
+        "hanzi": "六点",
+        "pinyin": "liù diǎn"
+      },
+      {
+        "hanzi": "七点",
+        "pinyin": "qī diǎn"
+      },
+      {
+        "hanzi": "八点",
+        "pinyin": "bā diǎn"
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk2-listening-13",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "这件衣服多少钱？",
+        "pinyin": "Zhè jiàn yīfu duōshao qián?",
+        "vi": "Bộ quần áo này bao nhiêu tiền?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "三百块。",
+        "pinyin": "Sānbǎi kuài.",
+        "vi": "Ba trăm đồng."
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "太贵了，便宜一点儿吧。",
+        "pinyin": "Tài guì le, piányi yìdiǎnr ba.",
+        "vi": "Đắt quá, rẻ hơn một chút đi."
+      }
+    ],
+    "question": {
+      "hanzi": "女的觉得衣服怎么样？",
+      "pinyin": "Nǚ de juéde yīfu zěnmeyàng?",
+      "vi": "Người nữ thấy bộ quần áo thế nào?"
+    },
+    "options": [
+      {
+        "hanzi": "很便宜",
+        "pinyin": "hěn piányi"
+      },
+      {
+        "hanzi": "太贵了",
+        "pinyin": "tài guì le"
+      },
+      {
+        "hanzi": "很漂亮",
+        "pinyin": "hěn piàoliang"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk2-listening-14",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nam",
+        "hanzi": "你昨天为什么没来上课？",
+        "pinyin": "Nǐ zuótiān wèishénme méi lái shàngkè?",
+        "vi": "Hôm qua sao bạn không đến lớp?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "因为我生病了。",
+        "pinyin": "Yīnwèi wǒ shēngbìng le.",
+        "vi": "Vì tôi bị ốm."
+      }
+    ],
+    "question": {
+      "hanzi": "女的为什么没来上课？",
+      "pinyin": "Nǚ de wèishénme méi lái shàngkè?",
+      "vi": "Tại sao người nữ không đến lớp?"
+    },
+    "options": [
+      {
+        "hanzi": "生病了",
+        "pinyin": "shēngbìng le"
+      },
+      {
+        "hanzi": "下雨了",
+        "pinyin": "xià yǔ le"
+      },
+      {
+        "hanzi": "很忙",
+        "pinyin": "hěn máng"
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "key": "hsk2-listening-15",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nữ",
+        "hanzi": "机场离这儿远吗？",
+        "pinyin": "Jīchǎng lí zhèr yuǎn ma?",
+        "vi": "Sân bay có xa đây không?"
+      },
+      {
+        "speaker": "nam",
+        "hanzi": "很远，坐出租车要一个小时。",
+        "pinyin": "Hěn yuǎn, zuò chūzūchē yào yí ge xiǎoshí.",
+        "vi": "Rất xa, đi taxi mất một tiếng."
+      }
+    ],
+    "question": {
+      "hanzi": "坐出租车去机场要多长时间？",
+      "pinyin": "Zuò chūzūchē qù jīchǎng yào duō cháng shíjiān?",
+      "vi": "Đi taxi đến sân bay mất bao lâu?"
+    },
+    "options": [
+      {
+        "hanzi": "十分钟",
+        "pinyin": "shí fēnzhōng"
+      },
+      {
+        "hanzi": "一个小时",
+        "pinyin": "yí ge xiǎoshí"
+      },
+      {
+        "hanzi": "两个小时",
+        "pinyin": "liǎng ge xiǎoshí"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk2-listening-16",
+    "type": "mcq",
+    "audio": [
+      {
+        "speaker": "nam",
+        "hanzi": "你去过中国吗？",
+        "pinyin": "Nǐ qùguo Zhōngguó ma?",
+        "vi": "Bạn đã từng đến Trung Quốc chưa?"
+      },
+      {
+        "speaker": "nữ",
+        "hanzi": "去过两次，第一次是去年。",
+        "pinyin": "Qùguo liǎng cì, dì-yī cì shì qùnián.",
+        "vi": "Đến hai lần rồi, lần đầu là năm ngoái."
+      }
+    ],
+    "question": {
+      "hanzi": "女的去过几次中国？",
+      "pinyin": "Nǚ de qùguo jǐ cì Zhōngguó?",
+      "vi": "Người nữ đã đến Trung Quốc mấy lần?"
+    },
+    "options": [
+      {
+        "hanzi": "一次",
+        "pinyin": "yí cì"
+      },
+      {
+        "hanzi": "两次",
+        "pinyin": "liǎng cì"
+      },
+      {
+        "hanzi": "三次",
+        "pinyin": "sān cì"
+      }
+    ],
+    "answer": 1
+  },
+  {
+    "key": "hsk2-listening-17",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "我已经吃饭了。",
+        "pinyin": "Wǒ yǐjing chī fàn le.",
+        "vi": "Tôi đã ăn cơm rồi."
+      }
+    ]
+  },
+  {
+    "key": "hsk2-listening-18",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "你身体好吗？",
+        "pinyin": "Nǐ shēntǐ hǎo ma?",
+        "vi": "Sức khỏe bạn tốt không?"
+      }
+    ]
+  },
+  {
+    "key": "hsk2-listening-19",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "请再说一次。",
+        "pinyin": "Qǐng zài shuō yí cì.",
+        "vi": "Xin nói lại một lần nữa."
+      }
+    ]
+  },
+  {
+    "key": "hsk2-listening-20",
+    "type": "dictation",
+    "audio": [
+      {
+        "hanzi": "他正在打电话。",
+        "pinyin": "Tā zhèngzài dǎ diànhuà.",
+        "vi": "Anh ấy đang gọi điện thoại."
+      }
+    ]
+  }
+]

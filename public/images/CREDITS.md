@@ -22,3 +22,12 @@
 | reading.webp | Free person reading book outside | — | CC0 1.0 | [rawpixel](https://www.rawpixel.com/image/5926283/photo-image-book-public-domain-hands) |
 | sleeping.jpg | Sleeping Woman | Travel Photographer | CC0 1.0 | [stocksnap](https://stocksnap.io/photo/sleeping-woman-CUGR92OCUB) |
 | chair.webp | Closeup wooden chair | — | CC0 1.0 | [rawpixel](https://www.rawpixel.com/image/6031256/photo-image-public-domain-wooden-free) |
+| soccer.jpg | Kids playing football tournament, 7 | — | CC0 1.0 | [rawpixel](https://www.rawpixel.com/image/6112359/photo-image-public-domain-people-free) |
+| swimming.jpg | 140930-D-DB155-016 | DoD News Photos | Public Domain Mark | [flickr](https://www.flickr.com/photos/127934495@N07/15221408159) |
+| egg.jpg | Fresh Eggs | cogdogblog | CC0 1.0 | [flickr](https://www.flickr.com/photos/37996646802@N01/2543297739) |
+| noodles.jpg | Jiro-style ramen | clvs7 | CC0 1.0 | [flickr](https://www.flickr.com/photos/182866455@N04/49972313002) |
+| watermelon.jpg | Free watermelon slice wooden table | — | CC0 1.0 | [rawpixel](https://www.rawpixel.com/image/5908283/image-public-domain-plant-fruit) |
+| basketball.jpg | JTSD Basketball Game 3 18 | USAWC PAO | Public Domain Mark | [flickr](https://www.flickr.com/photos/171239768@N08/32791744837) |
+| coffee.jpg | First cup of coffee of the day at Take5 | roland | CC0 1.0 | [flickr](https://www.flickr.com/photos/35034347371@N01/7819776) |
+| clothes.jpg | Folded clothes illustration | — | CC0 1.0 | [rawpixel](https://www.rawpixel.com/image/6743264/image-public-domain-blue-green) |
+| gift.jpg | Gift Present Celebrate Party Wrapped Simple Concept | Rawpixel Ltd | CC0 1.0 | [flickr](https://www.flickr.com/photos/147875007@N03/32965451966) |

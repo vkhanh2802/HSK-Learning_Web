@@ -1,0 +1,272 @@
+[
+  {
+    "key": "hsk2-g01",
+    "title": "Phân biệt 两 và 二",
+    "pattern": "两 + Lượng từ + Danh từ / 二 khi đếm số",
+    "explanation": "Cả hai đều là “hai”. Trước lượng từ dùng 两: 两个人, 两本书. Khi đếm số, số thứ tự, số có nhiều chữ số dùng 二: 一二三, 第二, 十二, 二十.",
+    "examples": [
+      { "hanzi": "我有两个哥哥。", "pinyin": "Wǒ yǒu liǎng ge gēge.", "vi": "Tôi có hai anh trai." },
+      { "hanzi": "今天是十二号。", "pinyin": "Jīntiān shì shí'èr hào.", "vi": "Hôm nay là ngày 12." },
+      { "hanzi": "我学习了两个小时。", "pinyin": "Wǒ xuéxí le liǎng ge xiǎoshí.", "vi": "Tôi đã học hai tiếng." }
+    ],
+    "mistakes": [{ "wrong": "我有二个孩子。", "right": "我有两个孩子。", "note": "Trước lượng từ 个 dùng 两." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我买了 ___ 件衣服。", "vi": "Tôi mua hai bộ quần áo." }, "options": ["两", "二", "第二"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他是我的第 ___ 个老师。", "vi": "Thầy ấy là giáo viên thứ hai của tôi." }, "options": ["二", "两", "俩"], "answer": 0 },
+      { "type": "reorder", "words": ["两", "妹妹", "我", "个", "有"], "vi": "Tôi có hai em gái.", "answers": ["我有两个妹妹。"] },
+      { "type": "error", "options": ["我有两本书。", "今天是二十号。", "他有二个弟弟。"], "answer": 2, "explain": "Trước lượng từ dùng 两: 他有两个弟弟。" }
+    ]
+  },
+  {
+    "key": "hsk2-g02",
+    "title": "了 cuối câu: tình huống đã thay đổi",
+    "pattern": "Chủ ngữ + Tính từ / Động từ (+ Tân ngữ) + 了",
+    "explanation": "了 ở cuối câu báo một sự thay đổi: trước không như vậy, bây giờ đã khác. 我累了 = tôi mệt rồi (trước chưa mệt). 下雨了 = trời mưa rồi. 他生病了 = anh ấy ốm rồi.",
+    "examples": [
+      { "hanzi": "我累了。", "pinyin": "Wǒ lèi le.", "vi": "Tôi mệt rồi." },
+      { "hanzi": "他生病了。", "pinyin": "Tā shēngbìng le.", "vi": "Anh ấy bị ốm rồi." },
+      { "hanzi": "我弟弟八岁了。", "pinyin": "Wǒ dìdi bā suì le.", "vi": "Em trai tôi tám tuổi rồi." }
+    ],
+    "mistakes": [{ "wrong": "我很累了。", "right": "我累了。", "note": "Khi nói “đã thay đổi” thường bỏ 很 (很 chỉ mô tả tình trạng)." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "外面下雨 ___。", "vi": "Bên ngoài trời mưa rồi." }, "options": ["了", "的", "吗"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你累 ___，休息一下吧。", "vi": "Bạn mệt rồi, nghỉ một chút đi." }, "options": ["了", "着", "过"], "answer": 0 },
+      { "type": "reorder", "words": ["了", "生病", "妈妈"], "vi": "Mẹ bị ốm rồi.", "answers": ["妈妈生病了。"] },
+      { "type": "error", "options": ["我饿了。", "他高兴了。", "她很累了。"], "answer": 2, "explain": "Nói sự thay đổi thì bỏ 很: 她累了。" }
+    ]
+  },
+  {
+    "key": "hsk2-g03",
+    "title": "Phó từ mức độ: 非常, 真, 最, 太",
+    "pattern": "非常 / 真 / 最 / 太 + Tính từ (太 … 了)",
+    "explanation": "非常 = vô cùng; 真 = thật là (thường dùng để cảm thán); 最 = nhất; 太 … 了 = … quá. Các phó từ đứng trước tính từ hoặc động từ chỉ cảm xúc (最喜欢).",
+    "examples": [
+      { "hanzi": "这个菜非常好吃。", "pinyin": "Zhège cài fēicháng hǎochī.", "vi": "Món này vô cùng ngon." },
+      { "hanzi": "你真漂亮！", "pinyin": "Nǐ zhēn piàoliang!", "vi": "Bạn thật xinh!" },
+      { "hanzi": "我最喜欢唱歌。", "pinyin": "Wǒ zuì xǐhuan chànggē.", "vi": "Tôi thích hát nhất." }
+    ],
+    "mistakes": [{ "wrong": "这件衣服贵太了。", "right": "这件衣服太贵了。", "note": "太 đứng trước tính từ, 了 ở cuối." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 喜欢吃西瓜。", "vi": "Tôi thích ăn dưa hấu nhất." }, "options": ["最", "太", "很多"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "这个手机太便宜 ___！", "vi": "Cái điện thoại này rẻ quá!" }, "options": ["了", "的", "过"], "answer": 0 },
+      { "type": "reorder", "words": ["好吃", "非常", "面条", "这个"], "vi": "Món mì này vô cùng ngon.", "answers": ["这个面条非常好吃。"] },
+      { "type": "error", "options": ["他真高。", "我最喜欢跳舞。", "这个宾馆贵太了。"], "answer": 2, "explain": "太 trước tính từ: 这个宾馆太贵了。" }
+    ]
+  },
+  {
+    "key": "hsk2-g04",
+    "title": "Thời lượng: làm bao lâu",
+    "pattern": "Chủ ngữ + Động từ + (了) + Thời lượng (+ Tân ngữ)",
+    "explanation": "Khoảng thời gian (两个小时, 三天, 一年) đứng SAU động từ, khác với thời điểm (八点, 明天) đứng trước động từ. Có tân ngữ thì đặt thời lượng giữa động từ và tân ngữ: 学习两个小时汉语, hoặc lặp động từ.",
+    "examples": [
+      { "hanzi": "我每天学习两个小时。", "pinyin": "Wǒ měi tiān xuéxí liǎng ge xiǎoshí.", "vi": "Mỗi ngày tôi học hai tiếng." },
+      { "hanzi": "他睡了八个小时。", "pinyin": "Tā shuì le bā ge xiǎoshí.", "vi": "Anh ấy đã ngủ tám tiếng." },
+      { "hanzi": "我们等了你十分钟。", "pinyin": "Wǒmen děng le nǐ shí fēnzhōng.", "vi": "Chúng tôi đã đợi bạn mười phút." }
+    ],
+    "mistakes": [{ "wrong": "我两个小时学习。", "right": "我学习两个小时。", "note": "Thời lượng đứng sau động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "___", "vi": "Tôi đã chạy bộ một tiếng." }, "options": ["我跑步了一个小时。", "我一个小时跑步了。", "一个小时我跑了步。"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他在中国住了两 ___。", "vi": "Anh ấy đã sống ở Trung Quốc hai năm." }, "options": ["年", "点", "号"], "answer": 0 },
+      { "type": "reorder", "words": ["小时", "睡", "八个", "了", "我"], "vi": "Tôi đã ngủ tám tiếng.", "answers": ["我睡了八个小时。"] },
+      { "type": "error", "options": ["我等了你半个小时。", "她三个小时看电视。", "我们玩了一天。"], "answer": 1, "explain": "Thời lượng sau động từ: 她看了三个小时电视。" }
+    ]
+  },
+  {
+    "key": "hsk2-g05",
+    "title": "要 (muốn, cần) và 吧 (đề nghị)",
+    "pattern": "Chủ ngữ + 要 + Động từ / Danh từ ; Câu + 吧",
+    "explanation": "要 + danh từ = muốn có (我要一个咖啡); 要 + động từ = muốn / cần phải làm (我要去机场). Phủ định “không muốn” dùng 不想. 吧 cuối câu làm câu đề nghị nhẹ nhàng: 我们走吧 = chúng ta đi thôi.",
+    "examples": [
+      { "hanzi": "服务员，我要一个面条。", "pinyin": "Fúwùyuán, wǒ yào yí ge miàntiáo.", "vi": "Phục vụ ơi, cho tôi một bát mì." },
+      { "hanzi": "我要去上班。", "pinyin": "Wǒ yào qù shàngbān.", "vi": "Tôi phải đi làm." },
+      { "hanzi": "我们一起去吃饭吧。", "pinyin": "Wǒmen yìqǐ qù chī fàn ba.", "vi": "Chúng ta cùng đi ăn cơm nhé." }
+    ],
+    "mistakes": [{ "wrong": "我不要去。(khi muốn nói “không muốn”)", "right": "我不想去。", "note": "Nói “không muốn” tự nhiên hơn với 不想; 不要 thường nghĩa “đừng”." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 一个咖啡。", "vi": "Tôi muốn một cốc cà phê." }, "options": ["要", "会", "是"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "太晚了，我们回家 ___。", "vi": "Muộn quá rồi, chúng ta về nhà thôi." }, "options": ["吧", "吗", "呢"], "answer": 0 },
+      { "type": "reorder", "words": ["机场", "要", "我", "去"], "vi": "Tôi phải đi sân bay.", "answers": ["我要去机场。"] },
+      { "type": "error", "options": ["我要一个鸡蛋。", "我们走吧。", "我们走吗吧。"], "answer": 2, "explain": "Không dùng 吗 và 吧 cùng lúc: 我们走吧。" }
+    ]
+  },
+  {
+    "key": "hsk2-g06",
+    "title": "给 và câu hai tân ngữ (送, 告诉)",
+    "pattern": "A + 给 + B + Động từ ; A + 送 / 告诉 + B + Vật / Việc",
+    "explanation": "给 + người đứng trước động từ = làm gì cho ai: 我给你打电话. Một số động từ có hai tân ngữ, người trước, vật sau: 我送你一本书, 请告诉我你的名字.",
+    "examples": [
+      { "hanzi": "我给妈妈打电话。", "pinyin": "Wǒ gěi māma dǎ diànhuà.", "vi": "Tôi gọi điện cho mẹ." },
+      { "hanzi": "他送我一个手表。", "pinyin": "Tā sòng wǒ yí ge shǒubiǎo.", "vi": "Anh ấy tặng tôi một cái đồng hồ." },
+      { "hanzi": "请告诉我你的名字。", "pinyin": "Qǐng gàosu wǒ nǐ de míngzi.", "vi": "Hãy cho tôi biết tên bạn." }
+    ],
+    "mistakes": [{ "wrong": "我打电话给你明天。", "right": "我明天给你打电话。", "note": "给 + người đặt trước động từ; thời gian trước nữa." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 你打电话。", "vi": "Tôi gọi điện cho bạn." }, "options": ["给", "送", "从"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "姐姐送 ___ 一本书。", "vi": "Chị gái tặng tôi một quyển sách." }, "options": ["我", "给我的", "我的"], "answer": 0 },
+      { "type": "reorder", "words": ["告诉", "请", "名字", "我", "你的"], "vi": "Hãy cho tôi biết tên bạn.", "answers": ["请告诉我你的名字。"] },
+      { "type": "error", "options": ["我给你介绍一下。", "他送我一个铅笔。", "我打电话给你明天。"], "answer": 2, "explain": "Đúng: 我明天给你打电话。" }
+    ]
+  },
+  {
+    "key": "hsk2-g07",
+    "title": "Khoảng cách: 离 và 从 … 到 …",
+    "pattern": "A + 离 + B + 远 / 近 ; 从 + A + 到 + B",
+    "explanation": "离 nói khoảng cách giữa hai nơi: 我家离学校很近 = nhà tôi cách trường rất gần. 从 … 到 … = từ … đến … (nơi chốn hoặc thời gian).",
+    "examples": [
+      { "hanzi": "机场离这儿很远。", "pinyin": "Jīchǎng lí zhèr hěn yuǎn.", "vi": "Sân bay cách đây rất xa." },
+      { "hanzi": "从我家到公司要一个小时。", "pinyin": "Cóng wǒ jiā dào gōngsī yào yí ge xiǎoshí.", "vi": "Từ nhà tôi đến công ty mất một tiếng." },
+      { "hanzi": "我从八点到十二点上课。", "pinyin": "Wǒ cóng bā diǎn dào shí'èr diǎn shàngkè.", "vi": "Tôi học từ tám giờ đến mười hai giờ." }
+    ],
+    "mistakes": [{ "wrong": "我家从学校很近。", "right": "我家离学校很近。", "note": "Nói xa/gần dùng 离." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我家 ___ 学校很近。", "vi": "Nhà tôi cách trường rất gần." }, "options": ["离", "从", "往"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___ 我家到公司要一个小时。", "vi": "Từ nhà tôi đến công ty mất một tiếng." }, "options": ["从", "离", "在"], "answer": 0 },
+      { "type": "reorder", "words": ["远", "离", "宾馆", "这儿", "很"], "vi": "Khách sạn cách đây rất xa.", "answers": ["宾馆离这儿很远。"] },
+      { "type": "error", "options": ["医院离这儿不远。", "我从九点到五点上班。", "公司从我家很远。"], "answer": 2, "explain": "Xa/gần dùng 离: 公司离我家很远。" }
+    ]
+  },
+  {
+    "key": "hsk2-g08",
+    "title": "Bổ ngữ xu hướng đơn: 来 / 去",
+    "pattern": "Động từ (进 / 出 / 回 / 上 / 下) + 来 / 去",
+    "explanation": "来 = hướng về phía người nói, 去 = hướng ra xa người nói. Người nói ở trong phòng: 请进来 (mời vào đây); 他出去了 (anh ấy ra ngoài rồi).",
+    "examples": [
+      { "hanzi": "请进来。", "pinyin": "Qǐng jìnlai.", "vi": "Mời vào." },
+      { "hanzi": "他出去了。", "pinyin": "Tā chūqu le.", "vi": "Anh ấy ra ngoài rồi." },
+      { "hanzi": "你什么时候回来？", "pinyin": "Nǐ shénme shíhou huílai?", "vi": "Khi nào bạn về?" }
+    ],
+    "mistakes": [{ "wrong": "(đang ở trong nhà) 请进去。", "right": "请进来。", "note": "Mời người khác vào chỗ mình đang ở dùng 来." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "（我在教室里）老师，请进 ___。", "vi": "(Tôi đang ở trong lớp) Thầy ơi, mời vào." }, "options": ["来", "去", "了"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "爸爸不在家，他出 ___ 了。", "vi": "Bố không có nhà, bố ra ngoài rồi." }, "options": ["去", "来", "过"], "answer": 0 },
+      { "type": "reorder", "words": ["回来", "什么时候", "你"], "vi": "Khi nào bạn về?", "answers": ["你什么时候回来？"] },
+      { "type": "error", "options": ["他回家去了。", "请进来坐。", "我在房间里，你进去吧。"], "answer": 2, "explain": "Người nói ở trong phòng thì mời vào bằng 来: 你进来吧。" }
+    ]
+  },
+  {
+    "key": "hsk2-g09",
+    "title": "过: đã từng",
+    "pattern": "Chủ ngữ + Động từ + 过 (+ Tân ngữ) ; Phủ định: 没 + Động từ + 过",
+    "explanation": "过 sau động từ nói về trải nghiệm trong quá khứ: 我去过北京 = tôi từng đến Bắc Kinh. Phủ định: 没(有) + động từ + 过 (giữ 过). Hỏi: …过…吗？",
+    "examples": [
+      { "hanzi": "我去过中国。", "pinyin": "Wǒ qùguo Zhōngguó.", "vi": "Tôi từng đến Trung Quốc." },
+      { "hanzi": "他没吃过羊肉。", "pinyin": "Tā méi chīguo yángròu.", "vi": "Anh ấy chưa từng ăn thịt cừu." },
+      { "hanzi": "你看过这个电影吗？", "pinyin": "Nǐ kànguo zhège diànyǐng ma?", "vi": "Bạn đã xem bộ phim này chưa?" }
+    ],
+    "mistakes": [{ "wrong": "我不去过北京。", "right": "我没去过北京。", "note": "Phủ định của 过 dùng 没." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我学 ___ 两年汉语。", "vi": "Tôi từng học tiếng Trung hai năm." }, "options": ["过", "着", "得"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "她 ___ 去过机场。", "vi": "Cô ấy chưa từng đến sân bay." }, "options": ["没", "不", "别"], "answer": 0 },
+      { "type": "reorder", "words": ["过", "你", "吗", "吃", "鱼"], "vi": "Bạn đã từng ăn cá chưa?", "answers": ["你吃过鱼吗？"] },
+      { "type": "error", "options": ["我吃过面条。", "他不看过这本书。", "我们去过那个饭店。"], "answer": 1, "explain": "Phủ định dùng 没: 他没看过这本书。" }
+    ]
+  },
+  {
+    "key": "hsk2-g10",
+    "title": "Bổ ngữ trạng thái với 得",
+    "pattern": "Chủ ngữ + (Động từ + Tân ngữ) + Động từ + 得 + (很) Tính từ",
+    "explanation": "Đánh giá một hành động làm thế nào: 他跑得很快 = anh ấy chạy rất nhanh. Có tân ngữ thì lặp động từ: 他说汉语说得很好 (hoặc bỏ động từ đầu: 他汉语说得很好). Phủ định: 得 + 不 + tính từ.",
+    "examples": [
+      { "hanzi": "他跑得很快。", "pinyin": "Tā pǎo de hěn kuài.", "vi": "Anh ấy chạy rất nhanh." },
+      { "hanzi": "她唱歌唱得非常好。", "pinyin": "Tā chànggē chàng de fēicháng hǎo.", "vi": "Cô ấy hát vô cùng hay." },
+      { "hanzi": "我起得不早。", "pinyin": "Wǒ qǐ de bù zǎo.", "vi": "Tôi dậy không sớm." }
+    ],
+    "mistakes": [{ "wrong": "他说汉语得很好。", "right": "他说汉语说得很好。", "note": "Có tân ngữ thì phải lặp động từ trước 得." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "你说 ___ 很对。", "vi": "Bạn nói rất đúng." }, "options": ["得", "的", "了"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他跳舞跳得 ___。", "vi": "Anh ấy nhảy không đẹp." }, "options": ["不好", "没好", "好不"], "answer": 0 },
+      { "type": "reorder", "words": ["快", "得", "走", "很", "他"], "vi": "Anh ấy đi rất nhanh.", "answers": ["他走得很快。"] },
+      { "type": "error", "options": ["她游泳游得很好。", "我写字写得很慢。", "他打篮球得很好。"], "answer": 2, "explain": "Lặp động từ: 他打篮球打得很好。" }
+    ]
+  },
+  {
+    "key": "hsk2-g11",
+    "title": "Phỏng đoán và ý kiến: 可能, 觉得",
+    "pattern": "Chủ ngữ + 可能 + Động từ ; Chủ ngữ + 觉得 + Câu",
+    "explanation": "可能 = có lẽ, đứng trước động từ (hoặc đầu câu): 明天可能下雨. 觉得 + một câu = cảm thấy / cho rằng: 我觉得这个菜很好吃.",
+    "examples": [
+      { "hanzi": "明天可能下雪。", "pinyin": "Míngtiān kěnéng xià xuě.", "vi": "Ngày mai có lẽ có tuyết." },
+      { "hanzi": "他可能不来了。", "pinyin": "Tā kěnéng bù lái le.", "vi": "Có lẽ anh ấy không đến nữa." },
+      { "hanzi": "我觉得汉语很有意思。", "pinyin": "Wǒ juéde Hànyǔ hěn yǒu yìsi.", "vi": "Tôi thấy tiếng Trung rất thú vị." }
+    ],
+    "mistakes": [{ "wrong": "明天下雨可能。", "right": "明天可能下雨。", "note": "可能 đứng trước động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "天阴了，___ 要下雨。", "vi": "Trời âm u rồi, có lẽ sắp mưa." }, "options": ["可能", "觉得", "希望"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你 ___ 这件衣服怎么样？", "vi": "Bạn thấy bộ quần áo này thế nào?" }, "options": ["觉得", "可能", "知道"], "answer": 0 },
+      { "type": "reorder", "words": ["累", "觉得", "很", "我"], "vi": "Tôi thấy rất mệt.", "answers": ["我觉得很累。"] },
+      { "type": "error", "options": ["他可能生病了。", "我觉得她很高兴。", "明天晴天可能。"], "answer": 2, "explain": "可能 trước vị ngữ: 明天可能是晴天。" }
+    ]
+  },
+  {
+    "key": "hsk2-g12",
+    "title": "着: trạng thái đang kéo dài",
+    "pattern": "Động từ + 着 (+ Tân ngữ)",
+    "explanation": "着 sau động từ chỉ một trạng thái đang tiếp diễn: 门开着 = cửa đang mở; 他穿着白衣服 = anh ấy đang mặc áo trắng. Thường dùng để miêu tả cảnh, khác với 在 + động từ (đang làm một hành động).",
+    "examples": [
+      { "hanzi": "门开着。", "pinyin": "Mén kāizhe.", "vi": "Cửa đang mở." },
+      { "hanzi": "她穿着红衣服。", "pinyin": "Tā chuānzhe hóng yīfu.", "vi": "Cô ấy đang mặc áo đỏ." },
+      { "hanzi": "他笑着说：“没问题。”", "pinyin": "Tā xiàozhe shuō: “Méi wèntí.”", "vi": "Anh ấy cười nói: “Không vấn đề gì.”" }
+    ],
+    "mistakes": [{ "wrong": "门着开。", "right": "门开着。", "note": "着 đứng ngay sau động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "教室的门开 ___。", "vi": "Cửa lớp học đang mở." }, "options": ["着", "过", "得"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他穿 ___ 一件黑衣服。", "vi": "Anh ấy đang mặc một chiếc áo đen." }, "options": ["着", "得", "完"], "answer": 0 },
+      { "type": "reorder", "words": ["着", "说", "她", "笑"], "vi": "Cô ấy cười nói.", "answers": ["她笑着说。"] },
+      { "type": "error", "options": ["门开着。", "他着穿白衣服。", "她笑着走了。"], "answer": 1, "explain": "着 sau động từ: 他穿着白衣服。" }
+    ]
+  },
+  {
+    "key": "hsk2-g13",
+    "title": "因为 … 所以 … / 虽然 … 但是 …",
+    "pattern": "因为 + Nguyên nhân, 所以 + Kết quả / 虽然 + A, 但是 + B",
+    "explanation": "因为 … 所以 … = vì … nên …; có thể bỏ một vế. 虽然 … 但是 … = tuy … nhưng …. Khác tiếng Việt: hai từ nối thường đi thành cặp.",
+    "examples": [
+      { "hanzi": "因为下雨，所以我没去。", "pinyin": "Yīnwèi xià yǔ, suǒyǐ wǒ méi qù.", "vi": "Vì trời mưa nên tôi không đi." },
+      { "hanzi": "虽然很累，但是我很快乐。", "pinyin": "Suīrán hěn lèi, dànshì wǒ hěn kuàilè.", "vi": "Tuy rất mệt nhưng tôi rất vui." },
+      { "hanzi": "他生病了，所以没来上课。", "pinyin": "Tā shēngbìng le, suǒyǐ méi lái shàngkè.", "vi": "Anh ấy bị ốm nên không đến lớp." }
+    ],
+    "mistakes": [{ "wrong": "虽然很贵，所以我买了。", "right": "虽然很贵，但是我买了。", "note": "虽然 đi với 但是, 因为 đi với 所以." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "因为我很忙，___ 不能去。", "vi": "Vì tôi rất bận nên không đi được." }, "options": ["所以", "但是", "也"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "虽然他很高，___ 他不会打篮球。", "vi": "Tuy anh ấy rất cao nhưng không biết chơi bóng rổ." }, "options": ["但是", "所以", "因为"], "answer": 0 },
+      { "type": "reorder", "words": ["所以", "我", "累", "休息", "了"], "vi": "Tôi mệt rồi nên nghỉ ngơi.", "answers": ["我累了所以休息。", "我累了，所以休息。"] },
+      { "type": "error", "options": ["因为下雪，所以我没出去。", "虽然很便宜，但是我不喜欢。", "虽然很远，所以我们坐出租车。"], "answer": 2, "explain": "虽然 đi với 但是; nói nguyên nhân dùng 因为 … 所以 …: 因为很远，所以我们坐出租车。" }
+    ]
+  },
+  {
+    "key": "hsk2-g14",
+    "title": "Câu so sánh với 比",
+    "pattern": "A + 比 + B + Tính từ (+ một chút / Số lượng)",
+    "explanation": "A 比 B + tính từ = A … hơn B. Không dùng 很, 非常 trước tính từ trong câu 比; muốn nói mức độ dùng 一点儿 (hơn một chút) hoặc số lượng sau tính từ. Phủ định thường dùng 没有: A 没有 B + tính từ.",
+    "examples": [
+      { "hanzi": "今天比昨天冷。", "pinyin": "Jīntiān bǐ zuótiān lěng.", "vi": "Hôm nay lạnh hơn hôm qua." },
+      { "hanzi": "哥哥比我高一点儿。", "pinyin": "Gēge bǐ wǒ gāo yìdiǎnr.", "vi": "Anh trai cao hơn tôi một chút." },
+      { "hanzi": "我比弟弟大三岁。", "pinyin": "Wǒ bǐ dìdi dà sān suì.", "vi": "Tôi lớn hơn em trai ba tuổi." }
+    ],
+    "mistakes": [{ "wrong": "他比我很高。", "right": "他比我高。", "note": "Câu 比 không dùng 很." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这件衣服 ___ 那件贵。", "vi": "Bộ quần áo này đắt hơn bộ kia." }, "options": ["比", "离", "从"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "我比你大 ___。", "vi": "Tôi lớn hơn bạn hai tuổi." }, "options": ["两岁", "两个岁", "二岁"], "answer": 0 },
+      { "type": "reorder", "words": ["比", "近", "我家", "他家"], "vi": "Nhà tôi gần hơn nhà anh ấy.", "answers": ["我家比他家近。"] },
+      { "type": "error", "options": ["火车比公共汽车快。", "妹妹比我非常漂亮。", "今天比昨天热一点儿。"], "answer": 1, "explain": "Không dùng 非常 trong câu 比: 妹妹比我漂亮。" }
+    ]
+  },
+  {
+    "key": "hsk2-g15",
+    "title": "正在 … 呢 và 已经 … 了",
+    "pattern": "Chủ ngữ + 正在 + Động từ (+ 呢) / Chủ ngữ + 已经 + Động từ + 了",
+    "explanation": "正在 (đang) nhấn mạnh hành động đang diễn ra đúng lúc nói; cuối câu thường thêm 呢. 已经 … 了 = đã … rồi, hành động đã hoàn thành.",
+    "examples": [
+      { "hanzi": "他正在上课呢。", "pinyin": "Tā zhèngzài shàngkè ne.", "vi": "Anh ấy đang học đấy." },
+      { "hanzi": "我已经吃饭了。", "pinyin": "Wǒ yǐjing chī fàn le.", "vi": "Tôi đã ăn cơm rồi." },
+      { "hanzi": "电影已经开始了。", "pinyin": "Diànyǐng yǐjing kāishǐ le.", "vi": "Phim đã bắt đầu rồi." }
+    ],
+    "mistakes": [{ "wrong": "我已经吃饭。", "right": "我已经吃饭了。", "note": "已经 thường đi với 了 ở cuối câu." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "妈妈 ___ 做饭呢。", "vi": "Mẹ đang nấu cơm đấy." }, "options": ["正在", "已经", "就"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他已经回家 ___。", "vi": "Anh ấy đã về nhà rồi." }, "options": ["了", "呢", "着"], "answer": 0 },
+      { "type": "reorder", "words": ["完", "我", "已经", "了", "看"], "vi": "Tôi đã xem xong rồi.", "answers": ["我已经看完了。"] },
+      { "type": "error", "options": ["她正在洗衣服呢。", "我们已经到机场了。", "他正在睡觉了。"], "answer": 2, "explain": "正在 đi với 呢, không đi với 了: 他正在睡觉呢。" }
+    ]
+  }
+]

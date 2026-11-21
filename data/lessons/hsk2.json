@@ -1,0 +1,17 @@
+[
+  { "order": 1, "title": "Gia đình và mọi người", "topic": "family", "words": ["哥哥", "姐姐", "弟弟", "妹妹", "丈夫", "妻子", "孩子", "男", "女", "大家", "您"], "grammar": ["hsk2-g01"] },
+  { "order": 2, "title": "Sức khỏe", "topic": "health", "words": ["身体", "眼睛", "生病", "药", "累", "休息", "起床", "笑", "高", "快乐"], "grammar": ["hsk2-g02"] },
+  { "order": 3, "title": "Màu sắc và miêu tả", "topic": "description", "words": ["白", "黑", "红", "颜色", "长", "新", "真", "最", "非常", "贵", "便宜"], "grammar": ["hsk2-g03"] },
+  { "order": 4, "title": "Con số và thời gian", "topic": "numbers-time", "words": ["百", "千", "两", "第一", "小时", "时间", "去年", "晚上", "早上", "号"], "grammar": ["hsk2-g04"] },
+  { "order": 5, "title": "Ở nhà hàng", "topic": "restaurant", "words": ["好吃", "鸡蛋", "面条", "牛奶", "咖啡", "羊肉", "鱼", "西瓜", "饭店", "服务员"], "grammar": ["hsk2-g05"] },
+  { "order": 6, "title": "Mua sắm và quà tặng", "topic": "shopping", "words": ["卖", "件", "票", "手表", "手机", "铅笔", "报纸", "送", "给", "找"], "grammar": ["hsk2-g06"] },
+  { "order": 7, "title": "Đi lại", "topic": "travel", "words": ["公共汽车", "机场", "宾馆", "路", "远", "近", "离", "往", "走", "到", "旅游"], "grammar": ["hsk2-g07"] },
+  { "order": 8, "title": "Vị trí và phương hướng", "topic": "position", "words": ["旁边", "左边", "右边", "外", "门", "房间", "教室", "进", "出", "从"], "grammar": ["hsk2-g08"] },
+  { "order": 9, "title": "Học tập và công việc", "topic": "study-work", "words": ["课", "考试", "题", "问题", "问", "懂", "意思", "公司", "上班", "准备"], "grammar": ["hsk2-g09"] },
+  { "order": 10, "title": "Thể thao và sở thích", "topic": "sports", "words": ["运动", "跑步", "游泳", "打篮球", "踢足球", "唱歌", "跳舞", "玩", "快", "慢"], "grammar": ["hsk2-g10"] },
+  { "order": 11, "title": "Thời tiết và cảm nhận", "topic": "weather", "words": ["晴", "阴", "雪", "可能", "觉得", "希望", "穿", "洗", "忙", "事情"], "grammar": ["hsk2-g11"] },
+  { "order": 12, "title": "Hỏi đáp hằng ngày", "topic": "daily", "words": ["吧", "得", "着", "过", "它", "姓", "没有", "哪儿", "说", "一点儿"], "grammar": ["hsk2-g12"] },
+  { "order": 13, "title": "Nối câu", "topic": "connectors", "words": ["因为", "所以", "虽然", "但是", "为什么", "也", "还", "就", "已经", "再"], "grammar": ["hsk2-g13"] },
+  { "order": 14, "title": "Nhờ và bảo", "topic": "requests", "words": ["可以", "要", "比", "别", "让", "告诉", "介绍", "知道", "帮助", "等"], "grammar": ["hsk2-g14"] },
+  { "order": 15, "title": "Đang làm gì", "topic": "in-progress", "words": ["正在", "一起", "一下", "每", "次", "完", "错", "对", "生日", "开始"], "grammar": ["hsk2-g15"] }
+]

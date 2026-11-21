@@ -1,0 +1,230 @@
+[
+  {
+    "key": "hsk2-writing-01",
+    "type": "fill",
+    "sentence": "我每天早上六点起___。",
+    "pinyin": "Wǒ měi tiān zǎoshang liù diǎn qǐchuáng.",
+    "vi": "Sáng nào tôi cũng dậy lúc sáu giờ.",
+    "answer": "床"
+  },
+  {
+    "key": "hsk2-writing-02",
+    "type": "fill",
+    "sentence": "这个西瓜很便___。",
+    "pinyin": "Zhège xīguā hěn piányi.",
+    "vi": "Quả dưa hấu này rất rẻ.",
+    "answer": "宜"
+  },
+  {
+    "key": "hsk2-writing-03",
+    "type": "fill",
+    "sentence": "我哥哥在公___上班。",
+    "pinyin": "Wǒ gēge zài gōngsī shàngbān.",
+    "vi": "Anh tôi đi làm ở công ty.",
+    "answer": "司"
+  },
+  {
+    "key": "hsk2-writing-04",
+    "type": "fill",
+    "sentence": "你喜欢什么颜___？",
+    "pinyin": "Nǐ xǐhuan shénme yánsè?",
+    "vi": "Bạn thích màu gì?",
+    "answer": "色"
+  },
+  {
+    "key": "hsk2-writing-05",
+    "type": "fill",
+    "sentence": "我去过两___北京。",
+    "pinyin": "Wǒ qùguo liǎng cì Běijīng.",
+    "vi": "Tôi đã đến Bắc Kinh hai lần.",
+    "answer": "次"
+  },
+  {
+    "key": "hsk2-writing-06",
+    "type": "fill",
+    "sentence": "他跑得很___。",
+    "pinyin": "Tā pǎo de hěn kuài.",
+    "vi": "Anh ấy chạy rất nhanh.",
+    "answer": "快"
+  },
+  {
+    "key": "hsk2-writing-07",
+    "type": "fill",
+    "sentence": "因为下雨，所___我没去。",
+    "pinyin": "Yīnwèi xià yǔ, suǒyǐ wǒ méi qù.",
+    "vi": "Vì trời mưa nên tôi không đi.",
+    "answer": "以"
+  },
+  {
+    "key": "hsk2-writing-08",
+    "type": "fill",
+    "sentence": "她的眼___很漂亮。",
+    "pinyin": "Tā de yǎnjing hěn piàoliang.",
+    "vi": "Mắt cô ấy rất đẹp.",
+    "answer": "睛"
+  },
+  {
+    "key": "hsk2-writing-09",
+    "type": "reorder",
+    "words": [
+      "比",
+      "我",
+      "高",
+      "哥哥"
+    ],
+    "vi": "Anh trai cao hơn tôi.",
+    "answer": [
+      "哥哥比我高。"
+    ]
+  },
+  {
+    "key": "hsk2-writing-10",
+    "type": "reorder",
+    "words": [
+      "过",
+      "我",
+      "中国",
+      "去"
+    ],
+    "vi": "Tôi đã từng đến Trung Quốc.",
+    "answer": [
+      "我去过中国。"
+    ]
+  },
+  {
+    "key": "hsk2-writing-11",
+    "type": "reorder",
+    "words": [
+      "得",
+      "他",
+      "好",
+      "唱歌",
+      "唱",
+      "很"
+    ],
+    "vi": "Anh ấy hát rất hay.",
+    "answer": [
+      "他唱歌唱得很好。"
+    ]
+  },
+  {
+    "key": "hsk2-writing-12",
+    "type": "reorder",
+    "words": [
+      "已经",
+      "了",
+      "他",
+      "家",
+      "回"
+    ],
+    "vi": "Anh ấy đã về nhà rồi.",
+    "answer": [
+      "他已经回家了。"
+    ]
+  },
+  {
+    "key": "hsk2-writing-13",
+    "type": "reorder",
+    "words": [
+      "一起",
+      "我们",
+      "吧",
+      "去"
+    ],
+    "vi": "Chúng ta cùng đi nhé.",
+    "answer": [
+      "我们一起去吧。"
+    ]
+  },
+  {
+    "key": "hsk2-writing-14",
+    "type": "reorder",
+    "words": [
+      "离",
+      "近",
+      "学校",
+      "我家",
+      "很"
+    ],
+    "vi": "Nhà tôi cách trường rất gần.",
+    "answer": [
+      "我家离学校很近。"
+    ]
+  },
+  {
+    "key": "hsk2-writing-15",
+    "type": "compose",
+    "words": [
+      "喜欢",
+      "游泳"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 喜欢 và 游泳.",
+    "picture": {
+      "emoji": "🏊",
+      "image": "/images/swimming.jpg",
+      "label": "bơi"
+    },
+    "answer": {
+      "hanzi": "我很喜欢游泳。",
+      "pinyin": "Wǒ hěn xǐhuan yóuyǒng.",
+      "vi": "Tôi rất thích bơi."
+    }
+  },
+  {
+    "key": "hsk2-writing-16",
+    "type": "compose",
+    "words": [
+      "比",
+      "贵"
+    ],
+    "hint": "Nhìn tranh, viết một câu so sánh có dùng 比 và 贵.",
+    "picture": {
+      "emoji": "👕",
+      "image": "/images/clothes.jpg",
+      "label": "quần áo"
+    },
+    "answer": {
+      "hanzi": "这件衣服比那件贵。",
+      "pinyin": "Zhè jiàn yīfu bǐ nà jiàn guì.",
+      "vi": "Bộ quần áo này đắt hơn bộ kia."
+    }
+  },
+  {
+    "key": "hsk2-writing-17",
+    "type": "compose",
+    "words": [
+      "正在",
+      "下雪"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 正在 và 下雪.",
+    "picture": {
+      "emoji": "❄️",
+      "image": "/images/snow.jpg",
+      "label": "trời tuyết"
+    },
+    "answer": {
+      "hanzi": "外面正在下雪。",
+      "pinyin": "Wàimiàn zhèngzài xià xuě.",
+      "vi": "Bên ngoài đang có tuyết rơi."
+    }
+  },
+  {
+    "key": "hsk2-writing-18",
+    "type": "compose",
+    "words": [
+      "生日",
+      "送"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 生日 và 送.",
+    "picture": {
+      "emoji": "🎁",
+      "image": "/images/gift.jpg",
+      "label": "quà sinh nhật"
+    },
+    "answer": {
+      "hanzi": "我生日的时候，朋友送我一个手表。",
+      "pinyin": "Wǒ shēngrì de shíhou, péngyou sòng wǒ yí ge shǒubiǎo.",
+      "vi": "Vào sinh nhật tôi, bạn tặng tôi một chiếc đồng hồ."
+    }
+  }
+]

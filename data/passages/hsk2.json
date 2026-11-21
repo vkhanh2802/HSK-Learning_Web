@@ -1,0 +1,190 @@
+[
+  {
+    "key": "hsk2-reading-01",
+    "type": "reading",
+    "title": "Gia đình tôi",
+    "text": "我 家 有 五 个 人 ： 爸爸 、 妈妈 、 哥哥 、 妹妹 和 我 。 爸爸 是 医生 ， 妈妈 在 一 个 公司 上班 。 哥哥 比 我 大 三 岁 ， 他 非常 高 ， 喜欢 打篮球 。 妹妹 八 岁 了 ， 她 最 喜欢 唱歌 和 跳舞 。 我们 一 家 人 都 很 快乐 。",
+    "translation": "Nhà tôi có năm người: bố, mẹ, anh trai, em gái và tôi. Bố là bác sĩ, mẹ làm việc ở một công ty. Anh trai lớn hơn tôi ba tuổi, anh ấy rất cao, thích chơi bóng rổ. Em gái tám tuổi rồi, em thích hát và nhảy nhất. Cả nhà chúng tôi đều rất vui vẻ.",
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "哥哥比我小。", "pinyin": "Gēge bǐ wǒ xiǎo.", "vi": "Anh trai nhỏ tuổi hơn tôi." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "妹妹最喜欢做什么？", "pinyin": "Mèimei zuì xǐhuan zuò shénme?", "vi": "Em gái thích làm gì nhất?" },
+        "options": [{ "hanzi": "唱歌跳舞", "pinyin": "chànggē tiàowǔ" }, { "hanzi": "打篮球", "pinyin": "dǎ lánqiú" }, { "hanzi": "游泳", "pinyin": "yóuyǒng" }],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-02",
+    "type": "dialogue",
+    "title": "Sinh nhật",
+    "text": "小李 ： 今天 是 我 的 生日 。\n小王 ： 生日 快乐 ！ 这 是 我 送 你 的 手表 。\n小李 ： 谢谢 ！ 这 个 手表 真 漂亮 。\n小王 ： 你 喜欢 就 好 。\n小李 ： 我 非常 喜欢 。 晚上 我们 一起 去 饭店 吃 饭 吧 。",
+    "translation": "Tiểu Lý: Hôm nay là sinh nhật mình.\nTiểu Vương: Chúc mừng sinh nhật! Đây là chiếc đồng hồ mình tặng bạn.\nTiểu Lý: Cảm ơn! Chiếc đồng hồ này đẹp thật.\nTiểu Vương: Bạn thích là được.\nTiểu Lý: Mình rất thích. Tối nay chúng mình cùng đi nhà hàng ăn cơm nhé.",
+    "gloss": {
+      "小王": { "p": "Xiǎo Wáng", "vi": "Tiểu Vương (cách gọi thân mật)" },
+      "小李": { "p": "Xiǎo Lǐ", "vi": "Tiểu Lý (cách gọi thân mật)" },
+      "饭": { "p": "fàn", "vi": "cơm, bữa ăn" }
+    },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "小王送小李一个手机。", "pinyin": "Xiǎo Wáng sòng Xiǎo Lǐ yí ge shǒujī.", "vi": "Tiểu Vương tặng Tiểu Lý một chiếc điện thoại." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "他们晚上去哪儿？", "pinyin": "Tāmen wǎnshang qù nǎr?", "vi": "Buổi tối họ đi đâu?" },
+        "options": [{ "hanzi": "饭店", "pinyin": "fàndiàn" }, { "hanzi": "学校", "pinyin": "xuéxiào" }, { "hanzi": "机场", "pinyin": "jīchǎng" }],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-03",
+    "type": "reading",
+    "title": "Thời tiết",
+    "text": "昨天 是 晴 天 ， 天气 非常 好 ， 我 和 朋友 去 外面 跑步 。 今天 天气 不 好 ， 是 阴 天 ， 可能 要 下雨 。 妈妈 让 我 多 穿 一点儿 衣服 。 明天 可能 下 雪 ， 我 希望 明天 能 和 弟弟 一起 去 外面 玩 。",
+    "translation": "Hôm qua trời nắng, thời tiết rất đẹp, tôi và bạn ra ngoài chạy bộ. Hôm nay thời tiết không tốt, trời âm u, có lẽ sắp mưa. Mẹ bảo tôi mặc thêm quần áo. Ngày mai có lẽ có tuyết, tôi hy vọng ngày mai có thể cùng em trai ra ngoài chơi.",
+    "gloss": {
+      "天": { "p": "tiān", "vi": "trời; ngày" },
+      "外面": { "p": "wàimiàn", "vi": "bên ngoài" }
+    },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "今天是晴天。", "pinyin": "Jīntiān shì qíngtiān.", "vi": "Hôm nay trời nắng." }, "answer": false },
+      {
+        "type": "picture",
+        "sentence": { "hanzi": "明天可能下雪。", "pinyin": "Míngtiān kěnéng xià xuě.", "vi": "Ngày mai có lẽ có tuyết." },
+        "options": [
+          { "emoji": "☀️", "image": "/images/sunny.webp", "label": "trời nắng" },
+          { "emoji": "❄️", "image": "/images/snow.jpg", "label": "trời tuyết" },
+          { "emoji": "🌧️", "image": "/images/rain.webp", "label": "trời mưa" }
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-04",
+    "type": "dialogue",
+    "title": "Đi sân bay",
+    "text": "小王 ： 你 什么 时候 去 机场 ？\n小李 ： 明天 早上 八 点 。 我 的 飞机 是 十 点 的 。\n小王 ： 机场 离 你 家 远 吗 ？\n小李 ： 很 远 ， 坐 出租车 要 一 个 小时 。\n小王 ： 你 去 哪儿 旅游 ？\n小李 ： 北京 。 我 去 过 一 次 ， 这 是 第二 次 。",
+    "translation": "Tiểu Vương: Khi nào bạn đi sân bay?\nTiểu Lý: Tám giờ sáng mai. Chuyến bay của mình lúc mười giờ.\nTiểu Vương: Sân bay cách nhà bạn có xa không?\nTiểu Lý: Rất xa, đi taxi mất một tiếng.\nTiểu Vương: Bạn đi du lịch ở đâu?\nTiểu Lý: Bắc Kinh. Mình đã đến một lần, đây là lần thứ hai.",
+    "gloss": {
+      "小王": { "p": "Xiǎo Wáng", "vi": "Tiểu Vương (cách gọi thân mật)" },
+      "小李": { "p": "Xiǎo Lǐ", "vi": "Tiểu Lý (cách gọi thân mật)" },
+      "第二": { "p": "dì-èr", "vi": "thứ hai" }
+    },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "小李的飞机是八点的。", "pinyin": "Xiǎo Lǐ de fēijī shì bā diǎn de.", "vi": "Chuyến bay của Tiểu Lý lúc tám giờ." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "以前小李去过几次北京？", "pinyin": "Yǐqián Xiǎo Lǐ qùguo jǐ cì Běijīng?", "vi": "Trước đây Tiểu Lý đã đến Bắc Kinh mấy lần?" },
+        "options": [{ "hanzi": "一次", "pinyin": "yí cì" }, { "hanzi": "两次", "pinyin": "liǎng cì" }, { "hanzi": "三次", "pinyin": "sān cì" }],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-05",
+    "type": "reading",
+    "title": "Một ngày đi làm",
+    "text": "我 每 天 早上 六 点 起床 。 七 点 我 吃 两 个 鸡蛋 ， 喝 牛奶 。 八 点 我 坐 公共汽车 去 公司 上班 。 我 的 工作 很 忙 ， 但是 我 很 喜欢 。 晚上 回 家 ， 我 看 一 个 小时 电视 ， 十一 点 睡觉 。",
+    "translation": "Mỗi ngày tôi dậy lúc sáu giờ sáng. Bảy giờ tôi ăn hai quả trứng, uống sữa. Tám giờ tôi đi xe buýt đến công ty làm việc. Công việc của tôi rất bận nhưng tôi rất thích. Buổi tối về nhà, tôi xem tivi một tiếng, mười một giờ đi ngủ.",
+    "gloss": { "天": { "p": "tiān", "vi": "ngày" }, "十一": { "p": "shíyī", "vi": "mười một" } },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "他坐出租车去上班。", "pinyin": "Tā zuò chūzūchē qù shàngbān.", "vi": "Anh ấy đi taxi đi làm." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "他晚上看多长时间电视？", "pinyin": "Tā wǎnshang kàn duō cháng shíjiān diànshì?", "vi": "Buổi tối anh ấy xem tivi bao lâu?" },
+        "options": [{ "hanzi": "一个小时", "pinyin": "yí ge xiǎoshí" }, { "hanzi": "两个小时", "pinyin": "liǎng ge xiǎoshí" }, { "hanzi": "三个小时", "pinyin": "sān ge xiǎoshí" }],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-06",
+    "type": "dialogue",
+    "title": "Gọi món",
+    "text": "服务员 ： 您 好 ！ 您 想 吃 什么 ？\n先生 ： 我 要 一 个 面条 和 一 个 鱼 。 这儿 的 鱼 好吃 吗 ？\n服务员 ： 非常 好吃 ！ 您 喝 茶 吗 ？\n先生 ： 不 ， 我 喝 咖啡 。 多少 钱 ？\n服务员 ： 一 百 二 十 块 。",
+    "translation": "Phục vụ: Chào ông! Ông muốn ăn gì ạ?\nÔng khách: Cho tôi một bát mì và một món cá. Cá ở đây có ngon không?\nPhục vụ: Rất ngon ạ! Ông có uống trà không?\nÔng khách: Không, tôi uống cà phê. Bao nhiêu tiền?\nPhục vụ: Một trăm hai mươi đồng.",
+    "gloss": { "这儿": { "p": "zhèr", "vi": "ở đây, chỗ này" } },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "先生要喝茶。", "pinyin": "Xiānsheng yào hē chá.", "vi": "Ông khách muốn uống trà." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "先生要吃什么？", "pinyin": "Xiānsheng yào chī shénme?", "vi": "Ông khách muốn ăn gì?" },
+        "options": [{ "hanzi": "面条和鱼", "pinyin": "miàntiáo hé yú" }, { "hanzi": "米饭和鱼", "pinyin": "mǐfàn hé yú" }, { "hanzi": "面条和羊肉", "pinyin": "miàntiáo hé yángròu" }],
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-07",
+    "type": "reading",
+    "title": "Chuẩn bị thi",
+    "text": "明天 我们 有 汉语 考试 ， 所以 今天 晚上 我 要 准备 考试 。 虽然 我 学习 汉语 已经 两 年 了 ， 但是 还 有 很 多 字 我 不 认识 。 老师 让 我 每 天 读 书 、 写 字 。 我 希望 明天 的 考试 没 问题 。",
+    "translation": "Ngày mai chúng tôi có bài thi tiếng Trung, nên tối nay tôi phải ôn thi. Tuy tôi đã học tiếng Trung hai năm rồi, nhưng vẫn còn nhiều chữ tôi chưa biết. Thầy giáo bảo tôi mỗi ngày đọc sách, viết chữ. Tôi hy vọng bài thi ngày mai không có vấn đề gì.",
+    "gloss": { "天": { "p": "tiān", "vi": "ngày" } },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "明天有汉语考试。", "pinyin": "Míngtiān yǒu Hànyǔ kǎoshì.", "vi": "Ngày mai có bài thi tiếng Trung." }, "answer": true },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "他学习汉语多长时间了？", "pinyin": "Tā xuéxí Hànyǔ duō cháng shíjiān le?", "vi": "Anh ấy học tiếng Trung bao lâu rồi?" },
+        "options": [{ "hanzi": "一年", "pinyin": "yì nián" }, { "hanzi": "两年", "pinyin": "liǎng nián" }, { "hanzi": "三年", "pinyin": "sān nián" }],
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-08",
+    "type": "dialogue",
+    "title": "Mua quần áo",
+    "text": "小李 ： 这 件 衣服 有 黑 的 吗 ？\n服务员 ： 有 ， 您 等 一下 。 这 件 怎么样 ？\n小李 ： 颜色 很 好 。 多少 钱 ？\n服务员 ： 三 百 块 。\n小李 ： 太 贵 了 ， 便宜 一点儿 吧 。\n服务员 ： 两 百 块 ， 可以 吗 ？\n小李 ： 好 ， 我 买 了 。",
+    "translation": "Tiểu Lý: Bộ quần áo này có màu đen không?\nPhục vụ: Có, chị đợi một chút. Bộ này thế nào?\nTiểu Lý: Màu đẹp lắm. Bao nhiêu tiền?\nPhục vụ: Ba trăm đồng.\nTiểu Lý: Đắt quá, rẻ hơn chút đi.\nPhục vụ: Hai trăm đồng, được không?\nTiểu Lý: Được, tôi mua.",
+    "gloss": { "小李": { "p": "Xiǎo Lǐ", "vi": "Tiểu Lý (cách gọi thân mật)" } },
+    "questions": [
+      {
+        "type": "mcq",
+        "question": { "hanzi": "小李买的衣服多少钱？", "pinyin": "Xiǎo Lǐ mǎi de yīfu duōshao qián?", "vi": "Bộ quần áo Tiểu Lý mua giá bao nhiêu?" },
+        "options": [{ "hanzi": "两百块", "pinyin": "liǎngbǎi kuài" }, { "hanzi": "三百块", "pinyin": "sānbǎi kuài" }, { "hanzi": "一百块", "pinyin": "yìbǎi kuài" }],
+        "answer": 0
+      },
+      { "type": "tf", "statement": { "hanzi": "小李想买白的衣服。", "pinyin": "Xiǎo Lǐ xiǎng mǎi bái de yīfu.", "vi": "Tiểu Lý muốn mua quần áo màu trắng." }, "answer": false }
+    ]
+  },
+  {
+    "key": "hsk2-reading-09",
+    "type": "reading",
+    "title": "Thể thao",
+    "text": "我 哥哥 非常 喜欢 运动 。 他 每 天 早上 都 去 跑步 ， 下午 和 同学 一起 打篮球 。 他 跑步 非常 快 。 我 不 喜欢 跑步 ， 我 最 喜欢 游泳 。 我 每 个 星期 去 游泳 两 次 。",
+    "translation": "Anh trai tôi rất thích thể thao. Sáng nào anh ấy cũng đi chạy bộ, buổi chiều chơi bóng rổ cùng bạn học. Anh ấy chạy rất nhanh. Tôi không thích chạy bộ, tôi thích bơi nhất. Mỗi tuần tôi đi bơi hai lần.",
+    "gloss": { "天": { "p": "tiān", "vi": "ngày" } },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "哥哥最喜欢游泳。", "pinyin": "Gēge zuì xǐhuan yóuyǒng.", "vi": "Anh trai thích bơi nhất." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "“我”每个星期游泳几次？", "pinyin": "“Wǒ” měi ge xīngqī yóuyǒng jǐ cì?", "vi": "“Tôi” mỗi tuần bơi mấy lần?" },
+        "options": [{ "hanzi": "一次", "pinyin": "yí cì" }, { "hanzi": "两次", "pinyin": "liǎng cì" }, { "hanzi": "三次", "pinyin": "sān cì" }],
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "key": "hsk2-reading-10",
+    "type": "dialogue",
+    "title": "Hỏi đường",
+    "text": "小王 ： 请 问 ， 医院 在 哪儿 ？\n小李 ： 往 前面 走 ， 医院 在 一 个 商店 旁边 。\n小王 ： 离 这儿 远 吗 ？\n小李 ： 不 远 ， 走 十 分钟 就 到 了 。\n小王 ： 谢谢 你 ！\n小李 ： 不客气 。",
+    "translation": "Tiểu Vương: Xin hỏi, bệnh viện ở đâu?\nTiểu Lý: Đi thẳng về phía trước, bệnh viện ở bên cạnh một cửa hàng.\nTiểu Vương: Có xa đây không?\nTiểu Lý: Không xa, đi bộ mười phút là đến.\nTiểu Vương: Cảm ơn bạn!\nTiểu Lý: Không có gì.",
+    "gloss": {
+      "小王": { "p": "Xiǎo Wáng", "vi": "Tiểu Vương (cách gọi thân mật)" },
+      "小李": { "p": "Xiǎo Lǐ", "vi": "Tiểu Lý (cách gọi thân mật)" },
+      "这儿": { "p": "zhèr", "vi": "ở đây, chỗ này" }
+    },
+    "questions": [
+      { "type": "tf", "statement": { "hanzi": "医院离这儿很远。", "pinyin": "Yīyuàn lí zhèr hěn yuǎn.", "vi": "Bệnh viện cách đây rất xa." }, "answer": false },
+      {
+        "type": "mcq",
+        "question": { "hanzi": "医院在哪儿？", "pinyin": "Yīyuàn zài nǎr?", "vi": "Bệnh viện ở đâu?" },
+        "options": [{ "hanzi": "商店旁边", "pinyin": "shāngdiàn pángbiān" }, { "hanzi": "学校左边", "pinyin": "xuéxiào zuǒbian" }, { "hanzi": "机场右边", "pinyin": "jīchǎng yòubian" }],
+        "answer": 0
+      }
+    ]
+  }
+]

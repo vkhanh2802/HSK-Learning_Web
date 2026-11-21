@@ -355,11 +355,27 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 
 ## Phase 10 — Mở rộng HSK3–4
 
-- [ ] Duyệt nghĩa Việt + ví dụ cho từ HSK3 (600) và HSK4 (1200)
-- [ ] Chia bài, seed lại
-- [ ] Bài nghe/đọc/ngữ pháp cho HSK3–4 (lặp lại quy trình Phase 5–7)
-- [ ] Mặc định tắt pinyin từ HSK3
-- [ ] Kiểm tra hiệu năng ôn tập khi có >2000 thẻ (đánh index `ReviewCard.due`)
+Làm theo từng cấp. Người dùng chọn: HSK2–4 theo **danh sách chính thức HSK 2012**; HSK1 giữ danh sách hiện tại.
+
+### Nguồn dữ liệu
+- [x] Tải `data/raw/hsk2012-l2.tsv`, `-l3.tsv`, `-l4.tsv` (glxxyz/hskhsk.com, MIT; 150 / 300 / 600 từ; cột: giản thể, phồn thể, số, pinyin, nghĩa Anh)
+- [x] Seed: HSK1 đọc `data/raw/hsk1.json`, HSK2–4 đọc file 2012 (bộ thủ vẫn tra từ dữ liệu drkameleon); bỏ từ đã có ở cấp dưới (4 từ L2 trùng HSK1 hiện tại: 火车站 零 日 说话); cho phép từ ngoài danh sách nếu đánh dấu `"extra": true`; chữ đã tạo ở cấp dưới giữ nguyên cách đọc (không bị 好吃 ghi đè 好)
+
+### HSK2 — xong
+- [x] Từ vựng `data/vocab/hsk2.json`: 147 từ L2 + 6 từ HSK1 bản 2012 chưa có ở HSK1 hiện tại (饭店 号 没有 哪儿 说 一点儿, `extra`) = 153 từ, nghĩa Việt + loại từ + 1 câu ví dụ dùng từ HSK1–2 — do Claude soạn, **cần duyệt**
+- [x] 15 bài theo chủ đề (`data/lessons/hsk2.json`, 10–11 từ/bài)
+- [x] 15 điểm ngữ pháp, 60 bài (`data/grammar/hsk2.json`): 两/二, 了 thay đổi, phó từ mức độ, thời lượng, 要/吧, 给 + hai tân ngữ, 离 / 从…到…, bổ ngữ xu hướng 来/去, 过, bổ ngữ trạng thái 得, 可能/觉得, 着, 因为…所以… / 虽然…但是…, 比, 正在…呢 / 已经…了 — seed đã bắt được 1 bài sắp xếp sai (游泳 là động từ ly hợp: 你游过泳吗) và đã sửa
+- [x] 20 bài nghe, 10 bài đọc (70–100 chữ, qua kiểm tra từ vượt cấp HSK1–2), 18 bài viết. Thêm 9 ảnh CC0/Public Domain qua Openverse cho tranh mới (bóng đá, bơi, trứng, mì, dưa hấu, bóng rổ, cà phê, quần áo, quà) — nguồn trong `public/images/CREDITS.md`; không còn tranh nào chỉ có emoji.
+- [x] Trang Luyện viết có chọn cấp (`?level=`), luyện gõ dùng từ ≤ cấp đang chọn; Luyện nghe, Bài đọc, Ngữ pháp, Luyện nói, Học, dashboard tự hiện HSK2
+
+### HSK3, HSK4 — chưa làm
+- [ ] HSK3 (300 từ) — đợt sau, cùng quy trình
+- [ ] HSK4 (600 từ) — đợt sau
+- [ ] Dạng bài để dành: hội thoại dài (nghe), điền từ / sắp xếp đoạn (đọc), viết đoạn ngắn, trả lời bằng giọng nói
+- [x] Mặc định tắt pinyin từ HSK3 (trình đọc: `pinyinDefault = level <= 2`, có từ Phase 6)
+- [ ] Kiểm tra hiệu năng ôn tập khi có >2000 thẻ (`ReviewCard.due` đã có index từ Phase 2) — làm khi có đủ HSK3–4
+
+> Xác minh HSK2: seed `HSK2: 153 từ, 212 chữ, 15 bài` + 15 điểm ngữ pháp/60 bài + 10 bài đọc + 20 nghe + 18 viết; cách đọc chữ dùng chung giữ đúng (好 hǎo, 长 cháng…); 56 test, lint, `tsc --noEmit`, build đạt; trên dev server `/`, `/learn/2`, `/grammar`, `/reading`, `/listening?level=2`, `/writing?level=2`, `/speaking`, bài học/ngữ pháp/bài đọc đầu tiên của HSK2 đều 200 và hiện đúng nội dung (bài đọc HSK2 có pinyin ruby).
 
 **Tiêu chí hoàn thành:** đủ dữ liệu HSK1–4, mọi trang chạy với cả 4 cấp.
 

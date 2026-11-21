@@ -1,7 +1,8 @@
 // Nạp dữ liệu HSK vào SQLite. Chạy: npx prisma db seed (an toàn khi chạy lại nhiều lần).
 //
 // Nguồn:
-//   data/raw/hskN.json     — danh sách từ HSK 2.0 gốc (drkameleon/complete-hsk-vocabulary, MIT): nghĩa tiếng Anh, bộ thủ
+//   data/raw/hsk1.json     — danh sách từ HSK1 (drkameleon/complete-hsk-vocabulary, MIT); data/raw/hskN.json còn dùng để tra bộ thủ
+//   data/raw/hsk2012-lN.tsv — danh sách chính thức HSK 2012 cấp 2–4 (glxxyz/hskhsk.com, MIT): nghĩa tiếng Anh
 //   data/vocab/hskN.json   — tự soạn: pinyin chuẩn (tách âm tiết bằng dấu cách), nghĩa Việt, loại từ, câu ví dụ
 //   data/lessons/hskN.json — chia bài theo chủ đề
 //   data/exercises/hskN-skill.json — bài tập (nghe, đọc, …), định dạng ở src/lib/exercises.ts
@@ -27,11 +28,37 @@ type VocabEntry = {
   pos: string;
   vi: string;
   example: { hanzi: string; pinyin: string; vi: string };
+  extra?: boolean; // từ ngoài danh sách gốc của cấp (vd. từ HSK1 bản 2012 chưa có ở HSK1 hiện tại)
 };
 type LessonEntry = { order: number; title: string; topic: string; words: string[]; grammar?: string[] };
 
 const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
 const plain = (pinyin: string) => pinyin.replace(/[\s']/g, "").toLowerCase();
+
+// Danh sách cũ (drkameleon) — HSK1 dùng làm danh sách từ, các cấp khác chỉ để tra bộ thủ.
+const drkameleon = new Map(
+  [1, 2, 3, 4].flatMap((n) => readJson<RawWord[]>(`data/raw/hsk${n}.json`)).map((w) => [w.simplified, w]),
+);
+
+/**
+ * Danh sách từ gốc của một cấp: HSK1 theo data/raw/hsk1.json (người dùng chọn giữ), HSK2–4 theo danh sách
+ * chính thức 2012 data/raw/hsk2012-lN.tsv (glxxyz/hskhsk.com, MIT): chữ giản thể, phồn thể, số, pinyin, nghĩa Anh.
+ */
+function rawWords(level: number): RawWord[] {
+  if (level === 1) return readJson<RawWord[]>("data/raw/hsk1.json");
+  return readFileSync(`data/raw/hsk2012-l${level}.tsv`, "utf8")
+    .replace(/^﻿/, "")
+    .split(/\r?\n/)
+    .filter(Boolean)
+    .map((line) => {
+      const [simplified, , , pinyin, en] = line.split("\t");
+      return {
+        simplified,
+        radical: drkameleon.get(simplified)?.radical,
+        forms: [{ transcriptions: { pinyin }, meanings: [en] }],
+      };
+    });
+}
 
 async function seedLevel(level: number) {
   const vocabPath = `data/vocab/hsk${level}.json`;
@@ -41,7 +68,13 @@ async function seedLevel(level: number) {
     return;
   }
 
-  const raw = new Map(readJson<RawWord[]>(`data/raw/hsk${level}.json`).map((w) => [w.simplified, w]));
+  // Từ đã có ở cấp dưới (theo dữ liệu đã soạn) thì không lặp lại ở cấp này.
+  const lower = new Set(
+    Array.from({ length: level - 1 }, (_, i) => `data/vocab/hsk${i + 1}.json`)
+      .filter(existsSync)
+      .flatMap((f) => Object.keys(readJson<Record<string, VocabEntry>>(f))),
+  );
+  const raw = new Map(rawWords(level).filter((w) => !lower.has(w.simplified)).map((w) => [w.simplified, w]));
   const vocab = readJson<Record<string, VocabEntry>>(vocabPath);
   const lessons = readJson<LessonEntry[]>(lessonPath);
 
@@ -49,7 +82,8 @@ async function seedLevel(level: number) {
   const errors: string[] = [];
   for (const hanzi of raw.keys()) if (!vocab[hanzi]) errors.push(`thiếu trong ${vocabPath}: ${hanzi}`);
   for (const [hanzi, v] of Object.entries(vocab)) {
-    if (!raw.has(hanzi)) errors.push(`không có trong danh sách gốc: ${hanzi}`);
+    if (!raw.has(hanzi) && !v.extra) errors.push(`không có trong danh sách gốc (thêm "extra": true nếu cố ý): ${hanzi}`);
+    if (lower.has(hanzi)) errors.push(`đã có ở cấp dưới: ${hanzi}`);
     if (v.pinyin.trim().split(/\s+/).length !== [...hanzi].length)
       errors.push(`số âm tiết pinyin khác số chữ: ${hanzi} "${v.pinyin}"`);
   }
@@ -76,7 +110,7 @@ async function seedLevel(level: number) {
       if (!prev || (single && !prev.single))
         charInfo.set(c, {
           pinyin: syllables[i].toLowerCase(),
-          radical: single ? raw.get(hanzi)?.radical : prev?.radical,
+          radical: single ? (raw.get(hanzi) ?? drkameleon.get(hanzi))?.radical : prev?.radical,
           single,
         });
     });
@@ -84,19 +118,25 @@ async function seedLevel(level: number) {
   const charIds = new Map<string, number>();
   for (const [char, info] of charInfo) {
     const data = { pinyin: info.pinyin, radical: info.radical ?? null };
-    const row = await prisma.character.upsert({ where: { char }, update: data, create: { char, ...data } });
+    // Chữ đã tạo ở cấp dưới giữ nguyên cách đọc; chỉ ghi đè khi ở cấp này chữ đứng riêng thành một từ.
+    const existing = await prisma.character.findUnique({ where: { char } });
+    const row = existing
+      ? info.single
+        ? await prisma.character.update({ where: { char }, data })
+        : existing
+      : await prisma.character.create({ data: { char, ...data } });
     charIds.set(char, row.id);
   }
 
   const wordIds = new Map<string, number>();
   for (const [hanzi, v] of Object.entries(vocab)) {
     const pinyin = joinSyllables(v.pinyin.trim().split(/\s+/));
-    const forms = raw.get(hanzi)!.forms;
+    const forms = raw.get(hanzi)?.forms ?? [];
     const form = forms.find((f) => plain(f.transcriptions.pinyin) === plain(pinyin)) ?? forms[0];
     const data = {
       pinyin,
       meaningVi: v.vi,
-      meaningEn: form.meanings.join("; "),
+      meaningEn: form?.meanings.join("; ") ?? null,
       pos: v.pos,
       levelId: level,
       examples: JSON.stringify([v.example]),
