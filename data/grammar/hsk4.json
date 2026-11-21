@@ -1,0 +1,362 @@
+[
+  {
+    "key": "hsk4-g01",
+    "title": "连…都/也…: ngay cả… cũng…",
+    "pattern": "连 + Danh từ / Động từ + 都 / 也 + Vị ngữ",
+    "explanation": "Nhấn mạnh một trường hợp cực đoan để nói các trường hợp khác càng như vậy: 他忙得连饭都没吃 = bận đến mức ngay cả cơm cũng chưa ăn. 连 đứng trước phần được nhấn mạnh, vế sau bắt buộc có 都 hoặc 也.",
+    "examples": [
+      { "hanzi": "这个问题连老师都不知道。", "pinyin": "Zhège wèntí lián lǎoshī dōu bù zhīdào.", "vi": "Câu hỏi này ngay cả thầy cũng không biết." },
+      { "hanzi": "他连一句汉语也不会说。", "pinyin": "Tā lián yí jù Hànyǔ yě bú huì shuō.", "vi": "Anh ấy ngay cả một câu tiếng Trung cũng không biết nói." },
+      { "hanzi": "我累得连话都不想说。", "pinyin": "Wǒ lèi de lián huà dōu bù xiǎng shuō.", "vi": "Tôi mệt đến mức chẳng muốn nói gì." }
+    ],
+    "mistakes": [{ "wrong": "连孩子知道这件事。", "right": "连孩子都知道这件事。", "note": "Có 连 thì vế sau phải có 都 hoặc 也." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "他太粗心了，连自己的名字 ___ 写错了。", "vi": "Anh ấy cẩu thả quá, ngay cả tên mình cũng viết sai." }, "options": ["都", "就", "才"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___ 我妈妈都觉得这个菜太辣了。", "vi": "Ngay cả mẹ tôi cũng thấy món này quá cay." }, "options": ["除了", "连", "对于"], "answer": 1 },
+      { "type": "reorder", "words": ["连", "他", "都", "没吃", "早饭"], "vi": "Anh ấy ngay cả bữa sáng cũng chưa ăn.", "answers": ["他连早饭都没吃。"] },
+      { "type": "error", "options": ["连小孩子都知道。", "他连一分钱也没有。", "连我不知道他去哪儿了。"], "answer": 2, "explain": "Thiếu 都/也: 连我都不知道他去哪儿了。" }
+    ]
+  },
+  {
+    "key": "hsk4-g02",
+    "title": "Câu kiêm ngữ 让 / 使: khiến ai đó…",
+    "pattern": "Sự việc + 让 / 使 + Người + Tính từ / Động từ",
+    "explanation": "让 và 使 = làm cho, khiến: 这个故事让我很感动 = câu chuyện làm tôi rất cảm động. 让 dùng nhiều trong khẩu ngữ (còn có nghĩa “bảo, để”: 妈妈让我早点儿回家); 使 trang trọng hơn, thường đi với tính từ chỉ cảm xúc, trạng thái.",
+    "examples": [
+      { "hanzi": "这个消息让大家很吃惊。", "pinyin": "Zhège xiāoxi ràng dàjiā hěn chījīng.", "vi": "Tin này khiến mọi người rất ngạc nhiên." },
+      { "hanzi": "他的话使我很感动。", "pinyin": "Tā de huà shǐ wǒ hěn gǎndòng.", "vi": "Lời anh ấy làm tôi rất cảm động." },
+      { "hanzi": "别让父母担心。", "pinyin": "Bié ràng fùmǔ dānxīn.", "vi": "Đừng để bố mẹ lo lắng." }
+    ],
+    "mistakes": [{ "wrong": "这件事让很失望我。", "right": "这件事让我很失望。", "note": "Người chịu tác động đứng ngay sau 让/使, rồi mới đến tính từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "考试的结果 ___ 他非常失望。", "vi": "Kết quả thi khiến anh ấy rất thất vọng." }, "options": ["使", "被", "把"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Bộ phim này làm tôi rất cảm động.”" }, "options": ["这个电影让很感动我。", "这个电影让我很感动。", "我让这个电影很感动。"], "answer": 1 },
+      { "type": "reorder", "words": ["让", "这件事", "我", "后悔", "很"], "vi": "Việc này khiến tôi rất hối hận.", "answers": ["这件事让我很后悔。"] },
+      { "type": "error", "options": ["他的话让我很生气。", "音乐使人放松。", "这个消息使很兴奋大家。"], "answer": 2, "explain": "Người đứng sau 使: 这个消息使大家很兴奋。" }
+    ]
+  },
+  {
+    "key": "hsk4-g03",
+    "title": "一点儿也不 / 一点儿都不: chẳng… chút nào",
+    "pattern": "一点儿 + 也 / 都 + 不 / 没 + Tính từ / Động từ",
+    "explanation": "Phủ định hoàn toàn: 这个菜一点儿也不辣 = món này chẳng cay chút nào. 一点儿 đứng trước động từ/tính từ, không đứng sau: không nói 不辣一点儿. Với 没: 我一点儿都没吃 = tôi chẳng ăn chút nào.",
+    "examples": [
+      { "hanzi": "这个汤一点儿也不咸。", "pinyin": "Zhège tāng yìdiǎnr yě bù xián.", "vi": "Món canh này chẳng mặn chút nào." },
+      { "hanzi": "我一点儿都不累。", "pinyin": "Wǒ yìdiǎnr dōu bú lèi.", "vi": "Tôi chẳng mệt chút nào." },
+      { "hanzi": "他一点儿也没变。", "pinyin": "Tā yìdiǎnr yě méi biàn.", "vi": "Anh ấy chẳng thay đổi chút nào." }
+    ],
+    "mistakes": [{ "wrong": "这个菜不辣一点儿。", "right": "这个菜一点儿也不辣。", "note": "一点儿也/都 đứng trước 不 + tính từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这个电影 ___ 不好看。", "vi": "Bộ phim này chẳng hay chút nào." }, "options": ["一点儿也", "有点儿", "一下"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Quả táo này chẳng chua chút nào.”" }, "options": ["这个苹果不酸一点儿。", "这个苹果一点儿也不酸。", "这个苹果有点儿不酸。"], "answer": 1 },
+      { "type": "reorder", "words": ["一点儿", "我", "也", "饿", "不"], "vi": "Tôi chẳng đói chút nào.", "answers": ["我一点儿也不饿。"] },
+      { "type": "error", "options": ["我一点儿也不紧张。", "他一点儿都没吃。", "今天冷一点儿也不。"], "answer": 2, "explain": "Đúng là: 今天一点儿也不冷。" }
+    ]
+  },
+  {
+    "key": "hsk4-g04",
+    "title": "So sánh số lượng: 倍, 百分之",
+    "pattern": "A + 是 + B + 的 + Số + 倍 / A + 比 + B + Tính từ + Số + 倍",
+    "explanation": "倍 = lần, gấp: 今年的收入是去年的两倍 = thu nhập năm nay gấp đôi năm ngoái. 比 + 倍 nói phần tăng thêm: A 比 B 多一倍 = A nhiều hơn B một lần (tức gấp đôi). Phần trăm đọc 百分之 + số: 百分之二十 = 20%. 倍 chỉ dùng để nói tăng, giảm thì dùng 百分之: 减少了百分之十.",
+    "examples": [
+      { "hanzi": "这个房子的价格是那个的三倍。", "pinyin": "Zhège fángzi de jiàgé shì nàge de sān bèi.", "vi": "Giá căn nhà này gấp ba căn kia." },
+      { "hanzi": "百分之九十的学生都通过了。", "pinyin": "Bǎifēnzhī jiǔshí de xuésheng dōu tōngguò le.", "vi": "90% học sinh đều đã đỗ." },
+      { "hanzi": "今年的顾客比去年多了一倍。", "pinyin": "Jīnnián de gùkè bǐ qùnián duō le yí bèi.", "vi": "Khách năm nay nhiều gấp đôi năm ngoái." }
+    ],
+    "mistakes": [{ "wrong": "价格降低了两倍。", "right": "价格降低了百分之五十。", "note": "倍 chỉ dùng khi tăng; khi giảm dùng phần trăm." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "他的工资是我的两 ___。", "vi": "Lương của anh ấy gấp đôi của tôi." }, "options": ["倍", "次", "遍"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "“30%” 怎么说？", "vi": "“30%” nói thế nào?" }, "options": ["三十百分", "百分之三十", "三十分之百"], "answer": 1 },
+      { "type": "reorder", "words": ["是", "收入", "的", "今年", "去年", "两倍", "的"], "vi": "Thu nhập năm nay gấp đôi năm ngoái.", "answers": ["今年的收入是去年的两倍。"] },
+      { "type": "error", "options": ["这本书是那本的两倍厚。", "价格减少了三倍。", "百分之六十的人同意。"], "answer": 1, "explain": "Giảm thì dùng phần trăm, vd. 价格减少了百分之三十。" }
+    ]
+  },
+  {
+    "key": "hsk4-g05",
+    "title": "Câu 把 với kết quả: 把…V进/到/给/成",
+    "pattern": "Chủ ngữ + 把 + Tân ngữ + Động từ + 进 / 到 / 给 / 成 + …",
+    "explanation": "Khi vật được chuyển đến đâu, đưa cho ai hoặc biến thành gì, câu thường dùng 把: 把垃圾扔进垃圾桶 (vứt rác vào thùng), 把钥匙放到桌子上 (để chìa khóa lên bàn), 把书还给他 (trả sách cho anh ấy), 把这句话翻译成中文 (dịch câu này thành tiếng Trung).",
+    "examples": [
+      { "hanzi": "请把垃圾扔进垃圾桶。", "pinyin": "Qǐng bǎ lājī rēng jìn lājītǒng.", "vi": "Hãy vứt rác vào thùng rác." },
+      { "hanzi": "我把钥匙忘在家里了。", "pinyin": "Wǒ bǎ yàoshi wàng zài jiā lǐ le.", "vi": "Tôi để quên chìa khóa ở nhà rồi." },
+      { "hanzi": "请把这篇文章翻译成中文。", "pinyin": "Qǐng bǎ zhè piān wénzhāng fānyì chéng Zhōngwén.", "vi": "Hãy dịch bài văn này sang tiếng Trung." }
+    ],
+    "mistakes": [{ "wrong": "我放钥匙在桌子上。", "right": "我把钥匙放在桌子上。", "note": "Đặt vật vào chỗ nào dùng câu 把: 把 + vật + 放在 + nơi chốn." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "请把这些衣服挂 ___ 外面。", "vi": "Hãy treo quần áo này ra ngoài." }, "options": ["在", "成", "给"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他把美元换 ___ 了人民币。", "vi": "Anh ấy đổi đô la thành nhân dân tệ." }, "options": ["到", "成", "进"], "answer": 1 },
+      { "type": "reorder", "words": ["把", "我", "还给", "书", "他了"], "vi": "Tôi đã trả sách cho anh ấy.", "answers": ["我把书还给他了。"] },
+      { "type": "error", "options": ["我把手机放在包里了。", "请把这句话翻译成英语。", "我放杯子在桌子上了。"], "answer": 2, "explain": "Dùng câu 把: 我把杯子放在桌子上了。" }
+    ]
+  },
+  {
+    "key": "hsk4-g06",
+    "title": "Động từ + 起来: 看起来, 想起来, 说起来",
+    "pattern": "看 / 听 / 说 / 想 + 起来",
+    "explanation": "起来 sau động từ có nhiều nghĩa mở rộng. 看起来 / 听起来 = trông có vẻ, nghe có vẻ: 你看起来很累. 想起来 = nhớ ra: 我想起来了. 说起来 = nói ra thì, nhắc tới thì. Ngoài ra 起来 còn chỉ bắt đầu: 大家笑起来了 (mọi người bắt đầu cười).",
+    "examples": [
+      { "hanzi": "你看起来很年轻。", "pinyin": "Nǐ kàn qilai hěn niánqīng.", "vi": "Bạn trông rất trẻ." },
+      { "hanzi": "这个主意听起来不错。", "pinyin": "Zhège zhǔyi tīng qilai búcuò.", "vi": "Ý này nghe có vẻ hay đấy." },
+      { "hanzi": "我想起来了，他叫小王。", "pinyin": "Wǒ xiǎng qilai le, tā jiào Xiǎo Wáng.", "vi": "Tôi nhớ ra rồi, anh ấy tên Tiểu Vương." }
+    ],
+    "mistakes": [{ "wrong": "他起来看很高兴。", "right": "他看起来很高兴。", "note": "起来 đứng sau động từ: 看起来." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这个蛋糕看 ___ 很好吃。", "vi": "Cái bánh này trông có vẻ ngon." }, "options": ["起来", "出来", "下去"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他的名字我一下子想不 ___ 了。", "vi": "Tên anh ấy tôi nhất thời không nhớ ra." }, "options": ["上来", "起来", "过来"], "answer": 1 },
+      { "type": "reorder", "words": ["起来", "你", "看", "很累"], "vi": "Bạn trông rất mệt.", "answers": ["你看起来很累。"] },
+      { "type": "error", "options": ["这件衣服穿起来很舒服。", "听起来很有意思。", "他很健康看起来。"], "answer": 2, "explain": "Đúng là: 他看起来很健康。" }
+    ]
+  },
+  {
+    "key": "hsk4-g07",
+    "title": "要是…（的话），就…: nếu… thì…",
+    "pattern": "要是 + Điều kiện + (的话)，(Chủ ngữ) + 就 + Kết quả",
+    "explanation": "要是 = 如果, dùng nhiều trong khẩu ngữ. Cuối vế điều kiện thường thêm 的话. Có thể bỏ 要是, chỉ giữ 的话: 堵车的话，我们就坐地铁. Vế sau thường có 就.",
+    "examples": [
+      { "hanzi": "要是堵车的话，我们就坐地铁吧。", "pinyin": "Yàoshi dǔchē dehuà, wǒmen jiù zuò dìtiě ba.", "vi": "Nếu tắc đường thì chúng ta đi tàu điện ngầm." },
+      { "hanzi": "要是来不及，你就先走吧。", "pinyin": "Yàoshi lái bu jí, nǐ jiù xiān zǒu ba.", "vi": "Nếu không kịp thì bạn cứ đi trước." },
+      { "hanzi": "你有空的话，来我家玩儿吧。", "pinyin": "Nǐ yǒu kòng dehuà, lái wǒ jiā wánr ba.", "vi": "Bạn rảnh thì đến nhà tôi chơi nhé." }
+    ],
+    "mistakes": [{ "wrong": "要是你迷路了，才给我打电话。", "right": "要是你迷路了，就给我打电话。", "note": "要是 đi với 就, không đi với 才." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "要是明天下雨，我们 ___ 不去了。", "vi": "Nếu mai mưa thì chúng ta không đi nữa." }, "options": ["才", "就", "也"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "你累 ___，就休息一会儿。", "vi": "Nếu mệt thì nghỉ một lát." }, "options": ["的话", "以后", "的时候了"], "answer": 0 },
+      { "type": "reorder", "words": ["要是", "就", "你", "不舒服", "回家吧"], "vi": "Nếu bạn không khỏe thì về nhà đi.", "answers": ["要是你不舒服就回家吧。", "你要是不舒服就回家吧。"] },
+      { "type": "error", "options": ["要是有问题，就问我。", "要是你去的话，我也去。", "要是你不来，我才走。"], "answer": 2, "explain": "要是 đi với 就: 要是你不来，我就走。" }
+    ]
+  },
+  {
+    "key": "hsk4-g08",
+    "title": "既然…就…: đã… thì…",
+    "pattern": "既然 + Sự thật đã biết，(Chủ ngữ) + 就 + Kết luận / Đề nghị",
+    "explanation": "既然 nêu một sự thật cả hai bên đều biết, vế sau rút ra kết luận hoặc đề nghị: 既然你不舒服，就早点儿休息吧. Khác 如果 (giả định, chưa chắc xảy ra): 既然 là điều đã xảy ra, đã chắc chắn.",
+    "examples": [
+      { "hanzi": "既然来了北京，就去长城看看吧。", "pinyin": "Jìrán lái le Běijīng, jiù qù Chángchéng kànkan ba.", "vi": "Đã đến Bắc Kinh thì đi xem Vạn Lý Trường Thành đi." },
+      { "hanzi": "既然你不喜欢，就别买了。", "pinyin": "Jìrán nǐ bù xǐhuan, jiù bié mǎi le.", "vi": "Bạn đã không thích thì đừng mua nữa." },
+      { "hanzi": "既然签证办好了，我们就出发吧。", "pinyin": "Jìrán qiānzhèng bàn hǎo le, wǒmen jiù chūfā ba.", "vi": "Visa đã làm xong rồi thì chúng ta xuất phát thôi." }
+    ],
+    "mistakes": [{ "wrong": "既然明天可能下雨，我们就不去了。", "right": "如果明天下雨，我们就不去了。", "note": "Điều chưa chắc xảy ra dùng 如果; 既然 dùng cho sự thật đã biết." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "___ 你已经决定了，我就不说什么了。", "vi": "Bạn đã quyết định rồi thì tôi không nói gì nữa." }, "options": ["既然", "虽然", "即使"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "既然时间来不及了，我们 ___ 坐出租车吧。", "vi": "Đã không kịp giờ thì chúng ta đi taxi đi." }, "options": ["才", "也", "就"], "answer": 2 },
+      { "type": "reorder", "words": ["既然", "就", "你", "累了", "休息吧"], "vi": "Bạn đã mệt thì nghỉ đi.", "answers": ["既然你累了就休息吧。", "你既然累了就休息吧。"] },
+      { "type": "error", "options": ["既然你知道了，就告诉我吧。", "既然大家都同意，就这样决定吧。", "既然下雨，我们也要去。"], "answer": 2, "explain": "Ý “dù… cũng” dùng 即使: 即使下雨，我们也要去。" }
+    ]
+  },
+  {
+    "key": "hsk4-g09",
+    "title": "随着…: cùng với…, theo…",
+    "pattern": "随着 + Sự thay đổi，Chủ ngữ + (也) + thay đổi theo",
+    "explanation": "随着 đứng đầu câu, nêu một sự thay đổi kéo theo thay đổi khác: 随着经济的发展，人们的生活越来越好. Phần sau 随着 thường là cụm danh từ “… 的 + 发展/变化/增加/提高”.",
+    "examples": [
+      { "hanzi": "随着天气变冷，感冒的人越来越多。", "pinyin": "Suízhe tiānqì biàn lěng, gǎnmào de rén yuè lái yuè duō.", "vi": "Theo đà trời trở lạnh, người bị cảm ngày càng nhiều." },
+      { "hanzi": "随着互联网的发展，购物越来越方便了。", "pinyin": "Suízhe Hùliánwǎng de fāzhǎn, gòuwù yuè lái yuè fāngbiàn le.", "vi": "Cùng với sự phát triển của internet, mua sắm ngày càng tiện." },
+      { "hanzi": "随着年龄的增加，他变得更冷静了。", "pinyin": "Suízhe niánlíng de zēngjiā, tā biàn de gèng lěngjìng le.", "vi": "Càng lớn tuổi, anh ấy càng điềm tĩnh hơn." }
+    ],
+    "mistakes": [{ "wrong": "随着经济发展得很快，……", "right": "随着经济的快速发展，……", "note": "Sau 随着 thường là cụm danh từ, không phải cả một câu." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "___ 收入的增加，我们的生活越来越好了。", "vi": "Cùng với thu nhập tăng, cuộc sống chúng tôi ngày càng tốt." }, "options": ["随着", "按照", "对于"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "随着技术的发展，手机的价格越来越 ___ 了。", "vi": "Cùng với sự phát triển công nghệ, giá điện thoại ngày càng thấp." }, "options": ["很低", "低", "非常低"], "answer": 1 },
+      { "type": "reorder", "words": ["随着", "的", "城市", "发展", "交通", "越来越方便"], "vi": "Cùng với sự phát triển của thành phố, giao thông ngày càng thuận tiện.", "answers": ["随着城市的发展交通越来越方便。"] },
+      { "type": "error", "options": ["随着时间的过去，他慢慢忘了。", "随着人口的增加，问题也多了。", "随着他学习很努力，成绩提高了。"], "answer": 2, "explain": "Nêu nguyên nhân dùng 因为: 因为他学习很努力，成绩提高了。" }
+    ]
+  },
+  {
+    "key": "hsk4-g10",
+    "title": "不管 / 无论…都…: bất kể… đều…",
+    "pattern": "不管 / 无论 + Từ để hỏi / A 还是 B / A 不 A，Chủ ngữ + 都 / 也 + …",
+    "explanation": "Kết quả không đổi trong mọi điều kiện. Vế sau 不管/无论 phải có từ để hỏi (谁, 什么, 多…), hoặc “A 还是 B”, hoặc “A 不 A”: 不管刮风还是下雨，他都去跑步. 无论 trang trọng hơn 不管. Không dùng với một điều kiện cụ thể: không nói 不管下雨.",
+    "examples": [
+      { "hanzi": "不管多忙，他都坚持锻炼。", "pinyin": "Bùguǎn duō máng, tā dōu jiānchí duànliàn.", "vi": "Bất kể bận đến đâu, anh ấy vẫn kiên trì tập luyện." },
+      { "hanzi": "无论遇到什么困难，我们都不放弃。", "pinyin": "Wúlùn yùdào shénme kùnnan, wǒmen dōu bú fàngqì.", "vi": "Bất luận gặp khó khăn gì, chúng tôi cũng không bỏ cuộc." },
+      { "hanzi": "不管你去不去，我都要去。", "pinyin": "Bùguǎn nǐ qù bu qù, wǒ dōu yào qù.", "vi": "Dù bạn đi hay không, tôi vẫn đi." }
+    ],
+    "mistakes": [{ "wrong": "不管下雨，我都去。", "right": "不管下不下雨，我都去。", "note": "Sau 不管 cần từ để hỏi hoặc dạng lựa chọn (下不下雨)." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "无论谁来，我 ___ 不开门。", "vi": "Bất kể ai đến, tôi cũng không mở cửa." }, "options": ["就", "都", "才"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Dù đắt hay rẻ, tôi đều mua.”" }, "options": ["不管很贵，我都买。", "不管贵不贵，我都买。", "不管贵，我也买。"], "answer": 1 },
+      { "type": "reorder", "words": ["不管", "都", "多难", "我", "要学好"], "vi": "Dù khó đến đâu, tôi cũng phải học cho tốt.", "answers": ["不管多难我都要学好。"] },
+      { "type": "error", "options": ["无论什么时候，你都可以来。", "不管天气好不好，他都去跑步。", "不管很累，他都加班。"], "answer": 2, "explain": "Cần dạng hỏi: 不管多累，他都加班。" }
+    ]
+  },
+  {
+    "key": "hsk4-g11",
+    "title": "即使…也…: cho dù… cũng…",
+    "pattern": "即使 + Giả định，(Chủ ngữ) + 也 + Kết quả",
+    "explanation": "即使 nêu một giả định (thường là điều bất lợi), vế sau nói kết quả không thay đổi: 即使下雨，我也要去. Vế sau dùng 也, không dùng 就. Gần nghĩa 就算 (khẩu ngữ).",
+    "examples": [
+      { "hanzi": "即使很累，他也坚持学习。", "pinyin": "Jíshǐ hěn lèi, tā yě jiānchí xuéxí.", "vi": "Cho dù rất mệt, anh ấy cũng kiên trì học." },
+      { "hanzi": "即使失败了，也不要放弃。", "pinyin": "Jíshǐ shībài le, yě búyào fàngqì.", "vi": "Cho dù thất bại cũng đừng bỏ cuộc." },
+      { "hanzi": "即使你不说，我也知道。", "pinyin": "Jíshǐ nǐ bù shuō, wǒ yě zhīdào.", "vi": "Cho dù bạn không nói, tôi cũng biết." }
+    ],
+    "mistakes": [{ "wrong": "即使很忙，我就去看你。", "right": "即使很忙，我也去看你。", "note": "即使 đi với 也." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "即使明天下大雨，比赛 ___ 会举行。", "vi": "Cho dù mai mưa to, trận đấu vẫn sẽ diễn ra." }, "options": ["就", "也", "才"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "___ 工资不高，我也喜欢这份工作。", "vi": "Cho dù lương không cao, tôi vẫn thích công việc này." }, "options": ["既然", "即使", "因为"], "answer": 1 },
+      { "type": "reorder", "words": ["即使", "也", "失败了", "我", "不后悔"], "vi": "Cho dù thất bại, tôi cũng không hối hận.", "answers": ["即使失败了我也不后悔。"] },
+      { "type": "error", "options": ["即使有困难，我们也要完成。", "即使你不同意，我也要去。", "即使很远，我就要去。"], "answer": 2, "explain": "即使 đi với 也: 即使很远，我也要去。" }
+    ]
+  },
+  {
+    "key": "hsk4-g12",
+    "title": "尽管…但是/可是…: mặc dù… nhưng…",
+    "pattern": "尽管 + Sự thật，但是 / 可是 / 却 + Ý trái ngược",
+    "explanation": "尽管 = 虽然, nêu một sự thật có thật, vế sau nói điều trái với mong đợi: 尽管很累，他还是坚持工作. Vế sau thường có 但是/可是/还是/却. Phân biệt với 即使: 即使 là giả định (chưa xảy ra), 尽管 là sự thật.",
+    "examples": [
+      { "hanzi": "尽管压力很大，但是他从来不抱怨。", "pinyin": "Jǐnguǎn yālì hěn dà, dànshì tā cónglái bú bàoyuàn.", "vi": "Mặc dù áp lực lớn nhưng anh ấy chưa bao giờ phàn nàn." },
+      { "hanzi": "尽管下着雨，可是来的人还是很多。", "pinyin": "Jǐnguǎn xià zhe yǔ, kěshì lái de rén háishi hěn duō.", "vi": "Mặc dù trời đang mưa nhưng người đến vẫn rất đông." },
+      { "hanzi": "尽管他很努力，却没有通过考试。", "pinyin": "Jǐnguǎn tā hěn nǔlì, què méiyǒu tōngguò kǎoshì.", "vi": "Mặc dù rất cố gắng nhưng anh ấy đã không thi đỗ." }
+    ],
+    "mistakes": [{ "wrong": "尽管明天下雨，我也去。", "right": "即使明天下雨，我也去。", "note": "Giả định tương lai dùng 即使; 尽管 dùng cho sự thật." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "尽管他是第一次来北京，___ 他一点儿也不紧张。", "vi": "Mặc dù lần đầu đến Bắc Kinh nhưng anh ấy chẳng hồi hộp chút nào." }, "options": ["但是", "所以", "而且"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___ 天气不好，比赛还是很精彩。", "vi": "Mặc dù thời tiết xấu, trận đấu vẫn rất hay." }, "options": ["既然", "尽管", "如果"], "answer": 1 },
+      { "type": "reorder", "words": ["尽管", "但是", "很贵", "很多人", "买"], "vi": "Mặc dù rất đắt nhưng nhiều người mua.", "answers": ["尽管很贵但是很多人买。"] },
+      { "type": "error", "options": ["尽管很晚了，他还在工作。", "尽管他很累，可是很高兴。", "尽管你明天不来，我也等你。"], "answer": 2, "explain": "Giả định dùng 即使: 即使你明天不来，我也等你。" }
+    ]
+  },
+  {
+    "key": "hsk4-g13",
+    "title": "不仅…而且/也/还…: không chỉ… mà còn…",
+    "pattern": "Chủ ngữ + 不仅 + A，而且 / 也 / 还 + B",
+    "explanation": "不仅 = 不但 nhưng trang trọng hơn một chút: 他不仅会弹钢琴，还会唱京剧. Cùng chủ ngữ thì chủ ngữ đứng trước 不仅; khác chủ ngữ thì 不仅 đứng trước chủ ngữ đầu: 不仅我喜欢，我的朋友也喜欢.",
+    "examples": [
+      { "hanzi": "这场比赛不仅精彩，而且很激动人心。", "pinyin": "Zhè chǎng bǐsài bùjǐn jīngcǎi, érqiě hěn jīdòng rénxīn.", "vi": "Trận đấu này không chỉ hay mà còn rất kịch tính." },
+      { "hanzi": "她不仅会打网球，还会打羽毛球。", "pinyin": "Tā bùjǐn huì dǎ wǎngqiú, hái huì dǎ yǔmáoqiú.", "vi": "Cô ấy không chỉ biết chơi tennis mà còn biết đánh cầu lông." },
+      { "hanzi": "不仅孩子们喜欢，大人也喜欢。", "pinyin": "Bùjǐn háizimen xǐhuan, dàrén yě xǐhuan.", "vi": "Không chỉ trẻ con thích mà người lớn cũng thích." }
+    ],
+    "mistakes": [{ "wrong": "不仅他会唱歌，而且会跳舞。", "right": "他不仅会唱歌，而且会跳舞。", "note": "Cùng chủ ngữ thì đặt chủ ngữ trước 不仅." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这个演员不仅长得帅，___ 演得好。", "vi": "Diễn viên này không chỉ đẹp trai mà còn diễn giỏi." }, "options": ["还", "就", "才"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___ 学生们来了，老师们也来了。", "vi": "Không chỉ học sinh đến mà giáo viên cũng đến." }, "options": ["不管", "不仅", "尽管"], "answer": 1 },
+      { "type": "reorder", "words": ["不仅", "也", "他", "我", "喜欢", "喜欢"], "vi": "Không chỉ anh ấy thích, tôi cũng thích.", "answers": ["不仅他喜欢我也喜欢。"] },
+      { "type": "error", "options": ["他不仅聪明，而且很努力。", "不仅我去，他也去。", "不仅她很漂亮，而且很幽默。"], "answer": 2, "explain": "Cùng chủ ngữ: 她不仅很漂亮，而且很幽默。" }
+    ]
+  },
+  {
+    "key": "hsk4-g14",
+    "title": "对于 và 关于",
+    "pattern": "对于 + Đối tượng，+ Nhận xét / 关于 + Chủ đề + 的 + Danh từ",
+    "explanation": "对于 = đối với: chỉ đối tượng mà ta có thái độ, ý kiến: 对于这个问题，大家有不同的看法. 关于 = về (nội dung, chủ đề): 这是一本关于历史的书. 关于 có thể đứng trước danh từ làm định ngữ (关于…的书); 对于 thì ít dùng như vậy.",
+    "examples": [
+      { "hanzi": "对于这件事，我有自己的看法。", "pinyin": "Duìyú zhè jiàn shì, wǒ yǒu zìjǐ de kànfǎ.", "vi": "Đối với việc này, tôi có quan điểm riêng." },
+      { "hanzi": "我看了一篇关于环境污染的文章。", "pinyin": "Wǒ kàn le yì piān guānyú huánjìng wūrǎn de wénzhāng.", "vi": "Tôi đọc một bài viết về ô nhiễm môi trường." },
+      { "hanzi": "对于孩子来说，玩儿也很重要。", "pinyin": "Duìyú háizi lái shuō, wánr yě hěn zhòngyào.", "vi": "Đối với trẻ con mà nói, chơi cũng rất quan trọng." }
+    ],
+    "mistakes": [{ "wrong": "这是一本对于中国文化的书。", "right": "这是一本关于中国文化的书。", "note": "Nói về nội dung, chủ đề dùng 关于." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我想找一些 ___ 京剧的材料。", "vi": "Tôi muốn tìm một số tài liệu về Kinh kịch." }, "options": ["关于", "对于", "按照"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___ 他的建议，经理很重视。", "vi": "Đối với kiến nghị của anh ấy, giám đốc rất coi trọng." }, "options": ["关于", "对于", "随着"], "answer": 1 },
+      { "type": "reorder", "words": ["对于", "来说", "我", "这个", "很难", "问题"], "vi": "Đối với tôi, câu hỏi này rất khó.", "answers": ["对于我来说这个问题很难。"] },
+      { "type": "error", "options": ["关于这个问题，我们明天讨论。", "对于他来说，这不是问题。", "我买了一本对于历史的书。"], "answer": 2, "explain": "Nói chủ đề dùng 关于: 我买了一本关于历史的书。" }
+    ]
+  },
+  {
+    "key": "hsk4-g15",
+    "title": "Câu phản vấn 难道…吗？",
+    "pattern": "难道 + Câu + 吗？",
+    "explanation": "难道 = chẳng lẽ, lẽ nào: hỏi lại để nhấn mạnh ý ngược lại, không cần trả lời. 难道你不知道吗？ = lẽ nào bạn không biết? (ý: bạn phải biết chứ). 难道 đứng trước hoặc sau chủ ngữ; cuối câu thường có 吗.",
+    "examples": [
+      { "hanzi": "难道你忘了我们的约会吗？", "pinyin": "Nándào nǐ wàng le wǒmen de yuēhuì ma?", "vi": "Chẳng lẽ bạn quên cuộc hẹn của chúng ta rồi sao?" },
+      { "hanzi": "这么简单的问题，难道你不会吗？", "pinyin": "Zhème jiǎndān de wèntí, nándào nǐ bú huì ma?", "vi": "Câu đơn giản thế này, lẽ nào bạn không làm được?" },
+      { "hanzi": "你难道不想家吗？", "pinyin": "Nǐ nándào bù xiǎng jiā ma?", "vi": "Lẽ nào bạn không nhớ nhà?" }
+    ],
+    "mistakes": [{ "wrong": "难道你不知道呢？", "right": "难道你不知道吗？", "note": "Câu 难道 kết thúc bằng 吗." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "___ 你不认识我了吗？", "vi": "Chẳng lẽ bạn không nhận ra tôi nữa sao?" }, "options": ["难道", "到底", "究竟"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "“难道你不累吗？”的意思是：", "vi": "“Lẽ nào bạn không mệt?” có nghĩa là:" }, "options": ["你不累", "你应该很累", "我很累"], "answer": 1 },
+      { "type": "reorder", "words": ["难道", "你", "吗", "不知道"], "vi": "Chẳng lẽ bạn không biết?", "answers": ["难道你不知道吗？", "你难道不知道吗？"] },
+      { "type": "error", "options": ["难道你不想去吗？", "这件事你难道没听说吗？", "难道你今天去哪儿吗？"], "answer": 2, "explain": "难道 là câu phản vấn có/không, không dùng với từ để hỏi 哪儿." }
+    ]
+  },
+  {
+    "key": "hsk4-g16",
+    "title": "以为 và 认为",
+    "pattern": "Chủ ngữ + 以为 + Điều tưởng (thường sai) / Chủ ngữ + 认为 + Ý kiến",
+    "explanation": "以为 = tưởng là: thường dùng khi điều mình nghĩ hóa ra sai: 我以为你不来了 (tưởng bạn không đến, nhưng bạn đã đến). 认为 = cho rằng: nêu ý kiến, đánh giá một cách nghiêm túc: 我认为这个办法很好.",
+    "examples": [
+      { "hanzi": "我以为他是老师，原来他是学生。", "pinyin": "Wǒ yǐwéi tā shì lǎoshī, yuánlái tā shì xuésheng.", "vi": "Tôi tưởng anh ấy là thầy giáo, hóa ra là học sinh." },
+      { "hanzi": "我认为我们应该保护环境。", "pinyin": "Wǒ rènwéi wǒmen yīnggāi bǎohù huánjìng.", "vi": "Tôi cho rằng chúng ta nên bảo vệ môi trường." },
+      { "hanzi": "大家都以为他生气了，其实没有。", "pinyin": "Dàjiā dōu yǐwéi tā shēngqì le, qíshí méiyǒu.", "vi": "Mọi người đều tưởng anh ấy giận, thật ra không phải." }
+    ],
+    "mistakes": [{ "wrong": "我以为这个问题很重要，大家应该讨论。", "right": "我认为这个问题很重要，大家应该讨论。", "note": "Nêu ý kiến của mình dùng 认为." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 今天是星期六，原来是星期五。", "vi": "Tôi tưởng hôm nay là thứ bảy, hóa ra là thứ sáu." }, "options": ["认为", "以为", "觉得了"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "专家 ___ 每天至少要睡七个小时。", "vi": "Chuyên gia cho rằng mỗi ngày phải ngủ ít nhất bảy tiếng." }, "options": ["认为", "以为", "好像"], "answer": 0 },
+      { "type": "reorder", "words": ["以为", "我", "你", "了", "不来"], "vi": "Tôi tưởng bạn không đến nữa.", "answers": ["我以为你不来了。"] },
+      { "type": "error", "options": ["我以为他走了，原来他还在。", "我认为这本书值得看。", "我以为你说得对，我同意。"], "answer": 2, "explain": "Nêu ý kiến của mình dùng 认为: 我认为你说得对。" }
+    ]
+  },
+  {
+    "key": "hsk4-g17",
+    "title": "只要…就…: chỉ cần… là…",
+    "pattern": "只要 + Điều kiện，(Chủ ngữ) + 就 + Kết quả",
+    "explanation": "只要 nêu điều kiện đủ: có điều kiện này là có kết quả: 只要努力，就能成功. So sánh: 只有…才… nêu điều kiện duy nhất, bắt buộc (chỉ có… mới…). 只要 đi với 就, 只有 đi với 才.",
+    "examples": [
+      { "hanzi": "只要你有时间，就来找我。", "pinyin": "Zhǐyào nǐ yǒu shíjiān, jiù lái zhǎo wǒ.", "vi": "Chỉ cần bạn có thời gian là đến tìm tôi." },
+      { "hanzi": "只要多练习，你的汉语就会越来越流利。", "pinyin": "Zhǐyào duō liànxí, nǐ de Hànyǔ jiù huì yuè lái yuè liúlì.", "vi": "Chỉ cần luyện nhiều, tiếng Trung của bạn sẽ ngày càng lưu loát." },
+      { "hanzi": "只要不下雨，比赛就按时进行。", "pinyin": "Zhǐyào bú xià yǔ, bǐsài jiù ànshí jìnxíng.", "vi": "Chỉ cần không mưa, trận đấu sẽ diễn ra đúng giờ." }
+    ],
+    "mistakes": [{ "wrong": "只要你努力，才能成功。", "right": "只要你努力，就能成功。", "note": "只要 đi với 就." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "只要你同意，我们 ___ 马上出发。", "vi": "Chỉ cần bạn đồng ý, chúng ta xuất phát ngay." }, "options": ["才", "就", "也"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "___ 认真复习，你才能通过考试。", "vi": "Chỉ có ôn tập nghiêm túc bạn mới thi đỗ được." }, "options": ["只要", "只有", "既然"], "answer": 1 },
+      { "type": "reorder", "words": ["只要", "就", "坚持", "能成功", "你"], "vi": "Chỉ cần bạn kiên trì là có thể thành công.", "answers": ["只要你坚持就能成功。", "你只要坚持就能成功。"] },
+      { "type": "error", "options": ["只要有空，我就去看你。", "只有努力，才会有好结果。", "只要多听多说，才能说好。"], "answer": 2, "explain": "只要 đi với 就: 只要多听多说，就能说好。" }
+    ]
+  },
+  {
+    "key": "hsk4-g18",
+    "title": "到底 / 究竟: rốt cuộc",
+    "pattern": "Chủ ngữ + 到底 / 究竟 + Câu hỏi (không có 吗)",
+    "explanation": "到底 và 究竟 dùng trong câu hỏi để truy hỏi đến cùng, tỏ ý sốt ruột: 你到底去不去？ Câu đã có 到底 không dùng 吗; phải là câu có từ để hỏi hoặc dạng “A 不 A”. 究竟 trang trọng hơn 到底.",
+    "examples": [
+      { "hanzi": "你到底想买什么？", "pinyin": "Nǐ dàodǐ xiǎng mǎi shénme?", "vi": "Rốt cuộc bạn muốn mua gì?" },
+      { "hanzi": "这件事究竟是谁做的？", "pinyin": "Zhè jiàn shì jiūjìng shì shéi zuò de?", "vi": "Rốt cuộc việc này là ai làm?" },
+      { "hanzi": "你明天到底来不来？", "pinyin": "Nǐ míngtiān dàodǐ lái bu lái?", "vi": "Rốt cuộc mai bạn có đến không?" }
+    ],
+    "mistakes": [{ "wrong": "你到底喜欢她吗？", "right": "你到底喜欢不喜欢她？", "note": "Câu có 到底 không dùng 吗, dùng dạng A 不 A." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "你 ___ 为什么不同意？", "vi": "Rốt cuộc tại sao bạn không đồng ý?" }, "options": ["到底", "难道", "竟然"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "哪句话是对的？", "vi": "Câu nào đúng: “Rốt cuộc bạn có đi không?”" }, "options": ["你到底去吗？", "你到底去不去？", "到底你去吗呢？"], "answer": 1 },
+      { "type": "reorder", "words": ["到底", "你", "在哪儿", "现在"], "vi": "Rốt cuộc bây giờ bạn đang ở đâu?", "answers": ["你现在到底在哪儿？", "你到底现在在哪儿？"] },
+      { "type": "error", "options": ["这究竟是怎么回事？", "你到底想说什么？", "你到底是学生吗？"], "answer": 2, "explain": "Bỏ 吗, dùng dạng A 不 A: 你到底是不是学生？" }
+    ]
+  },
+  {
+    "key": "hsk4-g19",
+    "title": "原来 và 本来",
+    "pattern": "原来 + Sự thật mới phát hiện / 本来 + Dự định lúc đầu，后来…",
+    "explanation": "Cả hai đều có nghĩa “ban đầu, vốn”. Riêng 原来 còn có nghĩa “hóa ra” — phát hiện ra sự thật: 原来是你呀！ Riêng 本来 có nghĩa “lẽ ra, đương nhiên phải”: 这本来就是你的错. Khi kể dự định ban đầu bị thay đổi, hay dùng 本来…后来/可是…",
+    "examples": [
+      { "hanzi": "原来你也在这儿工作！", "pinyin": "Yuánlái nǐ yě zài zhèr gōngzuò!", "vi": "Hóa ra bạn cũng làm việc ở đây!" },
+      { "hanzi": "我本来想去旅行，可是没请到假。", "pinyin": "Wǒ běnlái xiǎng qù lǚxíng, kěshì méi qǐng dào jià.", "vi": "Tôi vốn định đi du lịch nhưng không xin được nghỉ." },
+      { "hanzi": "我找了半天，原来钥匙在包里。", "pinyin": "Wǒ zhǎo le bàntiān, yuánlái yàoshi zài bāo lǐ.", "vi": "Tôi tìm mãi, hóa ra chìa khóa ở trong túi." }
+    ],
+    "mistakes": [{ "wrong": "本来是你呀！", "right": "原来是你呀！", "note": "Nghĩa “hóa ra” chỉ dùng 原来." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "门外有人敲门，___ 是邻居来了。", "vi": "Có người gõ cửa, hóa ra là hàng xóm đến." }, "options": ["本来", "原来", "后来"], "answer": 1 },
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 打算坐飞机去，后来改坐火车了。", "vi": "Lúc đầu tôi định đi máy bay, sau đó đổi sang tàu hỏa." }, "options": ["本来", "原来是", "将来"], "answer": 0 },
+      { "type": "reorder", "words": ["原来", "这么", "简单", "是", "这个问题"], "vi": "Hóa ra câu hỏi này đơn giản thế.", "answers": ["原来这个问题是这么简单。", "这个问题原来是这么简单。"] },
+      { "type": "error", "options": ["原来他是我同学的哥哥。", "我本来不想去，后来还是去了。", "本来是你！我还以为是别人呢。"], "answer": 2, "explain": "Nghĩa “hóa ra” dùng 原来: 原来是你！" }
+    ]
+  },
+  {
+    "key": "hsk4-g20",
+    "title": "否则: nếu không thì",
+    "pattern": "Việc cần làm，否则 + Hậu quả",
+    "explanation": "否则 = nếu không thì, đứng đầu vế sau, nêu hậu quả khi không làm điều ở vế trước: 快走吧，否则要迟到了. Khẩu ngữ hay dùng 要不然 / 不然. Vế trước thường là lời khuyên, yêu cầu (要, 得, 应该, 必须…).",
+    "examples": [
+      { "hanzi": "你得早点儿出发，否则会堵车。", "pinyin": "Nǐ děi zǎo diǎnr chūfā, fǒuzé huì dǔchē.", "vi": "Bạn phải xuất phát sớm, nếu không sẽ tắc đường." },
+      { "hanzi": "多穿点儿衣服，否则会感冒的。", "pinyin": "Duō chuān diǎnr yīfu, fǒuzé huì gǎnmào de.", "vi": "Mặc thêm áo vào, không thì sẽ bị cảm đấy." },
+      { "hanzi": "我们必须马上去，否则来不及了。", "pinyin": "Wǒmen bìxū mǎshàng qù, fǒuzé lái bu jí le.", "vi": "Chúng ta phải đi ngay, nếu không sẽ không kịp." }
+    ],
+    "mistakes": [{ "wrong": "否则你努力，你会失败。", "right": "你要努力，否则会失败。", "note": "否则 đứng đầu vế sau, nêu hậu quả." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "记得带钥匙，___ 你进不了门。", "vi": "Nhớ mang chìa khóa, không thì bạn không vào được nhà." }, "options": ["否则", "而且", "于是"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你应该按时吃药，否则病会更 ___。", "vi": "Bạn nên uống thuốc đúng giờ, không thì bệnh sẽ nặng hơn." }, "options": ["轻", "严重", "正常"], "answer": 1 },
+      { "type": "reorder", "words": ["否则", "快点儿", "走吧", "要迟到了"], "vi": "Đi nhanh lên, không thì muộn mất.", "answers": ["快点儿走吧否则要迟到了。"] },
+      { "type": "error", "options": ["你要多练习，否则说不流利。", "快吃吧，否则菜就凉了。", "他很努力，否则他成功了。"], "answer": 2, "explain": "Nêu kết quả thuận dùng 所以/因此: 他很努力，所以成功了。" }
+    ]
+  }
+]

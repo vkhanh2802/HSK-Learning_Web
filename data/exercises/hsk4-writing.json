@@ -1,0 +1,232 @@
+[
+  {
+    "key": "hsk4-writing-01",
+    "type": "fill",
+    "sentence": "请按___完成作业。",
+    "pinyin": "Qǐng ànshí wánchéng zuòyè.",
+    "vi": "Hãy hoàn thành bài tập đúng hạn.",
+    "answer": "时"
+  },
+  {
+    "key": "hsk4-writing-02",
+    "type": "fill",
+    "sentence": "这个问题很复___。",
+    "pinyin": "Zhège wèntí hěn fùzá.",
+    "vi": "Vấn đề này rất phức tạp.",
+    "answer": "杂"
+  },
+  {
+    "key": "hsk4-writing-03",
+    "type": "fill",
+    "sentence": "我们要保___环境。",
+    "pinyin": "Wǒmen yào bǎohù huánjìng.",
+    "vi": "Chúng ta phải bảo vệ môi trường.",
+    "answer": "护"
+  },
+  {
+    "key": "hsk4-writing-04",
+    "type": "fill",
+    "sentence": "他汉语说得很流___。",
+    "pinyin": "Tā Hànyǔ shuō de hěn liúlì.",
+    "vi": "Anh ấy nói tiếng Trung rất lưu loát.",
+    "answer": "利"
+  },
+  {
+    "key": "hsk4-writing-05",
+    "type": "fill",
+    "sentence": "最近工作压___很大。",
+    "pinyin": "Zuìjìn gōngzuò yālì hěn dà.",
+    "vi": "Dạo này áp lực công việc rất lớn.",
+    "answer": "力"
+  },
+  {
+    "key": "hsk4-writing-06",
+    "type": "fill",
+    "sentence": "对不起，我不是故___的。",
+    "pinyin": "Duìbuqǐ, wǒ bú shì gùyì de.",
+    "vi": "Xin lỗi, tôi không cố ý.",
+    "answer": "意"
+  },
+  {
+    "key": "hsk4-writing-07",
+    "type": "fill",
+    "sentence": "___使下雨，我也要去。",
+    "pinyin": "Jíshǐ xià yǔ, wǒ yě yào qù.",
+    "vi": "Cho dù trời mưa, tôi cũng phải đi.",
+    "answer": "即"
+  },
+  {
+    "key": "hsk4-writing-08",
+    "type": "fill",
+    "sentence": "请把这句话翻___成中文。",
+    "pinyin": "Qǐng bǎ zhè jù huà fānyì chéng Zhōngwén.",
+    "vi": "Hãy dịch câu này sang tiếng Trung.",
+    "answer": "译"
+  },
+  {
+    "key": "hsk4-writing-09",
+    "type": "reorder",
+    "words": [
+      "连",
+      "他",
+      "都",
+      "没吃",
+      "早饭"
+    ],
+    "vi": "Anh ấy ngay cả bữa sáng cũng chưa ăn.",
+    "answer": [
+      "他连早饭都没吃。"
+    ]
+  },
+  {
+    "key": "hsk4-writing-10",
+    "type": "reorder",
+    "words": [
+      "让",
+      "这个消息",
+      "我",
+      "吃惊",
+      "很"
+    ],
+    "vi": "Tin này khiến tôi rất ngạc nhiên.",
+    "answer": [
+      "这个消息让我很吃惊。"
+    ]
+  },
+  {
+    "key": "hsk4-writing-11",
+    "type": "reorder",
+    "words": [
+      "不管",
+      "都",
+      "多忙",
+      "他",
+      "坚持锻炼"
+    ],
+    "vi": "Bất kể bận thế nào, anh ấy cũng kiên trì tập thể dục.",
+    "answer": [
+      "不管多忙他都坚持锻炼。"
+    ]
+  },
+  {
+    "key": "hsk4-writing-12",
+    "type": "reorder",
+    "words": [
+      "一点儿",
+      "也",
+      "这个菜",
+      "不辣"
+    ],
+    "vi": "Món này chẳng cay chút nào.",
+    "answer": [
+      "这个菜一点儿也不辣。"
+    ]
+  },
+  {
+    "key": "hsk4-writing-13",
+    "type": "reorder",
+    "words": [
+      "把",
+      "请",
+      "扔进",
+      "垃圾",
+      "垃圾桶"
+    ],
+    "vi": "Hãy vứt rác vào thùng rác.",
+    "answer": [
+      "请把垃圾扔进垃圾桶。"
+    ]
+  },
+  {
+    "key": "hsk4-writing-14",
+    "type": "reorder",
+    "words": [
+      "只要",
+      "就",
+      "努力",
+      "能成功",
+      "你"
+    ],
+    "vi": "Chỉ cần bạn cố gắng là có thể thành công.",
+    "answer": [
+      "只要你努力就能成功。",
+      "你只要努力就能成功。"
+    ]
+  },
+  {
+    "key": "hsk4-writing-15",
+    "type": "compose",
+    "words": [
+      "由于",
+      "推迟"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 由于 và 推迟.",
+    "picture": {
+      "emoji": "❄️",
+      "image": "/images/snow.jpg",
+      "label": "trời tuyết"
+    },
+    "answer": {
+      "hanzi": "由于下大雪，航班推迟了。",
+      "pinyin": "Yóuyú xià dà xuě, hángbān tuīchí le.",
+      "vi": "Do tuyết rơi dày, chuyến bay bị hoãn."
+    }
+  },
+  {
+    "key": "hsk4-writing-16",
+    "type": "compose",
+    "words": [
+      "即使",
+      "也"
+    ],
+    "hint": "Nhìn tranh, viết một câu với 即使…也….",
+    "picture": {
+      "emoji": "🌧️",
+      "image": "/images/rain.webp",
+      "label": "trời mưa"
+    },
+    "answer": {
+      "hanzi": "即使下雨，我们也要去。",
+      "pinyin": "Jíshǐ xià yǔ, wǒmen yě yào qù.",
+      "vi": "Cho dù mưa, chúng tôi cũng sẽ đi."
+    }
+  },
+  {
+    "key": "hsk4-writing-17",
+    "type": "compose",
+    "words": [
+      "看起来",
+      "好吃"
+    ],
+    "hint": "Nhìn tranh, viết một câu có dùng 看起来 và 好吃.",
+    "picture": {
+      "emoji": "🍜",
+      "image": "/images/noodles.jpg",
+      "label": "mì"
+    },
+    "answer": {
+      "hanzi": "这碗面条看起来很好吃。",
+      "pinyin": "Zhè wǎn miàntiáo kàn qilai hěn hǎochī.",
+      "vi": "Bát mì này trông rất ngon."
+    }
+  },
+  {
+    "key": "hsk4-writing-18",
+    "type": "compose",
+    "words": [
+      "不仅",
+      "而且"
+    ],
+    "hint": "Nhìn tranh, viết một câu với 不仅…而且….",
+    "picture": {
+      "emoji": "👕",
+      "image": "/images/clothes.jpg",
+      "label": "quần áo"
+    },
+    "answer": {
+      "hanzi": "这件衣服不仅漂亮，而且很便宜。",
+      "pinyin": "Zhè jiàn yīfu bùjǐn piàoliang, érqiě hěn piányi.",
+      "vi": "Bộ đồ này không chỉ đẹp mà còn rẻ."
+    }
+  }
+]

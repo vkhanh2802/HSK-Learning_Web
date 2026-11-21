@@ -17,15 +17,11 @@ export default async function Home() {
     prisma.lesson.findFirst({ where: { doneAt: null }, orderBy: [{ levelId: "asc" }, { order: "asc" }] }),
   ]);
 
-  const learnedByLevel = new Map(
-    (
-      await prisma.word.groupBy({
-        by: ["levelId"],
-        where: { id: { in: learnedCards.map((c) => c.itemId) } },
-        _count: true,
-      })
-    ).map((g) => [g.levelId, g._count]),
-  );
+  // Đếm ở JS thay vì `id in [...]`: số từ đã học có thể vượt giới hạn 999 tham số của SQLite.
+  const learned = new Set(learnedCards.map((c) => c.itemId));
+  const learnedByLevel = new Map<number, number>();
+  for (const w of await prisma.word.findMany({ select: { id: true, levelId: true } }))
+    if (learned.has(w.id)) learnedByLevel.set(w.levelId, (learnedByLevel.get(w.levelId) ?? 0) + 1);
   const days = streak([...attempts.map((a) => a.createdAt), ...lessonsDone.flatMap((l) => l.doneAt ?? [])], now);
 
   return (

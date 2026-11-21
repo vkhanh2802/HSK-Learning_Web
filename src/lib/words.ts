@@ -13,10 +13,18 @@ export type WordView = {
 
 /** Lấy từ kèm chữ tách sẵn, giữ đúng thứ tự `ids`. */
 export async function getWords(ids: number[]): Promise<WordView[]> {
-  const rows = await prisma.word.findMany({
-    where: { id: { in: ids } },
-    include: { characters: { include: { character: true }, orderBy: { position: "asc" } } },
-  });
+  // SQLite giới hạn số tham số mỗi truy vấn (999) nên chia danh sách id thành từng phần.
+  const chunks = Array.from({ length: Math.ceil(ids.length / 500) }, (_, i) => ids.slice(i * 500, i * 500 + 500));
+  const rows = (
+    await Promise.all(
+      chunks.map((chunk) =>
+        prisma.word.findMany({
+          where: { id: { in: chunk } },
+          include: { characters: { include: { character: true }, orderBy: { position: "asc" } } },
+        }),
+      ),
+    )
+  ).flat();
   const byId = new Map(
     rows.map((w) => [
       w.id,
