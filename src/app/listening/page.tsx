@@ -2,10 +2,12 @@ import Link from "next/link";
 import ListeningSession from "@/components/ListeningSession";
 import { prisma } from "@/lib/db";
 import type { ListeningExercise } from "@/lib/exercises";
+import { getT } from "@/lib/lang-server";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ level?: string }> }) {
+  const t = await getT();
   const level = Number((await searchParams).level ?? 1) || 1;
   const [rows, levels] = await Promise.all([
     prisma.exercise.findMany({ where: { skill: "listening", levelId: level }, orderBy: { key: "asc" } }),
@@ -16,12 +18,15 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ l
 
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">Luyện nghe</h1>
+      <h1 className="text-2xl font-bold">{t("Luyện nghe", "Listening practice")}</h1>
       <p className="mt-1 text-sm opacity-75">
-        Nghe rồi trả lời; sau mỗi câu có lời thoại (chữ Hán, pinyin, nghĩa). Ảnh minh hoạ CC0 / Public Domain (nguồn: public/images/CREDITS.md).
+        {t(
+          "Nghe rồi trả lời; sau mỗi câu có lời thoại (chữ Hán, pinyin, nghĩa). Ảnh minh hoạ CC0 / Public Domain (nguồn: public/images/CREDITS.md).",
+          "Listen, then answer; after each question the transcript is shown (characters, pinyin, meaning). Illustrations are CC0 / Public Domain (credits: public/images/CREDITS.md).",
+        )}
       </p>
       {levels.length > 1 && (
-        <nav aria-label="Chọn cấp" className="mt-4 flex gap-2">
+        <nav aria-label={t("Chọn cấp", "Choose level")} className="mt-4 flex gap-2">
           {levels.map((l) => (
             <Link
               key={l.levelId}

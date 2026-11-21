@@ -2,9 +2,11 @@
 
 import { useState, useTransition } from "react";
 import { addMockMistakes } from "@/app/actions";
+import { useT } from "./LangProvider";
 
 /** Nút đưa từ trong các câu làm sai của một lần thi thử vào ôn tập. */
 export default function AddMistakes({ resultId, count }: { resultId: number; count: number }) {
+  const t = useT();
   const [msg, setMsg] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   return (
@@ -16,15 +18,15 @@ export default function AddMistakes({ resultId, count }: { resultId: number; cou
           startTransition(async () => {
             try {
               const added = await addMockMistakes(resultId);
-              setMsg(added ? `Đã thêm ${added} từ vào ôn tập.` : "Các từ này đã có trong ôn tập.");
+              setMsg(added ? t(`Đã thêm ${added} từ vào ôn tập.`, `Added ${added} words to review.`) : t("Các từ này đã có trong ôn tập.", "These words are already in review."));
             } catch {
-              setMsg("Không thêm được, thử lại sau.");
+              setMsg(t("Không thêm được, thử lại sau.", "Could not add, please try again later."));
             }
           })
         }
         className="rounded bg-accent px-4 py-1.5 font-semibold text-background disabled:opacity-40"
       >
-        Thêm {count} từ vào ôn tập
+        {t(`Thêm ${count} từ vào ôn tập`, `Add ${count} words to review`)}
       </button>
       {msg && <span role="status">{msg}</span>}
     </div>

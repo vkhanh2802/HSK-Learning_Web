@@ -22,12 +22,12 @@ function ctor(): RecognitionCtor | undefined {
 export const speechRecognitionSupported = () => !!ctor();
 
 /** Lỗi đọc được cho người dùng từ mã lỗi của Web Speech API. */
-export function speechErrorMessage(code: string): string {
-  if (code === "not-allowed" || code === "service-not-allowed") return "Trình duyệt chưa được phép dùng micro.";
-  if (code === "no-speech") return "Không nghe thấy gì, thử nói to và rõ hơn.";
-  if (code === "audio-capture") return "Không tìm thấy micro.";
-  if (code === "network") return "Nhận diện giọng nói cần kết nối mạng.";
-  return `Lỗi nhận diện giọng nói (${code}).`;
+export function speechErrorMessage(code: string, t: (vi: string, en: string) => string): string {
+  if (code === "not-allowed" || code === "service-not-allowed") return t("Trình duyệt chưa được phép dùng micro.", "The browser is not allowed to use the microphone.");
+  if (code === "no-speech") return t("Không nghe thấy gì, thử nói to và rõ hơn.", "Heard nothing — try speaking louder and clearer.");
+  if (code === "audio-capture") return t("Không tìm thấy micro.", "No microphone found.");
+  if (code === "network") return t("Nhận diện giọng nói cần kết nối mạng.", "Speech recognition needs an internet connection.");
+  return t(`Lỗi nhận diện giọng nói (${code}).`, `Speech recognition error (${code}).`);
 }
 
 /** Nghe một câu: trả về văn bản nhận diện được ("" nếu không nghe thấy). `stop()` để dừng sớm. */

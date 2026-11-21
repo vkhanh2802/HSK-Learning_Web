@@ -3,6 +3,7 @@
 import { useRef, useState, useSyncExternalStore } from "react";
 import { recordSpeaking } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
+import { useT } from "@/components/LangProvider";
 import { alignSpeech } from "@/lib/compare";
 import { recognizeOnce, speechErrorMessage, speechRecognitionSupported } from "@/lib/speech";
 
@@ -51,6 +52,7 @@ function useRecorder() {
 }
 
 function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, string[]> }) {
+  const t = useT();
   const [state, setState] = useState<"idle" | "listening" | "recording">("idle");
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -74,7 +76,7 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
       setResult(r);
       recordSpeaking({ text: item.hanzi, heard, score: r.score }).catch(() => {});
     } catch (e) {
-      setError(speechErrorMessage((e as Error).message));
+      setError(speechErrorMessage((e as Error).message, t));
     } finally {
       recorder.stop();
       setState("idle");
@@ -87,7 +89,7 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
       recorder.stop();
       setState("idle");
     } else if (await recorder.start()) setState("recording");
-    else setError("Không dùng được micro (chưa cho phép hoặc trình duyệt không hỗ trợ ghi âm).");
+    else setError(t("Không dùng được micro (chưa cho phép hoặc trình duyệt không hỗ trợ ghi âm).", "Cannot use the microphone (permission denied or recording unsupported)."));
   };
 
   const pct = result ? Math.round(result.score * 100) : 0;
@@ -107,20 +109,20 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
       <p className="text-sm opacity-75">{item.vi}</p>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <AudioButton key={item.hanzi} text={item.hanzi} label="Nghe mẫu" />
+        <AudioButton key={item.hanzi} text={item.hanzi} label={t("Nghe mẫu", "Play model")} />
         {canRecognize ? (
           state === "listening" ? (
             <button type="button" onClick={() => stopRecognition.current()} className="rounded bg-accent px-4 py-2 font-semibold text-background">
-              ⏹ Đang nghe… bấm để dừng
+              {t("⏹ Đang nghe… bấm để dừng", "⏹ Listening… tap to stop")}
             </button>
           ) : (
             <button type="button" onClick={speak} className="rounded bg-accent px-4 py-2 font-semibold text-background">
-              🎙 Nói
+              {t("🎙 Nói", "🎙 Speak")}
             </button>
           )
         ) : (
           <button type="button" onClick={toggleRecord} className="rounded bg-accent px-4 py-2 font-semibold text-background">
-            {state === "recording" ? "⏹ Dừng ghi âm" : "🎙 Ghi âm"}
+            {state === "recording" ? t("⏹ Dừng ghi âm", "⏹ Stop recording") : t("🎙 Ghi âm", "🎙 Record")}
           </button>
         )}
         <button
@@ -129,34 +131,34 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
           onClick={() => setShowPinyin(!showPinyin)}
           className="rounded border border-border px-3 py-2 text-sm hover:bg-muted"
         >
-          {showPinyin ? "Ẩn pinyin" : "Hiện pinyin"}
+          {showPinyin ? t("Ẩn pinyin", "Hide pinyin") : t("Hiện pinyin", "Show pinyin")}
         </button>
       </div>
 
       {!canRecognize && (
         <p className="mt-2 text-sm opacity-75">
-          Trình duyệt không hỗ trợ nhận diện giọng nói (dùng Chrome hoặc Edge để được chấm điểm). Vẫn ghi âm được để tự nghe so với mẫu.
+          {t("Trình duyệt không hỗ trợ nhận diện giọng nói (dùng Chrome hoặc Edge để được chấm điểm). Vẫn ghi âm được để tự nghe so với mẫu.", "This browser does not support speech recognition (use Chrome or Edge to get scored). You can still record yourself and compare with the model.")}
         </p>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-sm text-accent">
+        <p role="alert" className="mt-2 text-sm font-semibold">
           {error}
         </p>
       )}
       {result && (
         <div role="status" className="mt-3">
           <p className="text-lg font-semibold">
-            Khớp {pct}% {pct >= 80 ? "✓ Tốt lắm!" : "— thử lại nhé"}
+            {t("Khớp", "Match")} {pct}% {pct >= 80 ? t("✓ Tốt lắm!", "✓ Great!") : t("— thử lại nhé", "— try again")}
           </p>
           <p className="text-sm">
-            Máy nghe được: <span lang="zh-CN">{result.heard || "(không nghe rõ)"}</span>
+            {t("Máy nghe được:", "Heard:")} <span lang="zh-CN">{result.heard || t("(không nghe rõ)", "(unclear)")}</span>
           </p>
-          {pct < 100 && <p className="text-sm opacity-75">Chữ gạch đỏ là chữ máy chưa nghe ra.</p>}
+          {pct < 100 && <p className="text-sm opacity-75">{t("Chữ gạch đỏ là chữ máy chưa nghe ra.", "Underlined characters were not recognised.")}</p>}
         </div>
       )}
       {recorder.url && (
         <div className="mt-3">
-          <p className="text-sm">Bản ghi của bạn:</p>
+          <p className="text-sm">{t("Bản ghi của bạn:", "Your recording:")}</p>
           <audio controls src={recorder.url} className="mt-1" />
         </div>
       )}
@@ -165,11 +167,12 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
 }
 
 export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLesson[]; sounds: Record<string, string[]> }) {
+  const t = useT();
   const [lessonId, setLessonId] = useState(lessons[0]?.id);
   const [mode, setMode] = useState<"sentences" | "words">("sentences");
   const [i, setI] = useState(0);
   const lesson = lessons.find((l) => l.id === lessonId);
-  if (!lesson) return <p className="mt-4">Chưa có bài học.</p>;
+  if (!lesson) return <p className="mt-4">{t("Chưa có bài học.", "No lessons yet.")}</p>;
   const items = lesson[mode];
   const item = items[Math.min(i, items.length - 1)];
 
@@ -177,7 +180,7 @@ export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLe
     <div className="mt-4 space-y-4">
       <div className="flex flex-wrap items-center gap-3">
         <label className="flex items-center gap-2 text-sm">
-          Bài
+          {t("Bài", "Lesson")}
           <select
             value={lessonId}
             onChange={(e) => {
@@ -193,7 +196,7 @@ export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLe
             ))}
           </select>
         </label>
-        <div role="group" aria-label="Luyện theo" className="flex gap-1 text-sm">
+        <div role="group" aria-label={t("Luyện theo", "Practise by")} className="flex gap-1 text-sm">
           {(["sentences", "words"] as const).map((m) => (
             <button
               key={m}
@@ -205,14 +208,14 @@ export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLe
               }}
               className={`rounded border border-border px-3 py-1 ${mode === m ? "bg-accent font-semibold text-background" : "hover:bg-muted"}`}
             >
-              {m === "sentences" ? "Câu (shadowing)" : "Từ"}
+              {m === "sentences" ? t("Câu (shadowing)", "Sentences (shadowing)") : t("Từ", "Words")}
             </button>
           ))}
         </div>
       </div>
 
       <p className="text-sm opacity-75">
-        {mode === "sentences" ? "Câu" : "Từ"} {Math.min(i, items.length - 1) + 1}/{items.length}
+        {mode === "sentences" ? t("Câu", "Sentence") : t("Từ", "Word")} {Math.min(i, items.length - 1) + 1}/{items.length}
       </p>
       {item && <SpeakCard key={`${lesson.id}-${mode}-${item.hanzi}`} item={item} sounds={sounds} />}
 
@@ -223,7 +226,7 @@ export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLe
           onClick={() => setI(i - 1)}
           className="rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40"
         >
-          ← Trước
+          {t("← Trước", "← Previous")}
         </button>
         <button
           type="button"
@@ -231,7 +234,7 @@ export default function SpeakingPractice({ lessons, sounds }: { lessons: SpeakLe
           onClick={() => setI(i + 1)}
           className="rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40"
         >
-          Tiếp →
+          {t("Tiếp →", "Next →")}
         </button>
       </div>
     </div>

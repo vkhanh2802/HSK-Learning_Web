@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { addWordToReview } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
+import { useT } from "@/components/LangProvider";
 import type { Token } from "@/lib/passages";
 import { speakLines } from "@/lib/tts";
 
@@ -24,6 +25,7 @@ export default function Reader({
   pinyinDefault: boolean;
   inReview: number[];
 }) {
+  const t = useT();
   const [showPinyin, setShowPinyin] = useState(pinyinDefault);
   const [showTranslation, setShowTranslation] = useState(false);
   const [selected, setSelected] = useState<Token | null>(null);
@@ -39,9 +41,9 @@ export default function Reader({
       try {
         await addWordToReview(w);
         setAdded((s) => new Set(s).add(w));
-        setMessage("✓ Đã thêm vào ôn tập.");
+        setMessage(t("✓ Đã thêm vào ôn tập.", "✓ Added to review."));
       } catch {
-        setMessage("Không thêm được, thử lại.");
+        setMessage(t("Không thêm được, thử lại.", "Could not add, please try again."));
       }
     });
 
@@ -49,7 +51,7 @@ export default function Reader({
     <div>
       <div className="flex flex-wrap gap-2">
         <button type="button" className={toggleClass(false)} onClick={readAll}>
-          🔊 Đọc cả bài
+          {t("🔊 Đọc cả bài", "🔊 Read aloud")}
         </button>
         <button type="button" aria-pressed={showPinyin} className={toggleClass(showPinyin)} onClick={() => setShowPinyin(!showPinyin)}>
           Pinyin
@@ -61,13 +63,13 @@ export default function Reader({
             className={toggleClass(showTranslation)}
             onClick={() => setShowTranslation(!showTranslation)}
           >
-            Bản dịch
+            {t("Bản dịch", "Translation")}
           </button>
         )}
       </div>
       {unsupported && (
-        <p role="status" className="mt-2 text-sm text-accent">
-          Máy chưa có giọng đọc tiếng Trung — cài gói ngôn ngữ Trung (Giản thể) trong cài đặt Windows.
+        <p role="status" className="mt-2 text-sm font-semibold">
+          {t("Máy chưa có giọng đọc tiếng Trung — cài gói ngôn ngữ Trung (Giản thể) trong cài đặt Windows.", "This device has no Chinese voice — install the Chinese (Simplified) language pack in Windows settings.")}
         </p>
       )}
 
@@ -119,7 +121,7 @@ export default function Reader({
             <span>{selected.vi}</span>
             {selected.w !== undefined &&
               (added.has(selected.w) ? (
-                <span className="text-sm opacity-75">Đã có trong ôn tập</span>
+                <span className="text-sm opacity-75">{t("Đã có trong ôn tập", "Already in review")}</span>
               ) : (
                 <button
                   type="button"
@@ -127,7 +129,7 @@ export default function Reader({
                   onClick={() => add(selected.w!)}
                   className="rounded bg-accent px-3 py-1.5 font-semibold text-background disabled:opacity-40"
                 >
-                  + Thêm vào ôn tập
+                  {t("+ Thêm vào ôn tập", "+ Add to review")}
                 </button>
               ))}
             {message && (
@@ -137,7 +139,7 @@ export default function Reader({
             )}
           </div>
         ) : (
-          <p className="text-sm opacity-75">Bấm vào một từ để xem pinyin, nghĩa và thêm vào ôn tập.</p>
+          <p className="text-sm opacity-75">{t("Bấm vào một từ để xem pinyin, nghĩa và thêm vào ôn tập.", "Tap a word to see its pinyin and meaning, and add it to your review.")}</p>
         )}
       </aside>
     </div>

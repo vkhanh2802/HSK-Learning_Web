@@ -13,7 +13,7 @@ export function proxy(request: NextRequest) {
 
   // API / server action trả 401 thay vì chuyển trang.
   if (pathname.startsWith("/api/") || request.method !== "GET")
-    return NextResponse.json({ error: "Chưa đăng nhập" }, { status: 401 });
+    return NextResponse.json({ error: "Chưa đăng nhập / Not signed in" }, { status: 401 });
   const login = new URL("/login", request.url);
   login.searchParams.set("next", pathname + search);
   return NextResponse.redirect(login);

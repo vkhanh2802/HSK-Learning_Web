@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { submitGrammar } from "@/app/actions";
 import type { ClientGrammarExercise } from "@/lib/grammar";
+import { useT } from "./LangProvider";
 
 type Result = { correct: boolean; answer: number | string; explain?: string };
 
@@ -29,6 +30,7 @@ export function ReorderSentence({
   onChange?: (order: string[]) => void;
 }) {
   // Lưu chỉ số để từ lặp lại (vd. 几 … 几) vẫn phân biệt được.
+  const t = useT();
   const [chosen, setChosen] = useState<number[]>([]);
   const remaining = words.map((w, i) => ({ w, i })).filter(({ i }) => !chosen.includes(i));
   const chip = "rounded border border-border px-3 py-1.5 text-xl disabled:opacity-40";
@@ -40,17 +42,17 @@ export function ReorderSentence({
   return (
     <div>
       <div
-        aria-label="Câu đang ghép"
+        aria-label={t("Câu đang ghép", "Sentence so far")}
         className="flex min-h-14 flex-wrap items-center gap-2 rounded border border-dashed border-border p-2"
         lang="zh-CN"
       >
-        {chosen.length === 0 && <span className="text-sm opacity-60">Bấm các từ bên dưới theo đúng thứ tự…</span>}
+        {chosen.length === 0 && <span className="text-sm opacity-60">{t("Bấm các từ bên dưới theo đúng thứ tự…", "Tap the words below in the right order…")}</span>}
         {chosen.map((i) => (
           <button
             key={i}
             type="button"
             disabled={disabled}
-            aria-label={`Bỏ ${words[i]}`}
+            aria-label={t(`Bỏ ${words[i]}`, `Remove ${words[i]}`)}
             onClick={() => update(chosen.filter((x) => x !== i))}
             className={`${chip} bg-muted`}
           >
@@ -72,7 +74,7 @@ export function ReorderSentence({
           onClick={() => onSubmit?.(chosen.map((i) => words[i]))}
           className="mt-3 rounded bg-accent px-4 py-2 font-semibold text-background disabled:opacity-40"
         >
-          Kiểm tra
+          {t("Kiểm tra", "Check")}
         </button>
       )}
     </div>
@@ -81,6 +83,7 @@ export function ReorderSentence({
 
 /** Bài tập của một điểm ngữ pháp; chấm từng câu ở server. */
 export default function GrammarPractice({ pointId, exercises }: { pointId: number; exercises: ClientGrammarExercise[] }) {
+  const t = useT();
   const [results, setResults] = useState<Record<number, Result>>({});
   const [picked, setPicked] = useState<Record<number, number>>({});
   const [error, setError] = useState<string | null>(null);
@@ -94,7 +97,7 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
         setResults((rs) => ({ ...rs, [ei]: r }));
         setError(null);
       } catch {
-        setError("Không chấm được, thử lại.");
+        setError(t("Không chấm được, thử lại.", "Could not grade, please try again."));
       }
     });
   };
@@ -104,7 +107,7 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
 
   return (
     <section className="mt-8">
-      <h2 className="text-lg font-semibold">Bài tập</h2>
+      <h2 className="text-2xl">{t("Bài tập", "Exercises")}</h2>
       <ol className="mt-3 space-y-4">
         {exercises.map((ex, ei) => {
           const r = results[ei];
@@ -112,8 +115,8 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
           return (
             <li key={ei} className="rounded border border-border p-4">
               <p className="mb-2 text-sm opacity-75">
-                Câu {ei + 1} ·{" "}
-                {ex.type === "choose" ? "Chọn đáp án đúng" : ex.type === "reorder" ? "Sắp xếp thành câu" : "Tìm câu SAI"}
+                {t("Câu", "Question")} {ei + 1} ·{" "}
+                {ex.type === "choose" ? t("Chọn đáp án đúng", "Choose the right answer") : ex.type === "reorder" ? t("Sắp xếp thành câu", "Reorder into a sentence") : t("Tìm câu SAI", "Find the WRONG sentence")}
               </p>
 
               {ex.type === "choose" && (
@@ -124,7 +127,7 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
                   <p className="text-sm opacity-75">{ex.prompt.vi}</p>
                 </>
               )}
-              {ex.type === "reorder" && <p className="mb-2 text-sm">Nghĩa: {ex.vi}</p>}
+              {ex.type === "reorder" && <p className="mb-2 text-sm">{t("Nghĩa:", "Meaning:")} {ex.vi}</p>}
 
               {ex.type === "reorder" ? (
                 <ReorderSentence words={ex.words} disabled={locked} onSubmit={(order) => answer(ei, order)} />
@@ -146,10 +149,10 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
 
               {r && (
                 <p role="status" className="mt-2 text-sm">
-                  {r.correct ? "✓ Chính xác! " : "✗ Chưa đúng. "}
+                  {r.correct ? t("✓ Chính xác! ", "✓ Correct! ") : t("✗ Chưa đúng. ", "✗ Not quite. ")}
                   {ex.type === "reorder" && (
                     <>
-                      Đáp án: <span lang="zh-CN">{r.answer}</span>
+                      {t("Đáp án:", "Answer:")} <span lang="zh-CN">{r.answer}</span>
                     </>
                   )}
                   {r.explain}
@@ -160,13 +163,13 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
         })}
       </ol>
       {error && (
-        <p role="alert" className="mt-2 text-accent">
+        <p role="alert" className="mt-2 font-semibold">
           {error}
         </p>
       )}
       {done === exercises.length && (
         <p role="status" className="mt-4 text-lg font-semibold">
-          Kết quả: {score}/{exercises.length} câu đúng
+          {t(`Kết quả: ${score}/${exercises.length} câu đúng`, `Result: ${score}/${exercises.length} correct`)}
         </p>
       )}
     </section>

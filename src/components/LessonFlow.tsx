@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import { completeLesson } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
+import { useT } from "@/components/LangProvider";
 import { speak } from "@/lib/tts";
 import type { WordView } from "@/lib/words";
 
@@ -30,6 +31,7 @@ const primary =
   "rounded bg-accent px-4 py-2 font-semibold text-background hover:opacity-90 disabled:opacity-40";
 
 export default function LessonFlow({ lessonId, words }: { lessonId: number; words: WordView[] }) {
+  const t = useT();
   const [step, setStep] = useState<"intro" | "quiz" | "done">("intro");
   const [i, setI] = useState(0);
   const [quiz, setQuiz] = useState<Question[]>([]);
@@ -39,14 +41,14 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
-  if (words.length === 0) return <p className="mt-6">Bài này chưa có từ.</p>;
+  if (words.length === 0) return <p className="mt-6">{t("Bài này chưa có từ.", "This lesson has no words yet.")}</p>;
 
   if (step === "intro") {
     const w = words[i];
     return (
       <section className="mt-6">
         <p className="text-sm opacity-75">
-          Từ mới {i + 1}/{words.length}
+          {t("Từ mới", "New word")} {i + 1}/{words.length}
         </p>
         <div className="mt-3 rounded border border-border p-6">
           <div className="flex items-center gap-4">
@@ -57,10 +59,10 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           </div>
           <p className="mt-2 text-xl">{w.pinyin}</p>
           <p className="mt-1 text-lg">
-            {w.meaningVi} {w.pos && <span className="text-sm opacity-75">({w.pos})</span>}
+            {w.meaning} {w.pos && <span className="text-sm opacity-75">({w.pos})</span>}
           </p>
           <p className="mt-3 text-sm">
-            {w.chars.length > 1 ? "Tách chữ (bấm để tập viết):" : "Tập viết:"}{" "}
+            {w.chars.length > 1 ? t("Tách chữ (bấm để tập viết):", "Characters (tap to practise writing):") : t("Tập viết:", "Practise writing:")}{" "}
             {w.chars.map((c, k) => (
               <Link key={k} href={`/write/${c.char}`} target="_blank" className="mr-3 hover:underline">
                 <span lang="zh-CN" className="text-lg text-accent">
@@ -76,7 +78,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
                 <span lang="zh-CN" className="text-lg">
                   {w.example.hanzi}
                 </span>
-                <AudioButton key={w.example.hanzi} text={w.example.hanzi} label="Nghe câu ví dụ" />
+                <AudioButton key={w.example.hanzi} text={w.example.hanzi} label={t("Nghe câu ví dụ", "Play example sentence")} />
               </p>
               <p className="text-sm opacity-75">{w.example.pinyin}</p>
               <p className="text-sm">{w.example.vi}</p>
@@ -85,11 +87,11 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
         </div>
         <div className="mt-4 flex gap-3">
           <button type="button" className={btn} disabled={i === 0} onClick={() => setI(i - 1)}>
-            ← Trước
+            {t("← Trước", "← Previous")}
           </button>
           {i < words.length - 1 ? (
             <button type="button" className={primary} onClick={() => setI(i + 1)}>
-              Tiếp →
+              {t("Tiếp →", "Next →")}
             </button>
           ) : (
             <button
@@ -102,7 +104,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
                 setStep("quiz");
               }}
             >
-              Bắt đầu kiểm tra
+              {t("Bắt đầu kiểm tra", "Start the quiz")}
             </button>
           )}
         </div>
@@ -121,20 +123,20 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
     return (
       <section className="mt-6">
         <p className="text-sm opacity-75">
-          Câu {i + 1}/{quiz.length} · Đúng {score}
+          {t("Câu", "Question")} {i + 1}/{quiz.length} · {t("Đúng", "Correct")} {score}
         </p>
         <div className="mt-3 rounded border border-border p-6">
           {q.kind === "meaning" ? (
             <p>
-              Nghĩa của{" "}
+              {t("Nghĩa của", "What does")}{" "}
               <span lang="zh-CN" className="text-4xl">
                 {q.word.hanzi}
               </span>{" "}
-              là gì?
+              {t("là gì?", "mean?")}
             </p>
           ) : (
             <p className="flex items-center gap-3">
-              Nghe và chọn chữ đúng: <AudioButton key={q.word.id} text={q.word.hanzi} hideText />
+              {t("Nghe và chọn chữ đúng:", "Listen and pick the right character:")} <AudioButton key={q.word.id} text={q.word.hanzi} hideText />
             </p>
           )}
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -160,7 +162,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
                   }}
                 >
                   {q.kind === "meaning" ? (
-                    o.meaningVi
+                    o.meaning
                   ) : (
                     <span lang="zh-CN" className="text-2xl">
                       {o.hanzi}
@@ -172,13 +174,13 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           </div>
           {answered && (
             <p role="status" className="mt-4">
-              {picked === q.word.id ? "✓ Chính xác! " : "✗ Chưa đúng. "}
-              <span lang="zh-CN">{q.word.hanzi}</span> · {q.word.pinyin} · {q.word.meaningVi}
+              {picked === q.word.id ? t("✓ Chính xác! ", "✓ Correct! ") : t("✗ Chưa đúng. ", "✗ Not quite. ")}
+              <span lang="zh-CN">{q.word.hanzi}</span> · {q.word.pinyin} · {q.word.meaning}
             </p>
           )}
         </div>
         <button type="button" className={`${primary} mt-4`} disabled={!answered} onClick={next}>
-          {i < quiz.length - 1 ? "Câu tiếp →" : "Xem kết quả"}
+          {i < quiz.length - 1 ? t("Câu tiếp →", "Next question →") : t("Xem kết quả", "See results")}
         </button>
       </section>
     );
@@ -187,13 +189,13 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
   return (
     <section className="mt-6 rounded border border-border p-6">
       <p className="text-xl font-semibold">
-        Kết quả: {score}/{quiz.length} câu đúng
+        {t(`Kết quả: ${score}/${quiz.length} câu đúng`, `Result: ${score}/${quiz.length} correct`)}
       </p>
       {saved ? (
         <p role="status" className="mt-3">
-          ✓ Đã lưu. Các từ của bài đã vào hàng ôn tập.{" "}
-          <Link href="/review" className="text-accent underline">
-            Ôn tập ngay
+          {t("✓ Đã lưu. Các từ của bài đã vào hàng ôn tập.", "✓ Saved. This lesson’s words are now in your review queue.")}{" "}
+          <Link href="/review" className="underline decoration-brush decoration-2 underline-offset-4">
+            {t("Ôn tập ngay", "Review now")}
           </Link>
         </p>
       ) : (
@@ -208,16 +210,16 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
                 setSaved(true);
                 setError(null);
               } catch {
-                setError("Không lưu được, thử lại.");
+                setError(t("Không lưu được, thử lại.", "Could not save, please try again."));
               }
             })
           }
         >
-          {pending ? "Đang lưu…" : "Hoàn thành bài và thêm vào ôn tập"}
+          {pending ? t("Đang lưu…", "Saving…") : t("Hoàn thành bài và thêm vào ôn tập", "Finish lesson and add to review")}
         </button>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-accent">
+        <p role="alert" className="mt-2 font-semibold">
           {error}
         </p>
       )}
@@ -229,7 +231,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           setI(0);
         }}
       >
-        Học lại bài
+        {t("Học lại bài", "Restart lesson")}
       </button>
     </section>
   );

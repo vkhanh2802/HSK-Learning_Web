@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useT } from "./LangProvider";
 
 export type StrokeMode = "animate" | "trace" | "blind";
 
@@ -20,6 +21,7 @@ const cssVar = (name: string) => getComputedStyle(document.documentElement).getP
  * Dữ liệu nét tải từ CDN jsDelivr (hanzi-writer-data) nên cần mạng.
  */
 export default function StrokeQuiz({ char, mode, size = 260, onLoad, onComplete }: Props) {
+  const t = useT();
   const box = useRef<HTMLDivElement>(null);
   const [error, setError] = useState(false);
   // Giữ callback mới nhất mà không phải tạo lại writer mỗi lần cha render.
@@ -71,13 +73,13 @@ export default function StrokeQuiz({ char, mode, size = 260, onLoad, onComplete 
       <div
         ref={box}
         role="img"
-        aria-label={mode === "animate" ? `Hoạt ảnh thứ tự nét chữ ${char}` : `Ô viết chữ ${char}, dùng chuột hoặc tay để viết`}
+        aria-label={mode === "animate" ? t(`Hoạt ảnh thứ tự nét chữ ${char}`, `Stroke order animation for ${char}`) : t(`Ô viết chữ ${char}, dùng chuột hoặc tay để viết`, `Writing area for ${char}; write with mouse or finger`)}
         className="touch-none rounded border border-border bg-[linear-gradient(to_right,transparent_49.5%,var(--border)_49.5%,var(--border)_50.5%,transparent_50.5%),linear-gradient(to_bottom,transparent_49.5%,var(--border)_49.5%,var(--border)_50.5%,transparent_50.5%)]"
         style={{ width: size, height: size }}
       />
       {error && (
-        <p role="alert" className="mt-2 text-sm text-accent">
-          Không tải được dữ liệu nét chữ (cần kết nối mạng).
+        <p role="alert" className="mt-2 text-sm font-semibold">
+          {t("Không tải được dữ liệu nét chữ (cần kết nối mạng).", "Could not load stroke data (needs an internet connection).")}
         </p>
       )}
     </div>

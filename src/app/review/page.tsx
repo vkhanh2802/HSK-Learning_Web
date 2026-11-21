@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ReviewSession, { type ReviewItem } from "@/components/ReviewSession";
 import { prisma } from "@/lib/db";
+import { getT } from "@/lib/lang-server";
 import { getWords } from "@/lib/words";
 
 export const dynamic = "force-dynamic";
@@ -8,6 +9,7 @@ export const dynamic = "force-dynamic";
 const LIMIT = 100;
 
 export default async function Page() {
+  const t = await getT();
   const cards = await prisma.reviewCard.findMany({
     where: { due: { lte: new Date() }, suspended: false, itemType: "word" },
     orderBy: { due: "asc" },
@@ -37,10 +39,13 @@ export default async function Page() {
 
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">Ôn tập</h1>
+      <h1 className="text-2xl font-bold">{t("Ôn tập", "Review")}</h1>
       {items.length === 0 ? (
         <p className="mt-4">
-          Không có thẻ nào đến hạn. <Link href="/learn/1" className="text-accent underline">Học bài mới</Link>
+          {t("Không có thẻ nào đến hạn.", "No cards are due.")}{" "}
+          <Link href="/learn/1" className="underline decoration-brush decoration-2 underline-offset-4">
+            {t("Học bài mới", "Learn a new lesson")}
+          </Link>
         </p>
       ) : (
         <ReviewSession items={items} />

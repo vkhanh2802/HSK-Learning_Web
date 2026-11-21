@@ -13,6 +13,13 @@ export function forecast(dues: Date[], now: Date, days = 30) {
 }
 
 export const SKILLS = ["listening", "speaking", "reading", "writing", "grammar"] as const;
+export const SKILL_NAMES_EN: Record<string, string> = {
+  listening: "Listening",
+  speaking: "Speaking",
+  reading: "Reading",
+  writing: "Writing",
+  grammar: "Grammar",
+};
 export const SKILL_NAMES: Record<string, string> = {
   listening: "Nghe",
   speaking: "Nói",

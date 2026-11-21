@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { submitMockTest } from "@/app/actions";
 import { ReorderSentence } from "@/components/GrammarPractice";
+import { useT } from "@/components/LangProvider";
 import Picture from "@/components/Picture";
-import { SKILL_VI, type Skill } from "@/lib/mock";
+import { SKILL_EN, SKILL_VI, type Skill } from "@/lib/mock";
 import type { ClientMockItem, Response } from "@/lib/mockData";
 import type { Token } from "@/lib/passages";
 import { speakLines } from "@/lib/tts";
@@ -62,18 +63,19 @@ function ItemBody({
   playsLeft: number;
   play: () => void;
 }) {
+  const tx = useT();
   if (item.kind === "gr") {
     const ex = item.ex;
     if (ex.type === "reorder")
       return (
         <div>
-          <p className="mb-2">Sắp xếp thành câu: {ex.vi}</p>
+          <p className="mb-2">{tx("Sắp xếp thành câu:", "Reorder into a sentence:")} {ex.vi}</p>
           <ReorderSentence words={ex.words} disabled={false} onChange={set} />
         </div>
       );
     return (
       <div>
-        <p className="mb-2">{ex.type === "choose" ? <Zh hanzi={ex.prompt.hanzi} showPinyin={false} /> : "Chọn câu SAI:"}</p>
+        <p className="mb-2">{ex.type === "choose" ? <Zh hanzi={ex.prompt.hanzi} showPinyin={false} /> : tx("Chọn câu SAI:", "Pick the WRONG sentence:")}</p>
         {/* Câu "chọn câu đúng" không có ngữ cảnh chữ Hán quanh ___ thì đề nằm ở nghĩa tiếng Việt. */}
         {ex.type === "choose" && !/[一-鿿].*___|___.*[一-鿿]/.test(ex.prompt.hanzi) && (
           <p className="mb-2 text-sm opacity-75">{ex.prompt.vi}</p>
@@ -102,7 +104,7 @@ function ItemBody({
           {q.type === "tf" &&
             [true, false].map((v) => (
               <button key={String(v)} type="button" onClick={() => set(v)} className={`${btn} min-w-24 ${pick(value === v)}`}>
-                {v ? "✓ Đúng" : "✗ Sai"}
+                {v ? tx("✓ Đúng", "✓ True") : tx("✗ Sai", "✗ False")}
               </button>
             ))}
           {q.type === "mcq" &&
@@ -130,7 +132,7 @@ function ItemBody({
         <p className="text-sm opacity-75">{ex.payload.pinyin}</p>
         <input
           lang="zh-CN"
-          aria-label="Chữ còn thiếu"
+          aria-label={tx("Chữ còn thiếu", "Missing character")}
           value={typeof value === "string" ? value : ""}
           onChange={(e) => set(e.target.value)}
           maxLength={4}
@@ -141,7 +143,7 @@ function ItemBody({
   if (ex.type === "reorder")
     return (
       <div>
-        <p className="mb-2">Sắp xếp thành câu: {ex.payload.vi}</p>
+        <p className="mb-2">{tx("Sắp xếp thành câu:", "Reorder into a sentence:")} {ex.payload.vi}</p>
         <ReorderSentence words={ex.payload.words} disabled={false} onChange={set} />
       </div>
     );
@@ -156,7 +158,7 @@ function ItemBody({
         disabled={playsLeft <= 0}
         className="rounded bg-accent px-3 py-1.5 font-semibold text-background disabled:opacity-40"
       >
-        🔊 Nghe {playsLeft > 0 ? `(còn ${playsLeft} lần)` : "(hết lượt)"}
+        🔊 {tx("Nghe", "Listen")} {playsLeft > 0 ? tx(`(còn ${playsLeft} lần)`, `(${playsLeft} left)`) : tx("(hết lượt)", "(no plays left)")}
       </button>
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {ex.type === "picture_tf" && (
@@ -164,7 +166,7 @@ function ItemBody({
             <Picture picture={ex.payload.picture} size={130} />
             {[true, false].map((v) => (
               <button key={String(v)} type="button" onClick={() => set(v)} className={`${btn} min-w-24 ${pick(value === v)}`}>
-                {v ? "✓ Đúng" : "✗ Sai"}
+                {v ? tx("✓ Đúng", "✓ True") : tx("✗ Sai", "✗ False")}
               </button>
             ))}
           </>
@@ -192,8 +194,8 @@ function ItemBody({
         {ex.type === "dictation" && (
           <input
             lang="zh-CN"
-            aria-label="Chép lại câu vừa nghe (chữ Hán hoặc pinyin)"
-            placeholder="Chữ Hán hoặc pinyin"
+            aria-label={tx("Chép lại câu vừa nghe (chữ Hán hoặc pinyin)", "Copy the sentence you heard (characters or pinyin)")}
+            placeholder={tx("Chữ Hán hoặc pinyin", "Characters or pinyin")}
             value={typeof value === "string" ? value : ""}
             onChange={(e) => set(e.target.value)}
             maxLength={200}
@@ -227,6 +229,8 @@ export default function MockTestRunner({
   sections: RunnerSection[];
 }) {
   const router = useRouter();
+  const tx = useT();
+  const skillName = (s: Skill) => tx(SKILL_VI[s], SKILL_EN[s]);
   const [idx, setIdx] = useState(0);
   const [deadline, setDeadline] = useState<number | null>(null);
   const [now, setNow] = useState(0);
@@ -250,7 +254,7 @@ export default function MockTestRunner({
         setSubmitted(true);
         router.push(`/mock-test/result/${resultId}`);
       } catch {
-        setError("Không nộp được bài, thử lại.");
+        setError(tx("Không nộp được bài, thử lại.", "Could not submit, please try again."));
       }
     });
   };
@@ -288,32 +292,32 @@ export default function MockTestRunner({
 
   const confirmFinish = () => {
     const missing = section.items.filter((i) => answers[i.ref] === undefined).length;
-    if (missing && !window.confirm(`Còn ${missing} câu chưa làm. Vẫn ${last ? "nộp bài" : "sang phần sau"}?`)) return;
+    if (missing && !window.confirm(tx(`Còn ${missing} câu chưa làm. Vẫn ${last ? "nộp bài" : "sang phần sau"}?`, `${missing} questions are unanswered. ${last ? "Submit anyway?" : "Move on to the next section anyway?"}`))) return;
     finishSection();
   };
 
   if (pending || submitted)
-    return <p className="mt-6">Đang chấm bài…</p>;
+    return <p className="mt-6">{tx("Đang chấm bài…", "Grading…")}</p>;
 
   if (deadline === null)
     return (
       <div className="mt-6 max-w-xl rounded border border-border p-6">
         <p className="text-sm opacity-75">
-          Phần {idx + 1}/{sections.length}
+          {tx("Phần", "Section")} {idx + 1}/{sections.length}
         </p>
         <h2 className="text-xl font-bold">
-          {SKILL_VI[section.skill]}: {section.items.length} câu · {section.minutes} phút
+          {skillName(section.skill)}: {section.items.length} {tx("câu", "questions")} · {section.minutes} {tx("phút", "min")}
         </h2>
         {section.skill === "listening" && (
-          <p className="mt-2 text-sm">Mỗi câu được nghe tối đa {maxPlays} lần. Hết giờ phần này tự chuyển sang phần sau.</p>
+          <p className="mt-2 text-sm">{tx(`Mỗi câu được nghe tối đa ${maxPlays} lần. Hết giờ phần này tự chuyển sang phần sau.`, `Each item can be played at most ${maxPlays} times. When time runs out the test moves on to the next section.`)}</p>
         )}
         {error && (
-          <p role="alert" className="mt-2 text-accent">
+          <p role="alert" className="mt-2 font-semibold">
             {error}
           </p>
         )}
         <button type="button" onClick={error ? submit : start} className="mt-4 rounded bg-accent px-5 py-2 font-semibold text-background">
-          {error ? "Nộp lại" : "Bắt đầu"}
+          {error ? tx("Nộp lại", "Resubmit") : tx("Bắt đầu", "Start")}
         </button>
       </div>
     );
@@ -325,16 +329,16 @@ export default function MockTestRunner({
     <div className="mt-4">
       <div className="sticky top-0 z-10 flex flex-wrap items-center gap-4 border-b border-border bg-background py-2">
         <span className="font-semibold">
-          {SKILL_VI[section.skill]} ({idx + 1}/{sections.length})
+          {skillName(section.skill)} ({idx + 1}/{sections.length})
         </span>
-        <span role="timer" aria-label="Thời gian còn lại" className={`font-mono text-lg ${left < 60_000 ? "text-accent" : ""}`}>
+        <span role="timer" aria-label={tx("Thời gian còn lại", "Time remaining")} className={`font-mono text-lg ${left < 60_000 ? "text-accent" : ""}`}>
           ⏱ {fmt(left)}
         </span>
         <span className="text-sm opacity-75">
-          Đã làm {done}/{section.items.length}
+          {tx("Đã làm", "Answered")} {done}/{section.items.length}
         </span>
         <button type="button" onClick={confirmFinish} className="ml-auto rounded bg-accent px-4 py-1.5 font-semibold text-background">
-          {last ? "Nộp bài" : "Sang phần sau"}
+          {last ? tx("Nộp bài", "Submit") : tx("Sang phần sau", "Next section")}
         </button>
       </div>
 
@@ -347,7 +351,7 @@ export default function MockTestRunner({
             <li key={item.ref}>
               {newPassage && item.kind === "pq" && <PassageText lines={item.passage.lines} showPinyin={showPinyin} />}
               <div className="rounded border border-border p-4">
-                <p className="mb-2 text-sm opacity-75">Câu {numberOffset + i + 1}</p>
+                <p className="mb-2 text-sm opacity-75">{tx("Câu", "Question")} {numberOffset + i + 1}</p>
                 <ItemBody
                   item={item}
                   value={answers[item.ref]}

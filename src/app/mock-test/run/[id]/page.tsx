@@ -1,12 +1,14 @@
 import { notFound, redirect } from "next/navigation";
 import MockTestRunner from "@/components/MockTestRunner";
 import { prisma } from "@/lib/db";
+import { getT } from "@/lib/lang-server";
 import { BLUEPRINT } from "@/lib/mock";
 import { loadItems, toClient, type Section } from "@/lib/mockData";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const t = await getT();
   const id = Number((await params).id);
   const test = Number.isInteger(id)
     ? await prisma.mockTest.findUnique({ where: { id }, include: { results: { select: { id: true } } } })
@@ -19,7 +21,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">Thi thử HSK{test.levelId}</h1>
+      <h1 className="text-2xl font-bold">{t("Thi thử", "Mock test")} HSK{test.levelId}</h1>
       {/* Đáp án không gửi xuống client; chấm cả bài ở server action submitMockTest. */}
       <MockTestRunner
         testId={test.id}

@@ -17,4 +17,5 @@ export const daysBetween = (a: string, b: string) => Math.round((fromKey(b).getT
 export const weekdayMon0 = (k: string) => (fromKey(k).getUTCDay() + 6) % 7;
 
 /** Ngày giờ hiển thị cho người học (dùng ở server component). */
-export const formatDateTime = (d: Date) => d.toLocaleString("vi-VN", { timeZone: APP_TZ });
+export const formatDateTime = (d: Date, lang: "vi" | "en" = "vi") =>
+  d.toLocaleString(lang === "en" ? "en-GB" : "vi-VN", { timeZone: APP_TZ });

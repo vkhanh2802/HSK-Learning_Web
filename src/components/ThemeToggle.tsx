@@ -1,6 +1,9 @@
 "use client";
 
+import { useT } from "./LangProvider";
+
 export default function ThemeToggle() {
+  const t = useT();
   function toggle() {
     const root = document.documentElement;
     const isDark = root.dataset.theme
@@ -17,9 +20,9 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label="Đổi chế độ sáng/tối"
-      title="Đổi chế độ sáng/tối"
-      className="ml-auto rounded-full border border-border px-3 py-1 hover:bg-muted"
+      aria-label={t("Đổi chế độ sáng/tối", "Toggle light/dark mode")}
+      title={t("Đổi chế độ sáng/tối", "Toggle light/dark mode")}
+      className="rounded-full border border-border px-3 py-1 hover:bg-muted"
     >
       ◐
     </button>

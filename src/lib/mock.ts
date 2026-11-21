@@ -28,6 +28,7 @@ export const BLUEPRINT: Record<number, { sections: SectionSpec[]; pass: number; 
 };
 
 export const SKILL_VI: Record<Skill, string> = { listening: "Nghe", reading: "Đọc", writing: "Viết" };
+export const SKILL_EN: Record<Skill, string> = { listening: "Listening", reading: "Reading", writing: "Writing" };
 
 /**
  * Một câu trong kho. `ref` định danh câu: "ex:<exerciseId>", "pq:<passageId>:<câu>", "gr:<pointId>:<bài>".

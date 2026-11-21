@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ExercisePlayer from "@/components/ExercisePlayer";
+import { useT } from "@/components/LangProvider";
 import type { ListeningExercise } from "@/lib/exercises";
 
 const RATES = [
@@ -17,6 +18,7 @@ const shuffle = <T,>(xs: T[]) =>
     .map(([, x]) => x);
 
 export default function ListeningSession({ exercises }: { exercises: ListeningExercise[] }) {
+  const t = useT();
   const [queue, setQueue] = useState<ListeningExercise[] | null>(null);
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
@@ -30,8 +32,8 @@ export default function ListeningSession({ exercises }: { exercises: ListeningEx
   };
 
   const speed = (
-    <div role="group" aria-label="Tốc độ đọc" className="flex items-center gap-1 text-sm">
-      Tốc độ:
+    <div role="group" aria-label={t("Tốc độ đọc", "Speech speed")} className="flex items-center gap-1 text-sm">
+      {t("Tốc độ:", "Speed:")}
       {RATES.map((r) => (
         <button
           key={r.label}
@@ -49,15 +51,15 @@ export default function ListeningSession({ exercises }: { exercises: ListeningEx
   const startButtons = (
     <div className="flex flex-wrap gap-2">
       <button type="button" onClick={() => start(10)} className="rounded bg-accent px-4 py-2 font-semibold text-background">
-        Bộ 10 câu ngẫu nhiên
+        {t("Bộ 10 câu ngẫu nhiên", "10 random questions")}
       </button>
       <button type="button" onClick={() => start(exercises.length)} className="rounded border border-border px-4 py-2 hover:bg-muted">
-        Làm cả {exercises.length} câu
+        {t(`Làm cả ${exercises.length} câu`, `Do all ${exercises.length} questions`)}
       </button>
     </div>
   );
 
-  if (exercises.length === 0) return <p className="mt-4">Chưa có bài nghe cho cấp này.</p>;
+  if (exercises.length === 0) return <p className="mt-4">{t("Chưa có bài nghe cho cấp này.", "No listening exercises for this level yet.")}</p>;
   if (!queue)
     return (
       <div className="mt-4 space-y-4">
@@ -70,7 +72,7 @@ export default function ListeningSession({ exercises }: { exercises: ListeningEx
     return (
       <div className="mt-4 space-y-4">
         <p role="status" className="text-xl font-semibold">
-          Kết quả: {score}/{queue.length} câu đúng
+          {t(`Kết quả: ${score}/${queue.length} câu đúng`, `Result: ${score}/${queue.length} correct`)}
         </p>
         {startButtons}
       </div>
@@ -80,7 +82,7 @@ export default function ListeningSession({ exercises }: { exercises: ListeningEx
     <div className="mt-4 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm opacity-75">
-          Câu {i + 1}/{queue.length} · Đúng {score}
+          {t("Câu", "Question")} {i + 1}/{queue.length} · {t("Đúng", "Correct")} {score}
         </p>
         {speed}
       </div>

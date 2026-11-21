@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { submitReading } from "@/app/actions";
 import Picture from "@/components/Picture";
+import { useT } from "@/components/LangProvider";
 import type { ClientQuestion } from "@/lib/passages";
 
 type Result = { correct: boolean; answer: boolean | number };
@@ -29,6 +30,7 @@ function Prompt({ text }: { text: { hanzi: string; pinyin: string; vi: string } 
 
 /** Câu hỏi đọc hiểu của một bài; chấm từng câu ở server. */
 export default function PassageQuestions({ passageId, questions }: { passageId: number; questions: ClientQuestion[] }) {
+  const t = useT();
   const [results, setResults] = useState<Record<number, Result>>({});
   const [picked, setPicked] = useState<Record<number, boolean | number>>({});
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +44,7 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
         setResults((rs) => ({ ...rs, [qi]: r }));
         setError(null);
       } catch {
-        setError("Không chấm được, thử lại.");
+        setError(t("Không chấm được, thử lại.", "Could not grade, please try again."));
       }
     });
   };
@@ -52,7 +54,7 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
 
   return (
     <section className="mt-8">
-      <h2 className="text-lg font-semibold">Câu hỏi đọc hiểu</h2>
+      <h2 className="text-2xl">{t("Câu hỏi đọc hiểu", "Comprehension questions")}</h2>
       <ol className="mt-3 space-y-4">
         {questions.map((q, qi) => {
           const r = results[qi];
@@ -60,8 +62,8 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
           return (
             <li key={qi} className="rounded border border-border p-4">
               <p className="mb-2 text-sm opacity-75">
-                Câu {qi + 1} ·{" "}
-                {q.type === "tf" ? "Đúng hay sai?" : q.type === "mcq" ? "Chọn đáp án đúng" : "Chọn tranh đúng với câu"}
+                {t("Câu", "Question")} {qi + 1} ·{" "}
+                {q.type === "tf" ? t("Đúng hay sai?", "True or false?") : q.type === "mcq" ? t("Chọn đáp án đúng", "Choose the right answer") : t("Chọn tranh đúng với câu", "Choose the picture that fits the sentence")}
               </p>
               {q.type === "tf" && <Prompt text={q.statement} />}
               {q.type === "mcq" && <Prompt text={q.question} />}
@@ -77,7 +79,7 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
                       onClick={() => answer(qi, v)}
                       className={`min-w-24 rounded border border-border px-4 py-2 ${optionClass(r, v, picked[qi])}`}
                     >
-                      {v ? "✓ Đúng" : "✗ Sai"}
+                      {v ? t("✓ Đúng", "✓ True") : t("✗ Sai", "✗ False")}
                     </button>
                   ))}
                 {q.type === "mcq" &&
@@ -112,7 +114,7 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
 
               {r && (
                 <p role="status" className="mt-2 text-sm">
-                  {r.correct ? "✓ Chính xác! " : "✗ Chưa đúng. "}
+                  {r.correct ? t("✓ Chính xác! ", "✓ Correct! ") : t("✗ Chưa đúng. ", "✗ Not quite. ")}
                   {q.type === "tf" ? q.statement.vi : q.type === "mcq" ? q.question.vi : q.sentence.vi}
                 </p>
               )}
@@ -121,13 +123,13 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
         })}
       </ol>
       {error && (
-        <p role="alert" className="mt-2 text-accent">
+        <p role="alert" className="mt-2 font-semibold">
           {error}
         </p>
       )}
       {done === questions.length && (
         <p role="status" className="mt-4 text-lg font-semibold">
-          Kết quả: {score}/{questions.length} câu đúng
+          {t(`Kết quả: ${score}/${questions.length} câu đúng`, `Result: ${score}/${questions.length} correct`)}
         </p>
       )}
     </section>

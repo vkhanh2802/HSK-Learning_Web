@@ -1,12 +1,17 @@
 import Link from "next/link";
+import { getT } from "@/lib/lang-server";
 import radicals from "../../../data/radicals.json";
 
-export default function Page() {
+export default async function Page() {
+  const t = await getT();
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">50 bộ thủ thường gặp</h1>
+      <h1 className="text-2xl font-bold">{t("50 bộ thủ thường gặp", "50 common radicals")}</h1>
       <p className="mt-1 text-sm opacity-75">
-        Bộ thủ là phần gợi nghĩa của chữ. Nhận ra bộ thủ giúp đoán nghĩa và nhớ chữ nhanh hơn. Bấm vào chữ ví dụ để tập viết.
+        {t(
+          "Bộ thủ là phần gợi nghĩa của chữ. Nhận ra bộ thủ giúp đoán nghĩa và nhớ chữ nhanh hơn. Bấm vào chữ ví dụ để tập viết.",
+          "A radical is the part of a character that hints at its meaning. Spotting radicals helps you guess meanings and remember characters faster. Tap an example character to practise writing it.",
+        )}
       </p>
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {radicals.map((r) => (
@@ -16,11 +21,11 @@ export default function Page() {
             </span>
             <div>
               <p>
-                <strong>{r.pinyin}</strong> — {r.vi}
+                <strong>{r.pinyin}</strong> — {t(r.vi, r.en)}
               </p>
               {r.variants && (
                 <p className="text-sm">
-                  Dạng biến thể: <span lang="zh-CN" className="text-lg">{r.variants}</span>
+                  {t("Dạng biến thể:", "Variant form:")} <span lang="zh-CN" className="text-lg">{r.variants}</span>
                 </p>
               )}
               <p className="mt-1 flex flex-wrap gap-2">

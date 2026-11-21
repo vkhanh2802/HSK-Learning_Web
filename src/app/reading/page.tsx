@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
+import { getT } from "@/lib/lang-server";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
+  const t = await getT();
   const passages = await prisma.passage.findMany({
     orderBy: [{ levelId: "asc" }, { key: "asc" }],
     select: { id: true, levelId: true, title: true, type: true },
@@ -12,11 +14,11 @@ export default async function Page() {
 
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">Bài đọc</h1>
+      <h1 className="text-2xl font-bold">{t("Bài đọc", "Reading")}</h1>
       <p className="mt-1 text-sm opacity-75">
-        Bấm vào từ để tra nghĩa và thêm vào ôn tập. Mỗi bài có câu hỏi đọc hiểu ở cuối.
+        {t("Bấm vào từ để tra nghĩa và thêm vào ôn tập. Mỗi bài có câu hỏi đọc hiểu ở cuối.", "Tap a word to look it up and add it to your review. Each passage ends with comprehension questions.")}
       </p>
-      {passages.length === 0 && <p className="mt-6">Chưa có bài đọc.</p>}
+      {passages.length === 0 && <p className="mt-6">{t("Chưa có bài đọc.", "No reading passages yet.")}</p>}
       {levels.map((level) => (
         <section key={level} className="mt-6">
           <h2 className="font-semibold">HSK{level}</h2>
@@ -27,7 +29,7 @@ export default async function Page() {
                 <li key={p.id}>
                   <Link href={`/reading/${p.id}`} className="block rounded border border-border p-3 hover:bg-muted">
                     <span className="text-sm opacity-75">
-                      Bài {i + 1} · {p.type === "dialogue" ? "Hội thoại" : "Đoạn văn"}
+                      {t("Bài", "Passage")} {i + 1} · {p.type === "dialogue" ? t("Hội thoại", "Dialogue") : t("Đoạn văn", "Paragraph")}
                     </span>
                     <span className="block font-semibold">{p.title}</span>
                   </Link>

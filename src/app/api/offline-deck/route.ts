@@ -1,4 +1,6 @@
 import { prisma } from "@/lib/db";
+import { meaning } from "@/lib/lang";
+import { getLang } from "@/lib/lang-server";
 import type { Example } from "@/lib/words";
 import { hasSession } from "@/lib/session";
 
@@ -10,6 +12,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET() {
   if (!(await hasSession())) return Response.json({ error: "Chưa đăng nhập" }, { status: 401 });
+  const lang = await getLang();
   const cards = await prisma.reviewCard.findMany({
     where: { itemType: "word", suspended: false },
     select: { itemId: true, due: true },
@@ -17,7 +20,7 @@ export async function GET() {
   const due = new Map<number, Date>();
   for (const c of cards) if (!due.has(c.itemId) || c.due < due.get(c.itemId)!) due.set(c.itemId, c.due);
 
-  const select = { id: true, hanzi: true, pinyin: true, meaningVi: true, examples: true } as const;
+  const select = { id: true, hanzi: true, pinyin: true, meaningVi: true, meaningEn: true, examples: true } as const;
   const words = due.size
     ? (await prisma.word.findMany({ select })).filter((w) => due.has(w.id))
     : await prisma.word.findMany({ where: { levelId: 1 }, select, orderBy: { id: "asc" } });
@@ -29,7 +32,7 @@ export async function GET() {
     words: words.map((w) => ({
       hanzi: w.hanzi,
       pinyin: w.pinyin,
-      vi: w.meaningVi,
+      vi: meaning(lang, w),
       example: (JSON.parse(w.examples) as Example[])[0] ?? null,
     })),
   });

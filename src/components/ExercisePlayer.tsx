@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { submitExercise } from "@/app/actions";
 import Picture from "@/components/Picture";
+import { useT } from "@/components/LangProvider";
 import type { Line, ListeningExercise } from "@/lib/exercises";
 import { speakLines } from "@/lib/tts";
 
@@ -18,12 +19,13 @@ const optionClass = (answered: boolean, isAnswer: boolean, isPicked: boolean) =>
         : "opacity-60";
 
 function Transcript({ lines }: { lines: Line[] }) {
+  const t = useT();
   return (
     <div className="mt-3 rounded bg-muted p-3 text-sm">
-      <p className="mb-1 font-semibold">Lời thoại</p>
+      <p className="mb-1 font-semibold">{t("Lời thoại", "Transcript")}</p>
       {lines.map((l, i) => (
         <p key={i} className="mt-1">
-          {l.speaker && <span className="mr-1 opacity-75">{l.speaker === "nam" ? "Nam:" : "Nữ:"}</span>}
+          {l.speaker && <span className="mr-1 opacity-75">{l.speaker === "nam" ? t("Nam:", "Man:") : t("Nữ:", "Woman:")}</span>}
           <span lang="zh-CN" className="text-base">
             {l.hanzi}
           </span>{" "}
@@ -47,6 +49,7 @@ export default function ExercisePlayer({
   rate: number;
   onDone: (r: Result) => void;
 }) {
+  const t = useT();
   const [picked, setPicked] = useState<boolean | number | string | null>(null);
   const [result, setResult] = useState<{ correct: boolean; answer: unknown } | null>(null);
   const [plays, setPlays] = useState(1); // effect bên dưới tự phát lần đầu
@@ -79,7 +82,7 @@ export default function ExercisePlayer({
         setError(null);
       } catch {
         setPicked(null);
-        setError("Không chấm được, thử lại.");
+        setError(t("Không chấm được, thử lại.", "Could not grade, please try again."));
       }
     });
   };
@@ -94,11 +97,11 @@ export default function ExercisePlayer({
           onClick={play}
           className="rounded bg-accent px-4 py-2 font-semibold text-background hover:opacity-90"
         >
-          🔊 Nghe {plays > 1 ? `(lần ${plays})` : "lại"}
+          🔊 {t("Nghe", "Listen")} {plays > 1 ? t(`(lần ${plays})`, `(play ${plays})`) : t("lại", "again")}
         </button>
         {unsupported && (
           <span role="status" className="text-sm text-accent">
-            Máy chưa có giọng đọc tiếng Trung — cài gói ngôn ngữ Trung (Giản thể) trong cài đặt Windows.
+            {t("Máy chưa có giọng đọc tiếng Trung — cài gói ngôn ngữ Trung (Giản thể) trong cài đặt Windows.", "This device has no Chinese voice — install the Chinese (Simplified) language pack in Windows settings.")}
           </span>
         )}
       </div>
@@ -106,7 +109,7 @@ export default function ExercisePlayer({
       <div className="mt-4">
         {exercise.type === "picture_tf" && (
           <>
-            <p>Âm thanh có khớp với tranh không?</p>
+            <p>{t("Âm thanh có khớp với tranh không?", "Does the audio match the picture?")}</p>
             <div className="my-3">
               <Picture picture={exercise.payload.picture} size={200} />
             </div>
@@ -119,7 +122,7 @@ export default function ExercisePlayer({
                   onClick={() => submit(v)}
                   className={`min-w-24 rounded border border-border px-4 py-2 ${optionClass(answered, result?.answer === v, picked === v)}`}
                 >
-                  {v ? "✓ Đúng" : "✗ Sai"}
+                  {v ? t("✓ Đúng", "✓ True") : t("✗ Sai", "✗ False")}
                 </button>
               ))}
             </div>
@@ -128,7 +131,7 @@ export default function ExercisePlayer({
 
         {exercise.type === "picture_mcq" && (
           <>
-            <p>Chọn tranh đúng với câu vừa nghe.</p>
+            <p>{t("Chọn tranh đúng với câu vừa nghe.", "Choose the picture that matches what you heard.")}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {exercise.payload.options.map((o, i) => (
                 <button
@@ -181,7 +184,7 @@ export default function ExercisePlayer({
               if (text.trim()) submit(text);
             }}
           >
-            <label htmlFor={`dict-${exercise.id}`}>Gõ lại câu vừa nghe (chữ Hán hoặc pinyin, có dấu hay không đều được):</label>
+            <label htmlFor={`dict-${exercise.id}`}>{t("Gõ lại câu vừa nghe (chữ Hán hoặc pinyin, có dấu hay không đều được):", "Type the sentence you heard (characters or pinyin, tone marks optional):")}</label>
             <div className="mt-2 flex gap-2">
               <input
                 id={`dict-${exercise.id}`}
@@ -196,7 +199,7 @@ export default function ExercisePlayer({
                 disabled={answered || pending || !text.trim()}
                 className="rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40"
               >
-                Kiểm tra
+                {t("Kiểm tra", "Check")}
               </button>
             </div>
           </form>
@@ -204,7 +207,7 @@ export default function ExercisePlayer({
       </div>
 
       {error && (
-        <p role="alert" className="mt-2 text-accent">
+        <p role="alert" className="mt-2 font-semibold">
           {error}
         </p>
       )}
@@ -212,7 +215,7 @@ export default function ExercisePlayer({
       {result && (
         <div className="mt-4">
           <p role="status" className="font-semibold">
-            {result.correct ? "✓ Chính xác!" : "✗ Chưa đúng."}
+            {result.correct ? t("✓ Chính xác!", "✓ Correct!") : t("✗ Chưa đúng.", "✗ Not quite.")}
           </p>
           <Transcript lines={audio} />
           <button
@@ -220,7 +223,7 @@ export default function ExercisePlayer({
             onClick={() => onDone({ correct: result.correct })}
             className="mt-3 rounded bg-accent px-4 py-2 font-semibold text-background hover:opacity-90"
           >
-            Câu tiếp →
+            {t("Câu tiếp →", "Next question →")}
           </button>
         </div>
       )}

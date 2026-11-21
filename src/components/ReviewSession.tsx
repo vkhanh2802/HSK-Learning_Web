@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { reviewCard } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
+import { useLang, useT } from "@/components/LangProvider";
 import StrokeQuiz from "@/components/StrokeQuiz";
 import { matchesDictation } from "@/lib/compare";
 import { writeGrade, type Grade } from "@/lib/srs";
@@ -18,6 +19,7 @@ export type ReviewItem = {
 
 /** Thẻ nhớ lại: xem nghĩa, gõ chữ Hán hoặc pinyin (dấu thanh tuỳ ý). */
 function RecallFront({ word, onDone }: { word: WordView; onDone: (input: string, ok: boolean) => void }) {
+  const t = useT();
   const [text, setText] = useState("");
   return (
     <form
@@ -26,11 +28,11 @@ function RecallFront({ word, onDone }: { word: WordView; onDone: (input: string,
         if (text.trim()) onDone(text, matchesDictation(text, word));
       }}
     >
-      <p className="text-sm opacity-75">Gõ từ có nghĩa</p>
-      <p className="mt-1 text-2xl">{word.meaningVi}</p>
+      <p className="text-sm opacity-75">{t("Gõ từ có nghĩa", "Type the word meaning")}</p>
+      <p className="mt-1 text-2xl">{word.meaning}</p>
       {word.pos && <p className="text-sm opacity-75">({word.pos})</p>}
       <label htmlFor="recall-input" className="sr-only">
-        Chữ Hán hoặc pinyin
+        {t("Chữ Hán hoặc pinyin", "Characters or pinyin")}
       </label>
       <input
         id="recall-input"
@@ -38,11 +40,11 @@ function RecallFront({ word, onDone }: { word: WordView; onDone: (input: string,
         autoComplete="off"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="chữ Hán hoặc pinyin"
+        placeholder={t("chữ Hán hoặc pinyin", "characters or pinyin")}
         className="mt-3 w-full max-w-xs rounded border border-border bg-background px-3 py-2 text-center text-xl"
       />
       <button type="submit" disabled={!text.trim()} className="mt-2 block w-full rounded border border-border px-4 py-2 hover:bg-muted disabled:opacity-40">
-        Kiểm tra <kbd className="text-sm opacity-75">Enter</kbd>
+        {t("Kiểm tra", "Check")} <kbd className="text-sm opacity-75">Enter</kbd>
       </button>
     </form>
   );
@@ -50,17 +52,18 @@ function RecallFront({ word, onDone }: { word: WordView; onDone: (input: string,
 
 /** Thẻ viết: viết lần lượt từng chữ của từ, không có mẫu; báo tổng số lần sai khi xong. */
 function WriteFront({ word, onDone }: { word: WordView; onDone: (mistakes: number) => void }) {
+  const t = useT();
   const chars = [...word.hanzi];
   const [i, setI] = useState(0);
   const [total, setTotal] = useState(0);
   return (
     <div>
-      <p className="text-sm opacity-75">Viết từ này</p>
+      <p className="text-sm opacity-75">{t("Viết từ này", "Write this word")}</p>
       <p className="mt-1 text-xl">{word.pinyin}</p>
-      <p className="text-lg">{word.meaningVi}</p>
+      <p className="text-lg">{word.meaning}</p>
       {chars.length > 1 && (
         <p className="mt-2 text-sm opacity-75">
-          Chữ {i + 1}/{chars.length}
+          {t("Chữ", "Character")} {i + 1}/{chars.length}
         </p>
       )}
       <div className="mt-2 flex justify-center">
@@ -82,16 +85,18 @@ function WriteFront({ word, onDone }: { word: WordView; onDone: (mistakes: numbe
 }
 
 const GRADES = [
-  { grade: 1, label: "Quên", key: "1" },
-  { grade: 2, label: "Khó", key: "2" },
-  { grade: 3, label: "Nhớ", key: "3" },
-  { grade: 4, label: "Dễ", key: "4" },
+  { grade: 1, label: ["Quên", "Again"], key: "1" },
+  { grade: 2, label: ["Khó", "Hard"], key: "2" },
+  { grade: 3, label: ["Nhớ", "Good"], key: "3" },
+  { grade: 4, label: ["Dễ", "Easy"], key: "4" },
 ] as const;
 
 // Thẻ chấm xong mà FSRS hẹn lại trong khoảng này thì ôn lại ngay trong lượt hiện tại.
 const REQUEUE_MS = 10 * 60_000;
 
 export default function ReviewSession({ items }: { items: ReviewItem[] }) {
+  const t = useT();
+  const li = useLang() === "en" ? 1 : 0;
   const [queue, setQueue] = useState(items);
   const [flipped, setFlipped] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -108,12 +113,12 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
       (s) =>
         s ??
         (mode === "write" || mode === "recall"
-          ? { grade: 1, note: mode === "write" ? "Chưa viết xong — gợi ý chấm Quên." : "Chưa trả lời — gợi ý chấm Quên." }
+          ? { grade: 1, note: mode === "write" ? t("Chưa viết xong — gợi ý chấm Quên.", "Not finished — suggested grade: Again.") : t("Chưa trả lời — gợi ý chấm Quên.", "No answer — suggested grade: Again.") }
           : mode === "listen" && queue[0]?.options
-            ? { grade: 1, note: "Chưa chọn — gợi ý chấm Quên." }
+            ? { grade: 1, note: t("Chưa chọn — gợi ý chấm Quên.", "Nothing chosen — suggested grade: Again.") }
             : null),
     );
-  }, [queue]);
+  }, [queue, t]);
 
   const current = queue[0];
 
@@ -135,7 +140,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
         setSuggested(null);
         setError(null);
       } catch {
-        setError("Không lưu được kết quả, thử lại.");
+        setError(t("Không lưu được kết quả, thử lại.", "Could not save the result, please try again."));
       } finally {
         setBusy(false);
       }
@@ -162,7 +167,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
   if (!current)
     return (
       <p role="status" className="mt-6 text-lg">
-        ✓ Xong! Bạn đã ôn {reviewed} lượt thẻ.
+        {t(`✓ Xong! Bạn đã ôn ${reviewed} lượt thẻ.`, `✓ Done! You reviewed ${reviewed} cards.`)}
       </p>
     );
 
@@ -170,7 +175,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
   return (
     <section className="mt-6 max-w-xl">
       <p className="text-sm opacity-75">
-        Còn {queue.length} thẻ · Đã ôn {reviewed}
+        {t(`Còn ${queue.length} thẻ · Đã ôn ${reviewed}`, `${queue.length} left · ${reviewed} reviewed`)}
       </p>
       <div className="mt-3 min-h-64 rounded border border-border p-6 text-center">
         {current.mode === "recognize" ? (
@@ -184,7 +189,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
               word={w}
               onDone={(mistakes) => {
                 const grade = writeGrade(mistakes);
-                setSuggested({ grade, note: `Sai ${mistakes} lần — gợi ý chấm ${GRADES[grade - 1].label}.` });
+                setSuggested({ grade, note: t(`Sai ${mistakes} lần — gợi ý chấm ${GRADES[grade - 1].label[0]}.`, `${mistakes} mistakes — suggested grade: ${GRADES[grade - 1].label[1]}.`) });
                 setFlipped(true);
               }}
             />
@@ -197,8 +202,8 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
               onDone={(input, ok) => {
                 setSuggested(
                   ok
-                    ? { grade: 3, note: "✓ Đúng — gợi ý chấm Nhớ." }
-                    : { grade: 1, note: `✗ Bạn gõ “${input}” — gợi ý chấm Quên.` },
+                    ? { grade: 3, note: t("✓ Đúng — gợi ý chấm Nhớ.", "✓ Correct — suggested grade: Good.") }
+                    : { grade: 1, note: t(`✗ Bạn gõ “${input}” — gợi ý chấm Quên.`, `✗ You typed “${input}” — suggested grade: Again.`) },
                 );
                 setFlipped(true);
               }}
@@ -206,7 +211,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
           )
         ) : (
           <div>
-            <p className="text-sm opacity-75">{current.options ? "Nghe và chọn từ đúng" : "Nghe và nhớ lại từ"}</p>
+            <p className="text-sm opacity-75">{current.options ? t("Nghe và chọn từ đúng", "Listen and pick the right word") : t("Nghe và nhớ lại từ", "Listen and recall the word")}</p>
             <div className="mt-3 flex justify-center">
               <AudioButton key={current.cardId} text={w.hanzi} hideText />
             </div>
@@ -221,8 +226,8 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
                     onClick={() => {
                       setSuggested(
                         h === w.hanzi
-                          ? { grade: 3, note: "✓ Chọn đúng — gợi ý chấm Nhớ." }
-                          : { grade: 1, note: `✗ Bạn chọn ${h} — gợi ý chấm Quên.` },
+                          ? { grade: 3, note: t("✓ Chọn đúng — gợi ý chấm Nhớ.", "✓ Right choice — suggested grade: Good.") }
+                          : { grade: 1, note: t(`✗ Bạn chọn ${h} — gợi ý chấm Quên.`, `✗ You chose ${h} — suggested grade: Again.`) },
                       );
                       setFlipped(true);
                     }}
@@ -250,7 +255,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
             <p className="mt-2 flex items-center justify-center gap-2 text-xl">
               {w.pinyin} {current.mode === "recognize" && <AudioButton key={current.cardId} text={w.hanzi} />}
             </p>
-            <p className="mt-1 text-lg">{w.meaningVi}</p>
+            <p className="mt-1 text-lg">{w.meaning}</p>
             {w.example && (
               <div className="mt-3 text-sm">
                 <p lang="zh-CN">{w.example.hanzi}</p>
@@ -268,7 +273,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
           className="mt-4 w-full rounded bg-accent px-4 py-3 font-semibold text-background hover:opacity-90"
           onClick={flip}
         >
-          Hiện đáp án <kbd className="ml-2 text-sm opacity-75">Space</kbd>
+          {t("Hiện đáp án", "Show answer")} <kbd className="ml-2 text-sm opacity-75">Space</kbd>
         </button>
       ) : (
         <div className="mt-4 grid grid-cols-4 gap-2">
@@ -280,13 +285,13 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
               className={`rounded border px-2 py-3 hover:bg-muted disabled:opacity-40 ${suggested?.grade === g.grade ? "border-accent border-2 font-semibold" : "border-border"}`}
               onClick={() => rate(g.grade)}
             >
-              {g.label} <kbd className="block text-sm opacity-75">{g.key}</kbd>
+              {g.label[li]} <kbd className="block text-sm opacity-75">{g.key}</kbd>
             </button>
           ))}
         </div>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-accent">
+        <p role="alert" className="mt-2 font-semibold">
           {error}
         </p>
       )}

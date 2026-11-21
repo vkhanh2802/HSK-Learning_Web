@@ -2,6 +2,8 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { heatLevel } from "@/lib/stats";
+import { useLang } from "./LangProvider";
+import { tr } from "@/lib/lang";
 
 const fmtDate = (iso: string) => {
   const [, m, d] = iso.split("-");
@@ -37,6 +39,8 @@ export function ForecastChart({
 }: {
   data: { date: string; count: number }[];
 }) {
+  const lang = useLang();
+  const t = tr(lang);
   const [hover, setHover] = useState<number | null>(null);
   const max = Math.max(1, ...data.map((d) => d.count));
   const top = max <= 5 ? 5 : Math.ceil(max / 10) * 10;
@@ -49,7 +53,10 @@ export function ForecastChart({
       <div
         tabIndex={0}
         role="img"
-        aria-label={`Biểu đồ cột: ${total} thẻ đến hạn trong ${data.length} ngày tới, nhiều nhất ${max} thẻ một ngày. Dùng phím mũi tên để xem từng ngày.`}
+        aria-label={t(
+          `Biểu đồ cột: ${total} thẻ đến hạn trong ${data.length} ngày tới, nhiều nhất ${max} thẻ một ngày. Dùng phím mũi tên để xem từng ngày.`,
+          `Bar chart: ${total} cards due over the next ${data.length} days, at most ${max} in one day. Use the arrow keys to browse each day.`,
+        )}
         onKeyDown={(e) =>
           arrows(
             e,
@@ -107,18 +114,18 @@ export function ForecastChart({
                 key={d.date}
                 className={`flex-1 whitespace-nowrap ${i === 0 ? "text-left" : "text-center"}`}
               >
-                {i % 7 === 0 ? (i === 0 ? "Hôm nay" : fmtDate(d.date)) : ""}
+                {i % 7 === 0 ? (i === 0 ? t("Hôm nay", "Today") : fmtDate(d.date)) : ""}
               </span>
             ))}
           </div>
         </div>
       </div>
       <Tip
-        value={cur ? `${cur.count} thẻ` : ""}
+        value={cur ? `${cur.count} ${t("thẻ", "cards")}` : ""}
         label={
           cur
             ? hover === 0
-              ? "hôm nay (gồm thẻ quá hạn)"
+              ? t("hôm nay (gồm thẻ quá hạn)", "today (including overdue cards)")
               : fmtDate(cur.date)
             : ""
         }
@@ -127,7 +134,7 @@ export function ForecastChart({
   );
 }
 
-const DAYS = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
+const DAYS = { vi: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"], en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] };
 
 /** Lưới ngày học: mỗi cột một tuần, màu đậm = nhiều hoạt động (lượt làm bài + bài học xong). */
 export function ActivityHeatmap({
@@ -135,6 +142,8 @@ export function ActivityHeatmap({
 }: {
   weeks: { date: string; count: number | null }[][];
 }) {
+  const lang = useLang();
+  const t = tr(lang);
   const cells = weeks.flat();
   const [hover, setHover] = useState<number | null>(null);
   const cur = hover === null ? null : cells[hover];
@@ -146,7 +155,10 @@ export function ActivityHeatmap({
         <div
           tabIndex={0}
           role="img"
-          aria-label={`Lịch học ${weeks.length} tuần gần nhất: ${active} ngày có học. Dùng phím mũi tên để xem từng ngày.`}
+          aria-label={t(
+            `Lịch học ${weeks.length} tuần gần nhất: ${active} ngày có học. Dùng phím mũi tên để xem từng ngày.`,
+            `Study calendar for the last ${weeks.length} weeks: ${active} days with activity. Use the arrow keys to browse each day.`,
+          )}
           onKeyDown={(e) =>
             arrows(
               e,
@@ -161,7 +173,7 @@ export function ActivityHeatmap({
           className="inline-flex gap-[2px] rounded focus-visible:outline-2 focus-visible:outline-offset-4"
         >
           <div className="mr-1 grid grid-rows-7 gap-[2px] text-[10px] leading-3 opacity-60">
-            {DAYS.map((d, i) => (
+            {DAYS[lang].map((d, i) => (
               <span key={d} className="h-3">
                 {i % 2 === 0 ? d : ""}
               </span>
@@ -192,7 +204,7 @@ export function ActivityHeatmap({
         </div>
       </div>
       <div className="mt-2 flex items-center gap-1 text-xs opacity-75">
-        Ít
+        {t("Ít", "Less")}
         {[0, 1, 2, 3, 4].map((l) => (
           <span
             key={l}
@@ -200,13 +212,13 @@ export function ActivityHeatmap({
             style={{ background: `var(--viz-heat-${l})` }}
           />
         ))}
-        Nhiều
+        {t("Nhiều", "More")}
       </div>
       <Tip
-        value={cur && cur.count !== null ? `${cur.count} hoạt động` : ""}
+        value={cur && cur.count !== null ? `${cur.count} ${t("hoạt động", "activities")}` : ""}
         label={
           cur
-            ? new Date(`${cur.date}T00:00`).toLocaleDateString("vi-VN", {
+            ? new Date(`${cur.date}T00:00`).toLocaleDateString(lang === "en" ? "en-GB" : "vi-VN", {
                 weekday: "long",
                 day: "numeric",
                 month: "numeric",

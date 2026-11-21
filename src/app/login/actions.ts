@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getT } from "@/lib/lang-server";
 import { SESSION_COOKIE, SESSION_DAYS, authEnabled, checkPassword, createSessionValue, safeNext } from "@/lib/auth";
 
 export async function login(_prev: string | null, form: FormData): Promise<string | null> {
@@ -10,7 +11,7 @@ export async function login(_prev: string | null, form: FormData): Promise<strin
   if (!checkPassword(password)) {
     // Chậm lại một chút để đoán mật khẩu tốn thời gian hơn.
     await new Promise((r) => setTimeout(r, 800));
-    return "Sai mật khẩu.";
+    return (await getT())("Sai mật khẩu.", "Wrong password.");
   }
   (await cookies()).set(SESSION_COOKIE, createSessionValue(), {
     httpOnly: true,

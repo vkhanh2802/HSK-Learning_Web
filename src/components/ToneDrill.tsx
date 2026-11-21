@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AudioButton from "@/components/AudioButton";
+import { useT } from "@/components/LangProvider";
 import { speak } from "@/lib/tts";
 import type { Syllable, ToneSample } from "@/lib/syllables";
 
@@ -17,6 +18,7 @@ const tonesOf = (s: Syllable) => (Object.keys(s.tones).map(Number) as Tone[]).so
  * pairs: chỉ dùng âm tiết có ≥ 2 thanh, phương án là chính các thanh đó (vd. mā / má / mǎ).
  */
 export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs"; syllables: Syllable[] }) {
+  const tx = useT();
   const pool = mode === "pairs" ? syllables.filter((s) => tonesOf(s).length >= 2) : syllables;
   const [q, setQ] = useState<Question | null>(null);
   const [round, setRound] = useState(0);
@@ -35,7 +37,7 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
   if (!q)
     return (
       <button type="button" className="rounded bg-accent px-4 py-2 font-semibold text-background" onClick={nextQuestion}>
-        Bắt đầu ({ROUNDS} câu)
+        {tx(`Bắt đầu (${ROUNDS} câu)`, `Start (${ROUNDS} questions)`)}
       </button>
     );
 
@@ -43,7 +45,7 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
     return (
       <div role="status">
         <p className="text-lg font-semibold">
-          Kết quả: {score}/{ROUNDS}
+          {tx("Kết quả:", "Result:")} {score}/{ROUNDS}
         </p>
         <button
           type="button"
@@ -54,19 +56,19 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
             nextQuestion();
           }}
         >
-          Làm lại
+          {tx("Làm lại", "Try again")}
         </button>
       </div>
     );
 
   const sample: ToneSample = q.syllable.tones[q.answer]!;
   const answered = picked !== null;
-  const label = (t: Tone) => (mode === "pairs" ? q.syllable.tones[t]!.marked : `Thanh ${t}`);
+  const label = (t: Tone) => (mode === "pairs" ? q.syllable.tones[t]!.marked : tx(`Thanh ${t}`, `Tone ${t}`));
 
   return (
     <div>
       <p className="flex items-center gap-3 text-sm">
-        Câu {round + 1}/{ROUNDS} · Đúng {score} · Nghe lại: <AudioButton key={`${round}-${sample.char}`} text={sample.char} hideText />
+        {tx("Câu", "Question")} {round + 1}/{ROUNDS} · {tx("Đúng", "Correct")} {score} · {tx("Nghe lại:", "Replay:")} <AudioButton key={`${round}-${sample.char}`} text={sample.char} hideText />
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         {q.options.map((t) => {
@@ -96,8 +98,8 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
       {answered && (
         <div className="mt-3">
           <p role="status">
-            {picked === q.answer ? "✓ Đúng! " : "✗ Chưa đúng. "}
-            Đáp án: <strong>{sample.marked}</strong> (thanh {q.answer}) — chữ <span lang="zh-CN">{sample.char}</span>
+            {picked === q.answer ? tx("✓ Đúng! ", "✓ Correct! ") : tx("✗ Chưa đúng. ", "✗ Not quite. ")}
+            {tx("Đáp án:", "Answer:")} <strong>{sample.marked}</strong> ({tx("thanh", "tone")} {q.answer}) — {tx("chữ", "character")} <span lang="zh-CN">{sample.char}</span>
           </p>
           <button
             type="button"
@@ -107,7 +109,7 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
               if (round + 1 < ROUNDS) nextQuestion();
             }}
           >
-            {round + 1 < ROUNDS ? "Câu tiếp →" : "Xem kết quả"}
+            {round + 1 < ROUNDS ? tx("Câu tiếp →", "Next question →") : tx("Xem kết quả", "See results")}
           </button>
         </div>
       )}

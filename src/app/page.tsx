@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { SKILL_NAMES, accuracyBySkill } from "@/lib/stats";
+import { getT } from "@/lib/lang-server";
 import { streak } from "@/lib/streak";
 
 const SKILL_HREF: Record<string, string> = {
@@ -14,6 +15,7 @@ const SKILL_HREF: Record<string, string> = {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
+  const t = await getT();
   const now = new Date();
   const since = new Date(now.getTime() - 400 * 24 * 3600_000);
 
@@ -40,27 +42,30 @@ export default async function Home() {
     <main className="px-6 pb-16 pt-10">
       <section className="mx-auto max-w-2xl text-center">
         <h1 className="text-4xl leading-tight sm:text-5xl">
-          Mỗi ngày một chút,
+          {t("Mỗi ngày một chút,", "A little every day,")}
           <br />
           <span className="relative inline-block">
-            tiếng Trung tiến bộ.
+            {t("tiếng Trung tiến bộ.", "your Chinese grows.")}
             <svg aria-hidden className="absolute -bottom-3 left-0 w-full text-brush" viewBox="0 0 300 14" preserveAspectRatio="none">
               <path d="M3 9 C60 3, 130 12, 190 6 S270 4, 297 8" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
             </svg>
           </span>
         </h1>
         <p className="mx-auto mt-10 max-w-md opacity-80">
-          Từ vựng, ngữ pháp và đủ 4 kỹ năng Nghe, Nói, Đọc, Viết từ HSK1 đến HSK4, ôn theo lịch lặp lại ngắt quãng.
+          {t(
+            "Từ vựng, ngữ pháp và đủ 4 kỹ năng Nghe, Nói, Đọc, Viết từ HSK1 đến HSK4, ôn theo lịch lặp lại ngắt quãng.",
+            "Vocabulary, grammar and all four skills — listening, speaking, reading, writing — from HSK1 to HSK4, reviewed with spaced repetition.",
+          )}
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           {nextLesson && (
             <Link href={`/lesson/${nextLesson.id}`} className="rounded-xl bg-accent px-6 py-3 font-semibold text-background hover:opacity-90">
-              Học bài tiếp theo
+              {t("Học bài tiếp theo", "Start next lesson")}
             </Link>
           )}
           {due > 0 && (
             <Link href="/review" className="rounded-xl border border-border px-6 py-3 font-semibold hover:bg-muted">
-              Ôn {due} thẻ đến hạn
+              {t(`Ôn ${due} thẻ đến hạn`, `Review ${due} due cards`)}
             </Link>
           )}
         </div>
@@ -68,26 +73,26 @@ export default async function Home() {
 
       <div className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
         <div className="rounded-2xl border border-border bg-muted p-5">
-          <p className="text-sm opacity-75">Thẻ đến hạn</p>
+          <p className="text-sm opacity-75">{t("Thẻ đến hạn", "Cards due")}</p>
           <p className="font-serif text-4xl">{due}</p>
           {due > 0 && (
             <Link href="/review" className="underline decoration-brush decoration-2 underline-offset-4">
-              Ôn tập ngay
+              {t("Ôn tập ngay", "Review now")}
             </Link>
           )}
         </div>
         <div className="rounded-2xl border border-border bg-muted p-5">
-          <p className="text-sm opacity-75">Chuỗi ngày học</p>
-          <p className="font-serif text-4xl">{days} ngày</p>
+          <p className="text-sm opacity-75">{t("Chuỗi ngày học", "Study streak")}</p>
+          <p className="font-serif text-4xl">{days} {t("ngày", days === 1 ? "day" : "days")}</p>
         </div>
         <div className="rounded-2xl border border-border bg-muted p-5">
-          <p className="text-sm opacity-75">Bài tiếp theo</p>
+          <p className="text-sm opacity-75">{t("Bài tiếp theo", "Next lesson")}</p>
           {nextLesson ? (
             <Link href={`/lesson/${nextLesson.id}`} className="mt-1 block font-semibold underline decoration-brush decoration-2 underline-offset-4">
-              HSK{nextLesson.levelId} · Bài {nextLesson.order}: {nextLesson.title}
+              HSK{nextLesson.levelId} · {t("Bài", "Lesson")} {nextLesson.order}: {nextLesson.title}
             </Link>
           ) : (
-            <p className="mt-1">Đã học hết các bài hiện có 🎉</p>
+            <p className="mt-1">{t("Đã học hết các bài hiện có 🎉", "All current lessons done 🎉")}</p>
           )}
         </div>
       </div>
@@ -96,21 +101,21 @@ export default async function Home() {
       <p className="mt-4">
         {weak ? (
           <>
-            Kỹ năng yếu nhất 30 ngày qua: <strong>{SKILL_NAMES[weak.skill]}</strong> ({Math.round(weak.rate! * 100)}% đúng) —{" "}
+            {t("Kỹ năng yếu nhất 30 ngày qua:", "Weakest skill in the last 30 days:")} <strong>{SKILL_NAMES[weak.skill]}</strong> ({Math.round(weak.rate! * 100)}{t("% đúng", "% correct")}) —{" "}
             <Link href={SKILL_HREF[weak.skill]} className="underline decoration-brush decoration-2 underline-offset-4">
-              luyện ngay
+              {t("luyện ngay", "practise now")}
             </Link>
             .{" "}
           </>
         ) : (
-          "Làm thêm bài luyện để biết kỹ năng nào còn yếu. "
+          t("Làm thêm bài luyện để biết kỹ năng nào còn yếu. ", "Do more exercises to see which skill is weakest. ")
         )}
         <Link href="/stats" className="underline decoration-brush decoration-2 underline-offset-4">
-          Xem thống kê
+          {t("Xem thống kê", "View stats")}
         </Link>
       </p>
 
-      <h2 className="mt-10 text-2xl">Tiến độ từ vựng</h2>
+      <h2 className="mt-10 text-2xl">{t("Tiến độ từ vựng", "Vocabulary progress")}</h2>
       <ul className="mt-3 grid gap-3">
         {levels.map((l) => {
           const learned = learnedByLevel.get(l.id) ?? 0;
@@ -122,14 +127,14 @@ export default async function Home() {
                   {l.name}
                 </Link>
                 <span>
-                  {learned}/{total} từ
+                  {learned}/{total} {t("từ", "words")}
                 </span>
               </div>
               <progress
                 className="mt-1 h-2 w-full accent-accent"
                 value={learned}
                 max={total || 1}
-                aria-label={`${l.name}: đã học ${learned} trên ${total} từ`}
+                aria-label={t(`${l.name}: đã học ${learned} trên ${total} từ`, `${l.name}: ${learned} of ${total} words learned`)}
               />
             </li>
           );
