@@ -292,17 +292,17 @@ Mỗi từ sinh nhiều thẻ, mỗi thẻ 1 chế độ:
 ## Phase 7 — Ngữ pháp
 
 ### 7.1 Dữ liệu
-- [ ] Liệt kê điểm ngữ pháp theo cấp (tham khảo Chinese Grammar Wiki, tự viết lại bằng tiếng Việt)
-  - HSK1 ví dụ: 是, 吗, 呢, 的, 不/没, 了 (cơ bản), 在, 想, 会/能, số lượng từ
-  - HSK2 ví dụ: 过, 着, 比, 就, 还/已经, bổ ngữ kết quả, 因为…所以…
-  - HSK3 ví dụ: 把, 被, bổ ngữ xu hướng, bổ ngữ khả năng, 越来越, 除了…以外
-  - HSK4 ví dụ: 连…都, 无论…都, 既…又, 不仅…而且, 即使…也
-- [ ] Mỗi điểm: tiêu đề, công thức, giải thích, 3–5 ví dụ, lỗi hay gặp
+- [x] HSK1: 15 điểm (`data/grammar/hsk1.json`, tự viết bằng tiếng Việt) — 是/不是, 吗/呢, 会, số + lượng từ, 有/没有, 的, ngày tháng, thời gian trước động từ, 想, 几/多少, 坐…去…, 在/有 + phương vị, 很/太…了, 了, 在 + động từ — do Claude soạn, **cần duyệt**
+- [ ] HSK2–4 (gợi ý giữ lại): HSK2 过, 着, 比, 就, 还/已经, bổ ngữ kết quả, 因为…所以…; HSK3 把, 被, bổ ngữ xu hướng/khả năng, 越来越, 除了…以外; HSK4 连…都, 无论…都, 既…又, 不仅…而且, 即使…也 — Phase 10
+- [x] Mỗi điểm: tiêu đề, công thức, giải thích, 3 ví dụ (có âm thanh), 1 lỗi hay gặp. Thêm cột `key` + `exercises` cho `GrammarPoint` (migration `grammar_key`); schema + chấm điểm ở `src/lib/grammar.ts` (có test). Seed kiểm tra key, đáp án ngoài phạm vi, đáp án sắp xếp phải ghép được từ đúng các từ đã cho, và bài học trỏ tới key có thật.
+- Ghi chú: câu ví dụ ngữ pháp không qua bước kiểm tra từ vượt cấp như bài đọc; có dùng 说, 哪儿 (thuộc HSK1 bản 2012 nhưng không có trong danh sách hiện tại).
 
 ### 7.2 Trang `/grammar/[id]`
-- [ ] Hiển thị công thức tô màu theo thành phần câu
-- [ ] 5–10 bài tập: chọn đáp án, `ReorderSentence` (kéo thả), tìm câu sai
-- [ ] Gắn điểm ngữ pháp vào bài học tương ứng (`LessonItem`)
+- [x] Công thức tách theo " + ", mỗi thành phần một nền màu nhạt (đọc được cả sáng/tối)
+- [x] 4 bài/điểm (60 bài): 2 chọn đáp án, 1 sắp xếp câu, 1 tìm câu sai; chấm ở server (`submitGrammar`, đáp án không gửi xuống client), ghi `Attempt` skill `grammar`, hiện đáp án/giải thích và tổng điểm. Sắp xếp làm kiểu **bấm để ghép** (bấm từ để thêm, bấm từ đã ghép để bỏ) thay vì kéo thả, dùng được bằng bàn phím; xử lý đúng từ lặp (几…几); chấp nhận nhiều đáp án (我明天去北京 / 明天我去北京).
+- [x] Gắn vào bài học: `data/lessons/hsk1.json` có `"grammar": [key]`, seed tạo `LessonItem` loại `grammar`; trang bài học có mục "Ngữ pháp của bài"; trang `/grammar` liệt kê theo cấp kèm số bài; menu "Ngữ pháp" trỏ về đây. Trang danh sách bài chỉ đếm từ (không đếm mục ngữ pháp).
+
+> Xác minh: 39 test, lint, `tsc --noEmit`, build đạt; seed: 15 điểm, 60 bài. Chạy bản build ở cổng 3123: bài 8 → "Ngữ pháp của bài" → trang điểm 8 hiện công thức màu, ví dụ, lỗi hay gặp; làm 4 bài (cố ý sai 1) → 3/4, đáp án thay thế được chấp nhận; điểm 7: bài sắp xếp có hai chữ 几 ghép/bỏ đúng → chính xác; `/grammar` đủ 15 mục; `/learn/1` vẫn "10 từ"; không lỗi console. Đã xoá 5 Attempt do test tạo. **Dev server đang chạy cần khởi động lại** vì có migration mới.
 
 **Tiêu chí hoàn thành:** mỗi bài học HSK1 có ít nhất 1 điểm ngữ pháp kèm bài tập.
 

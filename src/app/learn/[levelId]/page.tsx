@@ -9,7 +9,7 @@ export default async function Page({ params }: { params: Promise<{ levelId: stri
   const level = Number.isInteger(levelId)
     ? await prisma.level.findUnique({
         where: { id: levelId },
-        include: { lessons: { orderBy: { order: "asc" }, include: { _count: { select: { items: true } } } } },
+        include: { lessons: { orderBy: { order: "asc" }, include: { _count: { select: { items: { where: { itemType: "word" } } } } } } },
       })
     : null;
   if (!level) notFound();

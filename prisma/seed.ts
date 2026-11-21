@@ -6,12 +6,14 @@
 //   data/lessons/hskN.json — chia bài theo chủ đề
 //   data/exercises/hskN-skill.json — bài tập (nghe, đọc, …), định dạng ở src/lib/exercises.ts
 //   data/passages/hskN.json — bài đọc, định dạng + cách tách token ở src/lib/passages.ts
+//   data/grammar/hskN.json — điểm ngữ pháp + bài tập (src/lib/grammar.ts); bài học trỏ tới bằng key ("grammar": [...])
 // Chỉ cấp nào có đủ data/vocab và data/lessons mới được nạp.
 import "dotenv/config";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { z } from "zod";
 import { prisma } from "../src/lib/db";
 import { exerciseSchema, splitExercise } from "../src/lib/exercises";
+import { grammarFileSchema } from "../src/lib/grammar";
 import { passageFileSchema, tokenize } from "../src/lib/passages";
 import { joinSyllables } from "../src/lib/pinyin";
 
@@ -26,7 +28,7 @@ type VocabEntry = {
   vi: string;
   example: { hanzi: string; pinyin: string; vi: string };
 };
-type LessonEntry = { order: number; title: string; topic: string; words: string[] };
+type LessonEntry = { order: number; title: string; topic: string; words: string[]; grammar?: string[] };
 
 const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
 const plain = (pinyin: string) => pinyin.replace(/[\s']/g, "").toLowerCase();
@@ -179,8 +181,60 @@ async function seedPassages(level: number) {
   console.log(`${file}: ${passages.length} bài đọc`);
 }
 
+// data/grammar/hskN.json, rồi gắn vào bài học theo trường "grammar" trong data/lessons/hskN.json.
+async function seedGrammar(level: number) {
+  const file = `data/grammar/hsk${level}.json`;
+  if (!existsSync(file)) return;
+  const points = grammarFileSchema.parse(readJson(file));
+
+  const errors: string[] = [];
+  if (new Set(points.map((p) => p.key)).size !== points.length) errors.push("trùng key");
+  for (const p of points)
+    p.exercises.forEach((ex, i) => {
+      if ("options" in ex && ex.answer >= ex.options.length) errors.push(`${p.key}: bài ${i + 1} có đáp án ngoài số phương án`);
+      // Câu đáp án của bài sắp xếp phải ghép đúng từ chính các từ đã cho.
+      if (ex.type === "reorder") {
+        const pool = [...ex.words].sort().join("|");
+        for (const a of ex.answers) {
+          const used = ex.words.filter((w) => a.includes(w)).length === ex.words.length;
+          const len = a.replace(/[\s\p{P}]/gu, "").length === ex.words.join("").length;
+          if (!used || !len) errors.push(`${p.key}: bài ${i + 1} đáp án "${a}" không ghép được từ [${pool}]`);
+        }
+      }
+    });
+  const lessons = readJson<LessonEntry[]>(`data/lessons/hsk${level}.json`);
+  const keys = new Set(points.map((p) => p.key));
+  for (const l of lessons) for (const k of l.grammar ?? []) if (!keys.has(k)) errors.push(`bài ${l.order} trỏ tới ${k} không tồn tại`);
+  if (errors.length) throw new Error(`${file} lỗi:\n- ${errors.join("\n- ")}`);
+
+  const ids = new Map<string, number>();
+  for (const p of points) {
+    const data = {
+      levelId: level,
+      title: p.title,
+      pattern: p.pattern,
+      explanation: p.explanation,
+      examples: JSON.stringify(p.examples),
+      mistakes: JSON.stringify(p.mistakes),
+      exercises: JSON.stringify(p.exercises),
+    };
+    const row = await prisma.grammarPoint.upsert({ where: { key: p.key }, update: data, create: { key: p.key, ...data } });
+    ids.set(p.key, row.id);
+  }
+  for (const l of lessons) {
+    const lesson = await prisma.lesson.findUnique({ where: { levelId_order: { levelId: level, order: l.order } } });
+    if (!lesson) continue;
+    await prisma.lessonItem.deleteMany({ where: { lessonId: lesson.id, itemType: "grammar" } });
+    await prisma.lessonItem.createMany({
+      data: (l.grammar ?? []).map((k, order) => ({ lessonId: lesson.id, itemType: "grammar", itemId: ids.get(k)!, order })),
+    });
+  }
+  console.log(`${file}: ${points.length} điểm ngữ pháp, ${points.reduce((n, p) => n + p.exercises.length, 0)} bài tập`);
+}
+
 async function main() {
   for (const level of [1, 2, 3, 4]) await seedLevel(level);
+  for (const level of [1, 2, 3, 4]) await seedGrammar(level);
   for (const level of [1, 2, 3, 4]) await seedPassages(level);
   await seedExercises();
 }

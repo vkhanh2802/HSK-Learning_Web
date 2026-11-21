@@ -4,6 +4,7 @@ import { z } from "zod";
 import { matchesDictation } from "@/lib/compare";
 import { prisma } from "@/lib/db";
 import type { Line } from "@/lib/exercises";
+import { gradeGrammar, revealGrammar, type GrammarExercise } from "@/lib/grammar";
 import type { Question } from "@/lib/passages";
 import { newCard, review, type Grade } from "@/lib/srs";
 
@@ -111,4 +112,24 @@ export async function submitExercise(input: z.input<typeof submitInput>) {
     data: { exerciseId, skill: ex.skill, correct, response: JSON.stringify(response), durationMs },
   });
   return { correct, answer };
+}
+
+const grammarInput = z.object({
+  pointId: z.number().int().positive(),
+  exercise: z.number().int().min(0).max(50),
+  response: z.union([z.number().int().min(0).max(20), z.array(z.string().max(20)).max(30)]),
+});
+
+/** Chấm một bài tập ngữ pháp ở server, ghi Attempt (skill grammar), trả kết quả + đáp án/giải thích. */
+export async function submitGrammar(input: z.input<typeof grammarInput>) {
+  const { pointId, exercise, response } = grammarInput.parse(input);
+  const point = await prisma.grammarPoint.findUnique({ where: { id: pointId } });
+  const ex = point && (JSON.parse(point.exercises) as GrammarExercise[])[exercise];
+  if (!ex) throw new Error("Không tìm thấy bài tập");
+
+  const correct = gradeGrammar(ex, response);
+  await prisma.attempt.create({
+    data: { skill: "grammar", correct, response: JSON.stringify({ point: point.key, exercise, response }) },
+  });
+  return { correct, ...revealGrammar(ex) };
 }

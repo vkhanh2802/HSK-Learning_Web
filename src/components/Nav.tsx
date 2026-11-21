@@ -8,7 +8,6 @@ type NavItem = NavLink | { label: string; children: NavLink[] };
 
 const levels = [1, 2, 3, 4];
 
-// shortcut: Ngữ pháp trỏ tới mục số 1 vì chưa có trang danh sách; thêm trang danh sách ở Phase 7.
 const items: NavItem[] = [
   { href: "/", label: "Trang chủ" },
   {
@@ -31,7 +30,7 @@ const items: NavItem[] = [
       { href: "/writing", label: "Viết" },
     ],
   },
-  { href: "/grammar/1", label: "Ngữ pháp" },
+  { href: "/grammar", label: "Ngữ pháp" },
   {
     label: "Thi thử",
     children: levels.map((n) => ({ href: `/mock-test/${n}`, label: `HSK${n}` })),

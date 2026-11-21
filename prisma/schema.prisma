@@ -69,6 +69,7 @@ model WordCharacter {
 
 model GrammarPoint {
   id          Int     @id @default(autoincrement())
+  key         String  @unique // id ổn định trong data/grammar, để seed upsert và gắn vào bài học
   levelId     Int
   level       Level   @relation(fields: [levelId], references: [id])
   title       String
@@ -76,6 +77,7 @@ model GrammarPoint {
   explanation String
   examples    String // JSON
   mistakes    String? // JSON
+  exercises   String  @default("[]") // JSON (có đáp án — không gửi thẳng xuống client), xem src/lib/grammar.ts
 }
 
 model Passage {

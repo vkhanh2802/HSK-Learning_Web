@@ -1,0 +1,272 @@
+[
+  {
+    "key": "hsk1-g01",
+    "title": "Câu chữ 是 và phủ định 不是",
+    "pattern": "A + 是 / 不是 + B",
+    "explanation": "是 nối chủ ngữ với một danh từ để nói “A là B”. Phủ định thêm 不 trước 是 thành 不是. Không dùng 是 trước tính từ: nói 我很高兴, không nói 我是高兴.",
+    "examples": [
+      { "hanzi": "我是学生。", "pinyin": "Wǒ shì xuésheng.", "vi": "Tôi là học sinh." },
+      { "hanzi": "他不是老师。", "pinyin": "Tā bú shì lǎoshī.", "vi": "Anh ấy không phải giáo viên." },
+      { "hanzi": "你是中国人吗？", "pinyin": "Nǐ shì Zhōngguó rén ma?", "vi": "Bạn là người Trung Quốc phải không?" }
+    ],
+    "mistakes": [{ "wrong": "我是很高兴。", "right": "我很高兴。", "note": "Trước tính từ không dùng 是." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 学生。", "vi": "Tôi là học sinh." }, "options": ["是", "很", "有"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "她 ___ 是医生，她是老师。", "vi": "Cô ấy không phải bác sĩ, cô ấy là giáo viên." }, "options": ["不", "没", "很"], "answer": 0 },
+      { "type": "reorder", "words": ["老师", "不", "他", "是"], "vi": "Anh ấy không phải giáo viên.", "answers": ["他不是老师。"] },
+      { "type": "error", "options": ["我是中国人。", "他不是学生。", "我是很好。"], "answer": 2, "explain": "Trước tính từ 好 không dùng 是: 我很好。" }
+    ]
+  },
+  {
+    "key": "hsk1-g02",
+    "title": "Câu hỏi với 吗 và 呢",
+    "pattern": "Câu trần thuật + 吗？ / Danh từ + 呢？",
+    "explanation": "Thêm 吗 vào cuối câu trần thuật để thành câu hỏi có/không. 呢 đặt sau danh từ hoặc đại từ để hỏi lại cùng ý: “còn … thì sao?”. Câu đã có từ để hỏi (什么, 谁, 哪…) thì không thêm 吗.",
+    "examples": [
+      { "hanzi": "你是老师吗？", "pinyin": "Nǐ shì lǎoshī ma?", "vi": "Bạn là giáo viên phải không?" },
+      { "hanzi": "我很好，你呢？", "pinyin": "Wǒ hěn hǎo, nǐ ne?", "vi": "Tôi khỏe, còn bạn?" },
+      { "hanzi": "他叫什么名字？", "pinyin": "Tā jiào shénme míngzi?", "vi": "Anh ấy tên là gì?" }
+    ],
+    "mistakes": [{ "wrong": "你叫什么名字吗？", "right": "你叫什么名字？", "note": "Câu đã có 什么 thì không thêm 吗." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "你是学生 ___？", "vi": "Bạn là học sinh phải không?" }, "options": ["吗", "呢", "的"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "我很好，你 ___？", "vi": "Tôi khỏe, còn bạn?" }, "options": ["吗", "呢", "了"], "answer": 1 },
+      { "type": "reorder", "words": ["吗", "中国人", "是", "你"], "vi": "Bạn là người Trung Quốc phải không?", "answers": ["你是中国人吗？"] },
+      { "type": "error", "options": ["他是谁吗？", "你认识他吗？", "我很好，你呢？"], "answer": 0, "explain": "Câu đã có từ để hỏi 谁 thì không thêm 吗: 他是谁？" }
+    ]
+  },
+  {
+    "key": "hsk1-g03",
+    "title": "Động từ năng nguyện 会 (biết làm gì)",
+    "pattern": "Chủ ngữ + 会 / 不会 + Động từ",
+    "explanation": "会 + động từ = biết làm việc gì đó nhờ học hoặc luyện tập (nói một thứ tiếng, viết chữ, nấu ăn). Phủ định là 不会. Câu hỏi: …会…吗？",
+    "examples": [
+      { "hanzi": "我会说汉语。", "pinyin": "Wǒ huì shuō Hànyǔ.", "vi": "Tôi biết nói tiếng Trung." },
+      { "hanzi": "他不会写这个字。", "pinyin": "Tā bú huì xiě zhège zì.", "vi": "Anh ấy không biết viết chữ này." },
+      { "hanzi": "你会做中国菜吗？", "pinyin": "Nǐ huì zuò Zhōngguó cài ma?", "vi": "Bạn biết nấu món Trung Quốc không?" }
+    ],
+    "mistakes": [{ "wrong": "我没会说汉语。", "right": "我不会说汉语。", "note": "Phủ định của 会 là 不会, không dùng 没." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 说汉语。", "vi": "Tôi biết nói tiếng Trung." }, "options": ["会", "是", "在"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你 ___ 做中国菜吗？", "vi": "Bạn biết nấu món Trung Quốc không?" }, "options": ["会", "很", "的"], "answer": 0 },
+      { "type": "reorder", "words": ["汉语", "会", "我", "说"], "vi": "Tôi biết nói tiếng Trung.", "answers": ["我会说汉语。"] },
+      { "type": "error", "options": ["她会写字。", "我没会做菜。", "你会说汉语吗？"], "answer": 1, "explain": "Phủ định của 会 là 不会: 我不会做菜。" }
+    ]
+  },
+  {
+    "key": "hsk1-g04",
+    "title": "Số từ + lượng từ + danh từ",
+    "pattern": "Số / 这 / 那 / 几 + Lượng từ + Danh từ",
+    "explanation": "Giữa số và danh từ bắt buộc có lượng từ. 个 dùng chung nhiều nhất; 本 cho sách vở; 块 cho tiền. 这, 那, 几 cũng cần lượng từ: 这个杯子, 几个人.",
+    "examples": [
+      { "hanzi": "我有三本书。", "pinyin": "Wǒ yǒu sān běn shū.", "vi": "Tôi có ba quyển sách." },
+      { "hanzi": "这个杯子是我的。", "pinyin": "Zhège bēizi shì wǒ de.", "vi": "Cái cốc này là của tôi." },
+      { "hanzi": "你家有几个人？", "pinyin": "Nǐ jiā yǒu jǐ ge rén?", "vi": "Nhà bạn có mấy người?" }
+    ],
+    "mistakes": [{ "wrong": "我有三书。", "right": "我有三本书。", "note": "Thiếu lượng từ 本." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我有一 ___ 女儿。", "vi": "Tôi có một con gái." }, "options": ["个", "本", "块"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "这是八 ___ 书。", "vi": "Đây là tám quyển sách." }, "options": ["个", "本", "块"], "answer": 1 },
+      { "type": "reorder", "words": ["杯子", "个", "那", "是", "我的"], "vi": "Cái cốc kia là của tôi.", "answers": ["那个杯子是我的。"] },
+      { "type": "error", "options": ["我买了一本书。", "他有三朋友。", "这个人是谁？"], "answer": 1, "explain": "Giữa số và danh từ cần lượng từ: 他有三个朋友。" }
+    ]
+  },
+  {
+    "key": "hsk1-g05",
+    "title": "Câu chữ 有 và phủ định 没有",
+    "pattern": "A + 有 / 没有 + B",
+    "explanation": "有 = có (sở hữu hoặc tồn tại). Phủ định của 有 luôn là 没有 (nói tắt 没), không bao giờ dùng 不有.",
+    "examples": [
+      { "hanzi": "我有一个儿子。", "pinyin": "Wǒ yǒu yí ge érzi.", "vi": "Tôi có một con trai." },
+      { "hanzi": "他没有钱。", "pinyin": "Tā méiyǒu qián.", "vi": "Anh ấy không có tiền." },
+      { "hanzi": "你家有猫吗？", "pinyin": "Nǐ jiā yǒu māo ma?", "vi": "Nhà bạn có mèo không?" }
+    ],
+    "mistakes": [{ "wrong": "我不有钱。", "right": "我没有钱。", "note": "Phủ định của 有 là 没有." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 一个女儿。", "vi": "Tôi có một con gái." }, "options": ["有", "是", "在"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他 ___ 有朋友。", "vi": "Anh ấy không có bạn." }, "options": ["没", "不", "很"], "answer": 0 },
+      { "type": "reorder", "words": ["猫", "有", "我", "家"], "vi": "Nhà tôi có mèo.", "answers": ["我家有猫。"] },
+      { "type": "error", "options": ["我没有钱。", "你有几个儿子？", "他不有电脑。"], "answer": 2, "explain": "Phủ định của 有 là 没有: 他没有电脑。" }
+    ]
+  },
+  {
+    "key": "hsk1-g06",
+    "title": "Trợ từ 的 (sở hữu)",
+    "pattern": "Người sở hữu + 的 + Danh từ",
+    "explanation": "的 nối người sở hữu với vật: 我的书 = sách của tôi. Thứ tự ngược tiếng Việt: người sở hữu đứng trước. Với người thân và nơi mình thuộc về có thể bỏ 的: 我妈妈, 我们学校.",
+    "examples": [
+      { "hanzi": "这是我的书。", "pinyin": "Zhè shì wǒ de shū.", "vi": "Đây là sách của tôi." },
+      { "hanzi": "她是我们的老师。", "pinyin": "Tā shì wǒmen de lǎoshī.", "vi": "Cô ấy là giáo viên của chúng tôi." },
+      { "hanzi": "我妈妈是医生。", "pinyin": "Wǒ māma shì yīshēng.", "vi": "Mẹ tôi là bác sĩ." }
+    ],
+    "mistakes": [{ "wrong": "这是书的我。", "right": "这是我的书。", "note": "Người sở hữu đứng trước 的." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这是老师 ___ 电脑。", "vi": "Đây là máy tính của thầy giáo." }, "options": ["的", "了", "吗"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___ 是医生。", "vi": "Bạn của tôi là bác sĩ." }, "options": ["我的朋友", "朋友的我", "的我朋友"], "answer": 0 },
+      { "type": "reorder", "words": ["书", "的", "这", "是", "谁"], "vi": "Đây là sách của ai?", "answers": ["这是谁的书？"] },
+      { "type": "error", "options": ["这是我的杯子。", "他是我们的老师。", "那是电脑的我。"], "answer": 2, "explain": "Người sở hữu đứng trước: 那是我的电脑。" }
+    ]
+  },
+  {
+    "key": "hsk1-g07",
+    "title": "Nói ngày tháng và thứ",
+    "pattern": "… 年 + … 月 + … 日 + 星期 …",
+    "explanation": "Tiếng Trung nói từ lớn đến nhỏ: năm → tháng → ngày → thứ (ngược với tiếng Việt). Thứ hai đến thứ bảy là 星期一 … 星期六 (chủ nhật là 星期天). Hỏi: 星期几？, 几月几日？",
+    "examples": [
+      { "hanzi": "今天是三月十日。", "pinyin": "Jīntiān shì sān yuè shí rì.", "vi": "Hôm nay là ngày 10 tháng 3." },
+      { "hanzi": "明天星期几？", "pinyin": "Míngtiān xīngqī jǐ?", "vi": "Ngày mai là thứ mấy?" },
+      { "hanzi": "我九月去北京。", "pinyin": "Wǒ jiǔ yuè qù Běijīng.", "vi": "Tháng chín tôi đi Bắc Kinh." }
+    ],
+    "mistakes": [{ "wrong": "今天是十日三月。", "right": "今天是三月十日。", "note": "Tháng đứng trước ngày." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "今天星期 ___？", "vi": "Hôm nay thứ mấy?" }, "options": ["几", "什么", "多少"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "今天是 ___。", "vi": "Hôm nay là ngày 5 tháng 8." }, "options": ["八月五日", "五日八月", "五月八日"], "answer": 0 },
+      { "type": "reorder", "words": ["几", "今天", "日", "月", "几"], "vi": "Hôm nay là ngày mấy tháng mấy?", "answers": ["今天几月几日？"] },
+      { "type": "error", "options": ["今天星期三。", "明天是九月一日。", "昨天是二十日五月。"], "answer": 2, "explain": "Tháng đứng trước ngày: 昨天是五月二十日。" }
+    ]
+  },
+  {
+    "key": "hsk1-g08",
+    "title": "Thời gian đứng trước động từ",
+    "pattern": "Chủ ngữ + Thời gian + Động từ",
+    "explanation": "Từ chỉ thời gian (今天, 下午, 八点…) đặt trước động từ, có thể đứng đầu câu, nhưng không đặt cuối câu như tiếng Việt. Nói giờ: 八点 (8 giờ), 八点十分 (8 giờ 10).",
+    "examples": [
+      { "hanzi": "我八点去学校。", "pinyin": "Wǒ bā diǎn qù xuéxiào.", "vi": "Tôi đến trường lúc 8 giờ." },
+      { "hanzi": "下午我们看电影。", "pinyin": "Xiàwǔ wǒmen kàn diànyǐng.", "vi": "Buổi chiều chúng tôi xem phim." },
+      { "hanzi": "他中午在家吃饭。", "pinyin": "Tā zhōngwǔ zài jiā chī fàn.", "vi": "Buổi trưa anh ấy ăn cơm ở nhà." }
+    ],
+    "mistakes": [{ "wrong": "我去学校八点。", "right": "我八点去学校。", "note": "Thời gian đứng trước động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "现在三 ___ 十分。", "vi": "Bây giờ là 3 giờ 10 phút." }, "options": ["点", "年", "个"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "___", "vi": "Tôi ăn cơm lúc 12 giờ." }, "options": ["我十二点吃饭。", "我吃饭十二点。", "十二点吃饭我。"], "answer": 0 },
+      { "type": "reorder", "words": ["去", "明天", "北京", "我"], "vi": "Ngày mai tôi đi Bắc Kinh.", "answers": ["我明天去北京。", "明天我去北京。"] },
+      { "type": "error", "options": ["我七点去学校。", "他睡觉十点。", "下午我在家。"], "answer": 1, "explain": "Thời gian đứng trước động từ: 他十点睡觉。" }
+    ]
+  },
+  {
+    "key": "hsk1-g09",
+    "title": "想 + động từ (muốn làm gì)",
+    "pattern": "Chủ ngữ + 想 / 不想 + Động từ (+ Tân ngữ)",
+    "explanation": "想 + động từ = muốn làm gì. Phủ định là 不想. 想 + người thì nghĩa là nhớ ai: 我想妈妈.",
+    "examples": [
+      { "hanzi": "我想喝茶。", "pinyin": "Wǒ xiǎng hē chá.", "vi": "Tôi muốn uống trà." },
+      { "hanzi": "他不想吃米饭。", "pinyin": "Tā bù xiǎng chī mǐfàn.", "vi": "Anh ấy không muốn ăn cơm." },
+      { "hanzi": "你想去哪儿？", "pinyin": "Nǐ xiǎng qù nǎr?", "vi": "Bạn muốn đi đâu?" }
+    ],
+    "mistakes": [{ "wrong": "我没想去。", "right": "我不想去。", "note": "Phủ định ý muốn dùng 不想." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 吃苹果。", "vi": "Tôi muốn ăn táo." }, "options": ["想", "有", "是"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你 ___ 喝什么？", "vi": "Bạn muốn uống gì?" }, "options": ["想", "是", "个"], "answer": 0 },
+      { "type": "reorder", "words": ["茶", "想", "我", "喝", "不"], "vi": "Tôi không muốn uống trà.", "answers": ["我不想喝茶。"] },
+      { "type": "error", "options": ["我想去中国。", "她没想吃菜。", "你想喝水吗？"], "answer": 1, "explain": "Phủ định ý muốn: 她不想吃菜。" }
+    ]
+  },
+  {
+    "key": "hsk1-g10",
+    "title": "Hỏi số lượng và giá: 几 và 多少",
+    "pattern": "几 + Lượng từ + Danh từ？ / 多少 (+ Danh từ)？ / … 多少钱？",
+    "explanation": "几 hỏi số nhỏ (thường dưới 10) và luôn cần lượng từ: 几个人. 多少 hỏi số bất kỳ, có thể bỏ lượng từ: 多少学生. Hỏi giá: … 多少钱？",
+    "examples": [
+      { "hanzi": "这个杯子多少钱？", "pinyin": "Zhège bēizi duōshao qián?", "vi": "Cái cốc này bao nhiêu tiền?" },
+      { "hanzi": "你有几个朋友？", "pinyin": "Nǐ yǒu jǐ ge péngyou?", "vi": "Bạn có mấy người bạn?" },
+      { "hanzi": "你们学校有多少学生？", "pinyin": "Nǐmen xuéxiào yǒu duōshao xuésheng?", "vi": "Trường các bạn có bao nhiêu học sinh?" }
+    ],
+    "mistakes": [{ "wrong": "你家有几人？", "right": "你家有几个人？", "note": "几 cần lượng từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "这个苹果 ___ 钱？", "vi": "Quả táo này bao nhiêu tiền?" }, "options": ["多少", "几", "什么"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "现在 ___ 点？", "vi": "Bây giờ là mấy giờ?" }, "options": ["几", "多少", "什么"], "answer": 0 },
+      { "type": "reorder", "words": ["多少", "这", "钱", "个", "杯子"], "vi": "Cái cốc này bao nhiêu tiền?", "answers": ["这个杯子多少钱？"] },
+      { "type": "error", "options": ["你有几个朋友？", "这本书多少钱？", "你家有几人？"], "answer": 2, "explain": "几 cần lượng từ: 你家有几个人？" }
+    ]
+  },
+  {
+    "key": "hsk1-g11",
+    "title": "Đi bằng gì, đi làm gì: 坐 … 去 …",
+    "pattern": "Chủ ngữ + 坐 + Phương tiện + 去 + Nơi chốn (+ làm gì)",
+    "explanation": "Phương tiện đứng trước 去/来: 坐飞机去北京 = đi Bắc Kinh bằng máy bay. Mục đích đứng sau nơi chốn: 去商店买东西 = đến cửa hàng mua đồ.",
+    "examples": [
+      { "hanzi": "我坐飞机去北京。", "pinyin": "Wǒ zuò fēijī qù Běijīng.", "vi": "Tôi đi Bắc Kinh bằng máy bay." },
+      { "hanzi": "他们坐出租车来学校。", "pinyin": "Tāmen zuò chūzūchē lái xuéxiào.", "vi": "Họ đi taxi đến trường." },
+      { "hanzi": "我去商店买衣服。", "pinyin": "Wǒ qù shāngdiàn mǎi yīfu.", "vi": "Tôi đến cửa hàng mua quần áo." }
+    ],
+    "mistakes": [{ "wrong": "我去北京坐飞机。", "right": "我坐飞机去北京。", "note": "Câu sai có nghĩa “đến Bắc Kinh để đi máy bay”." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我 ___ 出租车去医院。", "vi": "Tôi đi taxi đến bệnh viện." }, "options": ["坐", "是", "有"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "我去商店 ___ 东西。", "vi": "Tôi đến cửa hàng mua đồ." }, "options": ["买", "坐", "会"], "answer": 0 },
+      { "type": "reorder", "words": ["去", "飞机", "坐", "他", "北京"], "vi": "Anh ấy đi Bắc Kinh bằng máy bay.", "answers": ["他坐飞机去北京。"] },
+      { "type": "error", "options": ["我们坐出租车去。", "她去北京坐飞机。", "我去饭馆吃饭。"], "answer": 1, "explain": "Phương tiện đứng trước 去: 她坐飞机去北京。" }
+    ]
+  },
+  {
+    "key": "hsk1-g12",
+    "title": "Chỉ vị trí: 在, 有 và từ chỉ phương hướng",
+    "pattern": "Vật + 在 + Nơi + 上/里/前面/后面 / Nơi + 上/里… + 有 + Vật",
+    "explanation": "“A ở đâu” dùng 在: 书在桌子上. “Ở đâu có gì” dùng 有, nơi chốn đứng đầu: 桌子上有书. Từ chỉ phương hướng đứng sau danh từ (桌子上 = trên bàn), ngược với tiếng Việt.",
+    "examples": [
+      { "hanzi": "猫在椅子上。", "pinyin": "Māo zài yǐzi shang.", "vi": "Con mèo ở trên ghế." },
+      { "hanzi": "杯子里有水。", "pinyin": "Bēizi li yǒu shuǐ.", "vi": "Trong cốc có nước." },
+      { "hanzi": "学校前面有一个商店。", "pinyin": "Xuéxiào qiánmiàn yǒu yí ge shāngdiàn.", "vi": "Phía trước trường có một cửa hàng." }
+    ],
+    "mistakes": [{ "wrong": "书在上桌子。", "right": "书在桌子上。", "note": "Từ chỉ phương hướng đứng sau danh từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "我的电脑在桌子 ___。", "vi": "Máy tính của tôi ở trên bàn." }, "options": ["上", "在", "有"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "桌子上 ___ 一本书。", "vi": "Trên bàn có một quyển sách." }, "options": ["有", "在", "是"], "answer": 0 },
+      { "type": "reorder", "words": ["后面", "在", "医院", "商店"], "vi": "Cửa hàng ở phía sau bệnh viện.", "answers": ["商店在医院后面。"] },
+      { "type": "error", "options": ["杯子里有茶。", "狗在桌子后面。", "猫在上椅子。"], "answer": 2, "explain": "Từ chỉ phương hướng đứng sau danh từ: 猫在椅子上。" }
+    ]
+  },
+  {
+    "key": "hsk1-g13",
+    "title": "Tính từ làm vị ngữ: 很 …, 太 … 了",
+    "pattern": "Chủ ngữ + 很 + Tính từ / 太 + Tính từ + 了",
+    "explanation": "Tính từ làm vị ngữ trực tiếp, không cần 是; thường thêm 很 (nghĩa “rất” rất nhẹ). 太 … 了 = “… quá!”. Phủ định: 不 + tính từ (不冷).",
+    "examples": [
+      { "hanzi": "今天很热。", "pinyin": "Jīntiān hěn rè.", "vi": "Hôm nay nóng." },
+      { "hanzi": "这个杯子太小了。", "pinyin": "Zhège bēizi tài xiǎo le.", "vi": "Cái cốc này nhỏ quá." },
+      { "hanzi": "北京不冷。", "pinyin": "Běijīng bù lěng.", "vi": "Bắc Kinh không lạnh." }
+    ],
+    "mistakes": [{ "wrong": "今天是热。", "right": "今天很热。", "note": "Tính từ không đi với 是." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "今天天气 ___ 好。", "vi": "Hôm nay trời rất đẹp." }, "options": ["很", "是", "有"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "这个电影太好 ___！", "vi": "Bộ phim này hay quá!" }, "options": ["了", "的", "吗"], "answer": 0 },
+      { "type": "reorder", "words": ["漂亮", "你", "衣服", "很", "的"], "vi": "Quần áo của bạn rất đẹp.", "answers": ["你的衣服很漂亮。"] },
+      { "type": "error", "options": ["他的家很大。", "今天是冷。", "太好了！"], "answer": 1, "explain": "Tính từ không đi với 是: 今天很冷。" }
+    ]
+  },
+  {
+    "key": "hsk1-g14",
+    "title": "Trợ từ 了: việc đã xảy ra",
+    "pattern": "Chủ ngữ + Động từ + 了 (+ Tân ngữ) / Phủ định: 没 + Động từ",
+    "explanation": "了 sau động từ cho biết việc đã xảy ra, đã xong. Phủ định việc đã qua dùng 没 + động từ và bỏ 了. 了 cuối câu còn chỉ sự thay đổi: 下雨了 = trời mưa rồi.",
+    "examples": [
+      { "hanzi": "我买了一本书。", "pinyin": "Wǒ mǎi le yì běn shū.", "vi": "Tôi đã mua một quyển sách." },
+      { "hanzi": "他昨天没看电影。", "pinyin": "Tā zuótiān méi kàn diànyǐng.", "vi": "Hôm qua anh ấy không xem phim." },
+      { "hanzi": "下雨了。", "pinyin": "Xià yǔ le.", "vi": "Trời mưa rồi." }
+    ],
+    "mistakes": [{ "wrong": "我没买了书。", "right": "我没买书。", "note": "Câu phủ định với 没 không dùng 了." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "昨天我看 ___ 一个电影。", "vi": "Hôm qua tôi đã xem một bộ phim." }, "options": ["了", "的", "吗"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "他昨天 ___ 去学校。", "vi": "Hôm qua anh ấy không đến trường." }, "options": ["没", "不", "很"], "answer": 0 },
+      { "type": "reorder", "words": ["了", "苹果", "我", "个", "买", "一"], "vi": "Tôi đã mua một quả táo.", "answers": ["我买了一个苹果。"] },
+      { "type": "error", "options": ["她喝了很多水。", "我没吃了米饭。", "他回家了。"], "answer": 1, "explain": "Phủ định bằng 没 thì bỏ 了: 我没吃米饭。" }
+    ]
+  },
+  {
+    "key": "hsk1-g15",
+    "title": "在 + động từ: đang làm gì",
+    "pattern": "Chủ ngữ + 在 + Động từ (+ 呢)",
+    "explanation": "在 đứng trước động từ = đang làm gì; cuối câu có thể thêm 呢. Hỏi: 你在做什么？. Phân biệt: 在 + nơi chốn = ở đâu (我在家).",
+    "examples": [
+      { "hanzi": "妈妈在做饭。", "pinyin": "Māma zài zuò fàn.", "vi": "Mẹ đang nấu cơm." },
+      { "hanzi": "你在做什么呢？", "pinyin": "Nǐ zài zuò shénme ne?", "vi": "Bạn đang làm gì thế?" },
+      { "hanzi": "他们在学习汉语。", "pinyin": "Tāmen zài xuéxí Hànyǔ.", "vi": "Họ đang học tiếng Trung." }
+    ],
+    "mistakes": [{ "wrong": "我看在电视。", "right": "我在看电视。", "note": "在 đứng trước động từ." }],
+    "exercises": [
+      { "type": "choose", "prompt": { "hanzi": "他 ___ 打电话。", "vi": "Anh ấy đang gọi điện thoại." }, "options": ["在", "是", "有"], "answer": 0 },
+      { "type": "choose", "prompt": { "hanzi": "你在做什么 ___？", "vi": "Bạn đang làm gì thế?" }, "options": ["呢", "吗", "了"], "answer": 0 },
+      { "type": "reorder", "words": ["电视", "在", "爸爸", "看"], "vi": "Bố đang xem tivi.", "answers": ["爸爸在看电视。"] },
+      { "type": "error", "options": ["她在睡觉。", "我写在字。", "你在做什么呢？"], "answer": 1, "explain": "在 đứng trước động từ: 我在写字。" }
+    ]
+  }
+]
