@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Promise<{ char: string 
 
   return (
     <main className="p-8">
-      <Link href="/write" className="text-sm opacity-75 hover:underline">
+      <Link href="/write" className="text-sm opacity-75">
         ← {t("Tất cả chữ", "All characters")}
       </Link>
       <h1 className="mt-1 flex items-baseline gap-3 text-2xl font-bold">

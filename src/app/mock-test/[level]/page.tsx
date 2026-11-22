@@ -86,7 +86,7 @@ export default async function Page({ params }: { params: Promise<{ level: string
             const s = JSON.parse(r.scores) as { sections: SectionScore[]; total: number; max: number; passed: boolean };
             return (
               <li key={r.id}>
-                <Link href={`/mock-test/result/${r.id}`} className="hover:underline">
+                <Link href={`/mock-test/result/${r.id}`}>
                   {formatDateTime(r.createdAt, lang)} —{" "}
                   <strong>
                     {s.total}/{s.max}

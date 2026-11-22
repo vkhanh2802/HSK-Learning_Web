@@ -64,7 +64,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           <p className="mt-3 text-sm">
             {w.chars.length > 1 ? t("Tách chữ (bấm để tập viết):", "Characters (tap to practise writing):") : t("Tập viết:", "Practise writing:")}{" "}
             {w.chars.map((c, k) => (
-              <Link key={k} href={`/write/${c.char}`} target="_blank" className="mr-3 hover:underline">
+              <Link key={k} href={`/write/${c.char}`} target="_blank" className="mr-3">
                 <span lang="zh-CN" className="text-lg text-accent">
                   {c.char}
                 </span>{" "}

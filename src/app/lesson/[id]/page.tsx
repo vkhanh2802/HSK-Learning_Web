@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   return (
     <main className="p-8">
-      <Link href={`/learn/${lesson.levelId}`} className="text-sm opacity-75 hover:underline">
+      <Link href={`/learn/${lesson.levelId}`} className="text-sm opacity-75">
         ← {lesson.level.name}
       </Link>
       <h1 className="mt-1 text-2xl font-bold">

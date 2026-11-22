@@ -30,7 +30,7 @@ export default async function Page() {
               )}
               <p className="mt-1 flex flex-wrap gap-2">
                 {r.examples.map((c) => (
-                  <Link key={c} href={`/write/${c}`} lang="zh-CN" className="text-2xl text-accent hover:underline">
+                  <Link key={c} href={`/write/${c}`} lang="zh-CN" className="text-2xl text-accent">
                     {c}
                   </Link>
                 ))}

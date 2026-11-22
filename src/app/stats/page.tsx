@@ -133,7 +133,7 @@ export default async function Page() {
           {vocab.map((v) => (
             <li key={v.id}>
               <div className="flex justify-between text-sm">
-                <Link href={`/learn/${v.id}`} className="hover:underline">
+                <Link href={`/learn/${v.id}`}>
                   {v.name}
                 </Link>
                 <span className="tabular-nums">

@@ -39,63 +39,46 @@ export default async function Home() {
   const days = streak([...attempts.map((a) => a.createdAt), ...lessonsDone.flatMap((l) => l.doneAt ?? [])], now);
 
   return (
-    <main className="px-6 pb-16 pt-10">
-      <section className="motion-stagger mx-auto max-w-2xl text-center">
-        <h1 className="motion-enter text-4xl leading-tight sm:text-5xl">
+    <main className="bare px-4 pb-16 sm:px-6">
+      <section className="motion-stagger mx-auto flex min-h-[calc(100svh-7rem)] max-w-5xl flex-col justify-end gap-8 pb-10 text-white">
+        <h1
+          className="motion-enter text-[clamp(2.6rem,7.5vw,6.25rem)] leading-[0.98] [text-shadow:0_2px_30px_rgb(0_0_0/0.35)]"
+          style={{ fontFamily: "var(--font-sans)", fontWeight: 600, letterSpacing: "-0.035em" }}
+        >
           {t("Mỗi ngày một chút,", "A little every day,")}
           <br />
-          <span className="relative inline-block">
-            {t("tiếng Trung tiến bộ.", "your Chinese grows.")}
-            <svg aria-hidden className="absolute -bottom-3 left-0 w-full text-brush" viewBox="0 0 300 14" preserveAspectRatio="none">
-              <path className="motion-brush" pathLength="1" d="M3 9 C60 3, 130 12, 190 6 S270 4, 297 8" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-            </svg>
-          </span>
+          {t("tiếng Trung tiến bộ.", "your Chinese grows.")}
         </h1>
-        <p className="motion-enter mx-auto mt-10 max-w-md opacity-80">
-          {t(
-            "Từ vựng, ngữ pháp và đủ 4 kỹ năng Nghe, Nói, Đọc, Viết từ HSK1 đến HSK4, ôn theo lịch lặp lại ngắt quãng.",
-            "Vocabulary, grammar and all four skills — listening, speaking, reading, writing — from HSK1 to HSK4, reviewed with spaced repetition.",
-          )}
-        </p>
-        <div className="motion-enter mt-6 flex flex-wrap justify-center gap-3">
-          {nextLesson && (
-            <Link href={`/lesson/${nextLesson.id}`} className="motion-cta rounded-xl bg-accent px-6 py-3 font-semibold text-background">
-              {t("Học bài tiếp theo", "Start next lesson")}
-              <svg aria-hidden="true" className="motion-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 10h12m-5-5 5 5-5 5" />
-              </svg>
-            </Link>
-          )}
-          {due > 0 && (
-            <Link href="/review" className="motion-cta rounded-xl border border-border px-6 py-3 font-semibold">
-              {t(`Ôn ${due} thẻ đến hạn`, `Review ${due} due cards`)}
-              <svg aria-hidden="true" className="motion-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 10h12m-5-5 5 5-5 5" />
-              </svg>
-            </Link>
-          )}
+        <div className="motion-enter flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-sm text-sm leading-relaxed text-white/85">
+            {t(
+              "Từ vựng, ngữ pháp và đủ 4 kỹ năng Nghe, Nói, Đọc, Viết từ HSK1 đến HSK4, ôn theo lịch lặp lại ngắt quãng.",
+              "Vocabulary, grammar and all four skills — listening, speaking, reading, writing — from HSK1 to HSK4, reviewed with spaced repetition.",
+            )}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {nextLesson && (
+              <Link href={`/lesson/${nextLesson.id}`} className="motion-cta rounded-full bg-white px-6 py-3 font-semibold text-black">
+                {t("Học bài tiếp theo", "Start next lesson")}
+                <svg aria-hidden="true" className="motion-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 10h12m-5-5 5 5-5 5" />
+                </svg>
+              </Link>
+            )}
+            {due > 0 && (
+              <Link href="/review" className="motion-cta rounded-full border border-white/50 px-6 py-3 font-semibold text-white backdrop-blur-sm">
+                {t(`Ôn ${due} thẻ đến hạn`, `Review ${due} due cards`)}
+                <svg aria-hidden="true" className="motion-cta-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 10h12m-5-5 5 5-5 5" />
+                </svg>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 
-      <div aria-hidden className="mx-auto mt-12 flex max-w-md justify-center" lang="zh-CN">
-        {[
-          { h: "你好", p: "nǐ hǎo", m: t("Xin chào", "Hello"), tilt: "-7deg" },
-          { h: "谢谢", p: "xièxie", m: t("Cảm ơn", "Thank you"), tilt: "1deg" },
-          { h: "学习", p: "xuéxí", m: t("Học tập", "To study"), tilt: "8deg" },
-        ].map((c, i) => (
-          <div
-            key={c.h}
-            className="flashcard -mx-1 w-36 rounded-2xl border border-border bg-background px-4 py-6 text-center shadow-sm"
-            style={{ "--tilt": c.tilt, "--i": i } as React.CSSProperties}
-          >
-            <p className="font-serif text-5xl">{c.h}</p>
-            <p className="mt-2 text-sm opacity-70" lang="vi">{c.p}</p>
-            <p className="mt-1 text-sm font-semibold" lang={t("vi", "en")}>{c.m}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="motion-stagger mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
+      <div className="glass mx-auto mt-6 max-w-5xl p-5 sm:p-8">
+      <div className="motion-stagger grid max-w-4xl gap-4 sm:grid-cols-3">
         <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
           <p className="text-sm opacity-75">{t("Thẻ đến hạn", "Cards due")}</p>
           <p className="font-serif text-4xl">{due}</p>
@@ -147,7 +130,7 @@ export default async function Home() {
           return (
             <li key={l.id} className="motion-enter">
               <div className="flex justify-between text-sm">
-                <Link href={`/learn/${l.id}`} className="hover:underline">
+                <Link href={`/learn/${l.id}`}>
                   {l.name}
                 </Link>
                 <span>
@@ -168,6 +151,7 @@ export default async function Home() {
           );
         })}
       </ul>
+      </div>
       </div>
     </main>
   );

@@ -54,6 +54,7 @@ export default async function RootLayout({
       <body className="antialiased">
         <LangProvider lang={lang}>
         <ThemeScript />
+        <div aria-hidden className="bg-photo" />
         <ServiceWorker />
         <a
           href="#noi-dung"
@@ -61,8 +62,8 @@ export default async function RootLayout({
         >
           {t("Bỏ qua tới nội dung", "Skip to content")}
         </a>
-        <header className="sticky top-0 z-20 bg-background/80 backdrop-blur-md">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-4">
+        <header className="sticky top-0 z-20 px-3 pt-3">
+          <div className="glass mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-2 px-5 py-2.5">
             <Link href="/" className="font-serif text-2xl">
               学中文
             </Link>
@@ -74,7 +75,7 @@ export default async function RootLayout({
             {authEnabled() && <LogoutButton />}
           </div>
         </header>
-        <div id="noi-dung" tabIndex={-1} className="mx-auto max-w-5xl outline-none">
+        <div id="noi-dung" tabIndex={-1} className="mx-auto max-w-5xl px-3 pb-6 pt-3 outline-none">
           {children}
         </div>
         </LangProvider>
