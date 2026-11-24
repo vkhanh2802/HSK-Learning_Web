@@ -698,3 +698,33 @@ header .motion-nav-menu {
   border-radius: 1.25rem;
   padding: 5px;
 }
+
+/* Nút loa + hộp thanh âm lượng bung ra khi bấm. */
+.uv-vol-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
+}
+.uv-vol-btn:hover,
+.uv-vol-btn[aria-expanded="true"] {
+  background: rgb(255 255 255 / 0.24);
+}
+.uv-vol-pop {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -8px;
+  z-index: 30;
+  width: 11rem;
+  padding: 14px 16px;
+  border-radius: 1.25rem !important;
+  animation: study-menu var(--motion-fast, 150ms) ease;
+}
+.uv-vol-pop .uv-volume {
+  width: 100%;
+}
