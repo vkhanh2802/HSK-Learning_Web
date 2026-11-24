@@ -63,13 +63,13 @@ export default async function RootLayout({
         >
           {t("Bỏ qua tới nội dung", "Skip to content")}
         </a>
-        <header className="sticky top-0 z-20 px-3 pt-3">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+        <header className="sticky top-0 z-20 px-6 pt-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr]">
             <Link href="/" className="glass justify-self-start rounded-full px-5 py-2 font-serif text-2xl leading-none">
               学中文
             </Link>
             <Nav />
-            <div className="glass flex items-center gap-3 justify-self-end rounded-full px-3 py-2">
+            <div className="glass flex items-center gap-3 justify-self-end whitespace-nowrap rounded-full px-3 py-2">
               <VolumeSlider />
               <LangToggle />
               <ThemeToggle />
