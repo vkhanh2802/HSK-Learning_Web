@@ -7,6 +7,7 @@ import Nav from "@/components/Nav";
 import ServiceWorker from "@/components/ServiceWorker";
 import ThemeScript from "@/components/ThemeScript";
 import ThemeToggle from "@/components/ThemeToggle";
+import VolumeSlider from "@/components/VolumeSlider";
 import { LangProvider } from "@/components/LangProvider";
 import LangToggle from "@/components/LangToggle";
 import { authEnabled } from "@/lib/auth";
@@ -68,7 +69,8 @@ export default async function RootLayout({
               学中文
             </Link>
             <Nav />
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-4">
+              <VolumeSlider />
               <LangToggle />
             </div>
             <ThemeToggle />

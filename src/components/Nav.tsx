@@ -47,11 +47,11 @@ export default function Nav() {
     href === "/" ? pathname === "/" : section(pathname) === section(href);
 
   const linkClass = (active: boolean) =>
-    `motion-nav-link block rounded-full px-3 py-1 hover:bg-muted ${active ? "font-semibold" : ""}`;
+    `motion-nav-link cir-tabs__t ${active ? "is-active" : ""}`;
 
   return (
     <nav aria-label={i ? "Main navigation" : "Điều hướng chính"}>
-      <ul className="flex flex-wrap items-center gap-1">
+      <ul className="cir-tabs flex-wrap">
         {items.map((item) =>
           "href" in item ? (
             <li key={item.label[0]}>

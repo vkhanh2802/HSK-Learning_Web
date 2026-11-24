@@ -5,6 +5,25 @@ function chineseVoice(): SpeechSynthesisVoice | undefined {
   return voices.find((v) => v.lang === "zh-CN") ?? voices.find((v) => v.lang.startsWith("zh"));
 }
 
+const VOLUME_KEY = "volume";
+
+/** Âm lượng 0–1 người dùng chọn ở thanh trượt trên header; mặc định 1. */
+export function getVolume(): number {
+  try {
+    const v = Number(localStorage.getItem(VOLUME_KEY) ?? 1);
+    return Number.isFinite(v) ? Math.min(1, Math.max(0, v)) : 1;
+  } catch {
+    return 1;
+  }
+}
+
+export function setVolume(v: number) {
+  try {
+    localStorage.setItem(VOLUME_KEY, String(v));
+  } catch {} // trình duyệt chặn storage: giữ nguyên âm lượng cũ
+  window.dispatchEvent(new Event("volume-change"));
+}
+
 export type SpeakLine = { text: string; speaker?: "nam" | "nữ" };
 
 /**
@@ -21,6 +40,7 @@ export function speakLines(lines: SpeakLine[], rate = 0.9): boolean {
     const u = new SpeechSynthesisUtterance(line.text);
     u.lang = "zh-CN";
     u.rate = rate;
+    u.volume = getVolume();
     u.pitch = line.speaker === "nam" ? 0.8 : line.speaker === "nữ" ? 1.3 : 1;
     if (voice) u.voice = voice;
     speechSynthesis.speak(u);

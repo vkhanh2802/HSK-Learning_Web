@@ -422,7 +422,6 @@ header .glass {
     inset 0 -1px 0 rgb(255 255 255 / 0.06),
     0 8px 28px -10px rgb(0 0 0 / 0.45);
 }
-header .motion-nav-link,
 header .motion-control,
 header [aria-pressed] {
   background: rgb(255 255 255 / 0.1);
@@ -430,7 +429,6 @@ header [aria-pressed] {
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
   color: #fff;
 }
-header .motion-nav-link:hover,
 header .motion-control:hover,
 header [aria-pressed]:hover {
   background: rgb(255 255 255 / 0.22);
@@ -596,4 +594,107 @@ header .uv-switch {
   .uv-loader-letter {
     animation: none;
   }
+}
+
+/* Thanh âm lượng: "Input" của Galahhad (https://uiverse.io/Galahhad/happy-dodo-17), đổi màu cho header kính. */
+.uv-volume {
+  --slider-height: 6px;
+  --slider-bg: rgb(255 255 255 / 0.3);
+  --level-color: #fff;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 10px;
+  width: 7.5rem;
+  cursor: pointer;
+  color: rgb(255 255 255 / 0.85);
+}
+.uv-volume svg {
+  flex: none;
+}
+.uv-volume input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 1;
+  min-width: 0;
+  height: var(--slider-height);
+  margin: 0;
+  background: var(--slider-bg);
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: inherit;
+  transition: height 0.1s;
+}
+.uv-volume input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  box-shadow: -200px 0 0 200px var(--level-color);
+}
+.uv-volume input::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: 0;
+  box-shadow: -200px 0 0 200px var(--level-color);
+}
+.uv-volume:hover input {
+  height: calc(var(--slider-height) * 2);
+}
+.uv-volume:has(input:focus-visible) {
+  outline: 2px solid var(--brush);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* Thanh điều hướng dạng viên phân đoạn: "Pill segmented tabs" của uiverse-astronaut
+   (https://uiverse.io/uiverse-astronaut/odd-bobcat-3), đổi màu cho header kính. */
+.cir-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  background: rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 20px 40px -24px rgb(0 0 0 / 0.5);
+}
+.cir-tabs__t {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.78);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cir-tabs__t:hover {
+  color: #fff;
+}
+.cir-tabs__t.is-active {
+  background: #fff;
+  color: #0e1116;
+  box-shadow: 0 1px 1px rgb(14 17 22 / 0.06), 0 8px 18px -10px rgb(0 0 0 / 0.6);
+}
+.cir-tabs__t:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(106 168 255 / 0.5);
+}
+.cir-tabs__t::after {
+  display: none; /* bỏ gạch chân của motion-nav-link: trang đang mở đã có viên trắng */
+}
+.motion-nav-menu .cir-tabs__t {
+  justify-content: flex-start;
+  width: 100%;
+}
+header .motion-nav-menu {
+  border-radius: 1.25rem;
+  padding: 5px;
 }
