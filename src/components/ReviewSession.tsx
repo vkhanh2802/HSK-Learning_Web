@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { reviewCard } from "@/app/actions";
 import AudioButton from "@/components/AudioButton";
-import { useLang, useT } from "@/components/LangProvider";
+import { useT } from "@/components/LangProvider";
 import StrokeQuiz from "@/components/StrokeQuiz";
 import { matchesDictation } from "@/lib/compare";
 import { writeGrade, type Grade } from "@/lib/srs";
@@ -84,19 +84,14 @@ function WriteFront({ word, onDone }: { word: WordView; onDone: (mistakes: numbe
   );
 }
 
-const GRADES = [
-  { grade: 1, label: ["Quên", "Again"], key: "1" },
-  { grade: 2, label: ["Khó", "Hard"], key: "2" },
-  { grade: 3, label: ["Nhớ", "Good"], key: "3" },
-  { grade: 4, label: ["Dễ", "Easy"], key: "4" },
-] as const;
+// Không còn bước tự chấm: điểm lấy từ kết quả làm bài (đúng = Nhớ, sai/bỏ qua = Quên); thẻ chỉ xem thì tính Nhớ.
+const DEFAULT_GRADE: Grade = 3;
 
 // Thẻ chấm xong mà FSRS hẹn lại trong khoảng này thì ôn lại ngay trong lượt hiện tại.
 const REQUEUE_MS = 10 * 60_000;
 
 export default function ReviewSession({ items }: { items: ReviewItem[] }) {
   const t = useT();
-  const li = useLang() === "en" ? 1 : 0;
   const [queue, setQueue] = useState(items);
   const [flipped, setFlipped] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -113,9 +108,9 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
       (s) =>
         s ??
         (mode === "write" || mode === "recall"
-          ? { grade: 1, note: mode === "write" ? t("Chưa viết xong — gợi ý chấm Quên.", "Not finished — suggested grade: Again.") : t("Chưa trả lời — gợi ý chấm Quên.", "No answer — suggested grade: Again.") }
+          ? { grade: 1, note: mode === "write" ? t("Chưa viết xong.", "Not finished.") : t("Chưa trả lời.", "No answer.") }
           : mode === "listen" && queue[0]?.options
-            ? { grade: 1, note: t("Chưa chọn — gợi ý chấm Quên.", "Nothing chosen — suggested grade: Again.") }
+            ? { grade: 1, note: t("Chưa chọn.", "Nothing chosen.") }
             : null),
     );
   }, [queue, t]);
@@ -155,14 +150,14 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
       if (e.key === " " && !flipped) {
         e.preventDefault();
         flip();
-      } else if (flipped) {
-        const g = GRADES.find((x) => x.key === e.key);
-        if (g) rate(g.grade);
+      } else if (flipped && (e.key === " " || e.key === "ArrowRight")) {
+        e.preventDefault();
+        rate(suggested?.grade ?? DEFAULT_GRADE);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [flipped, rate, flip]);
+  }, [flipped, rate, flip, suggested]);
 
   if (!current)
     return (
@@ -177,81 +172,19 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
       <p className="text-sm opacity-75">
         {t(`Còn ${queue.length} thẻ · Đã ôn ${reviewed}`, `${queue.length} left · ${reviewed} reviewed`)}
       </p>
-      <div className="mt-3 min-h-64 rounded border border-border p-6 text-center">
-        {current.mode === "recognize" ? (
-          <p lang="zh-CN" className="text-6xl">
-            {w.hanzi}
-          </p>
-        ) : current.mode === "write" ? (
-          !flipped && (
-            <WriteFront
-              key={`${current.cardId}-${reviewed}`}
-              word={w}
-              onDone={(mistakes) => {
-                const grade = writeGrade(mistakes);
-                setSuggested({ grade, note: t(`Sai ${mistakes} lần — gợi ý chấm ${GRADES[grade - 1].label[0]}.`, `${mistakes} mistakes — suggested grade: ${GRADES[grade - 1].label[1]}.`) });
-                setFlipped(true);
-              }}
-            />
-          )
-        ) : current.mode === "recall" ? (
-          !flipped && (
-            <RecallFront
-              key={`${current.cardId}-${reviewed}`}
-              word={w}
-              onDone={(input, ok) => {
-                setSuggested(
-                  ok
-                    ? { grade: 3, note: t("✓ Đúng — gợi ý chấm Nhớ.", "✓ Correct — suggested grade: Good.") }
-                    : { grade: 1, note: t(`✗ Bạn gõ “${input}” — gợi ý chấm Quên.`, `✗ You typed “${input}” — suggested grade: Again.`) },
-                );
-                setFlipped(true);
-              }}
-            />
-          )
-        ) : (
-          <div>
-            <p className="text-sm opacity-75">{current.options ? t("Nghe và chọn từ đúng", "Listen and pick the right word") : t("Nghe và nhớ lại từ", "Listen and recall the word")}</p>
-            <div className="mt-3 flex justify-center">
-              <AudioButton key={current.cardId} text={w.hanzi} hideText />
-            </div>
-            {current.options && !flipped && (
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                {current.options.map((h) => (
-                  <button
-                    key={h}
-                    type="button"
-                    lang="zh-CN"
-                    className="rounded border border-border px-3 py-3 text-2xl hover:bg-muted"
-                    onClick={() => {
-                      setSuggested(
-                        h === w.hanzi
-                          ? { grade: 3, note: t("✓ Chọn đúng — gợi ý chấm Nhớ.", "✓ Right choice — suggested grade: Good.") }
-                          : { grade: 1, note: t(`✗ Bạn chọn ${h} — gợi ý chấm Quên.`, `✗ You chose ${h} — suggested grade: Again.`) },
-                      );
-                      setFlipped(true);
-                    }}
-                  >
-                    {h}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
+      {/* Thẻ dạng cuốn sách: bìa (mặt trước) mở ra khi lật thẻ. Dựa trên "Card" của eslam-hany (Uiverse.io, MIT). */}
+      <div key={`${current.cardId}-${reviewed}`} className={`uv-book mt-3 ${flipped ? "is-open" : ""}`}>
+        <div className="uv-book-page">
         {flipped && (
-          <div className={current.mode === "write" || current.mode === "recall" ? "" : "mt-4 border-t border-border pt-4"}>
+          <div>
             {suggested && (
               <p role="status" className="mb-2 text-sm">
                 {suggested.note}
               </p>
             )}
-            {current.mode !== "recognize" && (
-              <p lang="zh-CN" className="text-5xl">
-                {w.hanzi}
-              </p>
-            )}
+            <p lang="zh-CN" className="text-5xl">
+              {w.hanzi}
+            </p>
             <p className="mt-2 flex items-center justify-center gap-2 text-xl">
               {w.pinyin} {current.mode === "recognize" && <AudioButton key={current.cardId} text={w.hanzi} />}
             </p>
@@ -265,6 +198,71 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
             )}
           </div>
         )}
+        </div>
+        <div className="uv-book-cover" inert={flipped}>
+        {current.mode === "recognize" ? (
+          <p lang="zh-CN" className="text-6xl">
+            {w.hanzi}
+          </p>
+        ) : current.mode === "write" ? (
+          (
+            <WriteFront
+              key={`${current.cardId}-${reviewed}`}
+              word={w}
+              onDone={(mistakes) => {
+                const grade = writeGrade(mistakes);
+                setSuggested({ grade, note: t(`Sai ${mistakes} lần.`, `${mistakes} mistakes.`) });
+                setFlipped(true);
+              }}
+            />
+          )
+        ) : current.mode === "recall" ? (
+          (
+            <RecallFront
+              key={`${current.cardId}-${reviewed}`}
+              word={w}
+              onDone={(input, ok) => {
+                setSuggested(
+                  ok
+                    ? { grade: 3, note: t("✓ Đúng", "✓ Correct") }
+                    : { grade: 1, note: t(`✗ Bạn gõ “${input}”`, `✗ You typed “${input}”`) },
+                );
+                setFlipped(true);
+              }}
+            />
+          )
+        ) : (
+          <div>
+            <p className="text-sm opacity-75">{current.options ? t("Nghe và chọn từ đúng", "Listen and pick the right word") : t("Nghe và nhớ lại từ", "Listen and recall the word")}</p>
+            <div className="mt-3 flex justify-center">
+              <AudioButton key={current.cardId} text={w.hanzi} hideText />
+            </div>
+            {current.options && (
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {current.options.map((h) => (
+                  <button
+                    key={h}
+                    type="button"
+                    lang="zh-CN"
+                    className="rounded border border-border px-3 py-3 text-2xl hover:bg-muted"
+                    onClick={() => {
+                      setSuggested(
+                        h === w.hanzi
+                          ? { grade: 3, note: t("✓ Chọn đúng", "✓ Right choice") }
+                          : { grade: 1, note: t(`✗ Bạn chọn ${h}`, `✗ You chose ${h}`) },
+                      );
+                      setFlipped(true);
+                    }}
+                  >
+                    {h}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        </div>
       </div>
 
       {!flipped ? (
@@ -276,19 +274,14 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
           {t("Hiện đáp án", "Show answer")} <kbd className="ml-2 text-sm opacity-75">Space</kbd>
         </button>
       ) : (
-        <div className="mt-4 grid grid-cols-4 gap-2">
-          {GRADES.map((g) => (
-            <button
-              key={g.grade}
-              type="button"
-              disabled={busy}
-              className={`rounded border px-2 py-3 hover:bg-muted disabled:opacity-40 ${suggested?.grade === g.grade ? "border-accent border-2 font-semibold" : "border-border"}`}
-              onClick={() => rate(g.grade)}
-            >
-              {g.label[li]} <kbd className="block text-sm opacity-75">{g.key}</kbd>
-            </button>
-          ))}
-        </div>
+        <button
+          type="button"
+          disabled={busy}
+          className="mt-4 w-full rounded bg-accent px-4 py-3 font-semibold text-background hover:opacity-90 disabled:opacity-40"
+          onClick={() => rate(suggested?.grade ?? DEFAULT_GRADE)}
+        >
+          {t("Thẻ tiếp theo", "Next card")} <kbd className="ml-2 text-sm opacity-75">Space</kbd>
+        </button>
       )}
       {error && (
         <p role="alert" className="mt-2 font-semibold">

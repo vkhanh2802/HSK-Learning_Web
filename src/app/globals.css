@@ -728,3 +728,50 @@ header .motion-nav-menu {
 .uv-vol-pop .uv-volume {
   width: 100%;
 }
+
+/* Thẻ ôn tập dạng cuốn sách: "Card" của eslam-hany (https://uiverse.io/eslam-hany/selfish-bobcat-73);
+   bìa lật quanh mép trái khi mở, lộ trang đáp án bên dưới. */
+.uv-book {
+  display: grid;
+  min-height: 16rem;
+  perspective: 2000px;
+}
+.uv-book-page,
+.uv-book-cover {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+.uv-book-page {
+  background: color-mix(in srgb, var(--muted) 85%, var(--background));
+  border: 1px solid var(--border);
+  box-shadow: 1px 1px 12px rgb(0 0 0 / 0.35);
+}
+.uv-book-cover {
+  background: var(--background);
+  border: 1px solid var(--border);
+  box-shadow: 1px 1px 12px rgb(0 0 0 / 0.35);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.uv-book.is-open .uv-book-cover {
+  transform: rotateY(-80deg);
+  pointer-events: none;
+}
+
+/* Sang thẻ tiếp theo: bìa mới trượt vào từ bên phải. */
+@media (prefers-reduced-motion: no-preference) {
+  .uv-book {
+    animation: book-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+}
+@keyframes book-in {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+}
