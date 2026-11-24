@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { submitMockTest } from "@/app/actions";
 import { ReorderSentence } from "@/components/GrammarPractice";
 import { useT } from "@/components/LangProvider";
+import Loader from "@/components/Loader";
 import Picture from "@/components/Picture";
 import { SKILL_EN, SKILL_VI, type Skill } from "@/lib/mock";
 import type { ClientMockItem, Response } from "@/lib/mockData";
@@ -297,7 +298,11 @@ export default function MockTestRunner({
   };
 
   if (pending || submitted)
-    return <p className="mt-6">{tx("Đang chấm bài…", "Grading…")}</p>;
+    return (
+      <div className="mt-6 flex justify-center">
+        <Loader text={tx("Đang chấm bài", "Grading")} />
+      </div>
+    );
 
   if (deadline === null)
     return (

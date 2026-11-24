@@ -17,14 +17,15 @@ export default function ThemeToggle() {
   }
 
   return (
+    // aria-checked chỉ là mặc định cho trình đọc màn hình; hình dạng công tắc do CSS theo data-theme quyết định.
     <button
       type="button"
+      role="switch"
+      aria-checked="false"
       onClick={toggle}
       aria-label={t("Đổi chế độ sáng/tối", "Toggle light/dark mode")}
       title={t("Đổi chế độ sáng/tối", "Toggle light/dark mode")}
-      className="motion-control rounded-full border border-border px-3 py-1 hover:bg-muted"
-    >
-      ◐
-    </button>
+      className="uv-switch"
+    />
   );
 }
