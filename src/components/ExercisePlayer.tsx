@@ -11,12 +11,12 @@ export type Result = { correct: boolean };
 
 const optionClass = (answered: boolean, isAnswer: boolean, isPicked: boolean) =>
   !answered
-    ? "hover:bg-muted"
+    ? "hover:bg-muted hover:-translate-y-0.5"
     : isAnswer
-      ? "border-green-600 bg-green-600/15"
+      ? "animate-pop border-green-600 bg-green-600/15"
       : isPicked
-        ? "border-accent bg-accent/15"
-        : "opacity-60";
+        ? "animate-shake border-accent bg-accent/15"
+        : "opacity-50";
 
 function Transcript({ lines }: { lines: Line[] }) {
   const t = useT();
@@ -90,7 +90,7 @@ export default function ExercisePlayer({
   const answered = result !== null;
 
   return (
-    <div className="rounded border border-border p-5">
+    <div className="animate-card-swap rounded border border-border bg-muted/25 p-5">
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
@@ -213,7 +213,7 @@ export default function ExercisePlayer({
       )}
 
       {result && (
-        <div className="mt-4">
+        <div className="animate-pop mt-4">
           <p role="status" className="font-semibold">
             {result.correct ? t("✓ Chính xác!", "✓ Correct!") : t("✗ Chưa đúng.", "✗ Not quite.")}
           </p>

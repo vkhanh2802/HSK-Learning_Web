@@ -12,12 +12,12 @@ export default async function Page() {
     <main className="p-8">
       <h1 className="text-2xl font-bold">{t("Tập viết chữ Hán", "Hanzi writing practice")}</h1>
       <p className="mt-1 text-sm opacity-75">{t(`${chars.length} chữ trong từ vựng đã có. Chọn một chữ để xem thứ tự nét và tập viết.`, `${chars.length} characters in the vocabulary so far. Pick one to see its stroke order and practise writing it.`)}</p>
-      <ul className="mt-6 grid grid-cols-[repeat(auto-fill,minmax(4.5rem,1fr))] gap-2">
+      <ul className="motion-stagger-fast mt-6 grid grid-cols-[repeat(auto-fill,minmax(4.5rem,1fr))] gap-2.5">
         {chars.map((c) => (
-          <li key={c.char}>
+          <li key={c.char} className="motion-enter">
             <Link
               href={`/write/${c.char}`}
-              className="flex flex-col items-center rounded border border-border p-2 hover:bg-muted"
+              className="flex flex-col items-center rounded border border-border bg-muted/35 p-2.5 hover:bg-muted"
             >
               <span lang="zh-CN" className="text-3xl">
                 {c.char}

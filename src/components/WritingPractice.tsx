@@ -284,15 +284,15 @@ export default function WritingPractice({
       {!aiEnabled && (
         <p className="mt-2 text-sm opacity-75">{t("“Đặt câu” đang khoá vì cần chấm bằng AI — sẽ mở khi đã cấu hình API.", "“Write a sentence” is locked because it needs AI grading — it opens once the API is configured.")}</p>
       )}
-      <div role="tabpanel" className="mt-4">
+      <div key={tab} role="tabpanel" className="animate-card-swap mt-4">
         {tab === "ime" ? (
-          <div className="rounded border border-border p-4">
+          <div className="rounded border border-border bg-muted/25 p-4">
             <ImePractice words={words} />
           </div>
         ) : (
-          <ol className="space-y-4">
+          <ol className="motion-stagger space-y-4">
             {items.map((ex) => (
-              <li key={ex.id} className="rounded border border-border p-4">
+              <li key={ex.id} className="motion-enter rounded border border-border bg-muted/25 p-4">
                 {ex.type === "fill" && <FillItem ex={ex} />}
                 {ex.type === "reorder" && <ReorderItem ex={ex} />}
                 {ex.type === "compose" && <ComposeItem ex={ex} />}

@@ -22,12 +22,12 @@ export default async function Page() {
       {levels.map((level) => (
         <section key={level} className="mt-6">
           <h2 className="font-semibold">HSK{level}</h2>
-          <ol className="mt-2 grid gap-2 sm:grid-cols-2">
+          <ol className="motion-stagger mt-2 grid gap-2.5 sm:grid-cols-2">
             {passages
               .filter((p) => p.levelId === level)
               .map((p, i) => (
-                <li key={p.id}>
-                  <Link href={`/reading/${p.id}`} className="block rounded border border-border p-3 hover:bg-muted">
+                <li key={p.id} className="motion-enter">
+                  <Link href={`/reading/${p.id}`} className="block rounded border border-border bg-muted/35 p-3.5 hover:bg-muted">
                     <span className="text-sm opacity-75">
                       {t("Bài", "Passage")} {i + 1} · {p.type === "dialogue" ? t("Hội thoại", "Dialogue") : t("Đoạn văn", "Paragraph")}
                     </span>

@@ -88,9 +88,9 @@ export default async function Page() {
       </p>
 
       <h2 className="mt-6 text-lg font-semibold">{tt("4 thanh và thanh nhẹ", "The 4 tones and the neutral tone")}</h2>
-      <ul className="mt-2 grid gap-2 sm:grid-cols-5">
+      <ul className="motion-stagger mt-2 grid gap-2 sm:grid-cols-5">
         {TONE_INFO.map((t) => (
-          <li key={t.name[0]} className="rounded border border-border p-3">
+          <li key={t.name[0]} className="motion-enter ui-card rounded border border-border bg-muted/35 p-3">
             <span className="text-2xl">{t.mark}</span> <span className="font-semibold">{tt(t.name[0], t.name[1])}</span>
             <p className="text-sm">{tt(t.body[0], t.body[1])}</p>
           </li>
@@ -98,9 +98,9 @@ export default async function Page() {
       </ul>
 
       <h2 className="mt-6 text-lg font-semibold">{tt("Điểm khó cho người Việt", "Tricky points")}</h2>
-      <ul className="mt-2 grid gap-2 sm:grid-cols-2">
+      <ul className="motion-stagger mt-2 grid gap-2 sm:grid-cols-2">
         {TIPS.map((t) => (
-          <li key={t.title[0]} className="rounded border border-border p-3">
+          <li key={t.title[0]} className="motion-enter ui-card rounded border border-border bg-muted/35 p-3">
             <p className="font-semibold">{tt(t.title[0], t.title[1])}</p>
             <p className="text-sm">{tt(t.body[0], t.body[1])}</p>
           </li>

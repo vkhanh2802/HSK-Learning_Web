@@ -64,21 +64,25 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
   const sample: ToneSample = q.syllable.tones[q.answer]!;
   const answered = picked !== null;
   const label = (t: Tone) => (mode === "pairs" ? q.syllable.tones[t]!.marked : tx(`Thanh ${t}`, `Tone ${t}`));
+  const pct = ((round + (answered ? 1 : 0)) / ROUNDS) * 100;
 
   return (
-    <div>
+    <div key={round} className="animate-card-swap">
+      <div className="mb-2 h-1.5 w-full max-w-sm overflow-hidden rounded-full bg-muted">
+        <div className="progress-fill h-full rounded-full bg-brush" style={{ width: `${pct}%` }} />
+      </div>
       <p className="flex items-center gap-3 text-sm">
         {tx("Câu", "Question")} {round + 1}/{ROUNDS} · {tx("Đúng", "Correct")} {score} · {tx("Nghe lại:", "Replay:")} <AudioButton key={`${round}-${sample.char}`} text={sample.char} hideText />
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         {q.options.map((t) => {
           const state = !answered
-            ? "hover:bg-muted"
+            ? "hover:bg-muted hover:-translate-y-0.5"
             : t === q.answer
-              ? "border-green-600 bg-green-600/15"
+              ? "animate-pop border-green-600 bg-green-600/15"
               : t === picked
-                ? "border-accent bg-accent/15"
-                : "opacity-60";
+                ? "animate-shake border-accent bg-accent/15"
+                : "opacity-50";
           return (
             <button
               key={t}
@@ -96,7 +100,7 @@ export default function ToneDrill({ mode, syllables }: { mode: "single" | "pairs
         })}
       </div>
       {answered && (
-        <div className="mt-3">
+        <div className="animate-pop mt-3">
           <p role="status">
             {picked === q.answer ? tx("✓ Đúng! ", "✓ Correct! ") : tx("✗ Chưa đúng. ", "✗ Not quite. ")}
             {tx("Đáp án:", "Answer:")} <strong>{sample.marked}</strong> ({tx("thanh", "tone")} {q.answer}) — {tx("chữ", "character")} <span lang="zh-CN">{sample.char}</span>

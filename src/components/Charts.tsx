@@ -98,12 +98,15 @@ export function ForecastChart({
                 className="flex h-full flex-1 cursor-default items-end justify-center"
               >
                 <div
-                  className="w-full max-w-6 rounded-t"
-                  style={{
-                    height: d.count ? Math.max(2, (d.count / top) * H) : 0,
-                    background: "var(--viz-bar)",
-                    opacity: hover === null || hover === i ? 1 : 0.55,
-                  }}
+                  className="chart-bar-grow w-full max-w-6 rounded-t"
+                  style={
+                    {
+                      height: d.count ? Math.max(2, (d.count / top) * H) : 0,
+                      background: "var(--viz-bar)",
+                      opacity: hover === null || hover === i ? 1 : 0.45,
+                      "--bar-i": i,
+                    } as React.CSSProperties
+                  }
                 />
               </div>
             ))}
@@ -187,7 +190,7 @@ export function ActivityHeatmap({
                   <div
                     key={c.date}
                     onPointerEnter={() => c.count !== null && setHover(i)}
-                    className="size-3 rounded-[2px]"
+                    className="heat-cell relative size-3 rounded-[2px]"
                     style={{
                       background:
                         c.count === null

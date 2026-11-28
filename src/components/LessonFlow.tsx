@@ -45,12 +45,17 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
 
   if (step === "intro") {
     const w = words[i];
+    const pct = ((i + 1) / words.length) * 100;
     return (
       <section className="mt-6">
-        <p className="text-sm opacity-75">
-          {t("Từ mới", "New word")} {i + 1}/{words.length}
-        </p>
-        <div className="mt-3 rounded border border-border p-6">
+        <div className="flex items-center justify-between text-sm opacity-75">
+          <span>{t("Từ mới", "New word")} {i + 1}/{words.length}</span>
+          <span className="tabular-nums">{Math.round(pct)}%</span>
+        </div>
+        <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+          <div className="progress-fill h-full rounded-full bg-brush" style={{ width: `${pct}%` }} />
+        </div>
+        <div key={w.id} className="animate-card-swap mt-3 rounded border border-border bg-muted/35 p-6">
           <div className="flex items-center gap-4">
             <span lang="zh-CN" className="text-6xl">
               {w.hanzi}
@@ -64,7 +69,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           <p className="mt-3 text-sm">
             {w.chars.length > 1 ? t("Tách chữ (bấm để tập viết):", "Characters (tap to practise writing):") : t("Tập viết:", "Practise writing:")}{" "}
             {w.chars.map((c, k) => (
-              <Link key={k} href={`/write/${c.char}`} target="_blank" className="mr-3">
+              <Link key={k} href={`/write/${c.char}`} target="_blank" className="mr-2 inline-flex items-baseline gap-1 rounded-lg px-1.5 py-0.5 transition hover:bg-muted">
                 <span lang="zh-CN" className="text-lg text-accent">
                   {c.char}
                 </span>{" "}
@@ -115,6 +120,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
   if (step === "quiz") {
     const q = quiz[i];
     const answered = picked !== null;
+    const pct = ((i + (answered ? 1 : 0)) / quiz.length) * 100;
     const next = () => {
       setPicked(null);
       if (i < quiz.length - 1) setI(i + 1);
@@ -122,10 +128,14 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
     };
     return (
       <section className="mt-6">
-        <p className="text-sm opacity-75">
-          {t("Câu", "Question")} {i + 1}/{quiz.length} · {t("Đúng", "Correct")} {score}
-        </p>
-        <div className="mt-3 rounded border border-border p-6">
+        <div className="flex items-center justify-between text-sm opacity-75">
+          <span>{t("Câu", "Question")} {i + 1}/{quiz.length} · {t("Đúng", "Correct")} {score}</span>
+          <span className="tabular-nums">{Math.round(pct)}%</span>
+        </div>
+        <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+          <div className="progress-fill h-full rounded-full bg-brush" style={{ width: `${pct}%` }} />
+        </div>
+        <div key={q.word.id} className="animate-card-swap mt-3 rounded border border-border bg-muted/35 p-6">
           {q.kind === "meaning" ? (
             <p>
               {t("Nghĩa của", "What does")}{" "}
@@ -142,13 +152,14 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             {q.options.map((o) => {
               const correct = o.id === q.word.id;
+              const isPicked = o.id === picked;
               const state = !answered
-                ? "enabled:hover:bg-muted"
+                ? "enabled:hover:bg-muted enabled:hover:-translate-y-0.5"
                 : correct
-                  ? "border-green-600 bg-green-600/15"
-                  : o.id === picked
-                    ? "border-accent bg-accent/15"
-                    : "opacity-60";
+                  ? "animate-pop border-green-600 bg-green-600/15"
+                  : isPicked
+                    ? "animate-shake border-accent bg-accent/15"
+                    : "opacity-50";
               return (
                 <button
                   key={o.id}
@@ -173,7 +184,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
             })}
           </div>
           {answered && (
-            <p role="status" className="mt-4">
+            <p role="status" className="animate-pop mt-4 rounded-lg bg-muted/70 px-3 py-2 text-sm">
               {picked === q.word.id ? t("✓ Chính xác! ", "✓ Correct! ") : t("✗ Chưa đúng. ", "✗ Not quite. ")}
               <span lang="zh-CN">{q.word.hanzi}</span> · {q.word.pinyin} · {q.word.meaning}
             </p>
@@ -187,7 +198,7 @@ export default function LessonFlow({ lessonId, words }: { lessonId: number; word
   }
 
   return (
-    <section className="mt-6 rounded border border-border p-6">
+    <section className="animate-pop mt-6 rounded border border-border bg-muted/35 p-6">
       <p className="text-xl font-semibold">
         {t(`Kết quả: ${score}/${quiz.length} câu đúng`, `Result: ${score}/${quiz.length} correct`)}
       </p>

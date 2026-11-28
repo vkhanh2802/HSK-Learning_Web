@@ -51,26 +51,26 @@ export default async function Page() {
         )}
       </p>
 
-      <section className="mt-6 rounded border border-border p-4">
+      <section className="motion-enter mt-6 rounded border border-border bg-muted/25 p-4">
         <h2 className="text-lg font-semibold">{t("Bài 1 — Nghe và chọn thanh", "Drill 1 — Listen and pick the tone")}</h2>
         <p className="mb-3 text-sm">{t("Nghe một âm tiết bất kỳ, chọn thanh 1, 2, 3 hay 4.", "Listen to a syllable and choose tone 1, 2, 3 or 4.")}</p>
         <ToneDrill mode="single" syllables={syllables} />
       </section>
 
-      <section className="mt-6 rounded border border-border p-4">
+      <section className="motion-enter mt-6 rounded border border-border bg-muted/25 p-4">
         <h2 className="text-lg font-semibold">{t("Bài 2 — Cặp tối thiểu", "Drill 2 — Minimal pairs")}</h2>
         <p className="mb-3 text-sm">{t("Cùng một âm tiết, khác thanh (mā / má / mǎ). Chọn đúng âm vừa nghe.", "Same syllable, different tone (mā / má / mǎ). Choose the one you just heard.")}</p>
         <ToneDrill mode="pairs" syllables={syllables} />
       </section>
 
-      <section className="mt-6 rounded border border-border p-4">
+      <section className="motion-enter mt-6 rounded border border-border bg-muted/25 p-4">
         <h2 className="text-lg font-semibold">{t("Bài 3 — Biến điệu", "Drill 3 — Tone sandhi")}</h2>
         {SANDHI.map((rule) => (
           <div key={rule.title[0]} className="mt-4">
             <h3 className="font-semibold">{t(rule.title[0], rule.title[1])}</h3>
-            <ul className="mt-2 grid gap-2 sm:grid-cols-2">
+            <ul className="motion-stagger mt-2 grid gap-2 sm:grid-cols-2">
               {rule.examples.map((e) => (
-                <li key={e.hanzi} className="flex items-center gap-3 rounded border border-border p-2">
+                <li key={e.hanzi} className="motion-enter ui-card flex items-center gap-3 rounded border border-border bg-background/50 p-2.5">
                   <span lang="zh-CN" className="text-2xl">
                     {e.hanzi}
                   </span>

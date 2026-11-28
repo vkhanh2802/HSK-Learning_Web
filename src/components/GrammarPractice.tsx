@@ -9,12 +9,12 @@ type Result = { correct: boolean; answer: number | string; explain?: string };
 
 const optionClass = (r: Result | undefined, i: number, picked: number | undefined) =>
   !r
-    ? "hover:bg-muted"
+    ? "hover:bg-muted hover:-translate-y-0.5"
     : r.answer === i
-      ? "border-green-600 bg-green-600/15"
+      ? "animate-pop border-green-600 bg-green-600/15"
       : picked === i
-        ? "border-accent bg-accent/15"
-        : "opacity-60";
+        ? "animate-shake border-accent bg-accent/15"
+        : "opacity-50";
 
 /** Sắp xếp câu: bấm từ ở dưới để ghép lên trên, bấm từ đã ghép để trả về. Dùng được bằng bàn phím. */
 export function ReorderSentence({
@@ -54,7 +54,7 @@ export function ReorderSentence({
             disabled={disabled}
             aria-label={t(`Bỏ ${words[i]}`, `Remove ${words[i]}`)}
             onClick={() => update(chosen.filter((x) => x !== i))}
-            className={`${chip} bg-muted`}
+            className={`${chip} animate-chip bg-muted hover:border-brush/50`}
           >
             {words[i]}
           </button>
@@ -62,7 +62,7 @@ export function ReorderSentence({
       </div>
       <div className="mt-2 flex flex-wrap gap-2" lang="zh-CN">
         {remaining.map(({ w, i }) => (
-          <button key={i} type="button" disabled={disabled} onClick={() => update([...chosen, i])} className={`${chip} hover:bg-muted`}>
+          <button key={i} type="button" disabled={disabled} onClick={() => update([...chosen, i])} className={`${chip} animate-chip hover:bg-muted hover:-translate-y-0.5`}>
             {w}
           </button>
         ))}
@@ -108,12 +108,12 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
   return (
     <section className="mt-8">
       <h2 className="text-2xl">{t("Bài tập", "Exercises")}</h2>
-      <ol className="mt-3 space-y-4">
+      <ol className="motion-stagger mt-3 space-y-4">
         {exercises.map((ex, ei) => {
           const r = results[ei];
           const locked = !!r || pending;
           return (
-            <li key={ei} className="rounded border border-border p-4">
+            <li key={ei} className="motion-enter rounded border border-border bg-muted/25 p-4">
               <p className="mb-2 text-sm opacity-75">
                 {t("Câu", "Question")} {ei + 1} ·{" "}
                 {ex.type === "choose" ? t("Chọn đáp án đúng", "Choose the right answer") : ex.type === "reorder" ? t("Sắp xếp thành câu", "Reorder into a sentence") : t("Tìm câu SAI", "Find the WRONG sentence")}
@@ -148,7 +148,7 @@ export default function GrammarPractice({ pointId, exercises }: { pointId: numbe
               )}
 
               {r && (
-                <p role="status" className="mt-2 text-sm">
+                <p role="status" className="animate-pop mt-2 text-sm">
                   {r.correct ? t("✓ Chính xác! ", "✓ Correct! ") : t("✗ Chưa đúng. ", "✗ Not quite. ")}
                   {ex.type === "reorder" && (
                     <>

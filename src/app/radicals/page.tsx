@@ -13,9 +13,9 @@ export default async function Page() {
           "A radical is the part of a character that hints at its meaning. Spotting radicals helps you guess meanings and remember characters faster. Tap an example character to practise writing it.",
         )}
       </p>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="motion-stagger-fast mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {radicals.map((r) => (
-          <li key={r.radical} className="flex gap-4 rounded border border-border p-4">
+          <li key={r.radical} className="motion-enter ui-card flex gap-4 rounded border border-border bg-muted/35 p-4">
             <span lang="zh-CN" className="text-5xl leading-none">
               {r.radical}
             </span>

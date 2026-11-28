@@ -54,12 +54,12 @@ export default function OfflineDeck() {
         {t(`Còn ${queue.length} thẻ`, `${queue.length} cards left`)} · {deck.learned ? t("từ đã học", "learned words") : t("từ vựng HSK1", "HSK1 vocabulary")} · {t("lưu lúc", "saved at")}{" "}
         {new Date(deck.savedAt).toLocaleString(lang === "en" ? "en-GB" : "vi-VN")}
       </p>
-      <div className="mt-3 rounded border border-border p-6 text-center">
-        <button type="button" onClick={() => speak(card.hanzi)} lang="zh-CN" className="text-5xl" aria-label={t(`Nghe ${card.hanzi}`, `Play ${card.hanzi}`)}>
+      <div key={`${card.hanzi}-${queue.length}-${done}`} className="animate-card-swap mt-3 rounded border border-border bg-muted/35 p-6 text-center">
+        <button type="button" onClick={() => speak(card.hanzi)} lang="zh-CN" className="text-5xl transition hover:scale-105" aria-label={t(`Nghe ${card.hanzi}`, `Play ${card.hanzi}`)}>
           {card.hanzi}
         </button>
         {shown ? (
-          <div className="mt-3">
+          <div className="animate-pop mt-3">
             <p className="text-lg">{card.pinyin}</p>
             <p>{card.vi}</p>
             {card.example && (

@@ -306,7 +306,7 @@ export default function MockTestRunner({
 
   if (deadline === null)
     return (
-      <div className="mt-6 max-w-xl rounded border border-border p-6">
+      <div className="animate-card-swap mt-6 max-w-xl rounded border border-border bg-muted/35 p-6">
         <p className="text-sm opacity-75">
           {tx("Phần", "Section")} {idx + 1}/{sections.length}
         </p>
@@ -332,7 +332,7 @@ export default function MockTestRunner({
 
   return (
     <div className="mt-4">
-      <div className="sticky top-0 z-10 flex flex-wrap items-center gap-4 border-b border-border bg-background py-2">
+      <div className="sticky top-20 z-10 flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-background/85 px-4 py-2.5 shadow-sm backdrop-blur-xl">
         <span className="font-semibold">
           {skillName(section.skill)} ({idx + 1}/{sections.length})
         </span>

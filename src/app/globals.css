@@ -95,24 +95,56 @@ h2 {
 :root {
   --motion-fast: 150ms;
   --motion-interaction: 220ms;
-  --motion-entrance: 450ms;
+  --motion-entrance: 420ms;
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-spring: cubic-bezier(0.22, 1.28, 0.36, 1);
 }
 
 .motion-stagger > .motion-enter:nth-child(2) {
-  --motion-delay: 70ms;
+  --motion-delay: 50ms;
 }
 
 .motion-stagger > .motion-enter:nth-child(3) {
-  --motion-delay: 140ms;
+  --motion-delay: 100ms;
 }
 
 .motion-stagger > .motion-enter:nth-child(4) {
-  --motion-delay: 210ms;
+  --motion-delay: 150ms;
 }
 
-.motion-stagger > .motion-enter:nth-child(n + 5) {
-  --motion-delay: 280ms;
+.motion-stagger > .motion-enter:nth-child(5) {
+  --motion-delay: 200ms;
+}
+
+.motion-stagger > .motion-enter:nth-child(6) {
+  --motion-delay: 250ms;
+}
+
+.motion-stagger > .motion-enter:nth-child(7) {
+  --motion-delay: 300ms;
+}
+
+.motion-stagger > .motion-enter:nth-child(n + 8) {
+  --motion-delay: 340ms;
+}
+
+.motion-stagger-fast > .motion-enter {
+  --motion-delay: 0ms;
+}
+.motion-stagger-fast > .motion-enter:nth-child(n + 2) {
+  --motion-delay: 35ms;
+}
+.motion-stagger-fast > .motion-enter:nth-child(n + 5) {
+  --motion-delay: 70ms;
+}
+.motion-stagger-fast > .motion-enter:nth-child(n + 9) {
+  --motion-delay: 105ms;
+}
+.motion-stagger-fast > .motion-enter:nth-child(n + 13) {
+  --motion-delay: 140ms;
+}
+.motion-stagger-fast > .motion-enter:nth-child(n + 20) {
+  --motion-delay: 175ms;
 }
 
 .motion-cta {
@@ -228,7 +260,8 @@ h2 {
   }
 
   .motion-nav-details[open] > .motion-nav-menu {
-    animation: study-menu var(--motion-fast) var(--motion-ease);
+    animation: study-menu 200ms var(--motion-ease);
+    transform-origin: top left;
   }
 
   .motion-cta::before {
@@ -254,7 +287,16 @@ h2 {
   }
 
   .motion-control {
-    transition: background-color var(--motion-fast) ease, opacity var(--motion-fast) ease;
+    transition: background-color var(--motion-fast) ease, opacity var(--motion-fast) ease, transform var(--motion-fast) var(--motion-ease);
+  }
+
+  /* Chuyển đổi theme mượt mà giữa sáng và tối trên các lớp nền chính */
+  body,
+  main:not(.bare),
+  .glass,
+  .uv-book-page,
+  .uv-book-cover {
+    transition: background-color 280ms ease, color 220ms ease, border-color 280ms ease, box-shadow 280ms ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -262,16 +304,20 @@ h2 {
       transform: translateX(0);
       opacity: 1;
     }
+    .motion-cta:hover {
+      transform: translateY(-1px);
+    }
   }
 }
 
 @keyframes study-enter {
   from {
-    opacity: 0.8;
-    transform: translateY(6px);
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
   }
   to {
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -281,8 +327,14 @@ h2 {
 }
 
 @keyframes study-menu {
-  from { opacity: 0.8; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ---------- Hình khối và chuyển cảnh dùng chung (mọi nút/thẻ chưa có class motion-*) ---------- */
@@ -302,6 +354,8 @@ h2 {
       transform var(--motion-fast) var(--motion-ease),
       box-shadow var(--motion-interaction) var(--motion-ease),
       background-color var(--motion-fast) ease,
+      border-color var(--motion-fast) ease,
+      color var(--motion-fast) ease,
       opacity var(--motion-fast) ease;
   }
   button:not(:disabled):active,
@@ -320,11 +374,59 @@ h2 {
   }
   .bar {
     transform-origin: left;
-    animation: bar-grow 900ms 250ms var(--motion-ease) backwards;
+    animation: bar-grow 850ms 180ms var(--motion-ease) backwards;
+  }
+  .progress-fill {
+    transition: width 420ms var(--motion-ease);
+  }
+  .chart-bar-grow {
+    transform-origin: bottom;
+    animation: chart-bar-up 550ms calc(var(--bar-i, 0) * 14ms + 80ms) var(--motion-ease) backwards;
+    transition: height 260ms var(--motion-ease), opacity 180ms ease, transform 180ms var(--motion-ease), filter 180ms ease;
+  }
+  .heat-cell {
+    transition: transform 160ms var(--motion-ease), outline-color 150ms ease, filter 160ms ease;
   }
   a.block.rounded,
-  a.flex.rounded {
-    transition: transform var(--motion-interaction) var(--motion-ease), box-shadow var(--motion-interaction) var(--motion-ease);
+  a.flex.rounded,
+  .ui-card {
+    transition:
+      transform var(--motion-interaction) var(--motion-ease),
+      box-shadow var(--motion-interaction) var(--motion-ease),
+      border-color var(--motion-interaction) var(--motion-ease),
+      background-color var(--motion-fast) ease;
+  }
+
+  /* Micro-animations cho thẻ học, đáp án, chip từ, giọng đọc và micro */
+  .animate-card-swap {
+    animation: card-swap 300ms var(--motion-ease) backwards;
+  }
+  .animate-pop {
+    animation: pop-in 280ms var(--motion-spring) backwards;
+  }
+  .animate-shake {
+    animation: gentle-shake 340ms ease-in-out;
+  }
+  .animate-chip {
+    animation: chip-in 220ms var(--motion-spring) backwards;
+  }
+  .animate-mic-pulse {
+    position: relative;
+  }
+  .animate-mic-pulse::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    border: 2px solid var(--brush);
+    pointer-events: none;
+    animation: mic-ring 1.3s var(--motion-ease) infinite;
+  }
+  .audio-playing .audio-wave-1 {
+    animation: wave-pulse 0.7s ease-in-out infinite alternate;
+  }
+  .audio-playing .audio-wave-2 {
+    animation: wave-pulse 0.7s 0.2s ease-in-out infinite alternate;
   }
 }
 
@@ -336,12 +438,22 @@ h2 {
 @media (hover: hover) and (pointer: fine) {
   button:not(:disabled):hover:not(.motion-control):not(.motion-cta),
   a.bg-accent:hover:not(.motion-cta) {
-    box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--foreground) 55%, transparent);
+    box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--foreground) 45%, transparent);
   }
   a.block.rounded:hover,
-  a.flex.rounded:hover {
+  a.flex.rounded:hover,
+  .ui-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px -16px color-mix(in srgb, var(--foreground) 50%, transparent);
+    border-color: color-mix(in srgb, var(--brush) 42%, var(--border));
+    box-shadow: 0 12px 26px -16px color-mix(in srgb, var(--foreground) 42%, transparent);
+  }
+  .chart-bar-grow:hover {
+    transform: scaleY(1.04);
+    filter: brightness(1.12);
+  }
+  .heat-cell:hover {
+    transform: scale(1.35);
+    z-index: 2;
   }
   .flashcard:hover {
     transform: rotate(0deg) translateY(-10px);
@@ -355,6 +467,10 @@ h2 {
     opacity: 0;
     transform: translateY(10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes card-drop {
   from {
@@ -366,6 +482,67 @@ h2 {
   from {
     transform: scaleX(0);
   }
+}
+@keyframes chart-bar-up {
+  from {
+    opacity: 0.25;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+@keyframes card-swap {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  45% { transform: translateX(4px); }
+  70% { transform: translateX(-3px); }
+  85% { transform: translateX(2px); }
+}
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: scale(0.86) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes mic-ring {
+  0% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+@keyframes wave-pulse {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
 }
 
 /* ---------- Nền ảnh toàn trang + tấm kính (phong cách The Brink) ---------- */
@@ -398,11 +575,14 @@ h2 {
 /* Mọi trang (trừ trang chủ, có class bare) nằm trên một tấm kính mờ để chữ đọc được. */
 .glass,
 main:not(.bare) {
-  background: color-mix(in srgb, var(--background) 80%, transparent);
-  backdrop-filter: blur(22px) saturate(1.3);
-  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
   border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
   border-radius: 1.75rem;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 30%, transparent),
+    0 20px 50px -26px rgb(0 0 0 / 0.38);
 }
 header .glass {
   border-radius: 1.75rem;
@@ -442,11 +622,11 @@ header [role="group"] {
   background: rgb(255 255 255 / 0.06);
 }
 header .motion-nav-menu {
-  background: rgb(30 30 30 / 0.45);
-  backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  background: rgb(24 22 20 / 0.68);
+  backdrop-filter: blur(26px) saturate(1.8);
+  -webkit-backdrop-filter: blur(26px) saturate(1.8);
   border: 1px solid rgb(255 255 255 / 0.28);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4), 0 14px 30px -12px rgb(0 0 0 / 0.5);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.38), 0 16px 34px -12px rgb(0 0 0 / 0.55);
 }
 
 /* ---------- Thành phần từ Uiverse.io (giấy phép MIT) ---------- */
@@ -463,7 +643,7 @@ header .motion-nav-menu {
   border-radius: 15px;
   background: var(--dark);
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s var(--motion-ease), transform var(--motion-fast) var(--motion-ease);
 }
 .uv-switch::before {
   content: "";
@@ -475,7 +655,7 @@ header .motion-nav-menu {
   border-radius: 50%;
   background: var(--dark);
   box-shadow: inset 7px -2px 0 0 var(--light);
-  transition: 0.3s;
+  transition: transform 0.35s var(--motion-spring), box-shadow 0.3s ease;
 }
 :root[data-theme="light"] .uv-switch {
   background: var(--light);
@@ -498,15 +678,16 @@ header .uv-switch {
 }
 
 /* Nút chính: "New to you" của nima-mollazadeh (https://uiverse.io/nima-mollazadeh/terrible-panda-97),
-   viền gradient + quầng sáng khi rê chuột; đổi bảng màu theo ảnh nền hoàng hôn. */
-#noi-dung :is(button, a).bg-accent:not(.motion-cta) {
+   viền gradient + quầng sáng khi rê chuột; đổi bảng màu theo ảnh nền hoàng hôn.
+   Loại trừ nút gạt/tab/chọn cấp để chúng giữ kiểu pill gọn gàng. */
+#noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"]) {
   position: relative;
   isolation: isolate;
   color: #fff;
   background: linear-gradient(45deg, #ffb38a, #d96aa7, #6aa8ff);
 }
-#noi-dung :is(button, a).bg-accent:not(.motion-cta)::before,
-#noi-dung :is(button, a).bg-accent:not(.motion-cta)::after {
+#noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"])::before,
+#noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"])::after {
   content: "";
   position: absolute;
   inset: 1px;
@@ -514,22 +695,22 @@ header .uv-switch {
   border-radius: inherit;
   pointer-events: none;
 }
-#noi-dung :is(button, a).bg-accent:not(.motion-cta)::before {
+#noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"])::before {
   background: #272727;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s ease;
 }
-#noi-dung :is(button, a).bg-accent:not(.motion-cta)::after {
+#noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"])::after {
   inset: 0;
   background: linear-gradient(45deg, #ffb38a, #d96aa7, #6aa8ff);
   filter: blur(18px);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s ease;
 }
 @media (hover: hover) and (pointer: fine) {
-  #noi-dung :is(button, a).bg-accent:not(.motion-cta):not(:disabled):hover::before {
+  #noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"]):not(:disabled):hover::before {
     opacity: 0.7;
   }
-  #noi-dung :is(button, a).bg-accent:not(.motion-cta):not(:disabled):hover::after {
+  #noi-dung :is(button, a).bg-accent:not(.motion-cta):not([aria-pressed]):not([role="tab"]):not([aria-current="page"]):not(:disabled):hover::after {
     opacity: 1;
   }
 }
@@ -623,7 +804,7 @@ header .uv-switch {
   border-radius: 999px;
   overflow: hidden;
   cursor: inherit;
-  transition: height 0.1s;
+  transition: height 0.15s var(--motion-ease);
 }
 .uv-volume input::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -673,10 +854,12 @@ header .uv-switch {
   transition:
     background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
     color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cir-tabs__t:hover {
   color: #fff;
+  background: rgb(255 255 255 / 0.12);
 }
 .cir-tabs__t.is-active {
   background: #fff;
@@ -694,6 +877,9 @@ header .uv-switch {
   justify-content: flex-start;
   width: 100%;
 }
+.motion-nav-menu .cir-tabs__t:not(.is-active):hover {
+  background: rgb(255 255 255 / 0.14);
+}
 header .motion-nav-menu {
   border-radius: 1.25rem;
   padding: 5px;
@@ -710,6 +896,7 @@ header .motion-nav-menu {
   background: rgb(255 255 255 / 0.1);
   border: 1px solid rgb(255 255 255 / 0.22);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
+  transition: background-color var(--motion-fast) ease, transform var(--motion-fast) var(--motion-ease);
 }
 .uv-vol-btn:hover,
 .uv-vol-btn[aria-expanded="true"] {
@@ -723,7 +910,8 @@ header .motion-nav-menu {
   width: 11rem;
   padding: 14px 16px;
   border-radius: 1.25rem !important;
-  animation: study-menu var(--motion-fast, 150ms) ease;
+  transform-origin: top right;
+  animation: study-menu 190ms var(--motion-ease);
 }
 .uv-vol-pop .uv-volume {
   width: 100%;
@@ -733,7 +921,7 @@ header .motion-nav-menu {
    bìa lật quanh mép trái khi mở, lộ trang đáp án bên dưới. */
 .uv-book {
   display: grid;
-  min-height: 16rem;
+  min-height: 17rem;
   perspective: 2000px;
 }
 .uv-book-page,
@@ -742,36 +930,57 @@ header .motion-nav-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  padding: 1.75rem;
+  border-radius: 1.125rem;
   text-align: center;
 }
 .uv-book-page {
-  background: color-mix(in srgb, var(--muted) 85%, var(--background));
+  background: color-mix(in srgb, var(--muted) 88%, var(--background));
   border: 1px solid var(--border);
-  box-shadow: 1px 1px 12px rgb(0 0 0 / 0.35);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 25%, transparent),
+    0 12px 28px -14px rgb(0 0 0 / 0.35);
 }
 .uv-book-cover {
   background: var(--background);
   border: 1px solid var(--border);
-  box-shadow: 1px 1px 12px rgb(0 0 0 / 0.35);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 30%, transparent),
+    0 12px 28px -14px rgb(0 0 0 / 0.35);
   transform-origin: left;
-  transition: transform 0.5s ease;
+  backface-visibility: hidden;
+  transition: transform 0.55s var(--motion-ease), opacity 0.38s ease 0.1s, box-shadow 0.45s ease;
 }
 .uv-book.is-open .uv-book-cover {
-  transform: rotateY(-80deg);
+  transform: rotateY(-108deg);
+  opacity: 0;
   pointer-events: none;
 }
 
 /* Sang thẻ tiếp theo: bìa mới trượt vào từ bên phải. */
 @media (prefers-reduced-motion: no-preference) {
   .uv-book {
-    animation: book-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation: book-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) backwards;
   }
 }
 @keyframes book-in {
   from {
     opacity: 0;
-    transform: translateX(48px);
+    transform: translateX(38px) scale(0.985);
   }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Ô chữ Mễ (米字格) cho phần tập viết chữ Hán */
+.tianzige-grid {
+  background-color: color-mix(in srgb, var(--muted) 45%, var(--background));
+  background-image:
+    linear-gradient(to right, transparent 49.5%, color-mix(in srgb, var(--brush) 24%, var(--border)) 49.5%, color-mix(in srgb, var(--brush) 24%, var(--border)) 50.5%, transparent 50.5%),
+    linear-gradient(to bottom, transparent 49.5%, color-mix(in srgb, var(--brush) 24%, var(--border)) 49.5%, color-mix(in srgb, var(--brush) 24%, var(--border)) 50.5%, transparent 50.5%),
+    linear-gradient(to bottom right, transparent 49.6%, color-mix(in srgb, var(--border) 65%, transparent) 49.6%, color-mix(in srgb, var(--border) 65%, transparent) 50.4%, transparent 50.4%),
+    linear-gradient(to top right, transparent 49.6%, color-mix(in srgb, var(--border) 65%, transparent) 49.6%, color-mix(in srgb, var(--border) 65%, transparent) 50.4%, transparent 50.4%);
+  box-shadow: inset 0 2px 8px -4px rgb(0 0 0 / 0.15);
 }

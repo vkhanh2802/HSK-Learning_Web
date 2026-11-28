@@ -104,9 +104,9 @@ export default async function Page() {
                 {skillName(s.skill)}
                 {s.skill === weakest && <span className="ml-1 text-xs opacity-75">{t("(yếu nhất)", "(weakest)")}</span>}
               </span>
-              <span className="h-2 rounded-full" style={{ background: "var(--viz-track)" }}>
+              <span className="h-2 overflow-hidden rounded-full" style={{ background: "var(--viz-track)" }}>
                 <span
-                  className="block h-2 rounded-full"
+                  className="bar block h-2 rounded-full"
                   style={{ width: s.rate === null ? 0 : `${s.rate * 100}%`, background: "var(--viz-bar)" }}
                 />
               </span>
@@ -146,11 +146,11 @@ export default async function Page() {
                 className="mt-1 flex h-2 gap-[2px] rounded-full bg-muted"
               >
                 {v.mastered > 0 && (
-                  <span className="rounded-full" style={{ width: pct(v.mastered, v.total), background: "var(--viz-mastered)" }} />
+                  <span className="bar rounded-full" style={{ width: pct(v.mastered, v.total), background: "var(--viz-mastered)" }} />
                 )}
                 {v.learned > v.mastered && (
                   <span
-                    className="rounded-full"
+                    className="bar rounded-full"
                     style={{ width: pct(v.learned - v.mastered, v.total), background: "var(--viz-learned)" }}
                   />
                 )}

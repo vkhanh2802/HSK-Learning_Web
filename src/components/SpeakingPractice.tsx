@@ -95,7 +95,7 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
   const pct = result ? Math.round(result.score * 100) : 0;
 
   return (
-    <div className="rounded border border-border p-5">
+    <div className="animate-card-swap rounded border border-border bg-muted/25 p-5">
       <p lang="zh-CN" className="text-4xl leading-relaxed">
         {result
           ? result.chars.map((c, i) => (
@@ -112,7 +112,7 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
         <AudioButton key={item.hanzi} text={item.hanzi} label={t("Nghe mẫu", "Play model")} />
         {canRecognize ? (
           state === "listening" ? (
-            <button type="button" onClick={() => stopRecognition.current()} className="rounded bg-accent px-4 py-2 font-semibold text-background">
+            <button type="button" onClick={() => stopRecognition.current()} className="animate-mic-pulse rounded bg-accent px-4 py-2 font-semibold text-background">
               {t("⏹ Đang nghe… bấm để dừng", "⏹ Listening… tap to stop")}
             </button>
           ) : (
@@ -121,7 +121,7 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
             </button>
           )
         ) : (
-          <button type="button" onClick={toggleRecord} className="rounded bg-accent px-4 py-2 font-semibold text-background">
+          <button type="button" onClick={toggleRecord} className={`${state === "recording" ? "animate-mic-pulse " : ""}rounded bg-accent px-4 py-2 font-semibold text-background`}>
             {state === "recording" ? t("⏹ Dừng ghi âm", "⏹ Stop recording") : t("🎙 Ghi âm", "🎙 Record")}
           </button>
         )}
@@ -141,23 +141,28 @@ function SpeakCard({ item, sounds }: { item: SpeakItem; sounds: Record<string, s
         </p>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-sm font-semibold">
+        <p role="alert" className="animate-shake mt-2 text-sm font-semibold">
           {error}
         </p>
       )}
       {result && (
-        <div role="status" className="mt-3">
-          <p className="text-lg font-semibold">
-            {t("Khớp", "Match")} {pct}% {pct >= 80 ? t("✓ Tốt lắm!", "✓ Great!") : t("— thử lại nhé", "— try again")}
-          </p>
-          <p className="text-sm">
+        <div role="status" className="animate-pop mt-4 rounded-lg bg-muted/70 p-3.5">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-lg font-semibold">
+              {t("Khớp", "Match")} {pct}% {pct >= 80 ? t("✓ Tốt lắm!", "✓ Great!") : t("— thử lại nhé", "— try again")}
+            </p>
+          </div>
+          <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-background/70">
+            <div className="progress-fill h-full rounded-full bg-brush" style={{ width: `${pct}%` }} />
+          </div>
+          <p className="mt-2 text-sm">
             {t("Máy nghe được:", "Heard:")} <span lang="zh-CN">{result.heard || t("(không nghe rõ)", "(unclear)")}</span>
           </p>
           {pct < 100 && <p className="text-sm opacity-75">{t("Chữ gạch đỏ là chữ máy chưa nghe ra.", "Underlined characters were not recognised.")}</p>}
         </div>
       )}
       {recorder.url && (
-        <div className="mt-3">
+        <div className="animate-pop mt-3">
           <p className="text-sm">{t("Bản ghi của bạn:", "Your recording:")}</p>
           <audio controls src={recorder.url} className="mt-1" />
         </div>

@@ -21,12 +21,12 @@ export default async function Page() {
       {levels.map((level) => (
         <section key={level} className="mt-6">
           <h2 className="font-semibold">HSK{level}</h2>
-          <ol className="mt-2 grid gap-2 sm:grid-cols-2">
+          <ol className="motion-stagger mt-2 grid gap-2.5 sm:grid-cols-2">
             {points
               .filter((p) => p.levelId === level)
               .map((p) => (
-                <li key={p.id}>
-                  <Link href={`/grammar/${p.id}`} className="block rounded border border-border p-3 hover:bg-muted">
+                <li key={p.id} className="motion-enter">
+                  <Link href={`/grammar/${p.id}`} className="block rounded border border-border bg-muted/35 p-3.5 hover:bg-muted">
                     {lessonOf.has(p.id) && <span className="text-sm opacity-75">{t("Bài", "Lesson")} {lessonOf.get(p.id)}</span>}
                     <span className="block font-semibold">{p.title}</span>
                     <span lang="zh-CN" className="text-sm opacity-75">

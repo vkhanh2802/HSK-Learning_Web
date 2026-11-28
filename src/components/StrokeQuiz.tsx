@@ -74,7 +74,7 @@ export default function StrokeQuiz({ char, mode, size = 260, onLoad, onComplete 
         ref={box}
         role="img"
         aria-label={mode === "animate" ? t(`Hoạt ảnh thứ tự nét chữ ${char}`, `Stroke order animation for ${char}`) : t(`Ô viết chữ ${char}, dùng chuột hoặc tay để viết`, `Writing area for ${char}; write with mouse or finger`)}
-        className="touch-none rounded border border-border bg-[linear-gradient(to_right,transparent_49.5%,var(--border)_49.5%,var(--border)_50.5%,transparent_50.5%),linear-gradient(to_bottom,transparent_49.5%,var(--border)_49.5%,var(--border)_50.5%,transparent_50.5%)]"
+        className="tianzige-grid touch-none rounded border border-border"
         style={{ width: size, height: size }}
       />
       {error && (

@@ -87,7 +87,7 @@ export default function Reader({
                     setSelected(tok);
                     setMessage(null);
                   }}
-                  className={`rounded px-0.5 hover:bg-muted ${selected === tok ? "bg-accent/20 outline outline-accent" : ""}`}
+                  className={`rounded-md px-1 transition hover:bg-muted ${selected === tok ? "bg-brush/15 outline-1 outline-brush" : ""}`}
                 >
                   {showPinyin ? (
                     <ruby>
@@ -107,12 +107,12 @@ export default function Reader({
       </div>
 
       {showTranslation && translation && (
-        <p className="mt-4 whitespace-pre-line rounded bg-muted p-3 text-sm">{translation}</p>
+        <p className="animate-pop mt-4 whitespace-pre-line rounded border border-border/70 bg-muted/70 p-3.5 text-sm">{translation}</p>
       )}
 
-      <aside aria-live="polite" className="sticky bottom-0 mt-6 rounded border border-border bg-background p-4">
+      <aside aria-live="polite" className="sticky bottom-3 mt-6 rounded-2xl border border-border bg-background/85 p-4 shadow-lg backdrop-blur-xl">
         {selected ? (
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div key={selected.t} className="animate-pop flex flex-wrap items-center gap-x-4 gap-y-2">
             <span lang="zh-CN" className="text-3xl">
               {selected.t}
             </span>

@@ -140,7 +140,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
         setBusy(false);
       }
     },
-    [current, busy],
+    [current, busy, t],
   );
 
   useEffect(() => {
@@ -161,24 +161,35 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
 
   if (!current)
     return (
-      <p role="status" className="mt-6 text-lg">
+      <p role="status" className="animate-pop mt-6 rounded border border-border bg-muted/60 p-5 text-lg font-medium">
         {t(`✓ Xong! Bạn đã ôn ${reviewed} lượt thẻ.`, `✓ Done! You reviewed ${reviewed} cards.`)}
       </p>
     );
 
   const w = current.word;
+  const totalSession = reviewed + queue.length;
+  const pct = totalSession ? (reviewed / totalSession) * 100 : 0;
   return (
     <section className="mt-6 max-w-xl">
-      <p className="text-sm opacity-75">
-        {t(`Còn ${queue.length} thẻ · Đã ôn ${reviewed}`, `${queue.length} left · ${reviewed} reviewed`)}
-      </p>
+      <div className="flex items-center justify-between text-sm opacity-75">
+        <span>{t(`Còn ${queue.length} thẻ · Đã ôn ${reviewed}`, `${queue.length} left · ${reviewed} reviewed`)}</span>
+        <span className="tabular-nums">{Math.round(pct)}%</span>
+      </div>
+      <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+        <div className="progress-fill h-full rounded-full bg-brush" style={{ width: `${pct}%` }} />
+      </div>
       {/* Thẻ dạng cuốn sách: bìa (mặt trước) mở ra khi lật thẻ. Dựa trên "Card" của eslam-hany (Uiverse.io, MIT). */}
-      <div key={`${current.cardId}-${reviewed}`} className={`uv-book mt-3 ${flipped ? "is-open" : ""}`}>
+      <div key={`${current.cardId}-${reviewed}`} className={`uv-book mt-4 ${flipped ? "is-open" : ""}`}>
         <div className="uv-book-page">
         {flipped && (
-          <div>
+          <div className="animate-pop">
             {suggested && (
-              <p role="status" className="mb-2 text-sm">
+              <p
+                role="status"
+                className={`mb-2 inline-block rounded-full px-3 py-0.5 text-sm font-medium ${
+                  suggested.grade === 1 ? "animate-shake bg-accent/15 text-accent" : "bg-green-600/15 text-green-700 dark:text-green-400"
+                }`}
+              >
                 {suggested.note}
               </p>
             )}
@@ -190,7 +201,7 @@ export default function ReviewSession({ items }: { items: ReviewItem[] }) {
             </p>
             <p className="mt-1 text-lg">{w.meaning}</p>
             {w.example && (
-              <div className="mt-3 text-sm">
+              <div className="mt-3 border-t border-border/70 pt-3 text-sm">
                 <p lang="zh-CN">{w.example.hanzi}</p>
                 <p className="opacity-75">{w.example.pinyin}</p>
                 <p>{w.example.vi}</p>

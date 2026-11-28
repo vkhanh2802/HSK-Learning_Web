@@ -10,12 +10,12 @@ type Result = { correct: boolean; answer: boolean | number };
 
 const optionClass = (r: Result | undefined, value: boolean | number, picked: boolean | number | undefined) =>
   !r
-    ? "hover:bg-muted"
+    ? "hover:bg-muted hover:-translate-y-0.5"
     : r.answer === value
-      ? "border-green-600 bg-green-600/15"
+      ? "animate-pop border-green-600 bg-green-600/15"
       : picked === value
-        ? "border-accent bg-accent/15"
-        : "opacity-60";
+        ? "animate-shake border-accent bg-accent/15"
+        : "opacity-50";
 
 function Prompt({ text }: { text: { hanzi: string; pinyin: string; vi: string } }) {
   return (
@@ -55,12 +55,12 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
   return (
     <section className="mt-8">
       <h2 className="text-2xl">{t("Câu hỏi đọc hiểu", "Comprehension questions")}</h2>
-      <ol className="mt-3 space-y-4">
+      <ol className="motion-stagger mt-3 space-y-4">
         {questions.map((q, qi) => {
           const r = results[qi];
           const locked = !!r || pending;
           return (
-            <li key={qi} className="rounded border border-border p-4">
+            <li key={qi} className="motion-enter rounded border border-border bg-muted/25 p-4">
               <p className="mb-2 text-sm opacity-75">
                 {t("Câu", "Question")} {qi + 1} ·{" "}
                 {q.type === "tf" ? t("Đúng hay sai?", "True or false?") : q.type === "mcq" ? t("Chọn đáp án đúng", "Choose the right answer") : t("Chọn tranh đúng với câu", "Choose the picture that fits the sentence")}
@@ -113,7 +113,7 @@ export default function PassageQuestions({ passageId, questions }: { passageId: 
               </div>
 
               {r && (
-                <p role="status" className="mt-2 text-sm">
+                <p role="status" className="animate-pop mt-2 text-sm">
                   {r.correct ? t("✓ Chính xác! ", "✓ Correct! ") : t("✗ Chưa đúng. ", "✗ Not quite. ")}
                   {q.type === "tf" ? q.statement.vi : q.type === "mcq" ? q.question.vi : q.sentence.vi}
                 </p>

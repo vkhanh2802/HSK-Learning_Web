@@ -45,7 +45,7 @@ export default function WritePractice({ char }: { char: string }) {
         <StrokeQuiz key={attempt} char={char} mode={mode} onLoad={setStrokes} onComplete={setMistakes} />
       </div>
       {mistakes !== null && (
-        <div role="status" className="mt-3">
+        <div role="status" className="animate-pop mt-3">
           <p>{mistakes === 0 ? t("✓ Hoàn hảo, không sai nét nào!", "✓ Perfect, no mistakes!") : t(`✓ Xong — sai ${mistakes} lần.`, `✓ Done — ${mistakes} mistakes.`)}</p>
           <button
             type="button"

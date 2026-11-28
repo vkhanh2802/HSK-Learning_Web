@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { useLang } from "./LangProvider";
 
 type NavLink = { href: string; label: [vi: string, en: string] };
@@ -43,14 +44,42 @@ const section = (href: string) => href.split("/")[1];
 export default function Nav() {
   const pathname = usePathname();
   const i = useLang() === "en" ? 1 : 0;
+  const navRef = useRef<HTMLElement>(null);
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : section(pathname) === section(href);
+
+  useEffect(() => {
+    const closeAll = () => {
+      navRef.current?.querySelectorAll<HTMLDetailsElement>("details[open]").forEach((d) => {
+        d.open = false;
+      });
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) closeAll();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeAll();
+    };
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  const closeOthers = (current: HTMLDetailsElement) => {
+    if (!current.open) return;
+    navRef.current?.querySelectorAll<HTMLDetailsElement>("details[open]").forEach((d) => {
+      if (d !== current) d.open = false;
+    });
+  };
 
   const linkClass = (active: boolean) =>
     `motion-nav-link cir-tabs__t ${active ? "is-active" : ""}`;
 
   return (
-    <nav aria-label={i ? "Main navigation" : "Điều hướng chính"}>
+    <nav ref={navRef} aria-label={i ? "Main navigation" : "Điều hướng chính"}>
       <ul className="cir-tabs flex-wrap">
         {items.map((item) =>
           "href" in item ? (
@@ -67,7 +96,11 @@ export default function Nav() {
           ) : (
             <li key={item.label[0]}>
               {/* key theo pathname để menu tự đóng sau khi chuyển trang */}
-              <details key={pathname} className="motion-nav-details relative">
+              <details
+                key={pathname}
+                className="motion-nav-details relative"
+                onToggle={(e) => closeOthers(e.currentTarget)}
+              >
                 <summary
                   data-active={item.children.some((c) => isActive(c.href))}
                   className={`${linkClass(item.children.some((c) => isActive(c.href)))} cursor-pointer list-none`}

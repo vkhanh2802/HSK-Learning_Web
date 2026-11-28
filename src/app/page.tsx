@@ -79,33 +79,35 @@ export default async function Home() {
 
       <div className="glass mx-auto mt-6 max-w-5xl p-5 sm:p-8">
       <div className="motion-stagger grid max-w-4xl gap-4 sm:grid-cols-3">
-        <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
+        <div className="motion-enter ui-card rounded-2xl border border-border bg-muted/85 p-5">
           <p className="text-sm opacity-75">{t("Thẻ đến hạn", "Cards due")}</p>
-          <p className="font-serif text-4xl">{due}</p>
+          <p className="mt-1 font-serif text-4xl tabular-nums">{due}</p>
           {due > 0 && (
-            <Link href="/review" className="underline decoration-brush decoration-2 underline-offset-4">
+            <Link href="/review" className="mt-2 inline-block text-sm font-medium underline decoration-brush decoration-2 underline-offset-4">
               {t("Ôn tập ngay", "Review now")}
             </Link>
           )}
         </div>
-        <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
+        <div className="motion-enter ui-card rounded-2xl border border-border bg-muted/85 p-5">
           <p className="text-sm opacity-75">{t("Chuỗi ngày học", "Study streak")}</p>
-          <p className="font-serif text-4xl">{days} {t("ngày", days === 1 ? "day" : "days")}</p>
+          <p className="mt-1 font-serif text-4xl tabular-nums">
+            {days} <span className="text-2xl">{t("ngày", days === 1 ? "day" : "days")}</span>
+          </p>
         </div>
-        <div className="motion-enter rounded-2xl border border-border bg-muted p-5">
+        <div className="motion-enter ui-card rounded-2xl border border-border bg-muted/85 p-5">
           <p className="text-sm opacity-75">{t("Bài tiếp theo", "Next lesson")}</p>
           {nextLesson ? (
-            <Link href={`/lesson/${nextLesson.id}`} className="mt-1 block font-semibold underline decoration-brush decoration-2 underline-offset-4">
+            <Link href={`/lesson/${nextLesson.id}`} className="mt-1.5 block font-semibold underline decoration-brush decoration-2 underline-offset-4">
               HSK{nextLesson.levelId} · {t("Bài", "Lesson")} {nextLesson.order}: {nextLesson.title}
             </Link>
           ) : (
-            <p className="mt-1">{t("Đã học hết các bài hiện có 🎉", "All current lessons done 🎉")}</p>
+            <p className="mt-1.5">{t("Đã học hết các bài hiện có 🎉", "All current lessons done 🎉")}</p>
           )}
         </div>
       </div>
 
       <div className="mx-auto max-w-4xl">
-      <p className="mt-4">
+      <p className="mt-5 text-sm sm:text-base">
         {weak ? (
           <>
             {t("Kỹ năng yếu nhất 30 ngày qua:", "Weakest skill in the last 30 days:")} <strong>{SKILL_NAMES[weak.skill]}</strong> ({Math.round(weak.rate! * 100)}{t("% đúng", "% correct")}) —{" "}
@@ -122,31 +124,55 @@ export default async function Home() {
         </Link>
       </p>
 
+      <h2 className="mt-8 text-2xl">{t("Luyện nhanh", "Quick practice")}</h2>
+      <div className="motion-stagger mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+        {[
+          { href: "/listening", vi: "Nghe", en: "Listening", zh: "听" },
+          { href: "/speaking", vi: "Nói", en: "Speaking", zh: "说" },
+          { href: "/reading", vi: "Đọc", en: "Reading", zh: "读" },
+          { href: "/writing", vi: "Viết", en: "Writing", zh: "写" },
+          { href: "/grammar", vi: "Ngữ pháp", en: "Grammar", zh: "法" },
+          { href: "/pinyin", vi: "Pinyin", en: "Pinyin", zh: "拼" },
+        ].map((q) => (
+          <Link
+            key={q.href}
+            href={q.href}
+            className="motion-enter flex items-center gap-2.5 rounded border border-border bg-muted/65 px-3.5 py-2.5 hover:bg-muted"
+          >
+            <span lang="zh-CN" className="flex size-8 items-center justify-center rounded-lg bg-background/80 font-serif text-lg text-brush shadow-xs">
+              {q.zh}
+            </span>
+            <span className="text-sm font-medium">{t(q.vi, q.en)}</span>
+          </Link>
+        ))}
+      </div>
+
       <h2 className="mt-10 text-2xl">{t("Tiến độ từ vựng", "Vocabulary progress")}</h2>
-      <ul className="motion-stagger mt-3 grid gap-3">
+      <ul className="motion-stagger mt-3 grid gap-3 sm:grid-cols-2">
         {levels.map((l) => {
           const learned = learnedByLevel.get(l.id) ?? 0;
           const total = l._count.words;
+          const pct = total ? Math.round((learned / total) * 100) : 0;
           return (
             <li key={l.id} className="motion-enter">
-              <div className="flex justify-between text-sm">
-                <Link href={`/learn/${l.id}`}>
-                  {l.name}
-                </Link>
-                <span>
-                  {learned}/{total} {t("từ", "words")}
-                </span>
-              </div>
-              <div
-                role="progressbar"
-                className="mt-1 h-2 w-full overflow-hidden rounded-full bg-muted"
-                aria-valuenow={learned}
-                aria-valuemin={0}
-                aria-valuemax={total}
-                aria-label={t(`${l.name}: đã học ${learned} trên ${total} từ`, `${l.name}: ${learned} of ${total} words learned`)}
-              >
-                <div className="bar h-full rounded-full bg-accent" style={{ width: `${total ? (learned / total) * 100 : 0}%` }} />
-              </div>
+              <Link href={`/learn/${l.id}`} className="block rounded border border-border bg-muted/55 p-3.5 hover:bg-muted">
+                <div className="flex items-baseline justify-between text-sm">
+                  <span className="font-semibold">{l.name}</span>
+                  <span className="tabular-nums opacity-80">
+                    {learned}/{total} {t("từ", "words")} · {pct}%
+                  </span>
+                </div>
+                <div
+                  role="progressbar"
+                  className="mt-2 h-2 w-full overflow-hidden rounded-full bg-background/80"
+                  aria-valuenow={learned}
+                  aria-valuemin={0}
+                  aria-valuemax={total}
+                  aria-label={t(`${l.name}: đã học ${learned} trên ${total} từ`, `${l.name}: ${learned} of ${total} words learned`)}
+                >
+                  <div className="bar h-full rounded-full bg-accent" style={{ width: `${total ? (learned / total) * 100 : 0}%` }} />
+                </div>
+              </Link>
             </li>
           );
         })}

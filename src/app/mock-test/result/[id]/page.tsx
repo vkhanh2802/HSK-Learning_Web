@@ -124,17 +124,17 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       <h1 className="mt-1 text-2xl font-bold">{t("Kết quả thi thử", "Mock test result")} HSK{level}</h1>
       <p className="text-sm opacity-75">{formatDateTime(result.createdAt, lang)}</p>
 
-      <div className="mt-4 flex flex-wrap gap-4">
+      <div className="motion-stagger mt-4 flex flex-wrap gap-4">
         {scores.sections.map((s) => (
-          <div key={s.skill} className="rounded border border-border p-4">
+          <div key={s.skill} className="motion-enter ui-card rounded border border-border bg-muted/35 p-4">
             <p className="text-sm opacity-75">{skillName(s.skill)}</p>
-            <p className="text-2xl font-bold">{s.score}</p>
+            <p className="text-2xl font-bold tabular-nums">{s.score}</p>
             <p className="text-sm opacity-75">
               {t(`${s.correct}/${s.total} câu đúng`, `${s.correct}/${s.total} correct`)}
             </p>
           </div>
         ))}
-        <div className="rounded border border-border p-4">
+        <div className="motion-enter ui-card rounded border border-border bg-muted/35 p-4">
           <p className="text-sm opacity-75">{t("Tổng", "Total")}</p>
           <p className="text-2xl font-bold">
             {scores.total}/{scores.max}
