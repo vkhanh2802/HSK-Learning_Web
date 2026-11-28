@@ -65,8 +65,18 @@ export default async function RootLayout({
         </a>
         <header className="sticky top-0 z-20 px-6 pt-4">
           <div className="flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr]">
-            <Link href="/" className="glass justify-self-start rounded-full px-5 py-2 font-serif text-2xl leading-none">
-              学中文
+            <Link
+              href="/"
+              aria-label={t("Trang chủ", "Home")}
+              title={t("Trang chủ", "Home")}
+              className="glass inline-flex items-center justify-center justify-self-start rounded-full px-3.5 py-2.5 transition hover:scale-105"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v15H5.5A2.5 2.5 0 0 0 3 21.5z" fill="currentColor" fillOpacity="0.12" />
+                <path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v15h5.5a2.5 2.5 0 0 1 2.5 2.5z" fill="currentColor" fillOpacity="0.12" />
+                <path d="M12 4v15" />
+                <path d="M15.5 8.5h2.5M15.5 12h2.5M6 8.5h2.5M6 12h2.5" />
+              </svg>
             </Link>
             <Nav />
             <div className="glass flex items-center gap-3 justify-self-end whitespace-nowrap rounded-full px-3 py-2">
